@@ -1,3 +1,4 @@
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -10,6 +11,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import '@/i18n';
 import { OfflineBanner } from '@/components/OfflineBanner';
 import { installSoundPlayer } from '@/motion/sound';
+import { startOutbox } from '@/offline/outboxRuntime';
+import { persistOptions, queryClient } from '@/offline/persist';
 import { ThemeProvider, useTheme } from '@/theme/ThemeProvider';
 import { fontAssets } from '@/theme/typography';
 
@@ -37,12 +40,16 @@ export default function RootLayout() {
     if (ready) SplashScreen.hideAsync().catch(() => {});
   }, [ready]);
 
+  useEffect(() => startOutbox(), []);
+
   if (!ready) return null;
   return (
     <GestureHandlerRootView style={styles.root}>
-      <ThemeProvider>
-        <ThemedStack />
-      </ThemeProvider>
+      <PersistQueryClientProvider client={queryClient} persistOptions={persistOptions}>
+        <ThemeProvider>
+          <ThemedStack />
+        </ThemeProvider>
+      </PersistQueryClientProvider>
     </GestureHandlerRootView>
   );
 }
