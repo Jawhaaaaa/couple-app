@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.expo/
+expo-env.d.ts
+target/
+.env
+.env.*
+!.env.example
+*.log
+.idea/
+.vscode/
+*.keystore
+*.jks
+.DS_Store
