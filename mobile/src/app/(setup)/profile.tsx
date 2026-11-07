@@ -1,75 +1,50 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { router } from 'expo-router';
-import { CircleUser, MapPin } from 'lucide-react-native';
-import { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { CircleUser } from 'lucide-react-native';
+import { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 
-import { type CityRef, profileVersion, searchCities, updateMe } from '@/api/queries/auth';
+import type { CityRef } from '@/api/queries/auth';
 import { useMeQuery } from '@/api/queries/bootstrap';
+import { patchMe } from '@/api/queries/profile';
 import { deviceTimezone } from '@/auth/device';
 import { AppButton } from '@/components/AppButton';
 import { AppText } from '@/components/AppText';
 import { AuthScreen } from '@/components/AuthScreen';
+import { CityPicker } from '@/components/CityPicker';
 import { FormMessage } from '@/components/FormMessage';
 import { TextField } from '@/components/TextField';
 import { useErrorText } from '@/hooks/useErrorText';
 import { useOnlineOnly } from '@/hooks/useOnlineOnly';
 import { useT } from '@/i18n';
-import { usePrefsStore } from '@/stores/prefsStore';
 import { useColors } from '@/theme/ThemeProvider';
-import { iconStroke, radius, spacing, touchTarget } from '@/theme/tokens';
-
-const SEARCH_DEBOUNCE_MS = 300;
-
-/** Хайлтын үгийг бичиж дуусахыг хүлээнэ. */
-function useDebounced(value: string, ms: number): string {
-  const [debounced, setDebounced] = useState(value);
-  useEffect(() => {
-    const timer = setTimeout(() => setDebounced(value), ms);
-    return () => clearTimeout(timer);
-  }, [value, ms]);
-  return debounced;
-}
+import { iconStroke, radius, spacing } from '@/theme/tokens';
 
 /**
- * S-07 Профайл (FR-1.4): аватар (одоохондоо орлуулга — зургийг S-81-д), дуудах нэр,
- * цагийн бүсийн санал (төхөөрөмжөөс), хот (`GET /geo/cities`). Хот хайлт эсвэл
- * хадгалалт ажиллахгүй бол алдааг харуулж «Дараа нь»-гээр үргэлжлүүлэх боломжтой.
+ * S-07 Профайл (FR-1.4): аватар (зургийг S-81-д), дуудах нэр, цагийн бүсийн санал
+ * (төхөөрөмжөөс), хот (`GET /geo/cities`). Хот хайлт эсвэл хадгалалт ажиллахгүй бол
+ * алдааг харуулж «Дараа нь»-гээр үргэлжлүүлэх боломжтой. Дараа нь хаалга → S-13.
  */
 export default function ProfileSetupScreen() {
   const t = useT();
   const colors = useColors();
   const errorText = useErrorText();
-  const locale = usePrefsStore((s) => s.locale);
   const { disabled: offline } = useOnlineOnly();
   const queryClient = useQueryClient();
   const me = useMeQuery().data;
   const [callName, setCallName] = useState(me?.callName ?? '');
-  const [query, setQuery] = useState('');
   const [city, setCity] = useState<CityRef | null>(me?.city ?? null);
   const [suggestedZone] = useState(() => deviceTimezone());
-  const q = useDebounced(query.trim(), SEARCH_DEBOUNCE_MS);
-
-  const cities = useQuery({
-    queryKey: ['geo-cities', q, locale],
-    queryFn: () => searchCities(q, locale),
-    enabled: q.length >= 2 && !offline,
-    retry: 0,
-    staleTime: 5 * 60_000,
-  });
 
   const timezone = city?.timezone ?? suggestedZone ?? me?.timezone ?? null;
 
   const save = useMutation({
-    mutationFn: () => {
-      if (!me) throw new Error('me алга');
-      return updateMe({
+    mutationFn: () =>
+      patchMe({
         callName: callName.trim() || null,
         ...(timezone ? { timezone } : {}),
         city,
-        version: profileVersion(me),
-      });
-    },
+      }),
     onSuccess: (updated) => {
       queryClient.setQueryData(['me'], updated);
       router.replace('/');
@@ -107,51 +82,7 @@ export default function ProfileSetupScreen() {
         </AppText>
       ) : null}
 
-      {city ? (
-        <View style={styles.selected}>
-          <AppText style={styles.flex} testID="profile-city-selected">
-            {t('setup.profile.citySelected', { city: city.name })}
-          </AppText>
-          <AppButton variant="ghost" label={t('setup.profile.cityClear')} onPress={() => setCity(null)} testID="profile-city-clear" />
-        </View>
-      ) : (
-        <>
-          <TextField
-            label={t('setup.profile.city')}
-            placeholder={t('setup.profile.cityPlaceholder')}
-            value={query}
-            onChangeText={setQuery}
-            autoCorrect={false}
-            editable={!offline}
-            testID="profile-city"
-          />
-          {cities.isError ? <FormMessage kind="info" text={t('setup.profile.cityUnavailable')} testID="profile-city-unavailable" /> : null}
-          {cities.isSuccess && cities.data.length === 0 ? (
-            <AppText color="textMuted" testID="profile-city-empty">
-              {t('setup.profile.cityEmpty')}
-            </AppText>
-          ) : null}
-          {cities.data?.slice(0, 8).map((c) => {
-            const label = `${c.name}, ${c.countryCode}`;
-            return (
-              <Pressable
-                key={`${c.name}-${c.countryCode}-${c.lat}-${c.lon}`}
-                onPress={() => {
-                  setCity(c);
-                  setQuery('');
-                }}
-                accessibilityRole="button"
-                accessibilityLabel={label}
-                style={[styles.cityRow, { borderColor: colors.border }]}
-                testID="profile-city-option"
-              >
-                <MapPin size={18} color={colors.textMuted} strokeWidth={iconStroke} />
-                <AppText style={styles.flex}>{label}</AppText>
-              </Pressable>
-            );
-          })}
-        </>
-      )}
+      <CityPicker value={city} onChange={setCity} disabled={offline} />
 
       {save.error ? <FormMessage text={errorText(save.error)} testID="profile-save-error" /> : null}
       <AppButton
@@ -176,14 +107,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  selected: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs },
-  cityRow: {
-    minHeight: touchTarget,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.xs,
-    paddingHorizontal: spacing.sm,
-    borderBottomWidth: 1,
   },
 });

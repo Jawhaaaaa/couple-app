@@ -1,14 +1,46 @@
-import { View } from 'react-native';
+import { router } from 'expo-router';
+import { ChevronRight, CircleUser } from 'lucide-react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 
+import { AppText } from '@/components/AppText';
 import { TabScreen } from '@/components/TabScreen';
 import { useT } from '@/i18n';
+import { useColors } from '@/theme/ThemeProvider';
+import { iconStroke, radius, spacing, touchTarget } from '@/theme/tokens';
 
-/** S-80 Тохиргоо — бүлгүүдийн жагсаалт T-79-д. */
+/** S-80 Тохиргоо — бүлгүүдийн бүтэн жагсаалт T-79-д; одоохондоо S-81 Профайл. */
 export default function SettingsScreen() {
   const t = useT();
+  const colors = useColors();
   return (
     <TabScreen title={t('common.settings')} testID="screen-S-80">
-      <View />
+      <View style={styles.list}>
+        <Pressable
+          onPress={() => router.push('/settings/profile')}
+          accessibilityRole="button"
+          accessibilityLabel={t('common.profile')}
+          testID="settings-profile"
+          style={({ pressed }) => [styles.row, { backgroundColor: colors.surface, borderColor: colors.border, opacity: pressed ? 0.85 : 1 }]}
+        >
+          <CircleUser size={22} color={colors.primary} strokeWidth={iconStroke} />
+          <AppText style={styles.flex}>{t('common.profile')}</AppText>
+          <ChevronRight size={20} color={colors.textMuted} strokeWidth={iconStroke} />
+        </Pressable>
+      </View>
     </TabScreen>
   );
 }
+
+const styles = StyleSheet.create({
+  list: { padding: spacing.screen, gap: spacing.xs },
+  flex: { flex: 1 },
+  row: {
+    minHeight: touchTarget,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    paddingHorizontal: spacing.md,
+    borderWidth: 1,
+    borderRadius: radius.input,
+  },
+});

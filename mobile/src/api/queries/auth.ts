@@ -12,7 +12,6 @@ export type PolicyDocument = S['PolicyDocument'];
 export type VersionInfo = S['VersionInfo'];
 export type CityRef = S['CityRef'];
 export type RegisterRequest = S['RegisterRequest'];
-export type ProfileUpdate = S['ProfileUpdate'];
 export type OAuthExchangeResponse = S['OAuthExchangeResponse'];
 export type OAuthProvider = 'google' | 'apple';
 
@@ -78,18 +77,6 @@ export function acceptPolicy(version: string) {
   return unwrap(api.POST('/me/policy-acceptance', { body: { version } }));
 }
 
-export function updateMe(patch: ProfileUpdate): Promise<Me> {
-  return unwrap(api.PATCH('/me', { body: patch }));
-}
-
 export function searchCities(q: string, locale: Locale): Promise<CityRef[]> {
   return unwrap(api.GET('/geo/cities', { params: { query: { q, locale } } }));
-}
-
-/**
- * `PATCH /me`-ийн `version` (optimistic lock). Гэрээний `Me`-д `version` талбар
- * одоогоор алга (T-26-д `PATCH /me` хэрэгжинэ) — тэр болтол 0 илгээнэ.
- */
-export function profileVersion(_me: Me): number {
-  return 0;
 }

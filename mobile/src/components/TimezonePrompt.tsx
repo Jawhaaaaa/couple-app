@@ -2,8 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState, useSyncExternalStore } from 'react';
 import { Modal, StyleSheet, View } from 'react-native';
 
-import { profileVersion, updateMe } from '@/api/queries/auth';
 import { useMeQuery } from '@/api/queries/bootstrap';
+import { patchMe } from '@/api/queries/profile';
 import { deviceTimezone } from '@/auth/device';
 import { timezoneToAsk } from '@/auth/timezonePrompt';
 import { useT } from '@/i18n';
@@ -22,7 +22,7 @@ const isHydrated = () => persistApi.hasHydrated();
 
 /**
  * AC-64: төхөөрөмжийн бүс профайлынхаас өөр бол «Цагийн бүсээ Asia/Tokyo болгох
- * уу?» нэг удаа. Зөвшөөрвөл `PATCH /me {timezone, version}`; хариулсан бүсийг
+ * уу?» нэг удаа. Зөвшөөрвөл `PATCH /me {timezone}` (`patchMe` хувилбарыг удирдана); хариулсан бүсийг
  * `timezonePromptStore` санана. Хадгалж чадаагүй бол алдааг харуулж, хаахыг зөвшөөрнө.
  */
 export function TimezonePrompt() {
@@ -35,7 +35,7 @@ export function TimezonePrompt() {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: (zone: string) => updateMe({ timezone: zone, version: me ? profileVersion(me) : 0 }),
+    mutationFn: (zone: string) => patchMe({ timezone: zone }),
     onSuccess: (updated, zone) => {
       queryClient.setQueryData(['me'], updated);
       markAnswered(zone);

@@ -5,7 +5,7 @@ import { extractCode, waitForMail } from '../support/mailpit';
 import { uniqueEmail } from '../support/seed';
 
 /**
- * Нэвтрэлт (T-21): S-04 бүртгэл → S-05 код (Mailpit) → S-07 → нүүр (AC-01),
+ * Нэвтрэлт (T-21): S-04 бүртгэл → S-05 код (Mailpit) → S-07 → S-13 (AC-01),
  * 18+ (AC-04), бодлогын зөвшөөрөл (AC-63), нууц үгийн дүрэм (AC-164).
  * Хөтчийн бүс `Asia/Ulaanbaatar` (playwright.config.ts) — «өнөөдөр»-ийг тэр бүсээр.
  */
@@ -137,7 +137,7 @@ test.describe('Нэвтрэлт ба бүртгэл', () => {
     await expect(page.getByTestId('screen-S-05')).toBeVisible();
   });
 
-  test('AC-01 бүртгүүлж Mailpit-ийн 6 оронтой кодоор баталгаажуулаад S-07 → нүүр', async ({ page }) => {
+  test('AC-01 бүртгүүлж Mailpit-ийн 6 оронтой кодоор баталгаажуулаад S-07 → S-13', async ({ page }) => {
     const email = uniqueEmail('ac01');
     await openRegister(page);
     await fillRegister(page, { email });
@@ -158,8 +158,9 @@ test.describe('Нэвтрэлт ба бүртгэл', () => {
     await page.getByTestId('code-input').fill(code);
     await expect(page.getByTestId('screen-S-07')).toBeVisible();
 
+    // Хосгүй тул хаалга S-13 «Хамтрагчаа хүлээж байна» руу (spec §6.1)
     await page.getByTestId('profile-later').click();
-    await expect(page.getByTestId('screen-S-20')).toBeVisible();
+    await expect(page.getByTestId('screen-S-13')).toBeVisible();
   });
 
   test('S-03 «Нууц үг мартсан» ба «Бүртгүүлэх» холбоос', async ({ page }) => {

@@ -1,6 +1,7 @@
 import { Bell, CircleUser } from 'lucide-react-native';
 import { Pressable, StyleSheet, View } from 'react-native';
 
+import { useUnreadCount } from '@/api/queries/notifications';
 import { useT } from '@/i18n';
 import { useColors } from '@/theme/ThemeProvider';
 import { iconStroke, radius, spacing, touchTarget } from '@/theme/tokens';
@@ -9,13 +10,16 @@ import { AppText } from './AppText';
 
 interface Props {
   title: string;
+  /** Уншаагүй тоо; өгөөгүй бол `['notifications']` кэшээс (S-24-тэй нэг эх, AC-120). */
   unread?: number;
   onBell: () => void;
   onAvatar: () => void;
 }
 
 /** Табын толгой: гарчиг, мэдэгдлийн хонх (уншаагүй тоо), аватар → тохиргоо. */
-export function TopBar({ title, unread = 0, onBell, onAvatar }: Props) {
+export function TopBar({ title, unread: unreadProp, onBell, onAvatar }: Props) {
+  const cached = useUnreadCount();
+  const unread = unreadProp ?? cached;
   const colors = useColors();
   const t = useT();
   return (
@@ -32,7 +36,7 @@ export function TopBar({ title, unread = 0, onBell, onAvatar }: Props) {
       >
         <Bell size={24} color={colors.text} strokeWidth={iconStroke} />
         {unread > 0 ? (
-          <View style={[styles.badge, { backgroundColor: colors.primary }]}>
+          <View style={[styles.badge, { backgroundColor: colors.primary }]} testID="topbar-unread">
             <AppText variant="caption" color="onPrimary">
               {unread > 99 ? '99+' : String(unread)}
             </AppText>

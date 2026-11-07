@@ -167,6 +167,12 @@ export const mascotColors = {
 } as const;
 export type MascotColorName = keyof typeof mascotColors;
 
+/**
+ * QR код (S-08): бараан theme-д ч уншигдахын тулд үргэлж цайвар дэвсгэр дээр бараан
+ * модуль (зарим камер урвуу өнгийн QR уншдаггүй).
+ */
+export const qrColors = { module: '#2B2022', background: '#FFFFFF' } as const;
+
 /** Бараан theme-ийн 3%-ийн «grain» давхарга (§3.3). */
 export const grain = { opacity: 0.03, color: '#FFFFFF' } as const;
 

@@ -105,7 +105,17 @@ describe('AC-63 эхлэлийн хаалга', () => {
     expect(resolveGate({ signedIn: true, me: { ...me, policyUpdateRequired: true } })).toEqual({ pathname: '/policy-update' });
   });
 
-  it('бусад нь → нүүр', () => {
-    expect(resolveGate({ signedIn: true, me })).toEqual({ pathname: '/home' });
+  it('хосгүй (SOLO) → S-13 хүлээх дэлгэц', () => {
+    expect(resolveGate({ signedIn: true, me })).toEqual({ pathname: '/waiting' });
+  });
+
+  it('хостой (COUPLE) → нүүр', () => {
+    expect(resolveGate({ signedIn: true, me: { ...me, space: { ...me.space, kind: 'COUPLE' } } })).toEqual({ pathname: '/home' });
+  });
+
+  it('бодлого ба имэйл нь хос эсэхээс өмнө шалгагдана', () => {
+    const couple = { ...me, space: { ...me.space, kind: 'COUPLE' as const } };
+    expect(resolveGate({ signedIn: true, me: { ...couple, policyUpdateRequired: true } })).toEqual({ pathname: '/policy-update' });
+    expect(resolveGate({ signedIn: true, me: { ...couple, emailVerified: false } })).toMatchObject({ pathname: '/verify-email' });
   });
 });

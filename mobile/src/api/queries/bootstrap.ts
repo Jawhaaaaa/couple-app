@@ -8,10 +8,13 @@ import { fetchMe, fetchVersion, type Me, type VersionInfo } from './auth';
 
 export type BootStatus = 'pending' | 'ready' | 'unreachable' | 'updateRequired';
 
-/** `['me']` — нэвтэрсэн үед татна; offline-д persist кэшээс (AC-156). */
-export function useMeQuery() {
+/**
+ * `['me']` — нэвтэрсэн үед татна; offline-д persist кэшээс (AC-156). `refetchInterval` —
+ * хос холбогдохыг хүлээж буй дэлгэцүүд (S-08, S-10, S-13) realtime тасарсан үед ч мэдэхэд.
+ */
+export function useMeQuery({ refetchInterval = false }: { refetchInterval?: number | false } = {}) {
   const accessToken = useSessionStore((s) => s.accessToken);
-  return useQuery({ queryKey: ['me'], queryFn: fetchMe, enabled: !!accessToken });
+  return useQuery({ queryKey: ['me'], queryFn: fetchMe, enabled: !!accessToken, refetchInterval });
 }
 
 export interface Bootstrap {
