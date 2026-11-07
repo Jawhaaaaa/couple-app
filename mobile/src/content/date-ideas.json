@@ -1,0 +1,4407 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "lib-001",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Хамтдаа бууз чимхэх",
+        "description": "Гурил зуурч, мах татаад хоёулаа бууз чимхээрэй. Хэн нь илүү гоё хээтэй чимхэхийг үзээд, уураар жигнэсэн буузаа халуун цайтай идээрэй."
+      },
+      "en": {
+        "title": "Make buuz together",
+        "description": "Knead the dough, mince the meat and fold buuz side by side. See whose pleats look best, then enjoy them steaming hot with tea."
+      }
+    },
+    {
+      "id": "lib-002",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 90,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Дуудлага дээр нэг жороор хоол хийх",
+        "description": "Нэг жор сонгоод орцоо урьдчилж аваарай. Видео дуудлага дээр алхам алхмаар зэрэг хийгээд, эцэст нь ширээндээ хамт суугаад идээрэй."
+      },
+      "en": {
+        "title": "Cook the same recipe on a call",
+        "description": "Pick a recipe and shop for the ingredients ahead of time. Cook it step by step on a video call, then sit down to eat at the same moment."
+      }
+    },
+    {
+      "id": "lib-003",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 90,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Гараараа цуйван хийх",
+        "description": "Гурилаа элээж, нарийн хэрчээд хоёулаа цуйван хийгээрэй. Мах, ногоогоо хуурч байхдаа хүүхэд насныхаа хоолны дурсамжийг нэгэндээ ярьж өгөөрөй."
+      },
+      "en": {
+        "title": "Hand-made tsuivan",
+        "description": "Roll and slice the noodles by hand and make tsuivan as a pair. While the meat and vegetables sizzle, swap stories about the dishes you grew up with."
+      }
+    },
+    {
+      "id": "lib-004",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "SUMMER"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 150,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Наадмын хуушуур гэртээ",
+        "description": "Наадмын өдрүүдэд хоёулаа гэртээ хуушуур хийгээд, наадмын нээлтийг зурагтаар хамт үзээрэй."
+      },
+      "en": {
+        "title": "Naadam-style khuushuur at home",
+        "description": "During Naadam, fry khuushuur at home and watch the opening ceremony together on TV."
+      }
+    },
+    {
+      "id": "lib-005",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 180,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Цагаан сарын боов хамт хийх",
+        "description": "Цагаан сарын өмнө хоёулаа боов хийж, хээгээ дарж үзээрэй. Анх удаа хийж байгаа бол жижиг хэмжээгээр эхлэхэд л болно."
+      },
+      "en": {
+        "title": "Bake Tsagaan Sar biscuits",
+        "description": "Before Tsagaan Sar, make the traditional biscuits and press patterns into them. If it's your first try, a small batch is plenty."
+      }
+    },
+    {
+      "id": "lib-006",
+      "category": "FOOD",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 30,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Сүүтэй цайгаа хамт чанах",
+        "description": "Хар цайгаа буцалгаж, сүү, давсаа нэмээд самраад чанаарай. Нэг аяга халуун цайны дэргэд өдрийнхөө тухай тайван ярилцаарай."
+      },
+      "en": {
+        "title": "Brew milk tea the old way",
+        "description": "Boil the tea, add milk and a pinch of salt, and ladle it until it froths. Then talk over your day with a warm cup in hand."
+      }
+    },
+    {
+      "id": "lib-007",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 45,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Гэнэтийн өглөөний цай",
+        "description": "Нэг нь эрт босоод нөгөөдөө өглөөний цай бэлдээрэй. Дуртай амттан, гараар бичсэн жижиг бичигтэй хамт ор руу нь авчраарай."
+      },
+      "en": {
+        "title": "Surprise breakfast in bed",
+        "description": "One of you wakes up early and makes breakfast for the other. Bring it to bed with a favorite treat and a short handwritten note."
+      }
+    },
+    {
+      "id": "lib-008",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "SPRING",
+        "SUMMER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 180,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Үндэсний цэцэрлэгт хүрээлэнд зугаалга",
+        "description": "Сэндвич, жимс, халуун цайтай саваа аваад Үндэсний цэцэрлэгт хүрээлэнд зугаалаарай. Дэвсгэр дээр хэвтээд үүл ажиглаж, хэдэн цаг тайван өнгөрүүлээрэй."
+      },
+      "en": {
+        "title": "Picnic in the National Garden Park",
+        "description": "Pack sandwiches, fruit and a flask of tea and head to the National Garden Park. Lie on a blanket, watch the clouds and let a few slow hours pass."
+      }
+    },
+    {
+      "id": "lib-009",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 45,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Нүдээ боож амталж таах",
+        "description": "Нэг төрлийн хэдэн амттан, жимс худалдаж аваад нүдээ боож амталж таагаарай. Хэн нь олон зөв таахыг тоолоорой."
+      },
+      "en": {
+        "title": "Blindfolded taste test",
+        "description": "Buy a few versions of the same snack or fruit and taste them blindfolded. Keep score of who guesses right most often."
+      }
+    },
+    {
+      "id": "lib-010",
+      "category": "FOOD",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 240,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Хөдөө хорхог хийх",
+        "description": "Хотоос гараад мах, ногоогоо халуун чулуутай тогоонд жигнэж хорхог хийгээрэй. Дулаан чулууг гартаа өнхрүүлэх нь хорхогийн нэг сонирхол."
+      },
+      "en": {
+        "title": "Cook khorkhog in the countryside",
+        "description": "Leave the city and cook khorkhog, steaming meat and vegetables with hot stones in a pot. Rolling the warm stones between your palms is part of the ritual."
+      },
+      "safety": {
+        "mn": "Халуун чулууг зузаан бээлийтэй барьж, түлэгдэхээс болгоомжлоорой. Галаа зөвхөн зөвшөөрөгдсөн газар асааж, явахаасаа өмнө бүрэн унтраагаарай.",
+        "en": "Handle the hot stones with thick gloves to avoid burns. Light fires only where it's allowed and put them out completely before you leave."
+      }
+    },
+    {
+      "id": "lib-011",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 90,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Нэгнийхээ дуртай хоолыг хийх",
+        "description": "Хоёулаа нэгнийхээ хамгийн дуртай хоолыг нууцаар сураад хийж өгөөрөй. Амт нь хэр төстэй гарсныг тэр хоолны эзэн өөрөө дүгнэнэ."
+      },
+      "en": {
+        "title": "Cook each other's favorite dish",
+        "description": "Each of you secretly learns the other's favorite dish and cooks it. The person it belongs to judges how close it comes."
+      }
+    },
+    {
+      "id": "lib-012",
+      "category": "FOOD",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Танихгүй орны хоол амтлах",
+        "description": "Урьд нь хэзээ ч амсаж үзээгүй орны хоолтой газар хоёулаа очоорой. Цэсээс хамгийн сонин хоолыг сонгож, нэгнийхээ тавгаас амсаарай."
+      },
+      "en": {
+        "title": "Try a cuisine neither of you knows",
+        "description": "Find a place serving food from a country neither of you has tried. Order the most unfamiliar dishes on the menu and share plates."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-013",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Гэртээ пицца хийх орой",
+        "description": "Зуурмагаа өөрсдөө зуурч, тус тусдаа хагас дээр нь дуртай орцоо тавиарай. Жигнэж байх хооронд хөгжим тавиад бүжиглээрэй."
+      },
+      "en": {
+        "title": "Homemade pizza night",
+        "description": "Make the dough yourselves and top each half with your own favorite toppings. Put on music and dance while it bakes."
+      }
+    },
+    {
+      "id": "lib-014",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 90,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Дуудлага дээр бялуу жигнэх",
+        "description": "Ижил жор сонгоод хоёулаа өөр өөрийн гал тогоонд жижиг бялуу жигнээрэй. Болсных нь дараа хэнийх нь илүү хөөссөнийг камераар харуулаарай."
+      },
+      "en": {
+        "title": "Bake a cake on a video call",
+        "description": "Choose one simple recipe and bake a small cake in your own kitchens. When they're done, hold them up to the camera and compare whose rose higher."
+      }
+    },
+    {
+      "id": "lib-015",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Хүйтэн оройн банштай шөл",
+        "description": "Хүйтэн оройд хоёулаа жижиг банш чимхээд, шөлөнд хийж чанаарай. Халуун шөлөө идэнгээ ирэх амралтаа төлөвлөөрэй."
+      },
+      "en": {
+        "title": "Bansh soup for a cold night",
+        "description": "On a cold evening, fold small bansh dumplings and simmer them in broth. Plan your next break over a hot bowl."
+      }
+    },
+    {
+      "id": "lib-016",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 150,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Зах дээр орц сонгох сорил",
+        "description": "Хүнсний зах дээр очоод хоёулаа нэгнийхээ өмнөөс гурван орц сонгоорой. Гэртээ ирээд тэр бүх орцоор хамтдаа шинэ хоол зохиогоорой."
+      },
+      "en": {
+        "title": "Market ingredient challenge",
+        "description": "At a food market, each of you picks three ingredients for the other. Back home, invent a dish together using all six."
+      }
+    },
+    {
+      "id": "lib-017",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 45,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Цагаан идээгээр дайлцах",
+        "description": "Ааруул, ээзгий, өрөм, тараг зэрэг цагаан идээгээ ширээн дээр өрж нэг нэгээр нь амсаарай. Аль нь хамгийн дуртай, аль нь хүүхэд насыг санагдуулдгийг ярилцаарай."
+      },
+      "en": {
+        "title": "Mongolian dairy tasting",
+        "description": "Lay out aaruul, eezgii, urum and yogurt and taste them one by one. Talk about which you love most and which bring back childhood."
+      }
+    },
+    {
+      "id": "lib-018",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 40,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Гэртээ цайны амталгаа",
+        "description": "Гурав, дөрвөн төрлийн цай бэлдээд нэг нэгээр нь амтлаарай. Тус бүрийнх нь амтыг ганц үгээр тодорхойлж, тэмдэглэлээ харьцуулаарай."
+      },
+      "en": {
+        "title": "Tea tasting at home",
+        "description": "Brew three or four different teas and sip them one at a time. Describe each in a single word and compare notes."
+      }
+    },
+    {
+      "id": "lib-019",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Чацарганаар чанамал хийх",
+        "description": "Намар шинэ чацаргана аваад хоёулаа чанамал чанаарай. Лонхон дээр гоё шошго нааж, өвөлдөө хамт идэхээр хадгалаарай."
+      },
+      "en": {
+        "title": "Make sea-buckthorn jam",
+        "description": "In autumn, buy fresh sea buckthorn and cook it into jam. Label the jars nicely and save them for winter."
+      }
+    },
+    {
+      "id": "lib-020",
+      "category": "FOOD",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 240,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Ойд жимс түүх",
+        "description": "Зуны сүүлээр хотын ойролцоох ойд очиж нэрс, улаагана түүгээрэй. Түүсэн жимсээ гэртээ авчраад цайтайгаа идээрэй."
+      },
+      "en": {
+        "title": "Berry picking in the forest",
+        "description": "In late summer, head to a forest near the city to pick blueberries and lingonberries. Bring them home and enjoy them with tea."
+      },
+      "safety": {
+        "mn": "Ус, дулаан хувцас, цэнэгтэй утас авч, замаа хэн нэгэнд хэлээд гараарай, цаг агаар муудвал эргээд буугаарай.",
+        "en": "Bring water, a warm layer and a charged phone, tell someone your route and turn back if the weather turns."
+      }
+    },
+    {
+      "id": "lib-021",
+      "category": "FOOD",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 45,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Тагтан дээр өглөөний цай",
+        "description": "Дулаан өглөө тагтан дээрээ жижиг ширээ засаад өглөөний цайгаа уугаарай. Утсаа хол тавьж, хот хэрхэн сэрж байгааг хамт ажиглаарай."
+      },
+      "en": {
+        "title": "Breakfast on the balcony",
+        "description": "On a warm morning, set a little table on the balcony and have breakfast there. Put your phones away and watch the city wake up."
+      }
+    },
+    {
+      "id": "lib-022",
+      "category": "FOOD",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Хөргөгчинд байгаагаар хоол зохиох",
+        "description": "Дэлгүүр орохгүйгээр гэрт байгаа орцоор л хоёулаа нэг хоол зохиогоорой. Нэрийг нь хамтдаа өгч, жорыг нь тэмдэглэж аваарай."
+      },
+      "en": {
+        "title": "Fridge-raid cook-off",
+        "description": "Without a trip to the shop, invent a meal from whatever is already at home. Name it together and write the recipe down."
+      }
+    },
+    {
+      "id": "lib-023",
+      "category": "FOOD",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 40,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Дуудлагаар хамт хооллох",
+        "description": "Нэг цаг тохироод хоолоо бэлдэж, видео дуудлагаар зэрэг идээрэй. Өдрийнхөө төлөвлөгөөг хуваалцаж, нэгнээ урамшуулаарай."
+      },
+      "en": {
+        "title": "Mealtime together on video",
+        "description": "Set a time, make your meals and eat together over video. Share your plans for the day and cheer each other on."
+      }
+    },
+    {
+      "id": "lib-024",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Лааны гэрэлтэй оройн зоог",
+        "description": "Ширээгээ гоёж, лаа асаагаад хоёулаа оройн хоолоо хамт хийгээрэй. Хувцсаа ч гоё өмсөөд гадуур зоог барьж байгаа юм шиг тоглоорой."
+      },
+      "en": {
+        "title": "Candlelit dinner at home",
+        "description": "Set the table, light candles and cook dinner together. Dress up as if you were dining somewhere fancy."
+      }
+    },
+    {
+      "id": "lib-025",
+      "category": "FOOD",
+      "budgetBand": "OVER_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 150,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Ойн баяраа гоё газар тэмдэглэх",
+        "description": "Ойн баяраараа урьдчилж ширээ захиалаад хоёулаа гоё хувцаслан оройн зоогт гараарай. Танилцсан өдрөөсөө хойших хамгийн дуртай мөчүүдээ ярилцаарай."
+      },
+      "en": {
+        "title": "Anniversary dinner out",
+        "description": "Book a table in advance for your anniversary and dress up for dinner. Talk through your favorite moments since the day you met."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-026",
+      "category": "FOOD",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 180,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Эцэг эхдээ хамт хоол хийж өгөх",
+        "description": "Хоёулаа нэгнийхээ эцэг эхийг урьж, хамтдаа оройн хоол хийж дайлаарай. Ширээн дээр тэдний залуу насны түүхийг асууж сонсоорой."
+      },
+      "en": {
+        "title": "Cook dinner for your parents",
+        "description": "Invite one set of parents over and cook dinner for them together. At the table, ask them stories from when they were young."
+      }
+    },
+    {
+      "id": "lib-027",
+      "category": "FOOD",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 180,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Хоолны хичээлд хамт суух",
+        "description": "Хоолны дугуйланд нэг удаа хамт сууж, сурсан хоолоо долоо хоногийн дараа гэртээ дахин хийгээрэй. Хоёр дахь удаад нь хэн нь илүү санаж байсныг хараарай."
+      },
+      "en": {
+        "title": "Take a cooking class",
+        "description": "Take a one-off cooking class together, then make the same dish at home a week later. See which of you remembered more the second time."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-028",
+      "category": "TRAVEL",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 480,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Тэрэлжид нэг өдөр",
+        "description": "Горхи-Тэрэлжийн байгалийн цогцолборт газар руу өглөө эрт гарч, Мэлхий хадны дэргэд зургаа авахуулаарай. Туул голын эрэг дагуу алхаад орой нь хот руугаа буцаарай."
+      },
+      "en": {
+        "title": "A day in Terelj",
+        "description": "Head out early to Gorkhi-Terelj National Park and take photos by Turtle Rock. Walk along the Tuul River and drive back to the city in the evening."
+      },
+      "safety": {
+        "mn": "Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой. Ус, дулаан хувцас, цэнэгтэй утас авч, замаа хэн нэгэнд хэлээд гараарай, цаг агаар муудвал эргээд буугаарай.",
+        "en": "Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel. Bring water, a warm layer and a charged phone, tell someone your route and turn back if the weather turns."
+      }
+    },
+    {
+      "id": "lib-029",
+      "category": "TRAVEL",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 480,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Хустайд тахь үзэх",
+        "description": "Хустайн байгалийн цогцолборт газарт очоод оройн бүрийд тахь харж үзээрэй. Дурандаа ээлжилж харж, чимээгүй хүлээх нь өөрөө нэг гоё дурсамж болно."
+      },
+      "en": {
+        "title": "See takhi at Khustai",
+        "description": "Visit Khustai National Park and look for takhi, the wild Przewalski's horses, at dusk. Taking turns with the binoculars and waiting quietly becomes a memory in itself."
+      },
+      "safety": {
+        "mn": "Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой. Ус, дулаан хувцас, цэнэгтэй утас авч, замаа хэн нэгэнд хэлээд гараарай, цаг агаар муудвал эргээд буугаарай.",
+        "en": "Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel. Bring water, a warm layer and a charged phone, tell someone your route and turn back if the weather turns."
+      }
+    },
+    {
+      "id": "lib-030",
+      "category": "TRAVEL",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 300,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Цонжин болдогийн морьт хөшөө",
+        "description": "Цонжин болдог дахь Чингис хааны морьт хөшөөнд очиж, морины толгой дээрх тагтаас тал нутгийг хараарай. Буцахдаа замдаа зогсож, хээр жаахан алхаарай."
+      },
+      "en": {
+        "title": "Equestrian statue at Tsonjin Boldog",
+        "description": "Drive out to the Chinggis Khaan Equestrian Statue at Tsonjin Boldog and look over the steppe from the deck on the horse's head. Stop on the way back for a short walk in the open."
+      },
+      "safety": {
+        "mn": "Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой. Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel. In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-031",
+      "category": "TRAVEL",
+      "budgetBand": "OVER_150K",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 2880,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Хөвсгөлийн мөсний баярт очих",
+        "description": "Өвлийн сүүлээр Хатгалд болдог мөсний баярт хамт очоод мөсөн баримал, нуурын мөсөн дээрх тоглоомуудыг үзээрэй. Цэнхэр мөсөн дээр хамт зогсох мэдрэмжийг хоёулаа мартахгүй."
+      },
+      "en": {
+        "title": "Khövsgöl Ice Festival",
+        "description": "Late in winter, travel to the ice festival near Khatgal and see the ice sculptures and games on frozen Lake Khövsgöl. Standing together on that clear blue ice is hard to forget."
+      },
+      "safety": {
+        "mn": "Хүйтэнд давхарлаж дулаан хувцаслаад гадаа удаан бүү байгаарай, хуруу, хацар чинэрвэл шууд дулаан газар ороорой. Зөвхөн зузаан, олон хүн явдаг мөсөн дээр гарч, ан цав, ус нэвчсэн хэсгээс хол байгаарай. Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой.",
+        "en": "Dress in warm layers, keep your time outside short and head indoors as soon as fingers or cheeks go numb. Only step onto thick, well-used ice and keep clear of cracks and wet patches. Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel."
+      }
+    },
+    {
+      "id": "lib-032",
+      "category": "TRAVEL",
+      "budgetBand": "OVER_150K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 2880,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Хархорин, Эрдэнэ зуу руу аялах",
+        "description": "Хоёр хоногийн аялалаар Хархоринд очиж, Эрдэнэ зуу хийдийн хэрмийн дотуур алхаарай. Эзэнт гүрний нийслэл байсан газрын түүхийг урьдчилж уншаад очвол илүү сонирхолтой."
+      },
+      "en": {
+        "title": "Kharkhorin and Erdene Zuu",
+        "description": "Take a two-day trip to Kharkhorin and walk inside the walls of Erdene Zuu Monastery. Reading up on the old imperial capital beforehand makes the visit richer."
+      },
+      "safety": {
+        "mn": "Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой.",
+        "en": "Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel."
+      }
+    },
+    {
+      "id": "lib-033",
+      "category": "TRAVEL",
+      "budgetBand": "OVER_150K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 2880,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Элсэн тасархайн манханд",
+        "description": "Хотоос баруун тийш явж Элсэн тасархайн элсэн манханд гараарай. Нар жаргахад элсэн дээр сууж, өнгө нь хэрхэн хувирахыг хамт ажиглаарай."
+      },
+      "en": {
+        "title": "Dunes of Elsen Tasarkhai",
+        "description": "Drive west to the dunes of Elsen Tasarkhai and climb up the sand. Sit together at sunset and watch the colors shift."
+      },
+      "safety": {
+        "mn": "Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой. Нарны малгай, тос, хангалттай ус авч яваарай.",
+        "en": "Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel. Bring sun hats, sunscreen and plenty of water."
+      }
+    },
+    {
+      "id": "lib-034",
+      "category": "TRAVEL",
+      "budgetBand": "OVER_150K",
+      "seasons": [
+        "SUMMER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 4320,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Зун Хөвсгөл нуурт",
+        "description": "Зуны амралтаараа Хөвсгөл нуурын эрэгт хэд хоног гэрт буугаарай. Өглөө нуурын эрэг дагуу алхаж, орой нь галын дэргэд оддыг хараарай."
+      },
+      "en": {
+        "title": "Summer at Lake Khövsgöl",
+        "description": "Spend a few summer days in a ger on the shore of Lake Khövsgöl. Walk the shoreline in the mornings and watch the stars by the fire at night."
+      },
+      "safety": {
+        "mn": "Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой. Галаа зөвхөн зөвшөөрөгдсөн газар асааж, явахаасаа өмнө бүрэн унтраагаарай. Зөвхөн гүехэн, зөвшөөрөгдсөн газар усанд орж, ганцаараа бүү сэлж, хүйтэн усанд удаан бүү байгаарай.",
+        "en": "Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel. Light fires only where it's allowed and put them out completely before you leave. Swim only in shallow, permitted spots, never alone, and don't stay long in cold water."
+      }
+    },
+    {
+      "id": "lib-035",
+      "category": "TRAVEL",
+      "budgetBand": "OVER_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 2880,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Рашаан сувилалд амрах",
+        "description": "Хангайн нэг рашаанд хэд хоног очиж, халуун усанд орж ядаргаагаа тайлаарай. Хотын чимээнээс хол, зөвхөн хоёулаа байх хэдэн өдөр."
+      },
+      "en": {
+        "title": "Hot-spring getaway",
+        "description": "Spend a few days at a hot spring in the Khangai and soak away the fatigue. A few quiet days far from the city, just the two of you."
+      },
+      "safety": {
+        "mn": "Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой. Халуун рашаанд удаан суувал толгой эргэж болох тул завсарлагатай ороорой. Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel. Long soaks can make you dizzy, so take breaks between dips. In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-036",
+      "category": "TRAVEL",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "SPRING",
+        "SUMMER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 300,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Гачууртад Туулын эрэгт",
+        "description": "Хотоос холгүй Гачуурт руу явж, Туул голын эрэгт дэвсгэр дэлгээд өдрийн хоолоо идээрэй. Голын хавтгай чулуугаар ус үсчүүлэх тэмцээн зохиогоорой."
+      },
+      "en": {
+        "title": "Riverside afternoon in Gachuurt",
+        "description": "Make the short trip to Gachuurt, spread a blanket by the Tuul River and have lunch. Hold a stone-skipping contest."
+      },
+      "safety": {
+        "mn": "Зөвхөн гүехэн, зөвшөөрөгдсөн газар усанд орж, ганцаараа бүү сэлж, хүйтэн усанд удаан бүү байгаарай.",
+        "en": "Swim only in shallow, permitted spots, never alone, and don't stay long in cold water."
+      }
+    },
+    {
+      "id": "lib-037",
+      "category": "TRAVEL",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 720,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Галт тэргээр ойрын аймаг руу",
+        "description": "Галт тэргэнд суугаад ойролцоох аймаг руу аялаарай. Цонхоор өнгөрөх тал хээрийг харж, тэргэн дээр цай уунгаа ярилцах нь аяллын хамгийн гоё хэсэг."
+      },
+      "en": {
+        "title": "Train ride to a nearby province",
+        "description": "Hop on a train to a nearby province. Watching the steppe roll by and sharing tea in the carriage is the best part of the trip."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-038",
+      "category": "TRAVEL",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 360,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Төлөвлөгөөгүй машинаар аялах",
+        "description": "Хоёулаа машинд суугаад уулзвар бүрт зоос шидэж, аль зүг рүү эргэхээ шийдээрэй. Хаана ч хүрсэн тэндээ жаахан алхаад буцаарай."
+      },
+      "en": {
+        "title": "Coin-flip road trip",
+        "description": "Get in the car and flip a coin at every junction to decide which way to turn. Wherever you end up, take a short walk and head back."
+      },
+      "safety": {
+        "mn": "Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой.",
+        "en": "Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel."
+      }
+    },
+    {
+      "id": "lib-039",
+      "category": "TRAVEL",
+      "budgetBand": "OVER_150K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 2880,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Амарбаясгалант хийд үзэх",
+        "description": "Сэлэнгэ аймгийн уулсын дунд орших Амарбаясгалант хийд рүү аялж, эртний барилгын хээ угалзыг ажиглаарай. Ойр орчмын ногоон хөндий майхан барьж хонох сайхан газар."
+      },
+      "en": {
+        "title": "Visit Amarbayasgalant Monastery",
+        "description": "Travel to Amarbayasgalant Monastery among the mountains of Selenge and take in the details of its old buildings. The green valley around it is a lovely place to camp."
+      },
+      "safety": {
+        "mn": "Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой. Харанхуйд хотоос гадуур явахдаа гар чийдэн, дулаан хувцас авч, буцах замаа сайн мэдэж байгаарай.",
+        "en": "Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel. Outside the city after dark, bring a torch and warm clothes and know your way back."
+      }
+    },
+    {
+      "id": "lib-040",
+      "category": "TRAVEL",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Мөрөөдлийн аяллаа төлөвлөх",
+        "description": "Хоёулаа хамгийн их очихыг хүсдэг газраа сонгоод маршрутаа өдөр өдрөөр нь гаргаарай. Зураг, газрын зургаа нэг хуудсанд цуглуулбал тэр аялал илүү ойрхон санагдана."
+      },
+      "en": {
+        "title": "Plan your dream trip",
+        "description": "Pick the place you both most want to go and map the route day by day. Gather photos and maps on one page so the dream feels a step closer."
+      }
+    },
+    {
+      "id": "lib-041",
+      "category": "TRAVEL",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 240,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Өөрийн хотдоо жуулчин болох",
+        "description": "Хотоо анх ирсэн жуулчин шиг тойрч, газрын зураг барин хөшөө, талбайн дэргэд зураг авахуулаарай. Урьд нь хэзээ ч ороогүй гудамжаар заавал нэг удаа алхаарай."
+      },
+      "en": {
+        "title": "Tourists in your own city",
+        "description": "Explore your city like first-time visitors, map in hand, posing by statues and squares. Make a point of walking down at least one street you've never been on."
+      }
+    },
+    {
+      "id": "lib-042",
+      "category": "TRAVEL",
+      "budgetBand": "OVER_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 1080,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Хотын зочид буудалд нэг шөнө",
+        "description": "Холын аялалгүйгээр хотын нэг зочид буудалд нэг шөнө хоноорой. Орон дээр кино үзэж, өглөөний цайгаа тайван уувал жижиг амралт болно."
+      },
+      "en": {
+        "title": "One night at a city hotel",
+        "description": "Skip the long trip and spend one night at a hotel in town. A movie in bed and a slow breakfast make a mini holiday."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-043",
+      "category": "TRAVEL",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 420,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Арьяабал хүртэл өгсөх",
+        "description": "Тэрэлжид очоод Арьяабал бясалгалын төв хүртэл өгсөж, шат дээр амсхийн хөндийг хараарай. Тэнд чимээгүй байдлыг хүндэтгэж, тайван алхаарай."
+      },
+      "en": {
+        "title": "Walk up to Aryapala",
+        "description": "In Terelj, climb up to the Aryapala Meditation Center and pause on the steps to look over the valley. Keep your voices low and enjoy the calm."
+      },
+      "safety": {
+        "mn": "Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой. Ус, дулаан хувцас, цэнэгтэй утас авч, замаа хэн нэгэнд хэлээд гараарай, цаг агаар муудвал эргээд буугаарай.",
+        "en": "Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel. Bring water, a warm layer and a charged phone, tell someone your route and turn back if the weather turns."
+      }
+    },
+    {
+      "id": "lib-044",
+      "category": "TRAVEL",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 360,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Манзушир хийдийн туурь үзэх",
+        "description": "Зуунмодын ойролцоох Манзушир хийдийн туурь руу очиж, Богд хан уулын ойгоор алхаарай. Музейг нь үзээд, уулын бэлд дэвсгэр дэлгэн цайгаа уугаарай."
+      },
+      "en": {
+        "title": "Ruins of Manzushir Monastery",
+        "description": "Head to the ruins of Manzushir Monastery near Zuunmod and walk in the forest of Bogd Khan Mountain. See the small museum, then have tea on a blanket at the foot of the hills."
+      },
+      "safety": {
+        "mn": "Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой. Ус, дулаан хувцас, цэнэгтэй утас авч, замаа хэн нэгэнд хэлээд гараарай, цаг агаар муудвал эргээд буугаарай.",
+        "en": "Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel. Bring water, a warm layer and a charged phone, tell someone your route and turn back if the weather turns."
+      }
+    },
+    {
+      "id": "lib-045",
+      "category": "TRAVEL",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 1440,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Малчин айлд хоног өнжих",
+        "description": "Амралтын өдрүүдээр малчин айлд очиж, саалийн ажилд тусалж, гэрт нь хоноорой. Хотод мэдрэхгүй нам гүм шөнө, тод оддыг хоёулаа хамт харна."
+      },
+      "en": {
+        "title": "Stay with a herding family",
+        "description": "Spend a weekend with a herding family, help with the milking and sleep in their ger. You'll share a quiet night and starry sky the city never gives you."
+      },
+      "safety": {
+        "mn": "Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой. Харанхуйд хотоос гадуур явахдаа гар чийдэн, дулаан хувцас авч, буцах замаа сайн мэдэж байгаарай.",
+        "en": "Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel. Outside the city after dark, bring a torch and warm clothes and know your way back."
+      }
+    },
+    {
+      "id": "lib-046",
+      "category": "TRAVEL",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": true,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Очих газрынхаа газрын зураг",
+        "description": "Монголын газрын зураг хэвлээд хоёулаа очихыг хүссэн газар бүрт тэмдэг тавиарай. Очих бүртээ тэмдгийн хажууд огноо, нэг өгүүлбэр дурсамж бичээрэй."
+      },
+      "en": {
+        "title": "Our Mongolia map",
+        "description": "Print a map of Mongolia and mark every place you want to visit together. Each time you go, add the date and one line about the trip."
+      }
+    },
+    {
+      "id": "lib-047",
+      "category": "TRAVEL",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "SUMMER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Нуурт завиар сэлүүрдэх",
+        "description": "Зуны тайван өдөр нуур дээр жижиг завь түрээслэн ээлжилж сэлүүрдээрэй. Нуурын голд очоод хэсэг зогсож, усны чимээг чагнаарай."
+      },
+      "en": {
+        "title": "Row a boat on a lake",
+        "description": "On a calm summer day, rent a small boat and take turns rowing. Stop in the middle of the lake for a while and just listen to the water."
+      },
+      "safety": {
+        "mn": "Завинд аврах хантааз заавал өмсөж, салхитай үед ус руу бүү гараарай.",
+        "en": "Always wear life jackets and stay ashore when it's windy."
+      }
+    },
+    {
+      "id": "lib-048",
+      "category": "TRAVEL",
+      "budgetBand": "OVER_150K",
+      "seasons": [
+        "SPRING",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 4320,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Хонгорын элсэнд тэмээ унах",
+        "description": "Говийн аялалдаа Хонгорын элсэнд очоод хоёулаа тэмээ унаж, манхны орой руу гараарай. Тэмээний алхаанд дасах хүртлээ инээд алдах нь гарцаагүй."
+      },
+      "en": {
+        "title": "Camel ride at Khongoryn Els",
+        "description": "On a Gobi trip, ride camels up toward the top of the Khongoryn Els dunes. You'll both be laughing until you get used to the camel's sway."
+      },
+      "safety": {
+        "mn": "Тэмээ унахдаа хөтөчтэй явж, тэмээ сөхрөх, босох үед сайн барьцаарай. Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой.",
+        "en": "Ride with a guide and hold on tight as the camel kneels and rises. Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel."
+      }
+    },
+    {
+      "id": "lib-049",
+      "category": "TRAVEL",
+      "budgetBand": "OVER_150K",
+      "seasons": [
+        "SPRING",
+        "SUMMER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 4320,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Ёлын амны хавцлаар алхах",
+        "description": "Өмнөговьд очвол Ёлын амны нарийн хавцлаар хамт алхаарай. Зуны эхэн хүртэл хайлалгүй үлддэг мөсийг өөрсдийн нүдээр хараарай."
+      },
+      "en": {
+        "title": "Walk the Yolyn Am gorge",
+        "description": "If you're in the South Gobi, walk together through the narrow Yolyn Am gorge. See for yourselves the ice that often lingers there into early summer."
+      },
+      "safety": {
+        "mn": "Ус, дулаан хувцас, цэнэгтэй утас авч, замаа хэн нэгэнд хэлээд гараарай, цаг агаар муудвал эргээд буугаарай. Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой. Зөвхөн зузаан, олон хүн явдаг мөсөн дээр гарч, ан цав, ус нэвчсэн хэсгээс хол байгаарай.",
+        "en": "Bring water, a warm layer and a charged phone, tell someone your route and turn back if the weather turns. Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel. Only step onto thick, well-used ice and keep clear of cracks and wet patches."
+      }
+    },
+    {
+      "id": "lib-050",
+      "category": "TRAVEL",
+      "budgetBand": "OVER_150K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 4320,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Баянзагт нар жаргахыг харах",
+        "description": "Баянзагийн улаан хадан цохионд нар жаргах үеэр очоорой. Үлэг гүрвэлийн яс олдсон газар зогсоод олон сая жилийн түүхийн тухай ярилцаарай."
+      },
+      "en": {
+        "title": "Sunset at the Flaming Cliffs",
+        "description": "Go to the red cliffs of Bayanzag at sunset. Stand where dinosaur fossils were found and talk about how deep time really goes."
+      },
+      "safety": {
+        "mn": "Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой. Ус, дулаан хувцас, цэнэгтэй утас авч, замаа хэн нэгэнд хэлээд гараарай, цаг агаар муудвал эргээд буугаарай.",
+        "en": "Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel. Bring water, a warm layer and a charged phone, tell someone your route and turn back if the weather turns."
+      }
+    },
+    {
+      "id": "lib-051",
+      "category": "TRAVEL",
+      "budgetBand": "OVER_150K",
+      "seasons": [
+        "SPRING",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 4320,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Орхоны хүрхрээ үзэх",
+        "description": "Хангайн аялалдаа Улаан цутгалан буюу Орхоны хүрхрээнд очоорой. Хүрхрээний доод тал руу болгоомжтой бууж, усны шуугианыг ойроос сонсоорой."
+      },
+      "en": {
+        "title": "Visit the Orkhon Waterfall",
+        "description": "On a Khangai trip, stop at the Orkhon Waterfall, also called Ulaan Tsutgalan. Carefully climb down below the falls and hear the roar up close."
+      },
+      "safety": {
+        "mn": "Ус, дулаан хувцас, цэнэгтэй утас авч, замаа хэн нэгэнд хэлээд гараарай, цаг агаар муудвал эргээд буугаарай. Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой.",
+        "en": "Bring water, a warm layer and a charged phone, tell someone your route and turn back if the weather turns. Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel."
+      }
+    },
+    {
+      "id": "lib-052",
+      "category": "TRAVEL",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Хотоо видеогоор танилцуулах",
+        "description": "Видео дуудлага дээр өөрийн хотын дуртай газруудаар нөгөөгөө аялуулаарай. Дараа уулзахдаа тэр газруудаар хамт явахаар тохиролцоорой."
+      },
+      "en": {
+        "title": "Video tour of your city",
+        "description": "On a video call, take the other on a tour of your favorite spots in town. Agree to visit them together next time you meet."
+      }
+    },
+    {
+      "id": "lib-053",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 120,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Нэг киног зэрэг үзэх",
+        "description": "Кино сонгоод, тоолж байгаад зэрэг эхлүүлээрэй. Дуудлагаа асаалттай байлгаж, дуртай хэсэг дээрээ хамт инээгээд, дууссаных нь дараа ярилцаарай."
+      },
+      "en": {
+        "title": "Watch the same film on a call",
+        "description": "Pick a film, count down and press play at the same moment. Keep the call open, laugh at the same scenes and talk it over afterwards."
+      }
+    },
+    {
+      "id": "lib-054",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 150,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Хөнжлөөр овоохой барих",
+        "description": "Хөнжил, дэр, сандлаар том овоохой барьж, дотор нь жижиг гэрэл асаарай. Дотроо хэвтээд кино үзэх юм уу, бага насныхаа түүхийг ярилцаарай."
+      },
+      "en": {
+        "title": "Build a blanket fort",
+        "description": "Build a big fort from blankets, pillows and chairs and string up a little light inside. Lie in it to watch a film or trade childhood stories."
+      }
+    },
+    {
+      "id": "lib-055",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 120,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Ширээний тоглоомын орой",
+        "description": "Дуртай ширээний тоглоомоо гаргаж, хожигдсон нь дараагийн аяга цайг чанана гэж тохиролцоорой. Шинэ тоглоомын дүрмийг хамтдаа сурах ч хөгжилтэй."
+      },
+      "en": {
+        "title": "Board game night",
+        "description": "Get out your favorite board games and agree that the loser makes the next pot of tea. Learning a new game's rules together is fun too."
+      }
+    },
+    {
+      "id": "lib-056",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Шагайн тоглоомын орой",
+        "description": "Шагайгаа гаргаад шагай уралдуулах, няслах тоглоомоор ээлжилж тоглоорой. Ялсан нь дараагийн тоглоомыг сонгоно."
+      },
+      "en": {
+        "title": "Shagai game night",
+        "description": "Bring out the shagai ankle bones and play the racing and flicking games. The winner picks the next game."
+      }
+    },
+    {
+      "id": "lib-057",
+      "category": "HOME",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 240,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Том пазл хамтдаа угсрах",
+        "description": "Олон хэсэгтэй пазл аваад ширээн дээр дэлгээрэй. Хэдэн оройгоор хувааж угсраад, дууссаных нь дараа жаазлаад хананд өлгөөрэй."
+      },
+      "en": {
+        "title": "Do a big jigsaw puzzle",
+        "description": "Get a big jigsaw and spread it out on the table. Work on it over a few evenings, then frame it and hang it up."
+      }
+    },
+    {
+      "id": "lib-058",
+      "category": "HOME",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 40,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Нэгнийхээ хөргийг зурах",
+        "description": "Цаас, будаг бэлдээд арван минутын дотор нэгнийхээ хөргийг зураарай. Хэр төстэй гарсанд нь ч, огт төсгүй гарсанд нь ч хамтдаа инээгээрэй."
+      },
+      "en": {
+        "title": "Paint each other's portraits",
+        "description": "Grab paper and paint and give yourselves ten minutes to paint each other. Laugh together however close, or far, the likeness turns out."
+      }
+    },
+    {
+      "id": "lib-059",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 45,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Ирээдүйн өөртөө захидал",
+        "description": "Хоёулаа таван жилийн дараах өөртөө захидал бичиж, битүүмжилсэн дугтуйнд хийгээрэй. Нээх өдрөө тэмдэглээд, тэр өдрийг тэвчээртэй хүлээгээрэй."
+      },
+      "en": {
+        "title": "Letters to your future selves",
+        "description": "Each write a letter to yourself five years from now and seal it in an envelope. Mark the date to open it and wait patiently until then."
+      }
+    },
+    {
+      "id": "lib-060",
+      "category": "HOME",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Хамтын зургийн цомог хийх",
+        "description": "Утсанд хадгалсан хамгийн дуртай зургуудаа хэвлэж, цомогт нааж, доор нь богино тайлбар бичээрэй. Тэр цомгийг хожим хамт эргэж харах нь бүр дулаахан."
+      },
+      "en": {
+        "title": "Make a photo album together",
+        "description": "Print your favorite photos from your phones, stick them into an album and add a short caption under each. Flipping through it later will feel even warmer."
+      }
+    },
+    {
+      "id": "lib-061",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Гүнзгий асуултын орой",
+        "description": "Нэгнээсээ урьд асууж байгаагүй асуултуудаа жагсааж, ээлжилж хариулаарай. Яаралгүй, үнэнээр ярьж, сонсож байгаагаа мэдрүүлээрэй."
+      },
+      "en": {
+        "title": "Deep-questions evening",
+        "description": "List questions you've never asked each other and take turns answering. Go slowly, be honest and really listen."
+      }
+    },
+    {
+      "id": "lib-062",
+      "category": "HOME",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 90,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Гэртээ тайвшрах орой",
+        "description": "Халуун усанд хөлөө дүрж, нүүрний маск тавиад, тайван хөгжим сонсоорой. Ээлжилж мөрөө иллэж, өдрийн ядаргаагаа тайлаарай."
+      },
+      "en": {
+        "title": "Pamper night at home",
+        "description": "Soak your feet in warm water, put on face masks and play calm music. Take turns giving shoulder rubs to melt away the day."
+      }
+    },
+    {
+      "id": "lib-063",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Гэртээ дуулах үдэш",
+        "description": "Дуртай дуунуудынхаа үгийг дэлгэцэнд гаргаад ээлжилж дуулаарай. Хамгийн их зориглож дуулсанд нь хөгжилтэй шагнал өгөөрэй."
+      },
+      "en": {
+        "title": "Sing-along night at home",
+        "description": "Put lyrics to your favorite songs on screen and take turns singing. Hand a silly prize to whoever sings with the most courage."
+      }
+    },
+    {
+      "id": "lib-064",
+      "category": "HOME",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Цонхон дээр ногоо тарих",
+        "description": "Жижиг сав, шороо, үр аваад цонхныхоо тавцан дээр ногоо тарьж ургуулаарай. Хэн нь хэзээ услахаа ээлжилж, ургахыг нь хамт ажиглаарай."
+      },
+      "en": {
+        "title": "Grow herbs on the windowsill",
+        "description": "Get small pots, soil and seeds and start an herb garden on the windowsill. Take turns watering and watch it grow together."
+      }
+    },
+    {
+      "id": "lib-065",
+      "category": "HOME",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 180,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Өрөөгөө шинэчлэх",
+        "description": "Тавилгаа шинээр байрлуулж, хуучин зүйлсээ ангилж, өрөөндөө шинэ өнгө оруулаарай. Хоёулаа дуртай нэг жижиг чимэглэл сонгоод хамгийн харагдах газарт тавиарай."
+      },
+      "en": {
+        "title": "Give a room a makeover",
+        "description": "Move the furniture around, sort through old things and give the room a fresh feel. Choose one small decoration you both love and put it where you'll see it most."
+      }
+    },
+    {
+      "id": "lib-066",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Хажуу хажуудаа ном унших",
+        "description": "Дулаан хөнжилд ороогоод тус тусын номоо уншаарай. Нэг цагийн дараа хамгийн сонирхолтой санагдсан хэсгээ нэгэндээ чангаар уншиж өгөөрөй."
+      },
+      "en": {
+        "title": "Reading night side by side",
+        "description": "Curl up under a warm blanket and read your own books. After an hour, read your favorite passage aloud to each other."
+      }
+    },
+    {
+      "id": "lib-067",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Хамтын компьютер тоглоом",
+        "description": "Хоёулаа нэг баг болж тоглох тоглоом сонгоод нэг шатыг хамт давж үзээрэй. Ялагдсан ч нэгнээ буруутгахгүй, дахин оролдох дүрэмтэй."
+      },
+      "en": {
+        "title": "Co-op video game night",
+        "description": "Pick a video game where you play as a team and try to beat a level together. House rule: no blaming, just another try."
+      }
+    },
+    {
+      "id": "lib-068",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 45,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Намайг хэр мэдэх вэ",
+        "description": "Хоёулаа нэгнийхээ тухай арав арван асуулт бэлдээд ээлжилж асуугаарай. Буруу хариулт бүр шинэ сонин түүх сонсох боломж."
+      },
+      "en": {
+        "title": "How well do you know me?",
+        "description": "Each prepare ten questions about the other and take turns asking. Every wrong answer is a chance to hear a new story."
+      }
+    },
+    {
+      "id": "lib-069",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 180,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Цагаан сарын бэлтгэлээ хамт хийх",
+        "description": "Битүүний өмнө гэрээ хамт цэвэрлэж, хуучин жилийн гомдлоо ч хамт үлдээгээрэй. Шинэ ондоо хүсч буй зүйлээ нэгэндээ хэлээрэй."
+      },
+      "en": {
+        "title": "Get ready for Tsagaan Sar",
+        "description": "Before Bituun, clean the home together and leave the old year's grudges behind as well. Share your wishes for the new year with each other."
+      }
+    },
+    {
+      "id": "lib-070",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": true,
+      "durationMinutes": 120,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Битүүнийг дуудлагаар өнгөрөөх",
+        "description": "Хол байгаа бол битүүний оройг видео дуудлагаар хамт өнгөрөөж, зассан ширээгээ нэгэндээ үзүүлээрэй. Унтахаасаа өмнө шинэ оны хүслээ хуваалцаарай."
+      },
+      "en": {
+        "title": "Bituun together over video",
+        "description": "If you're apart, spend Bituun evening together on video and show each other your festive tables. Share your New Year wishes before bed."
+      }
+    },
+    {
+      "id": "lib-071",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Шатар тоглож сурах",
+        "description": "Нэг нь мэддэг бол нөгөөдөө зааж, хоёулаа мэдэхгүй бол дүрмийг нь хамт сураарай. Долоо хоног бүр нэг өрөг тоглож, оноогоо хананд тэмдэглээрэй."
+      },
+      "en": {
+        "title": "Learn chess together",
+        "description": "If one of you knows how, teach the other; if neither does, learn the rules together. Play a game every week and keep score on the wall."
+      }
+    },
+    {
+      "id": "lib-072",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Мөрөөдлийн гэрээ зурах",
+        "description": "Ирээдүйд амьдрах гэрийнхээ зургийг хамтдаа цаасан дээр зураарай. Өрөө бүрт юу байхыг тохиролцох явцад нэгнийхээ хүслийг илүү сайн мэднэ."
+      },
+      "en": {
+        "title": "Sketch your dream home",
+        "description": "Draw a plan of the home you'd like to live in one day. Deciding what goes in each room shows you a lot about each other's wishes."
+      }
+    },
+    {
+      "id": "lib-073",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 15,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Талархлын лонх",
+        "description": "Нэг шил лонх бэлдээд долоо хоног бүр нэгэндээ талархсан зүйлээ цаасан дээр бичиж хийгээрэй. Оны эцэст бүгдийг нь хамт уншаарай."
+      },
+      "en": {
+        "title": "Gratitude jar",
+        "description": "Set out a jar and each week drop in a note about something you appreciate in the other. Read them all together at the end of the year."
+      }
+    },
+    {
+      "id": "lib-074",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 45,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Өөрсдийн радио нэвтрүүлэг",
+        "description": "Утсаараа хорин минутын яриа бичиж, өөрсдийн радио нэвтрүүлэг хийгээрэй. Хэдэн жилийн дараа сонсоход ямар байх бол гэж төсөөлөөд инээлдээрэй."
+      },
+      "en": {
+        "title": "Record your own radio show",
+        "description": "Record a twenty-minute chat on your phone as if you were hosting your own radio show. Imagine listening back years from now and have a laugh."
+      }
+    },
+    {
+      "id": "lib-075",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 45,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Цаас нугалж урлах",
+        "description": "Цаасаар тогоруу, цэцэг нугалах заавар хайгаад хамтдаа хийгээрэй. Хамгийн гоё гарсныг нь цонхондоо өлгөөрэй."
+      },
+      "en": {
+        "title": "Paper folding evening",
+        "description": "Look up how to fold paper cranes and flowers and make them together. Hang the best ones in the window."
+      }
+    },
+    {
+      "id": "lib-076",
+      "category": "HOME",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 40,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Цасан өдрийн халуун шоколад",
+        "description": "Гадаа хүйтэн байхад халуун шоколад хийгээд цонхны дэргэд суугаарай. Цас орохыг харангаа ирэх зундаа юу хийхээ ярилцаарай."
+      },
+      "en": {
+        "title": "Hot chocolate and a snowy view",
+        "description": "When it's freezing outside, make hot chocolate and sit by the window. Watch the snow fall and talk about what you'll do next summer."
+      }
+    },
+    {
+      "id": "lib-077",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 360,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Гурван ангит киноны өдөр",
+        "description": "Гурван ангитай нэг цуврал кино сонгоод амралтын өдөр нэг дор үзээрэй. Ангиудын хооронд завсарлаж, ээлжилж хөнгөн зууш бэлдээрэй."
+      },
+      "en": {
+        "title": "Film trilogy marathon",
+        "description": "Pick a film trilogy and watch the whole thing on a day off. Take breaks between parts and take turns making snacks."
+      }
+    },
+    {
+      "id": "lib-078",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": true,
+      "durationMinutes": 120,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Хуучин монгол киноны орой",
+        "description": "Хуучин монгол уран сайхны киноноос нэгийг сонгоод хамтдаа үзээрэй. Тэр кинонд гардаг алдартай үгнээс аль нь хоёуланд тань аль хэдийн танил байсныг ярилцаарай."
+      },
+      "en": {
+        "title": "Classic Mongolian film night",
+        "description": "Pick a classic Mongolian feature film and watch it together. Talk about which famous lines from it you both already knew."
+      }
+    },
+    {
+      "id": "lib-079",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Яаралгүй ням гарагийн өглөө",
+        "description": "Сэрүүлгээ унтраагаад, хүссэн цагтаа босож, өглөөний цайгаа орондоо уугаарай. Тэр өглөө ямар ч төлөвлөгөө гаргахгүй гэж хоорондоо амлаарай."
+      },
+      "en": {
+        "title": "Slow Sunday morning",
+        "description": "Turn off the alarms, get up whenever you like and have breakfast in bed. Promise each other there'll be no plans that morning."
+      }
+    },
+    {
+      "id": "lib-080",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Хөзрийн шинэ тоглоом сурах",
+        "description": "Хоёр хүнээр тоглодог шинэ хөзрийн тоглоомын дүрэм сураад хэдэн тойрог тоглоорой. Ялагч нь дараагийн үзэх киногоо сонгох эрхтэй."
+      },
+      "en": {
+        "title": "Learn a new card game",
+        "description": "Learn the rules of a new two-player card game and play a few rounds. The winner picks the next movie."
+      }
+    },
+    {
+      "id": "lib-081",
+      "category": "HOME",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 300,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Ноосон ороолт хамт сүлжих",
+        "description": "Ноосон утас аваад нэг ороолтыг ээлжилж сүлжээрэй. Дуусаад хэн нь эхэлж зүүхийг сугалаагаар шийдээрэй."
+      },
+      "en": {
+        "title": "Knit a scarf together",
+        "description": "Get some wool and take turns knitting a single scarf. When it's done, draw lots to see who wears it first."
+      }
+    },
+    {
+      "id": "lib-082",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Анхны зурвасаа дахин унших",
+        "description": "Анх танилцаж байх үеийн зурвас, захидлуудаа гаргаж хамт уншаарай. Тэр үеийн өөрсдөдөө инээж, одоо хэр ойртсоноо мэдрээрэй."
+      },
+      "en": {
+        "title": "Read your first messages again",
+        "description": "Dig out the messages and letters from when you first met and read them together. Laugh at who you were then and notice how close you've grown."
+      }
+    },
+    {
+      "id": "lib-083",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Өвлийн шөнө зуны зургууд",
+        "description": "Өвлийн урт шөнө зуны аяллын зургуудаа том дэлгэцэнд гаргаж үзээрэй. Тэр өдрүүдийн хамгийн хөгжилтэй мөчийг дахин дурсаарай."
+      },
+      "en": {
+        "title": "Summer photos on a winter night",
+        "description": "On a long winter night, put your summer trip photos up on the big screen. Relive the funniest moments together."
+      }
+    },
+    {
+      "id": "lib-084",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 45,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Нэгэндээ дууны жагсаалт хийх",
+        "description": "Хоёулаа нөгөөдөө зориулж арав орчим дуутай жагсаалт гаргаарай. Дуу бүрийг яагаад сонгосноо богино бичээд хамт явуулаарай."
+      },
+      "en": {
+        "title": "Make each other playlists",
+        "description": "Each make a playlist of about ten songs for the other. Add a short note on why you picked each one."
+      }
+    },
+    {
+      "id": "lib-085",
+      "category": "HOME",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Дуудлага дээр цомог сонсох",
+        "description": "Шинэ гарсан нэг цомгийг дуудлага дээр эхнээс нь дуустал хамт сонсоорой. Дуу бүрийн дараа сэтгэгдлээ ганцхан үгээр хэлээрэй."
+      },
+      "en": {
+        "title": "Album listening party on a call",
+        "description": "Listen to a new album start to finish together on a call. After each track, give your reaction in one word."
+      }
+    },
+    {
+      "id": "lib-086",
+      "category": "SPORT",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 90,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Мөсөн талбайд тэшүүрээр гулгах",
+        "description": "Өвөл хотын мөсөн талбай дээр гар гараасаа хөтлөлцөн гулгаарай. Нэг нь сайн гулгадаг бол нөгөөдөө тэнцвэрээ барихыг заагаарай."
+      },
+      "en": {
+        "title": "Ice skating together",
+        "description": "In winter, skate hand in hand at an outdoor rink in the city. If one of you is the stronger skater, help the other find their balance."
+      },
+      "safety": {
+        "mn": "Хүйтэнд давхарлаж дулаан хувцаслаад гадаа удаан бүү байгаарай, хуруу, хацар чинэрвэл шууд дулаан газар ороорой. Зөвхөн зузаан, олон хүн явдаг мөсөн дээр гарч, ан цав, ус нэвчсэн хэсгээс хол байгаарай.",
+        "en": "Dress in warm layers, keep your time outside short and head indoors as soon as fingers or cheeks go numb. Only step onto thick, well-used ice and keep clear of cracks and wet patches."
+      }
+    },
+    {
+      "id": "lib-087",
+      "category": "SPORT",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 360,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Цанаар гулгах өдөр",
+        "description": "Хотын ойролцоох цанын баазад очоод цанаар гулгаж үзээрэй. Анх удаа бол багштай нэг цагийн хичээл авбал илүү итгэлтэй гулгана."
+      },
+      "en": {
+        "title": "A day on the ski slopes",
+        "description": "Head to a ski area near the city and spend the day on skis. If it's your first time, a one-hour lesson with an instructor builds confidence fast."
+      },
+      "safety": {
+        "mn": "Түвшиндээ тохирсон налуу сонгож, дуулга өмсөөд, хүйтэнд хэт удаан бүү байгаарай. Хүйтэнд давхарлаж дулаан хувцаслаад гадаа удаан бүү байгаарай, хуруу, хацар чинэрвэл шууд дулаан газар ороорой.",
+        "en": "Pick slopes that match your level, wear helmets and don't stay out too long in the cold. Dress in warm layers, keep your time outside short and head indoors as soon as fingers or cheeks go numb."
+      }
+    },
+    {
+      "id": "lib-088",
+      "category": "SPORT",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Толгод дээр чаргаар гулгах",
+        "description": "Цастай өдөр чарга аваад хотын захын зөөлөн налуутай толгод руу очоорой. Гулгасны дараа термосноос халуун цай уугаад дулаацаарай."
+      },
+      "en": {
+        "title": "Sledding on a snowy hill",
+        "description": "On a snowy day, grab a sled and find a gentle hill on the edge of town. Warm up afterwards with hot tea from a flask."
+      },
+      "safety": {
+        "mn": "Зам, мод, чулуугүй зөөлөн налуу сонгож, ээлжилж гулгаарай. Хүйтэнд давхарлаж дулаан хувцаслаад гадаа удаан бүү байгаарай, хуруу, хацар чинэрвэл шууд дулаан газар ороорой.",
+        "en": "Pick a gentle slope away from roads, trees and rocks, and take turns. Dress in warm layers, keep your time outside short and head indoors as soon as fingers or cheeks go numb."
+      }
+    },
+    {
+      "id": "lib-089",
+      "category": "SPORT",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 45,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Өглөө хамт гүйх",
+        "description": "Долоо хоногт хоёр удаа өглөө эрт босоод хамтдаа хөнгөн гүйгээрэй. Гүйж дуусаад хамт өглөөний цай уух нь хамгийн сайхан шагнал."
+      },
+      "en": {
+        "title": "Morning run together",
+        "description": "Twice a week, get up early and go for an easy run together. Breakfast together afterwards is the best reward."
+      }
+    },
+    {
+      "id": "lib-090",
+      "category": "SPORT",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 180,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Туул голын дагуу дугуй унах",
+        "description": "Дулаан өдөр дугуй түрээслээд Туул голын эрэг дагуу аялаарай. Замдаа эрэг дээр зогсож, усны чимээ сонсон амраарай."
+      },
+      "en": {
+        "title": "Bike ride along the Tuul",
+        "description": "On a warm day, rent bikes and ride along the banks of the Tuul River. Stop on the shore for a rest and listen to the water."
+      },
+      "safety": {
+        "mn": "Дуулга өмсөж, гэрэл, дохиотой явж, машин ихтэй замаас зайлсхийгээрэй.",
+        "en": "Wear helmets, use lights and stay off busy roads."
+      }
+    },
+    {
+      "id": "lib-091",
+      "category": "SPORT",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 30,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Гэртээ хамт иог хийх",
+        "description": "Нэг бичлэгээр хоёулаа хагас цагийн иог хийгээрэй. Хол байгаа бол камераа асаагаад хөдөлгөөнөө нэгэндээ харуулаарай."
+      },
+      "en": {
+        "title": "Yoga session together",
+        "description": "Follow the same half-hour yoga video together. If you're apart, keep the cameras on and show each other the poses."
+      }
+    },
+    {
+      "id": "lib-092",
+      "category": "SPORT",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Хос бүжиг сурах",
+        "description": "Вальс, сальса гэх мэт хос бүжгийн хичээлийг бичлэгээр үзээд гэртээ сураарай. Алхаа андуурч нэгнийхээ хөлийг гишгэсэн ч инээгээд үргэлжлүүлээрэй."
+      },
+      "en": {
+        "title": "Learn a partner dance",
+        "description": "Pick a partner dance like waltz or salsa, follow a video and learn it in your living room. If you step on each other's toes, laugh and keep going."
+      }
+    },
+    {
+      "id": "lib-093",
+      "category": "SPORT",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Авиралтын заалд хамт авирах",
+        "description": "Авиралтын заалд очоод зааварлагчаас аюулгүйн дүрэм сонсоод хоёулаа ээлжилж авираарай. Доороос нь нэгнээ дэмжиж, хаана барихыг хэлж өгөөрөй."
+      },
+      "en": {
+        "title": "Indoor climbing session",
+        "description": "Go to a climbing gym, listen to the safety briefing and take turns climbing. Cheer each other on and call out holds from below."
+      },
+      "safety": {
+        "mn": "Зөвхөн зааварлагчийн хяналтан дор, зөв бэхэлгээтэй авираарай. Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "Climb only under an instructor's supervision with proper safety gear. In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-094",
+      "category": "SPORT",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 300,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Богд хан ууланд явган аялах",
+        "description": "Амралтын өдөр Богд хан уулын ойт замаар өгсөж, хотыг дээрээс нь хараарай. Оргилд хүрээд авчирсан хоолоо хуваалцаж, буцахдаа яаралгүй бууаарай."
+      },
+      "en": {
+        "title": "Hike Bogd Khan Mountain",
+        "description": "On a day off, hike the forest trails of Bogd Khan Mountain and look down on the city. Share your packed lunch at the top and take the descent slowly."
+      },
+      "safety": {
+        "mn": "Ус, дулаан хувцас, цэнэгтэй утас авч, замаа хэн нэгэнд хэлээд гараарай, цаг агаар муудвал эргээд буугаарай.",
+        "en": "Bring water, a warm layer and a charged phone, tell someone your route and turn back if the weather turns."
+      }
+    },
+    {
+      "id": "lib-095",
+      "category": "SPORT",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 180,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Чингэлтэй ууланд нар угтах",
+        "description": "Хотын хойд талын Чингэлтэй ууланд хоёулаа өглөө эрт өгсөөрэй. Нар мандах үеэр хотын гэрэл унтарч байгааг дээрээс нь хараарай."
+      },
+      "en": {
+        "title": "Sunrise on Chingeltei Mountain",
+        "description": "Set off early and climb Chingeltei Mountain on the north side of the city. Watch from above as the city lights go out at sunrise."
+      },
+      "safety": {
+        "mn": "Ус, дулаан хувцас, цэнэгтэй утас авч, замаа хэн нэгэнд хэлээд гараарай, цаг агаар муудвал эргээд буугаарай. Харанхуйд хотоос гадуур явахдаа гар чийдэн, дулаан хувцас авч, буцах замаа сайн мэдэж байгаарай.",
+        "en": "Bring water, a warm layer and a charged phone, tell someone your route and turn back if the weather turns. Outside the city after dark, bring a torch and warm clothes and know your way back."
+      }
+    },
+    {
+      "id": "lib-096",
+      "category": "SPORT",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Усан бассейнд хамт сэлэх",
+        "description": "Ажлын дараа усан бассейнд очиж хамтдаа сэлээрэй. Нэг нь сайн сэлдэг бол нөгөөдөө нэг шинэ арга заагаарай."
+      },
+      "en": {
+        "title": "Swim at an indoor pool",
+        "description": "After work, go to an indoor pool and swim together. If one of you swims well, teach the other a new stroke."
+      },
+      "safety": {
+        "mn": "Зөвхөн гүехэн, зөвшөөрөгдсөн газар усанд орж, ганцаараа бүү сэлж, хүйтэн усанд удаан бүү байгаарай. Өвөл бол үсээ бүрэн хатаасны дараа л гадаа гараарай.",
+        "en": "Swim only in shallow, permitted spots, never alone, and don't stay long in cold water. In winter, dry your hair completely before heading outside."
+      }
+    },
+    {
+      "id": "lib-097",
+      "category": "SPORT",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Бадминтон тоглох",
+        "description": "Цэцэрлэгт хүрээлэн эсвэл байрныхаа хашаанд бадминтон тоглоорой. Шувууг хэдэн удаа унагалгүй дамжуулж чадахаа тоолоорой."
+      },
+      "en": {
+        "title": "Badminton in the park",
+        "description": "Play badminton in a park or your courtyard. Count how long you can keep the shuttlecock in the air."
+      }
+    },
+    {
+      "id": "lib-098",
+      "category": "SPORT",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 120,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Монгол нумаар сур харвах",
+        "description": "Үндэсний сур харвааны дугуйланд нэг удаагийн хичээлд хамт ороорой. Монгол нум татах арга, онох үед уухай дуудах ёсыг хоёулаа мэдэж авна."
+      },
+      "en": {
+        "title": "Try traditional Mongolian archery",
+        "description": "Join a one-off lesson at a traditional archery club. You'll learn to draw a Mongolian bow and the uukhai cheer called out when an arrow hits."
+      },
+      "safety": {
+        "mn": "Зааварлагчийн хэлснээр харваж, байны чиглэлд хэзээ ч бүү зогсоорой.",
+        "en": "Shoot only when the instructor says so and never stand near the targets."
+      }
+    },
+    {
+      "id": "lib-099",
+      "category": "SPORT",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 240,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Морь унаж тал хээрээр явах",
+        "description": "Хотын ойролцоох малчин айл эсвэл жуулчны баазад очоод хөтөчтэй морь унаарай. Анх удаа бол алхаагаар явж, морь залахыг тайван сураарай."
+      },
+      "en": {
+        "title": "Horseback ride on the steppe",
+        "description": "Visit a herding family or a camp near the city and go riding with a guide. If it's your first time, stay at a walk and calmly learn to steer."
+      },
+      "safety": {
+        "mn": "Номхон морь сонгож, дуулга өмсөөд, туршлагатай хөтчийн хажуугаас бүү холдоорой. Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой.",
+        "en": "Choose a gentle horse, wear a helmet and stay close to an experienced guide. Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel."
+      }
+    },
+    {
+      "id": "lib-100",
+      "category": "SPORT",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 20,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Дуудлагаар хамт дасгал хийх",
+        "description": "Хорин минутын дасгалын хөтөлбөр сонгоод видео дуудлагаар зэрэг хийгээрэй. Сүүлийн давталт дээр нэгнээ чангаар урамшуулаарай."
+      },
+      "en": {
+        "title": "Workout buddies on video",
+        "description": "Pick a twenty-minute routine and do it together over video. Cheer each other through the last set."
+      }
+    },
+    {
+      "id": "lib-101",
+      "category": "SPORT",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Алхамын хамтын сорил",
+        "description": "Долоо хоногийн турш хоёулангийнхаа алхмыг нэмж, нэг хамтын зорилго тавиарай. Зорилгодоо хүрвэл жижиг баяр тэмдэглээрэй."
+      },
+      "en": {
+        "title": "Shared step challenge",
+        "description": "For a week, add up both your daily steps toward one shared goal. Celebrate with something small when you hit it."
+      }
+    },
+    {
+      "id": "lib-102",
+      "category": "SPORT",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Ширээний теннисний тоглолт",
+        "description": "Ширээний теннисний ширээ олоод хэдэн тоглолт хийгээрэй. Хожигдсон нь ялагчдаа халуун ундаа авч өгнө."
+      },
+      "en": {
+        "title": "Table tennis rematch",
+        "description": "Find a table tennis table and play a few games. Whoever loses buys the winner a hot drink."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-103",
+      "category": "SPORT",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "SPRING"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Цаасан шувуу хөөргөх",
+        "description": "Салхитай хаврын өдөр цаасан шувуу аваад задгай талбай руу гараарай. Хэн нь илүү өндөрт хөөргөхийг үзээрэй."
+      },
+      "en": {
+        "title": "Fly a kite",
+        "description": "On a breezy spring day, take a kite out to an open field. See who can fly it highest."
+      }
+    },
+    {
+      "id": "lib-104",
+      "category": "SPORT",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 150,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Сагсан бөмбөгийн тоглолт үзэх",
+        "description": "Хотод болох сагсан бөмбөгийн тоглолтод очоод нэг багийг хамт дэмжээрэй. Тэр багийн өнгөтэй хувцас өмсвөл бүр хөгжилтэй."
+      },
+      "en": {
+        "title": "Cheer at a basketball game",
+        "description": "Go to a basketball game in town and pick a team to cheer for together. Wearing the team colors makes it even more fun."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-105",
+      "category": "SPORT",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 30,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Цасан бөмбөг шидэлцэх",
+        "description": "Шинэ цасанд хоёулаа цасан бөмбөг шидэлцэж, цасан хэрэм барьж нуугдаарай. Хорин минутаас илүүгүй тоглоод гэртээ халуун цай уугаарай."
+      },
+      "en": {
+        "title": "Snowball fight",
+        "description": "In fresh snow, have a snowball fight and build a little snow wall to hide behind. Play for twenty minutes at most, then head home for hot tea."
+      },
+      "safety": {
+        "mn": "Хүйтэнд давхарлаж дулаан хувцаслаад гадаа удаан бүү байгаарай, хуруу, хацар чинэрвэл шууд дулаан газар ороорой.",
+        "en": "Dress in warm layers, keep your time outside short and head indoors as soon as fingers or cheeks go numb."
+      }
+    },
+    {
+      "id": "lib-106",
+      "category": "SPORT",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Ойн замаар хамт гүйх",
+        "description": "Хотын захын ойн зөөлөн замаар хоёулаа удаан хурдтай гүйгээрэй. Замдаа зогсож сунгалт хийн, ойн агаараар амьсгалаарай."
+      },
+      "en": {
+        "title": "Trail jog in the woods",
+        "description": "Jog slowly together along a soft forest trail on the edge of town. Stop along the way to stretch and breathe in the forest air."
+      },
+      "safety": {
+        "mn": "Ус, дулаан хувцас, цэнэгтэй утас авч, замаа хэн нэгэнд хэлээд гараарай, цаг агаар муудвал эргээд буугаарай.",
+        "en": "Bring water, a warm layer and a charged phone, tell someone your route and turn back if the weather turns."
+      }
+    },
+    {
+      "id": "lib-107",
+      "category": "CULTURE",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "SUMMER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 300,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Наадмын нээлтэд хамт очих",
+        "description": "Долдугаар сарын наадмын нээлтэд хамт очиж, ёслолын жагсаал, бөхийн барилдааныг үзээрэй. Цэнгэлдэхийн гадаа шагай харвааны майханд ч ороорой."
+      },
+      "en": {
+        "title": "Naadam opening ceremony",
+        "description": "Go to the Naadam opening ceremony in July and watch the parade and the wrestling. Stop by the ankle-bone shooting tents outside the stadium as well."
+      },
+      "safety": {
+        "mn": "Нарны малгай, тос, хангалттай ус авч яваарай.",
+        "en": "Bring sun hats, sunscreen and plenty of water."
+      }
+    },
+    {
+      "id": "lib-108",
+      "category": "CULTURE",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "SUMMER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 360,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Хүй долоон худагт морины уралдаан",
+        "description": "Наадмаар Хүй долоон худагт очиж, хурдан морьдын барианд орж ирэхийг хамт хараарай. Тоос шороо, нар их байдаг тул малгай, ус авч яваарай."
+      },
+      "en": {
+        "title": "Naadam races at Khui Doloon",
+        "description": "During Naadam, head to Khui Doloon Khudag and watch the racehorses cross the finish line. It's dusty and sunny out there, so bring hats and water."
+      },
+      "safety": {
+        "mn": "Уралдааны замаас хол, хашлагын ард байгаарай. Нарны малгай, тос, хангалттай ус авч яваарай.",
+        "en": "Stay well back behind the barriers, away from the race track. Bring sun hats, sunscreen and plenty of water."
+      }
+    },
+    {
+      "id": "lib-109",
+      "category": "CULTURE",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Чойжин ламын сүм музей үзэх",
+        "description": "Хотын төвд байрлах Чойжин ламын сүм музейг хамт үзээрэй. Цамын баг, хээ угалзыг ажиглаж, сонирхсон зүйлээ нэгэндээ тайлбарлаарай."
+      },
+      "en": {
+        "title": "Choijin Lama Temple Museum",
+        "description": "Visit the Choijin Lama Temple Museum in the city center together. Look closely at the Tsam dance masks and ornaments and tell each other what caught your eye."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-110",
+      "category": "CULTURE",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Гандан хийдийг үзэх",
+        "description": "Гандантэгчэнлин хийдэд очиж, Мэгжид Жанрайсигийн өндөр баримлыг үзээрэй. Тэнд байгаа хүмүүсийн зан үйлийг хүндэтгэн, чимээгүй тайван алхаарай."
+      },
+      "en": {
+        "title": "Visit Gandan Monastery",
+        "description": "Visit Gandantegchenlin Monastery and see the towering statue of Migjid Janraisig. Respect the people practicing there and walk quietly."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-111",
+      "category": "CULTURE",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 120,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Монголын үндэсний музейд",
+        "description": "Монголын үндэсний музейд очоод чулуун зэвсгийн үеэс өнөөг хүртэлх түүхтэй танилцаарай. Танхим бүрээс нэг дуртай үзмэрээ сонгож, яагаад гэдгээ хэлээрэй."
+      },
+      "en": {
+        "title": "National Museum of Mongolia",
+        "description": "Visit the National Museum of Mongolia and follow the story from the Stone Age to today. Pick one favorite exhibit in each hall and explain your choice."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-112",
+      "category": "CULTURE",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Богд хааны ордон музейд",
+        "description": "Богд хааны ордон музейд очиж, ордны эдлэл, хувцас, хаалганы хээ угалзыг үзээрэй. Гарсныхаа дараа алхангаа үзсэн зүйлсээ ярилцаарай."
+      },
+      "en": {
+        "title": "Bogd Khan Palace Museum",
+        "description": "Visit the Bogd Khan Palace Museum and look at the palace belongings, robes and carved gates. Walk around afterwards and talk about what you saw."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-113",
+      "category": "CULTURE",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Занабазарын музейд урлаг үзэх",
+        "description": "Занабазарын нэрэмжит дүрслэх урлагийн музейд очиж, түүний бүтээлүүдийг хамт үзээрэй. Хамгийн удаан харсан бүтээлээ нэгэндээ зааж, юу мэдэрснээ хэлээрэй."
+      },
+      "en": {
+        "title": "Art at the Zanabazar Museum",
+        "description": "Visit the Zanabazar Museum of Fine Arts and look at his works together. Show each other the piece you lingered over longest and say how it made you feel."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-114",
+      "category": "CULTURE",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Үлэг гүрвэлийн музей үзэх",
+        "description": "Монголын үлэг гүрвэлийн төв музейд очиж, говиос олдсон тарбозаврын араг ясыг үзээрэй. Түүний өмнө зогсоход хоёулаа өөрсдийгөө ямар жижигхэн болохыг мэдэрнэ."
+      },
+      "en": {
+        "title": "Dinosaur museum visit",
+        "description": "Visit the Central Museum of Mongolian Dinosaurs and see the tarbosaurus skeleton found in the Gobi. Standing before it, you'll both feel very small."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-115",
+      "category": "CULTURE",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 180,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Дуурь, бүжгийн жүжиг үзэх",
+        "description": "Улсын дуурь бүжгийн эрдмийн театрт тасалбар урьдчилж аваад гоё хувцаслан очоорой. Завсарлагааны үеэр анхны сэтгэгдлээ хуваалцаарай."
+      },
+      "en": {
+        "title": "A night at the opera or ballet",
+        "description": "Book tickets ahead for the State Academic Theatre of Opera and Ballet and dress up for the night. Share your first impressions at the interval."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-116",
+      "category": "CULTURE",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Үндэсний урлагийн тоглолт",
+        "description": "Морин хуур, хөөмий, уртын дуутай үндэсний урлагийн тоглолтыг хамт үзээрэй. Тоглолтын дараа аль хэсэг нь сэтгэлд тань хамгийн их хүрснийг ярилцаарай."
+      },
+      "en": {
+        "title": "Traditional music and dance show",
+        "description": "Go to a traditional show with morin khuur, throat singing and long song. Afterwards, talk about which part moved you most."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-117",
+      "category": "CULTURE",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": true,
+      "durationMinutes": 30,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Хөөмийн анхны оролдлого",
+        "description": "Хөөмийн хичээлийн бичлэг үзээд хоёулаа анхны авиагаа гаргаж үзээрэй. Хэн нь түрүүлж исгэрээ гаргахыг хараарай, инээд алдах нь лавтай."
+      },
+      "en": {
+        "title": "Try throat singing",
+        "description": "Watch a throat-singing tutorial and try making your first sounds together. See who gets the whistling overtone first; laughter is guaranteed."
+      }
+    },
+    {
+      "id": "lib-118",
+      "category": "CULTURE",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Дээлтэй зураг авахуулах",
+        "description": "Хоёулаа дээлээ өмсөөд хотын гоё газар эсвэл тал хээр зураг авахуулаарай. Тэр зургаас нэгийг хэвлээд гэрийнхээ хананд өлгөөрэй."
+      },
+      "en": {
+        "title": "Photo shoot in deel",
+        "description": "Put on your deel and take photos at a favorite spot in town or out on the steppe. Print one and hang it at home."
+      }
+    },
+    {
+      "id": "lib-119",
+      "category": "CULTURE",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Уран зургийн үзэсгэлэн үзэх",
+        "description": "Хотод болж буй уран зургийн үзэсгэлэн олоод хамт үзээрэй. Ганцхан зургийг гэртээ өлгөх боломжтой бол аль нь байхыг тохиролцоорой."
+      },
+      "en": {
+        "title": "Art exhibition afternoon",
+        "description": "Find an art exhibition in town and walk through it together. If you could hang just one piece at home, agree on which it would be."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-120",
+      "category": "CULTURE",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 150,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Амьд хөгжмийн тоглолт",
+        "description": "Жижиг танхимд болох амьд хөгжмийн тоглолтод хамт очоорой. Дуртай дуу тань эхлэхэд нэгнийхээ гарыг атгаарай."
+      },
+      "en": {
+        "title": "Live music night",
+        "description": "Go to a live music show at a small venue. Hold hands when your favorite song comes on."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-121",
+      "category": "CULTURE",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 180,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Драмын театрт жүжиг үзэх",
+        "description": "Улсын драмын эрдмийн театрын тайзнаа тавигдаж буй жүжгээс нэгийг сонгоод үзээрэй. Гэртээ харихдаа гол дүрийн оронд байсан бол яах байснаа ярилцаарай."
+      },
+      "en": {
+        "title": "See a play at the Drama Theatre",
+        "description": "Choose a play on stage at the State Academic Drama Theatre and go see it. On the way home, talk about what you'd have done in the lead character's place."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-122",
+      "category": "CULTURE",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": true,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Ардын дуу хамт сурах",
+        "description": "Хоёулаа дуртай нэг ардын дуугаа сонгоод үгийг нь цээжилж, хамтдаа дуулж сураарай. Дараагийн гэр бүлийн цугларалт дээр дуулж бусдыг гайхшруулаарай."
+      },
+      "en": {
+        "title": "Learn a folk song together",
+        "description": "Choose a folk song you both love, learn the words by heart and practice singing it together. Surprise everyone with it at the next family gathering."
+      }
+    },
+    {
+      "id": "lib-123",
+      "category": "CULTURE",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Дэлхийн музейг дэлгэцээр тойрох",
+        "description": "Дэлхийн томоохон музейн цахим аяллаас нэгийг сонгоод дуудлага дээр хамт тойроорой. Хамгийн сонирхолтой үзмэрээ нэгэндээ зааж, шалтгаанаа хэлээрэй."
+      },
+      "en": {
+        "title": "Virtual museum tour on a call",
+        "description": "Choose a virtual tour from a major museum somewhere in the world and explore it together on a call. Point out your favorite piece and say why."
+      }
+    },
+    {
+      "id": "lib-124",
+      "category": "CULTURE",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": true,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Монголын байгалийн баримтат кино",
+        "description": "Монголын байгаль, амьтны тухай баримтат кино сонгоод хамт үзээрэй. Кинонд гарсан газраас аль руу нь очихыг хүсэж байгаагаа тэмдэглээрэй."
+      },
+      "en": {
+        "title": "Nature documentary night",
+        "description": "Pick a documentary about Mongolia's nature and wildlife and watch it together. Note which place on screen you'd most like to visit."
+      }
+    },
+    {
+      "id": "lib-125",
+      "category": "CULTURE",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 120,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Номын санд нэг үдэш",
+        "description": "Хотын нийтийн номын санд очиж, тус бүрдээ нөгөөдөө нэг ном сонгож өгөөрөй. Чимээгүй уншлагын танхимд хажуу хажуудаа суугаад уншаарай."
+      },
+      "en": {
+        "title": "An afternoon at the library",
+        "description": "Go to a public library and each pick out a book for the other. Sit side by side in the quiet reading room and read."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-126",
+      "category": "CULTURE",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 120,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Монгол уран бичлэгийн хичээл",
+        "description": "Монгол бичгийн уран бичлэгийн нэг удаагийн хичээлд хамт ороорой. Бийрээр бичсэн анхны үгээ жаазлаад гэртээ өлгөөрэй."
+      },
+      "en": {
+        "title": "Mongolian calligraphy class",
+        "description": "Take a one-off Mongolian calligraphy class together. Frame the first word you each write with a brush and hang it at home."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-127",
+      "category": "CULTURE",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": true,
+      "durationMinutes": 30,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Монгол бичиг хамт сурах",
+        "description": "Монгол бичгийн үсгийг өдөрт хэдэн ширхэгээр хамт сураарай. Сарын дараа нэгэндээ богино захидлыг монгол бичгээр бичиж өгөөрөй."
+      },
+      "en": {
+        "title": "Learn Mongolian script together",
+        "description": "Learn a few letters of traditional Mongolian script each day together. After a month, write each other a short note in it."
+      }
+    },
+    {
+      "id": "lib-128",
+      "category": "CULTURE",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 180,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Эсгий урлалын хичээл",
+        "description": "Эсгийгээр жижиг тоглоом, шаахай урладаг дугуйланд хамт очоорой. Ноосоо савантай усаар элдэж хийсэн бүтээлээ нэгэндээ бэлэглээрэй."
+      },
+      "en": {
+        "title": "Felt-making workshop",
+        "description": "Join a felt workshop and make small toys or slippers together. Work the wool with soapy water by hand and give each other what you make."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-129",
+      "category": "CULTURE",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": true,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Ургийн бичгээ хамт судлах",
+        "description": "Хоёулаа эцэг эхээсээ асууж, өвөг дээдсийнхээ нэр, нутгийг ургийн бичигт буулгаарай. Ургийн овгийнхоо гарал үүслийг хамт хайгаарай."
+      },
+      "en": {
+        "title": "Trace your family trees",
+        "description": "Ask your parents and map out your ancestors' names and home regions on a family tree. Look into the origins of your clan names together."
+      }
+    },
+    {
+      "id": "lib-130",
+      "category": "CULTURE",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Эцэг эхийн залуу насны дуунууд",
+        "description": "Эцэг эхийнхээ залуу насандаа дуртай байсан дуунуудаар жагсаалт гаргаад хамт сонсоорой. Тэр дуунуудтай холбоотой гэр бүлийн түүхийг нэгэндээ ярьж өгөөрөй."
+      },
+      "en": {
+        "title": "Your parents' favorite songs",
+        "description": "Make a playlist of the songs your parents loved when they were young and listen together. Share any family stories tied to those songs."
+      }
+    },
+    {
+      "id": "lib-131",
+      "category": "CULTURE",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 150,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Кино театрт шинэ кино үзэх",
+        "description": "Хоёулаа сонирхсон шинэ кинонд тасалбар аваад орой кино театрт очоорой. Киноны дараа халуун ундаа уунгаа оноо өгч дүгнээрэй."
+      },
+      "en": {
+        "title": "New release at the cinema",
+        "description": "Get tickets to a new film you're both curious about. Afterwards, rate it together over a hot drink."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-132",
+      "category": "CULTURE",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Хоёр хүний номын клуб",
+        "description": "Нэг ном сонгоод долоо хоног бүр хэдэн бүлгийг уншиж дуусгахаар тохиролцоорой. Амралтын өдөр дуудлагаар уншсан зүйлээ ярилцаарай."
+      },
+      "en": {
+        "title": "A book club for two",
+        "description": "Choose one book and agree on a few chapters to read each week. Talk about it on a call at the weekend."
+      }
+    },
+    {
+      "id": "lib-133",
+      "category": "CULTURE",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 45,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Нэгэндээ шүлэг бичих",
+        "description": "Хоёулаа нэгэндээ зориулж богино шүлэг бичээд орой чангаар уншиж өгөөрөй. Уран гарсан эсэх чухал биш, чин сэтгэлээсээ байвал хангалттай."
+      },
+      "en": {
+        "title": "Write each other a poem",
+        "description": "Each write a short poem for the other and read it aloud in the evening. It doesn't need to be polished, just sincere."
+      }
+    },
+    {
+      "id": "lib-134",
+      "category": "CULTURE",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 150,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Ваар урлах хичээл",
+        "description": "Шавраар ваар урладаг хичээлд хамт ороорой. Хоёулаа нэг аяга хамтран хийгээд, шатаасных нь дараа өглөөний цайндаа хэрэглээрэй."
+      },
+      "en": {
+        "title": "Pottery class for two",
+        "description": "Take a pottery class together. Make one cup between you and use it for your morning tea once it's fired."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-135",
+      "category": "CULTURE",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": true,
+      "durationMinutes": 40,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Ардын оньсогоор сорилцох",
+        "description": "Монгол ардын оньсогоор нэгнээ сорьж, гацвал сэжүүр өгөөрэй. Хэн нь олон оньсого тайлахыг тоолоорой."
+      },
+      "en": {
+        "title": "Mongolian riddle night",
+        "description": "Test each other with traditional Mongolian riddles, giving hints when the other gets stuck. Keep count of who solves the most."
+      }
+    },
+    {
+      "id": "lib-136",
+      "category": "CULTURE",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 240,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Цагаан сараар хамт золгох",
+        "description": "Цагаан сарын шинийн нэгэнд дээлээ өмсөөд ахмадууддаа хамт золгоорой. Гэр бүлийнхээ хадаг барих, хүндэтгэх ёсыг нэгэндээ зааж хуваалцаарай."
+      },
+      "en": {
+        "title": "Greet elders at Tsagaan Sar",
+        "description": "On the first day of Tsagaan Sar, put on your deel and visit your elders together. Show each other how your families offer the khadag and share your own traditions."
+      }
+    },
+    {
+      "id": "lib-137",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 90,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Зайсан толгойд нар жаргах",
+        "description": "Зайсан толгойн шатаар өгсөж, нар жаргах үед хотын гэрэл асахыг хамт хараарай. Дулаан хувцас авчирвал оройн салхинд даарахгүй."
+      },
+      "en": {
+        "title": "Sunset from Zaisan Hill",
+        "description": "Climb the steps of Zaisan Hill and watch the city lights come on as the sun sets. Bring a warm layer for the evening wind."
+      },
+      "safety": {
+        "mn": "Хүйтэнд давхарлаж дулаан хувцаслаад гадаа удаан бүү байгаарай, хуруу, хацар чинэрвэл шууд дулаан газар ороорой. Шат гулгаа байж болох тул гулгадаггүй ултай гутал өмсөөрэй.",
+        "en": "Dress in warm layers, keep your time outside short and head indoors as soon as fingers or cheeks go numb. The steps can be icy, so wear shoes with good grip."
+      }
+    },
+    {
+      "id": "lib-138",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 180,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Хотоос гарч од ажиглах",
+        "description": "Тэнгэр цэлмэг шөнө хотын гэрлээс хол гарч, дэвсгэр дээр хэвтээд од ажиглаарай. Тэнгэрийн заадсыг олж, харвах од харвал хүслээ шивнээрэй."
+      },
+      "en": {
+        "title": "Stargazing outside the city",
+        "description": "On a clear night, drive away from the city lights, lie on a blanket and look up. Find the Milky Way and whisper a wish if you see a shooting star."
+      },
+      "safety": {
+        "mn": "Харанхуйд хотоос гадуур явахдаа гар чийдэн, дулаан хувцас авч, буцах замаа сайн мэдэж байгаарай. Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой.",
+        "en": "Outside the city after dark, bring a torch and warm clothes and know your way back. Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel."
+      }
+    },
+    {
+      "id": "lib-139",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 90,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Нар мандахыг хамт угтах",
+        "description": "Үүр цайхаас өмнө босоод хотын захын өндөрлөг дээр нар мандахыг угтаарай. Термостой цай, жижиг зууш авч гараарай."
+      },
+      "en": {
+        "title": "Catch the sunrise together",
+        "description": "Get up before dawn and greet the sunrise from a hilltop at the edge of the city. Bring a flask of tea and a small snack."
+      },
+      "safety": {
+        "mn": "Харанхуйд хотоос гадуур явахдаа гар чийдэн, дулаан хувцас авч, буцах замаа сайн мэдэж байгаарай.",
+        "en": "Outside the city after dark, bring a torch and warm clothes and know your way back."
+      }
+    },
+    {
+      "id": "lib-140",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Сэлбэ голын эрэг дагуу алхах",
+        "description": "Оройн хоолны дараа Сэлбэ голын эрэг дээрх явган замаар зугаалаарай. Өдрийнхөө хамгийн гоё, хамгийн хэцүү мөчийг нэгэндээ хуваалцаарай."
+      },
+      "en": {
+        "title": "Stroll along the Selbe River",
+        "description": "After dinner, take a walk along the path beside the Selbe River. Share the best and the hardest moment of your day."
+      }
+    },
+    {
+      "id": "lib-141",
+      "category": "OUTDOOR",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "SPRING",
+        "SUMMER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 1080,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Майхантай нэг шөнө хонох",
+        "description": "Майхан, унтлагын уут аваад хотоос холгүй ойн захад нэг шөнө хоноорой. Галын дэргэд хоол хийж, шөнийн чимээг хамт чагнаарай."
+      },
+      "en": {
+        "title": "Overnight camping trip",
+        "description": "Pack a tent and sleeping bags and spend a night at a forest edge not far from the city. Cook by the fire and listen to the night sounds together."
+      },
+      "safety": {
+        "mn": "Галаа зөвхөн зөвшөөрөгдсөн газар асааж, явахаасаа өмнө бүрэн унтраагаарай. Харанхуйд хотоос гадуур явахдаа гар чийдэн, дулаан хувцас авч, буцах замаа сайн мэдэж байгаарай.",
+        "en": "Light fires only where it's allowed and put them out completely before you leave. Outside the city after dark, bring a torch and warm clothes and know your way back."
+      }
+    },
+    {
+      "id": "lib-142",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 150,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Хаврын анхны яргуй хайх",
+        "description": "Хавар хотын ойролцоох толгодоор алхаж, анхны яргуй цэцгийг хайгаарай. Цэцгийг тасдалгүй, зөвхөн зургийг нь аваад үлдээгээрэй."
+      },
+      "en": {
+        "title": "Hunt for the first pasqueflowers",
+        "description": "In spring, walk the hills near the city looking for the first pasqueflowers. Leave them be and just take photos."
+      },
+      "safety": {
+        "mn": "Ус, дулаан хувцас, цэнэгтэй утас авч, замаа хэн нэгэнд хэлээд гараарай, цаг агаар муудвал эргээд буугаарай.",
+        "en": "Bring water, a warm layer and a charged phone, tell someone your route and turn back if the weather turns."
+      }
+    },
+    {
+      "id": "lib-143",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 240,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Намрын шар шинэсэн ойд алхах",
+        "description": "Намар Тэрэлж, Богд хан уулын шинэсэн ой алтан шар өнгөтэй болдог. Тэр үеэр хоёулаа ойгоор алхаж, унасан шилмүүсний дунд зургаа авахуулаарай."
+      },
+      "en": {
+        "title": "Golden larch forest walk",
+        "description": "In autumn, the larch forests of Terelj and Bogd Khan Mountain turn bright gold. Walk among them and take photos in the falling needles."
+      },
+      "safety": {
+        "mn": "Ус, дулаан хувцас, цэнэгтэй утас авч, замаа хэн нэгэнд хэлээд гараарай, цаг агаар муудвал эргээд буугаарай.",
+        "en": "Bring water, a warm layer and a charged phone, tell someone your route and turn back if the weather turns."
+      }
+    },
+    {
+      "id": "lib-144",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Туулын эрэгт шувуу ажиглах",
+        "description": "Дуран, жижиг дэвтэр аваад Туул голын эрэгт шувуу ажиглаарай. Харсан шувуу бүрийн нэрийг хамт хайж тэмдэглээрэй."
+      },
+      "en": {
+        "title": "Bird watching by the Tuul",
+        "description": "Take binoculars and a notebook to the banks of the Tuul and watch the birds. Look up and write down each one you see."
+      }
+    },
+    {
+      "id": "lib-145",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 20,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Шинэ цасан дээгүүр богино алхалт",
+        "description": "Цас орсон тайван оройд хорин минут л гадаа алхаж, цасны шаржигнахыг сонсоорой. Гэртээ ирээд халуун сүүтэй цайгаар дулаацаарай."
+      },
+      "en": {
+        "title": "Short walk in fresh snow",
+        "description": "On a quiet snowy evening, go out for just twenty minutes and listen to the snow crunch underfoot. Warm up at home with hot milk tea."
+      },
+      "safety": {
+        "mn": "Хүйтэнд давхарлаж дулаан хувцаслаад гадаа удаан бүү байгаарай, хуруу, хацар чинэрвэл шууд дулаан газар ороорой.",
+        "en": "Dress in warm layers, keep your time outside short and head indoors as soon as fingers or cheeks go numb."
+      }
+    },
+    {
+      "id": "lib-146",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Сүхбаатарын талбайгаар оройн алхалт",
+        "description": "Орой Сүхбаатарын талбай дээр гэрэлтсэн байшингуудыг хараад, ойр орчмын гудамжаар алхаарай. Анх уулзсан газар тань ойрхон бол тэрний хажуугаар өнгөрөөрэй."
+      },
+      "en": {
+        "title": "Evening at Sükhbaatar Square",
+        "description": "In the evening, take in the lit-up buildings on Sükhbaatar Square and wander the nearby streets. Pass by the place where you first met, if it's close."
+      }
+    },
+    {
+      "id": "lib-147",
+      "category": "OUTDOOR",
+      "budgetBand": "OVER_150K",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 1440,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Өвлийн Тэрэлжид гэрт хонох",
+        "description": "Өвөл Тэрэлжид пийшинтэй гэрт хоноглож, цастай хөндийн нам гүмийг мэдрээрэй. Гадаа богино зугаалаад, зуухныхаа дэргэд эргэж ирж дулаацаарай."
+      },
+      "en": {
+        "title": "Winter night in a Terelj ger",
+        "description": "Spend a winter night in a stove-heated ger in Terelj and take in the silence of the snowy valley. Keep walks short and come back to warm up by the stove."
+      },
+      "safety": {
+        "mn": "Хүйтэнд давхарлаж дулаан хувцаслаад гадаа удаан бүү байгаарай, хуруу, хацар чинэрвэл шууд дулаан газар ороорой. Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой. Зуухны яндан, агааржуулалтыг шалгаж, утааны хорт хийнээс болгоомжлоорой.",
+        "en": "Dress in warm layers, keep your time outside short and head indoors as soon as fingers or cheeks go numb. Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel. Check the stove pipe and ventilation to guard against carbon monoxide."
+      }
+    },
+    {
+      "id": "lib-148",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 240,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Сонгинохайрхан ууланд алхах",
+        "description": "Хотын баруун талын Сонгинохайрхан ууланд хамт гараад, хот хэр том болсныг дээрээс нь хараарай. Буух замдаа ирэх жилийн хамтын зорилгоо ярилцаарай."
+      },
+      "en": {
+        "title": "Walk up Songino Khairkhan",
+        "description": "Head up Songino Khairkhan Mountain on the west side of the city and see how far it sprawls. On the way down, talk about your goals for the coming year."
+      },
+      "safety": {
+        "mn": "Ус, дулаан хувцас, цэнэгтэй утас авч, замаа хэн нэгэнд хэлээд гараарай, цаг агаар муудвал эргээд буугаарай.",
+        "en": "Bring water, a warm layer and a charged phone, tell someone your route and turn back if the weather turns."
+      }
+    },
+    {
+      "id": "lib-149",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SUMMER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 30,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Зуны бороонд хамт алхах",
+        "description": "Зуны дулаан бороо орж эхэлмэгц шүхрээ аваад хамт гадаа гараарай. Шалбаагаар үсэрч, гэртээ ирээд хуурай хувцас өмсөж цай уугаарай."
+      },
+      "en": {
+        "title": "Walk in the summer rain",
+        "description": "When warm summer rain starts, grab an umbrella and head outside together. Splash through puddles, then change into dry clothes and have tea at home."
+      },
+      "safety": {
+        "mn": "Аянга цахилгаантай бол гадаа бүү гараарай.",
+        "en": "Stay indoors if there's thunder and lightning."
+      }
+    },
+    {
+      "id": "lib-150",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Хамтдаа мод тарих",
+        "description": "Үндэсний мод тарих өдөр хамт нэг мод тарьж, нэр өгөөрэй. Жил бүр очиж хэр ургасныг нь харах нь хоёулангийн тань уламжлал болно."
+      },
+      "en": {
+        "title": "Plant a tree together",
+        "description": "On National Tree Planting Day, plant a tree together and give it a name. Visiting each year to see how it has grown can become your own tradition."
+      }
+    },
+    {
+      "id": "lib-151",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 120,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Сэдэвтэй зургийн аялал",
+        "description": "Нэг сэдэв, жишээ нь «улаан өнгө» эсвэл «хаалга» гэж сонгоод хот тойрон зураг аваарай. Орой хамгийн гоё таван зургаа сонгож харьцуулаарай."
+      },
+      "en": {
+        "title": "Photo walk with a theme",
+        "description": "Choose a theme, like red things or doors, and photograph it around the city. In the evening, pick your five best shots and compare."
+      }
+    },
+    {
+      "id": "lib-152",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 30,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Тэргэл сарыг хамт харах",
+        "description": "Дараагийн тэргэл сартай оройг хуанлиас олоод гадаа гарч хамт хараарай. Хол байгаа бол яг нэг цагт сар руу харж, утсаар ярилцаарай."
+      },
+      "en": {
+        "title": "Full-moon evening",
+        "description": "Find the next full moon on the calendar and step outside to look at it together. If you're apart, look up at the same time and talk on the phone."
+      }
+    },
+    {
+      "id": "lib-153",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 45,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Утсаар ярингаа хамт алхах",
+        "description": "Хоёулаа өөр өөрийн хотод гадаа гараад утсаар ярьж алхаарай. Харж байгаа зүйлээ нэгэндээ дүрслэн хэлж, зураг илгээгээрэй."
+      },
+      "en": {
+        "title": "Walk-and-talk phone date",
+        "description": "Each step out for a walk in your own city while talking on the phone. Describe what you see and send each other photos."
+      }
+    },
+    {
+      "id": "lib-154",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Цасан хүн барих",
+        "description": "Шинэ цас орсон өдөр хашаандаа гараад хамтдаа цасан хүн бариарай. Түүнд нэр өгч, хажууд нь зургаа авахуулаарай."
+      },
+      "en": {
+        "title": "Build a snowman",
+        "description": "When fresh snow falls, head out to the yard and build a snowman together. Give it a name and take a photo beside it."
+      },
+      "safety": {
+        "mn": "Хүйтэнд давхарлаж дулаан хувцаслаад гадаа удаан бүү байгаарай, хуруу, хацар чинэрвэл шууд дулаан газар ороорой.",
+        "en": "Dress in warm layers, keep your time outside short and head indoors as soon as fingers or cheeks go numb."
+      }
+    },
+    {
+      "id": "lib-155",
+      "category": "OUTDOOR",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Шөнийн хотоор машинаар тойрох",
+        "description": "Оройн хоолны дараа машиндаа суугаад дуртай дуугаа тавин хотоор тойроорой. Гэрэл гоё харагдах газар зогсоод хэсэг суугаарай."
+      },
+      "en": {
+        "title": "Night drive with your playlist",
+        "description": "After dinner, drive around the city with your favorite songs playing. Pull over somewhere with a good view of the lights and just sit for a while."
+      },
+      "safety": {
+        "mn": "Жолооч нь утсаа барихгүй, анхаарлаа замдаа төвлөрүүлээрэй. Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "The driver keeps the phone down and eyes on the road. In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-156",
+      "category": "OUTDOOR",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 300,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Гэр барихад туслах",
+        "description": "Хөдөө айлд очоод гэр барих, буулгахад нь тусалж, хана, унь, тооно хэрхэн угсардгийг сураарай. Хамтын ажил хоёр хүнийг ойртуулдгийг мэдрэх болно."
+      },
+      "en": {
+        "title": "Help put up a ger",
+        "description": "Visit a family in the countryside and help them put up or take down their ger, learning how the lattice walls, roof poles and crown fit together. Working as a team brings you closer."
+      },
+      "safety": {
+        "mn": "Хол замд гарахын өмнө машинаа шалгаж, түлш, ус, дулаан хувцас авч, ээлжилж жолоодоорой.",
+        "en": "Before a long drive, check the car, pack fuel, water and warm clothes, and take turns at the wheel."
+      }
+    },
+    {
+      "id": "lib-157",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 240,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Намрын ургац хураахад туслах",
+        "description": "Намар ногоо тарьдаг танилдаа очиж, төмс, лууван хураахад нь тусалаарай. Ургацаас нь жаахныг авчирч хамтдаа шөл хийгээрэй."
+      },
+      "en": {
+        "title": "Help with the autumn harvest",
+        "description": "In autumn, visit someone who grows vegetables and help dig up potatoes and carrots. Bring a little of the harvest home and make soup together."
+      }
+    },
+    {
+      "id": "lib-158",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 120,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Цэцэрлэгт хүрээлэнд номтой хэвтэх",
+        "description": "Нарлаг өдөр хотын цэцэрлэгт хүрээлэнд дэвсгэр дэлгээд номтойгоо хэвтээрэй. Хааяа номоосоо өндийж, нэгэндээ таалагдсан мөрөө уншиж өгөөрөй."
+      },
+      "en": {
+        "title": "Books on a blanket in the park",
+        "description": "On a sunny day, spread a blanket in a city park and stretch out with your books. Now and then, look up and read each other a line you like."
+      }
+    },
+    {
+      "id": "lib-159",
+      "category": "OUTDOOR",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 45,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Анх уулзсан газраа эргэн очих",
+        "description": "Анх болзож байсан газраа дахин очоод тэр өдрийг алхам алхмаар нь санаарай. Тэр цагаас хойш хоорондоо юу өөрчлөгдсөнийг ярилцаарай."
+      },
+      "en": {
+        "title": "Revisit your first-date spot",
+        "description": "Go back to where you had your first date and retrace that day step by step. Talk about how things between you have changed since."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-160",
+      "category": "OTHER",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Гэртээ эрдэнэсийн ан",
+        "description": "Нэг нь гэрийн өнцөг булан бүрт сэжүүр нууж, нөгөө нь тэдгээрийг дагаж жижиг бэлэг олоорой. Дараагийн удаа үүргээ солиорой."
+      },
+      "en": {
+        "title": "Treasure hunt at home",
+        "description": "One of you hides clues around the home leading to a small gift, and the other follows the trail. Swap roles next time."
+      }
+    },
+    {
+      "id": "lib-161",
+      "category": "OTHER",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 240,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Сайн дурын ажилд хамт оролцох",
+        "description": "Амьтны асрамжийн газар эсвэл хүнсний банкинд хагас өдөр сайн дурын ажил хийгээрэй. Бусдад хамтдаа тусалсан өдөр та хоёрыг улам ойртуулна."
+      },
+      "en": {
+        "title": "Volunteer together",
+        "description": "Spend half a day volunteering at an animal shelter or a food bank. Helping others side by side brings you closer."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-162",
+      "category": "OTHER",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Хамтын хүслийн жагсаалт",
+        "description": "Амьдралдаа хамт хийхийг хүссэн арван зүйлээ жагсааж, хамгийн түрүүнд хийхээ сонгоорой. Жагсаалтаа хөргөгчин дээр нааж, биелсэн бүрийг тэмдэглээрэй."
+      },
+      "en": {
+        "title": "Write a shared bucket list",
+        "description": "List ten things you want to do together in life and choose the one to do first. Stick it on the fridge and tick them off as you go."
+      }
+    },
+    {
+      "id": "lib-163",
+      "category": "OTHER",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 480,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Гэнэтийн өдөр зохиох",
+        "description": "Нэг нь бүтэн өдрийн хөтөлбөрийг нууцаар төлөвлөж, нөгөө нь зөвхөн дулаан хувцаслахаа л мэднэ. Дараа сард нь ээлжээ солиорой."
+      },
+      "en": {
+        "title": "Plan a surprise day",
+        "description": "One of you secretly plans a whole day out; the other only knows to dress warmly. Trade roles next month."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-164",
+      "category": "OTHER",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 15,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Шинэ хэлийг хамт сурах",
+        "description": "Хоёулаа мэдэхгүй нэг хэл сонгоод өдөр бүр арван минут хамт сураарай. Долоо хоногийн эцэст сурсан үгсээрээ нэгэндээ богино зурвас бичээрэй."
+      },
+      "en": {
+        "title": "Learn a new language together",
+        "description": "Choose a language neither of you knows and study it together for ten minutes a day. At the end of each week, text each other using only the new words."
+      }
+    },
+    {
+      "id": "lib-165",
+      "category": "OTHER",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Цаг хугацааны хайрцаг",
+        "description": "Хайрцагт өнөөдрийн зураг, тасалбар, хоорондоо бичсэн бичгээ хийгээд, нэг жилийн дараа нээхээр битүүмжлээрэй. Нуусан газраа зөвхөн хоёулаа мэдэх нууц болгоорой."
+      },
+      "en": {
+        "title": "Make a time capsule",
+        "description": "Fill a box with today's photos, ticket stubs and notes to each other, and seal it to open in a year. Keep the hiding place a secret only you two know."
+      }
+    },
+    {
+      "id": "lib-166",
+      "category": "OTHER",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 480,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Гэрийн ажлаа солих өдөр",
+        "description": "Нэг өдөр нэгнийхээ ердийн хийдэг гэрийн ажлыг сольж хийгээрэй. Орой нь аль нь хамгийн хэцүү байсныг инээлдэн ярилцаарай."
+      },
+      "en": {
+        "title": "Swap chores for a day",
+        "description": "For one day, swap the household chores you usually do. In the evening, laugh about which one turned out hardest."
+      }
+    },
+    {
+      "id": "lib-167",
+      "category": "OTHER",
+      "budgetBand": "50K_150K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 480,
+      "preparation": "PLANNED",
+      "mn": {
+        "title": "Анхны тусламжийн сургалт",
+        "description": "Анхны тусламжийн нэг өдрийн сургалтад хамт хамрагдаарай. Хөлдөлт, түлэгдэлтийн үед юу хийхийг мэдэх нь хамтын аялалд тань хэрэг болно."
+      },
+      "en": {
+        "title": "Take a first-aid course",
+        "description": "Sign up for a one-day first-aid course together. Knowing how to handle frostbite and burns will come in handy on your trips."
+      },
+      "safety": {
+        "mn": "Өвлийн их хүйтэнд дулаан хувцаслаж, гадаа хүлээх, алхах хугацаагаа богино байлгаарай.",
+        "en": "In the deep winter cold, dress warmly and keep any waiting or walking outside short."
+      }
+    },
+    {
+      "id": "lib-168",
+      "category": "OTHER",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Нэгэндээ илгээмж бэлдэх",
+        "description": "Хоёулаа нэгэндээ дуртай амттан, гараар бичсэн захидал, жижиг дурсгалтай илгээмж бэлдэж явуулаарай. Илгээмжээ дуудлага дээр зэрэг задлаарай."
+      },
+      "en": {
+        "title": "Send each other care packages",
+        "description": "Each put together a parcel with favorite treats, a handwritten letter and a small keepsake, and send it off. Open them at the same time on a call."
+      }
+    },
+    {
+      "id": "lib-169",
+      "category": "OTHER",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 20,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Унтахын өмнөх үлгэр",
+        "description": "Унтахын өмнө нэг нь нөгөөдөө номоос нэг бүлэг эсвэл өөрийн зохиосон үлгэрийг утсаар уншиж өгөөрөй. Орой бүр ээлжилбэл хол зай ч ойрхон санагдана."
+      },
+      "en": {
+        "title": "Bedtime stories by phone",
+        "description": "Before bed, one of you reads a chapter or tells a made-up story to the other over the phone. Taking turns every night makes the distance feel smaller."
+      }
+    },
+    {
+      "id": "lib-170",
+      "category": "OTHER",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 45,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Нэг зургийг алсаас хамт зурах",
+        "description": "Хамтын цахим самбар нээгээд нэг зургийг хоёулаа зэрэг зураарай. Нэг нь тэнгэр, нөгөө нь газар зурахаар хуваарилбал илүү сонирхолтой."
+      },
+      "en": {
+        "title": "Draw one picture together remotely",
+        "description": "Open a shared online whiteboard and draw a single picture together. Split it up, one on the sky and the other on the land, to make it more fun."
+      }
+    },
+    {
+      "id": "lib-171",
+      "category": "OTHER",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Ирэх жилийн хамтын зорилго",
+        "description": "Шинэ жилийн өмнө ирэх жилд хамт хүрэх гурван зорилгоо тохиролцоорой. Улирал бүр эргэж харж, хэр явж байгаагаа шалгаарай."
+      },
+      "en": {
+        "title": "Goals for the year ahead",
+        "description": "Before the new year, agree on three goals you want to reach together. Check in each season to see how you're doing."
+      }
+    },
+    {
+      "id": "lib-172",
+      "category": "OTHER",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 60,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Нэгнээсээ ур чадвар сурах",
+        "description": "Хоёулаа өөрийн сайн мэддэг нэг ур чадварыг нөгөөдөө нэг цагийн хичээлээр заагаарай. Багш, сурагч хоёр солигдоход нэгнээ шинэ талаас нь харна."
+      },
+      "en": {
+        "title": "Teach each other a skill",
+        "description": "Each of you teaches the other something you're good at in a one-hour lesson. Switching between teacher and student shows you a new side of each other."
+      }
+    },
+    {
+      "id": "lib-173",
+      "category": "OTHER",
+      "budgetBand": "UPTO_50K",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Гараар бэлэг хийх",
+        "description": "Хугацаа тохироод тус бүрдээ нөгөөдөө гараар жижиг бэлэг хийгээрэй. Бэлгээ өгөхдөө яагаад тэрийг сонгосноо тайлбарлаарай."
+      },
+      "en": {
+        "title": "Make each other handmade gifts",
+        "description": "Set a deadline and each make a small handmade gift for the other. When you hand it over, explain why you chose it."
+      }
+    },
+    {
+      "id": "lib-174",
+      "category": "OTHER",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 120,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Хэрэгцээгүй зүйлсээ хандивлах",
+        "description": "Шүүгээгээ хамт ангилж, өмсөхөө больсон хувцас, номоо хандивлах уутанд хийгээрэй. Дараа нь хандивын цэгт хамт хүргэж өгөөрөй."
+      },
+      "en": {
+        "title": "Declutter and donate",
+        "description": "Go through your closets together and bag up the clothes and books you no longer use. Then drop them off at a donation point together."
+      }
+    },
+    {
+      "id": "lib-175",
+      "category": "OTHER",
+      "budgetBand": "FREE",
+      "seasons": [
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "OUTDOOR",
+      "longDistance": false,
+      "mongolia": true,
+      "durationMinutes": 120,
+      "preparation": "LIGHT",
+      "mn": {
+        "title": "Голын эрэг цэвэрлэх",
+        "description": "Бээлий, уут аваад Туул эсвэл Сэлбэ голын эргээс хог түүгээрэй. Ажлаа дуусгасны дараа цэвэрхэн болсон эрэг дээр сууж амраарай."
+      },
+      "en": {
+        "title": "Clean up a riverbank",
+        "description": "Bring gloves and bags and pick up litter along the Tuul or Selbe River. When you're done, sit on the clean bank and rest."
+      }
+    },
+    {
+      "id": "lib-176",
+      "category": "OTHER",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": false,
+      "mongolia": false,
+      "durationMinutes": 45,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Нэг өдрийг дүрслэх тоглоом",
+        "description": "Өнөөдрийг кино гэж бодоод түүнд нэр, гол дуу, зурагт хуудас зохиогоорой. Хэнийх нь хувилбар илүү инээдтэй болсныг саналаар шийдээрэй."
+      },
+      "en": {
+        "title": "Turn today into a movie",
+        "description": "Imagine today was a film and invent its title, theme song and poster. Vote on whose version came out funnier."
+      }
+    },
+    {
+      "id": "lib-177",
+      "category": "OTHER",
+      "budgetBand": "FREE",
+      "seasons": [
+        "WINTER",
+        "SPRING",
+        "SUMMER",
+        "AUTUMN"
+      ],
+      "setting": "HOME",
+      "longDistance": true,
+      "mongolia": false,
+      "durationMinutes": 30,
+      "preparation": "NONE",
+      "mn": {
+        "title": "Нэгнээ магтах сорил",
+        "description": "Тав тав минутын турш нэгнийхээ сайн чанарыг давтахгүйгээр нэрлээрэй. Сонссон үгсээс хамгийн их сэтгэлд хүрснээ бичиж аваарай."
+      },
+      "en": {
+        "title": "Compliment challenge",
+        "description": "Take five minutes each to name the other's good qualities without repeating yourself. Write down the one that touched you most."
+      }
+    }
+  ]
+}
