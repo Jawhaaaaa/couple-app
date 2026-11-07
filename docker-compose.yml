@@ -1,3 +1,5 @@
+# DEV орчин (LLD §4.5): postgres, seaweedfs (S3), mailpit (SMTP), backend, mobile-web.
+# `docker compose up -d --build` — бүх үйлчилгээ healthy болно (AC-209).
 services:
   postgres:
     image: postgres:16-alpine
@@ -13,19 +15,81 @@ services:
       timeout: 3s
       retries: 10
 
+  # S3-нийцтэй медиа сан. Identity нь deploy/dev/seaweedfs-s3.json-д (sigv4 presigned URL).
+  seaweedfs:
+    image: chrislusf/seaweedfs:3.97
+    command: ["server", "-s3", "-s3.config=/etc/seaweedfs/s3.json", "-dir=/data", "-ip=seaweedfs", "-ip.bind=0.0.0.0"]
+    ports:
+      - "${S3_HOST_PORT:-8333}:8333"
+    volumes:
+      - ./deploy/dev/seaweedfs-s3.json:/etc/seaweedfs/s3.json:ro
+      - seaweed:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:9333/cluster/status >/dev/null && wget -qO- http://127.0.0.1:8333/status >/dev/null"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+
+  # DEV SMTP: 1025 — SMTP, 8025 — вэб UI (имэйлийн кодыг эндээс харна).
+  mailpit:
+    image: axllent/mailpit:v1.27
+    ports:
+      - "${MAILPIT_UI_PORT:-8025}:8025"
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: "1"
+      MP_SMTP_AUTH_ALLOW_INSECURE: "1"
+    healthcheck:
+      test: ["CMD", "/mailpit", "readyz"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
   backend:
     build: .
     ports:
       - "${HOST_PORT:-8080}:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-dev}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-aura}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-aura}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      AURA_JWT_SECRET: ${AURA_JWT_SECRET:?AURA_JWT_SECRET .env-д тавина}
+      AURA_S3_ENDPOINT: http://seaweedfs:8333
+      AURA_S3_PUBLIC_ENDPOINT: ${AURA_S3_PUBLIC_ENDPOINT:-http://localhost:8333}
+      AURA_S3_REGION: ${AURA_S3_REGION:-us-east-1}
+      AURA_S3_BUCKET: ${AURA_S3_BUCKET:-aura-media}
+      AURA_S3_ACCESS_KEY: ${AURA_S3_ACCESS_KEY:-aura-dev-access}
+      AURA_S3_SECRET_KEY: ${AURA_S3_SECRET_KEY:-aura-dev-secret-change-me}
+      AURA_S3_PATH_STYLE: "true"
+      SPRING_MAIL_HOST: ${SPRING_MAIL_HOST:-mailpit}
+      SPRING_MAIL_PORT: ${SPRING_MAIL_PORT:-1025}
+      SPRING_MAIL_USERNAME: ${SPRING_MAIL_USERNAME:-}
+      SPRING_MAIL_PASSWORD: ${SPRING_MAIL_PASSWORD:-}
+      AURA_MAIL_FROM: ${AURA_MAIL_FROM:-Aura <no-reply@aura.local>}
+      AURA_VAPID_PUBLIC_KEY: ${AURA_VAPID_PUBLIC_KEY:-}
+      AURA_VAPID_PRIVATE_KEY: ${AURA_VAPID_PRIVATE_KEY:-}
+      AURA_VAPID_SUBJECT: ${AURA_VAPID_SUBJECT:-}
+      AURA_GOOGLE_CLIENT_ID: ${AURA_GOOGLE_CLIENT_ID:-}
+      AURA_GOOGLE_CLIENT_SECRET: ${AURA_GOOGLE_CLIENT_SECRET:-}
+      AURA_OAUTH_REDIRECT_BASE: ${AURA_OAUTH_REDIRECT_BASE:-http://localhost:8080}
+      AURA_ADMIN_EMAILS: ${AURA_ADMIN_EMAILS:-}
+      AURA_CORS_ALLOWED_ORIGINS: ${AURA_CORS_ALLOWED_ORIGINS:-http://localhost:8090}
+      AURA_COOKIE_SECURE: ${AURA_COOKIE_SECURE:-false}
+      AURA_SENTRY_DSN: ${AURA_SENTRY_DSN:-}
     depends_on:
       postgres:
+        condition: service_healthy
+      seaweedfs:
+        condition: service_healthy
+      mailpit:
         condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/actuator/health | grep -q UP"]
       interval: 10s
       timeout: 5s
-      retries: 10
-      start_period: 30s
+      retries: 12
+      start_period: 40s
 
   mobile-web:
     build:
@@ -42,3 +106,4 @@ services:
 
 volumes:
   pgdata:
+  seaweed:
