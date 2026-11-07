@@ -17,7 +17,9 @@ public record AuraProperties(
         Cookie cookie,
         Storage storage,
         Sentry sentry,
-        Policy policy) {
+        Policy policy,
+        Web web,
+        Oauth oauth) {
 
     public AuraProperties {
         jwt = jwt != null ? jwt : new Jwt("");
@@ -28,6 +30,8 @@ public record AuraProperties(
         storage = storage != null ? storage : new Storage(10_737_418_240L, 0.8);
         sentry = sentry != null ? sentry : new Sentry("", "dev", null);
         policy = policy != null ? policy : new Policy("2026-11-07");
+        web = web != null ? web : new Web("http://localhost:8090");
+        oauth = oauth != null ? oauth : new Oauth(null, null, null);
     }
 
     public record Jwt(@DefaultValue("") String secret) {
@@ -68,5 +72,47 @@ public record AuraProperties(
     }
 
     public record Policy(@DefaultValue("2026-11-07") String version) {
+    }
+
+    /** Вэб апп-ын гаднах хаяг — имэйлийн холбоос ба вэбийн OAuth буцах хуудас (`/oauth-callback`). */
+    public record Web(@DefaultValue("http://localhost:8090") String baseUrl) {
+    }
+
+    /**
+     * OAuth (DD-AURA-032). `redirectBase` нь backend-ийн гаднах хаяг — IdP-д бүртгэсэн callback нь
+     * `{redirectBase}/api/v1/auth/oauth/{provider}/callback`.
+     */
+    public record Oauth(String redirectBase, Provider google, Provider apple) {
+
+        public Oauth {
+            redirectBase = redirectBase == null || redirectBase.isBlank() ? "http://localhost:8080" : redirectBase;
+            google = google != null ? google : Provider.disabled();
+            apple = apple != null ? apple : Provider.disabled();
+        }
+    }
+
+    /**
+     * OIDC provider. `clientId` хоосон эсвэл `enabled=false` бол 404 `PROVIDER_DISABLED`.
+     * `issuer` нь Google-ийнх (`https://accounts.google.com`) биш бол (E2E-ийн stub IdP, GAP-18)
+     * endpoint-ууд `{issuer}/authorize`, `{issuer}/token`, `{issuer}/jwks` болно.
+     * `idTokenAlg`: `RS256` (JWKS) эсвэл `HS256` (client secret-ээр — зөвхөн stub IdP).
+     */
+    public record Provider(
+            @DefaultValue("true") boolean enabled,
+            String clientId,
+            String clientSecret,
+            String issuer,
+            String authorizeUri,
+            String tokenUri,
+            String jwksUri,
+            @DefaultValue("RS256") String idTokenAlg) {
+
+        static Provider disabled() {
+            return new Provider(false, "", "", null, null, null, null, "RS256");
+        }
+
+        public boolean configured() {
+            return enabled && clientId != null && !clientId.isBlank();
+        }
     }
 }

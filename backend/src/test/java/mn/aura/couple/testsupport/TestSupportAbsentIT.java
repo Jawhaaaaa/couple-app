@@ -131,7 +131,7 @@ class TestSupportAbsentIT {
         }
 
         @Test
-        @DisplayName("AC-01 /test/mail/last — имэйл барих механизм нэмэгдтэл 404")
+        @DisplayName("AC-01 /test/mail/last — имэйл ирээгүй хаяг → 404 (агуулгатай нь EmailVerificationIT)")
         void lastMail() {
             HttpResponse<String> r = send("GET", url("/api/v1/test/mail/last?to=bat@example.mn"), null);
             assertThat(r.statusCode()).isEqualTo(404);

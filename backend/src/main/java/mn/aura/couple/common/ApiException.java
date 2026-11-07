@@ -47,6 +47,20 @@ public class ApiException extends RuntimeException {
                 List.of(new ApiError.FieldError(field, fieldCode.name(), null)));
     }
 
+    /**
+     * 400 тодорхой кодтой (жишээ `PASSWORD_WEAK`, `AGE_RESTRICTED`) — `code` ба талбарын код ижил,
+     * client аль алиныг нь уншиж болно.
+     */
+    public static ApiException badRequest(ErrorCode code, String field) {
+        return new ApiException(code, HttpStatus.BAD_REQUEST, Map.of(), null,
+                List.of(new ApiError.FieldError(field, code.name(), null)));
+    }
+
+    /** `Retry-After` толгой ба `retryAfterSeconds`-тэй алдаа (жишээ 423 `CODE_LOCKED`). */
+    public static ApiException withRetryAfter(ErrorCode code, HttpStatus status, int retryAfterSeconds) {
+        return new ApiException(code, status, Map.of(), Math.max(0, retryAfterSeconds), List.of());
+    }
+
     /** 404 `NOT_FOUND` — өөр space-ийн объектод ч мөн адил (DD-AURA-004). */
     public static ApiException notFound() {
         return new ApiException(ErrorCode.NOT_FOUND, HttpStatus.NOT_FOUND);

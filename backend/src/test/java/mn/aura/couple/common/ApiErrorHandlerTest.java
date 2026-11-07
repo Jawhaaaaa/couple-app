@@ -76,7 +76,7 @@ class ApiErrorHandlerTest {
     void setUp() {
         ObjectMapper mapper = new ObjectMapper();
         ErrorMessages messages = new ErrorMessages(mapper, new ByteArrayResource(ERRORS_JSON.getBytes(StandardCharsets.UTF_8)));
-        ErrorReporter reporter = new ErrorReporter(new AuraProperties(null, null, null, null, null, null, null, null));
+        ErrorReporter reporter = new ErrorReporter(new AuraProperties(null, null, null, null, null, null, null, null, null, null));
         ApiErrorHandler handler = new ApiErrorHandler(new ApiErrorWriter(messages, mapper), reporter);
         mvc = MockMvcBuilders.standaloneSetup(new ProbeController()).setControllerAdvice(handler).build();
     }

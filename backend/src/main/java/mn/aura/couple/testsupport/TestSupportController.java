@@ -26,6 +26,8 @@ import mn.aura.couple.api.model.TestMail;
 import mn.aura.couple.common.ApiException;
 import mn.aura.couple.common.ErrorCode;
 import mn.aura.couple.common.job.TestRunnableJob;
+import mn.aura.couple.common.mail.MailCapture;
+import mn.aura.couple.common.mail.MailMessage;
 import mn.aura.couple.common.time.MutableClock;
 import mn.aura.couple.common.time.TimeProvider;
 import org.springframework.context.annotation.Profile;
@@ -41,7 +43,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
  *
  * <p>`/test/seed` одоогоор stub: зөвхөн бүртгэгдсэн `TestSeedScenario` bean-ыг дуудна, суурь
  * `EMPTY` scenario хоосон үр дүн буцаана. Домэйн нэгжүүд (T-16, T-17…) scenario нэмнэ.
- * `/test/mail/last` нь имэйл барих механизм (T-17 `MailSender`) нэмэгдтэл 404.
+ * `/test/mail/last` нь `MailCapture`-аас (T-17 `MailSender` илгээх бүрд бүртгэнэ).
  */
 @RestController
 @Profile("e2e")
@@ -54,15 +56,18 @@ public class TestSupportController implements TestSupportApi {
     private final Map<String, TestRunnableJob> jobs;
     private final Map<String, TestSeedScenario> scenarios;
     private final PushSinkStore pushSinks;
+    private final MailCapture mails;
     private final HttpServletRequest request;
 
     public TestSupportController(MutableClock clock, TimeProvider time, List<TestRunnableJob> jobs,
-                                 List<TestSeedScenario> scenarios, PushSinkStore pushSinks, HttpServletRequest request) {
+                                 List<TestSeedScenario> scenarios, PushSinkStore pushSinks, MailCapture mails,
+                                 HttpServletRequest request) {
         this.clock = clock;
         this.time = time;
         this.jobs = jobs.stream().collect(Collectors.toUnmodifiableMap(TestRunnableJob::name, Function.identity()));
         this.scenarios = scenarios.stream().collect(Collectors.toUnmodifiableMap(TestSeedScenario::name, Function.identity()));
         this.pushSinks = pushSinks;
+        this.mails = mails;
         this.request = request;
     }
 
@@ -143,8 +148,13 @@ public class TestSupportController implements TestSupportApi {
         return ResponseEntity.status(status).build();
     }
 
+    /** AC-01: тухайн хаягт сүүлд илгээсэн имэйлийн гарчиг, 6 оронтой код, холбоос (`MailCapture`). */
     @Override
     public ResponseEntity<TestMail> getLastMail(String to) {
-        throw ApiException.notFound();
+        MailMessage mail = mails.last(to).orElseThrow(ApiException::notFound);
+        TestMail out = new TestMail(mail.subject());
+        out.setCode(mail.code());
+        out.setLink(mail.link() == null ? null : URI.create(mail.link()));
+        return ResponseEntity.ok(out);
     }
 }

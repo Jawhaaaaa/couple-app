@@ -5,6 +5,9 @@ spring:
       maximum-pool-size: 4
       minimum-idle: 1
 aura:
+  # Зөвхөн тестийн утга (≥ 32 байт) — бодит нууц биш
+  jwt:
+    secret: test-only-jwt-secret-0123456789abcdefghijklmnop
   cors:
     allowed-origins: http://allowed.example,http://localhost:8090
   sentry:

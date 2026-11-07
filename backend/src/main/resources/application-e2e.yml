@@ -3,3 +3,8 @@
 aura:
   sentry:
     dsn: ""
+  # GAP-18: Google-ийн оронд тестийн IdP (e2e/mocks/oauthIdp.ts) — AURA_GOOGLE_ISSUER=http://<stub>,
+  # id_token нь HS256 (client secret-ээр). Бодит Google (RS256, JWKS) — ГАР.
+  oauth:
+    google:
+      id-token-alg: ${AURA_GOOGLE_ID_TOKEN_ALG:HS256}

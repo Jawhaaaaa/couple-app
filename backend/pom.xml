@@ -32,6 +32,8 @@
     <commons-imaging.version>1.0.0-alpha6</commons-imaging.version>
     <archunit.version>1.4.1</archunit.version>
     <openapi-generator.version>7.27.0</openapi-generator.version>
+    <!-- Argon2id (spring-security-crypto-ийн Argon2PasswordEncoder) — DD-AURA-030 -->
+    <bouncycastle.version>1.81</bouncycastle.version>
   </properties>
 
   <dependencyManagement>
@@ -70,6 +72,16 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-websocket</artifactId>
+    </dependency>
+    <!-- Auth (T-17…T-20): access JWT ба OAuth id_token (Nimbus, JWKS), Argon2id -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-oauth2-jose</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk18on</artifactId>
+      <version>${bouncycastle.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -303,6 +315,13 @@
                   <fileset dir="${project.build.directory}/generated-sources/openapi/src/main/java" includes="**/model/*.java">
                     <contains text="private final Boolean value;"/>
                   </fileset>
+                </replaceregexp>
+                <!--
+                  Үүсгэсэн DTO-ийн toString() бүх талбарыг бичдэг тул нууц үг, код, токен Spring-ийн DEBUG
+                  логт («Read "application/json" to [...]») гарна (AC-196, INV-11). Утгыг `***` болгоно.
+                -->
+                <replaceregexp match="toIndentedString\((password|newPassword|currentPassword|code|emailCode|token|refreshToken|accessToken|linkToken|credential)\)" replace="toIndentedString(&quot;***&quot;)" flags="g" encoding="UTF-8">
+                  <fileset dir="${project.build.directory}/generated-sources/openapi/src/main/java" includes="**/model/*.java"/>
                 </replaceregexp>
               </target>
             </configuration>

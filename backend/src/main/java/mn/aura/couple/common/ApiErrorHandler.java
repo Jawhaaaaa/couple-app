@@ -10,6 +10,7 @@ import java.util.Set;
 import mn.aura.couple.common.observability.ErrorReporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -38,10 +39,18 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
 
     private final ApiErrorWriter writer;
     private final ErrorReporter errorReporter;
+    private final List<FieldErrorCodeResolver> fieldCodeResolvers;
 
     public ApiErrorHandler(ApiErrorWriter writer, ErrorReporter errorReporter) {
+        this(writer, errorReporter, List.of());
+    }
+
+    @Autowired
+    public ApiErrorHandler(ApiErrorWriter writer, ErrorReporter errorReporter,
+                           List<FieldErrorCodeResolver> fieldCodeResolvers) {
         this.writer = writer;
         this.errorReporter = errorReporter;
+        this.fieldCodeResolvers = List.copyOf(fieldCodeResolvers);
     }
 
     @ExceptionHandler(ApiException.class)
@@ -80,7 +89,7 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
                                                                   HttpStatusCode status, WebRequest request) {
         List<ApiError.FieldError> fields = new ArrayList<>();
         for (FieldError fe : ex.getBindingResult().getFieldErrors()) {
-            fields.add(new ApiError.FieldError(fe.getField(), fieldCode(fe.getDefaultMessage()), null));
+            fields.add(new ApiError.FieldError(fe.getField(), resolveFieldCode(fe), null));
         }
         ex.getBindingResult().getGlobalErrors().forEach(ge ->
                 fields.add(new ApiError.FieldError(ge.getObjectName(), fieldCode(ge.getDefaultMessage()), null)));
@@ -134,9 +143,26 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
         };
     }
 
+    /**
+     * Бүх талбарын алдаа нэг тодорхой кодтой бол (жишээ богино нууц үг → `PASSWORD_WEAK`) дээд түвшний
+     * `code` нь мөн тэр — гэрээний «`VALIDATION_FAILED` + fieldErrors[] эсвэл тодорхой код».
+     */
     private ResponseEntity<Object> validation(List<ApiError.FieldError> fields, WebRequest request) {
-        ApiError body = writer.build(ErrorCode.VALIDATION_FAILED, lang(request), fields, null, Map.of());
+        Set<String> codes = new java.util.HashSet<>();
+        fields.forEach(f -> codes.add(f.code()));
+        ErrorCode top = codes.size() == 1 ? ErrorCode.valueOf(codes.iterator().next()) : ErrorCode.VALIDATION_FAILED;
+        ApiError body = writer.build(top, lang(request), fields, null, Map.of());
         return ResponseEntity.badRequest().body(body);
+    }
+
+    private String resolveFieldCode(FieldError fe) {
+        for (FieldErrorCodeResolver resolver : fieldCodeResolvers) {
+            ErrorCode code = resolver.resolve(fe);
+            if (code != null) {
+                return code.name();
+            }
+        }
+        return fieldCode(fe.getDefaultMessage());
     }
 
     /** Constraint-ийн мессеж нь ErrorCode-ийн нэр бол (жишээ `PASSWORD_WEAK`) түүнийг, үгүй бол VALIDATION_FAILED. */

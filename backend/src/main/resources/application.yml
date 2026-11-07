@@ -96,3 +96,21 @@ aura:
     release: ${AURA_APP_LATEST_VERSION:}
   policy:
     version: ${AURA_POLICY_VERSION:2026-11-07}
+  # Вэб апп-ын гаднах хаяг — имэйлийн холбоос (/verify-email, /reset-password, /not-me) ба OAuth-ийн
+  # вэб буцах хуудас (/oauth-callback). Prod-д Caddy-ийн нийтийн origin.
+  web:
+    base-url: ${AURA_WEB_BASE_URL:http://localhost:8090}
+  # DD-AURA-032. client-id хоосон → 404 PROVIDER_DISABLED (PAR-AURA-005). Callback:
+  # {redirect-base}/api/v1/auth/oauth/{provider}/callback — IdP-д яг ингэж бүртгэнэ.
+  oauth:
+    redirect-base: ${AURA_OAUTH_REDIRECT_BASE:http://localhost:8080}
+    google:
+      client-id: ${AURA_GOOGLE_CLIENT_ID:}
+      client-secret: ${AURA_GOOGLE_CLIENT_SECRET:}
+      issuer: ${AURA_GOOGLE_ISSUER:https://accounts.google.com}
+      id-token-alg: ${AURA_GOOGLE_ID_TOKEN_ALG:RS256}
+    apple:
+      # GAP-02: native iOS build байхгүй — код бэлэн, идэвхгүй
+      enabled: ${AURA_APPLE_ENABLED:false}
+      client-id: ${AURA_APPLE_CLIENT_ID:}
+      client-secret: ${AURA_APPLE_CLIENT_SECRET:}
