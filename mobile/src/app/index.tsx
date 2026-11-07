@@ -1,18 +1,6 @@
-import { StyleSheet, View } from 'react-native';
+import { Redirect } from 'expo-router';
 
-import { AppText } from '@/components/AppText';
-import { useT } from '@/i18n';
-import { spacing } from '@/theme/tokens';
-
+/** Эхлэлийн хаалга — нэвтрэлт/хосын төлөвийн шалгалт T-21-д нэмэгдэнэ. */
 export default function Index() {
-  const t = useT();
-  return (
-    <View style={styles.root}>
-      <AppText variant="display">{t('app.name')}</AppText>
-    </View>
-  );
+  return <Redirect href="/home" />;
 }
-
-const styles = StyleSheet.create({
-  root: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: spacing.screen },
-});
