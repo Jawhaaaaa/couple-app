@@ -1,0 +1,335 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "S-13",
+      "mn": {
+        "text": "Урилга чинь илгээгдсэн, хайртай хүн чинь нэгдэхийг хүлээж байна.",
+        "action": "Урилгаа дахин илгээх"
+      },
+      "en": {
+        "text": "Your invite is on its way — just waiting for your person to join.",
+        "action": "Resend invite"
+      }
+    },
+    {
+      "id": "S-20",
+      "mn": {
+        "text": "Удахгүй энд та хоёрын өдөр тутмын мөчүүд харагдана.",
+        "action": "Эхний зүрхээ илгээх"
+      },
+      "en": {
+        "text": "Your everyday moments together will show up here soon.",
+        "action": "Send your first heart"
+      }
+    },
+    {
+      "id": "S-23",
+      "mn": {
+        "text": "Өмнөх жилүүдийн энэ өдөр хадгалсан дурсамж алга байна.",
+        "action": "Дурсамж нэмэх"
+      },
+      "en": {
+        "text": "No memories from this day in past years yet.",
+        "action": "Add a memory"
+      }
+    },
+    {
+      "id": "S-24",
+      "mn": {
+        "text": "Одоохондоо шинэ мэдэгдэл алга, бүх зүйл тайван байна.",
+        "action": "Нүүр хуудас руу"
+      },
+      "en": {
+        "text": "No new notifications — all calm for now.",
+        "action": "Back to home"
+      }
+    },
+    {
+      "id": "S-30",
+      "mn": {
+        "text": "Та хоёрын анхны дурсамж энд хадгалагдана.",
+        "action": "Эхний дурсамжаа нэмэх"
+      },
+      "en": {
+        "text": "Your first memory together will live here.",
+        "action": "Add your first memory"
+      }
+    },
+    {
+      "id": "S-34",
+      "mn": {
+        "text": "Энэ хайлтад тохирох дурсамж олдсонгүй, өөр үгээр хайгаад үзээрэй.",
+        "action": "Шүүлтүүр арилгах"
+      },
+      "en": {
+        "text": "No memories match that search — try different words.",
+        "action": "Clear filters"
+      }
+    },
+    {
+      "id": "S-35",
+      "mn": {
+        "text": "Дурсамжуудаа цомог болгон бүлэглээд эмх цэгцтэй хадгалаарай.",
+        "action": "Цомог үүсгэх"
+      },
+      "en": {
+        "text": "Group your memories into albums to keep them tidy.",
+        "action": "Create album"
+      }
+    },
+    {
+      "id": "S-36",
+      "mn": {
+        "text": "Дуртай дурсамжаа зүрхээр тэмдэглэвэл энд цугларна.",
+        "action": "Дурсамж үзэх"
+      },
+      "en": {
+        "text": "Mark memories with a heart and they'll gather here.",
+        "action": "Browse memories"
+      }
+    },
+    {
+      "id": "S-37",
+      "mn": {
+        "text": "Хогийн сав хоосон байна.",
+        "action": "Дурсамж руу буцах"
+      },
+      "en": {
+        "text": "The trash is empty.",
+        "action": "Back to memories"
+      }
+    },
+    {
+      "id": "S-40",
+      "mn": {
+        "text": "Та хоёрын яриа энд эхэлнэ, эхний мэндчилгээгээ бичээрэй.",
+        "action": "Мессеж бичих"
+      },
+      "en": {
+        "text": "This is where your conversation begins — say hello.",
+        "action": "Write a message"
+      }
+    },
+    {
+      "id": "S-42",
+      "mn": {
+        "text": "Чухал мессежээ тогтоовол энд хадгалагдана.",
+        "action": "Чат руу буцах"
+      },
+      "en": {
+        "text": "Pin important messages and they'll be kept here.",
+        "action": "Back to chat"
+      }
+    },
+    {
+      "id": "S-43",
+      "mn": {
+        "text": "Ийм мессеж олдсонгүй, өөр үгээр хайж үзээрэй.",
+        "action": "Хайлт цэвэрлэх"
+      },
+      "en": {
+        "text": "No messages found — try another word.",
+        "action": "Clear search"
+      }
+    },
+    {
+      "id": "S-44",
+      "mn": {
+        "text": "Чатаар солилцсон зураг, бичлэг энд цугларна.",
+        "action": "Зураг илгээх"
+      },
+      "en": {
+        "text": "Photos and videos you share in chat will collect here.",
+        "action": "Send a photo"
+      }
+    },
+    {
+      "id": "S-47",
+      "mn": {
+        "text": "Одоогоор идэвхтэй амлалт алга, хамтдаа нэгийг эхлүүлээрэй.",
+        "action": "Амлалт санал болгох"
+      },
+      "en": {
+        "text": "No active promise right now — start one together.",
+        "action": "Suggest a promise"
+      }
+    },
+    {
+      "id": "S-50",
+      "mn": {
+        "text": "Төлөвлөсөн болзоо алга, дараагийн уулзалтаа төлөвлөөрэй.",
+        "action": "Болзоо төлөвлөх"
+      },
+      "en": {
+        "text": "No dates planned yet — plan your next one.",
+        "action": "Plan a date"
+      }
+    },
+    {
+      "id": "S-51",
+      "mn": {
+        "text": "Санааны жагсаалт хоосон, сонирхсон санаагаа энд хадгалаарай.",
+        "action": "Санаа нэмэх"
+      },
+      "en": {
+        "text": "Your idea list is empty — save ideas you like here.",
+        "action": "Add an idea"
+      }
+    },
+    {
+      "id": "S-52",
+      "mn": {
+        "text": "Энэ хугацаанд төлөвлөгөө алга, хоосон өдөр ч сайхан эхлэл болно.",
+        "action": "Төлөвлөгөө нэмэх"
+      },
+      "en": {
+        "text": "Nothing planned for this period — a blank day is a fresh start.",
+        "action": "Add a plan"
+      }
+    },
+    {
+      "id": "S-56",
+      "mn": {
+        "text": "Сонгосон нөхцөлд тохирох санаа олдсонгүй, шүүлтүүрээ өргөжүүлээд үзээрэй.",
+        "action": "Шүүлтүүр өөрчлөх"
+      },
+      "en": {
+        "text": "No ideas match these filters — try loosening them.",
+        "action": "Change filters"
+      }
+    },
+    {
+      "id": "S-57",
+      "mn": {
+        "text": "Бүх картаа үзэж дууслаа, удахгүй шинэ санаа нэмэгдэнэ.",
+        "action": "Санааны сан руу"
+      },
+      "en": {
+        "text": "You've seen every card — new ideas are coming soon.",
+        "action": "Open idea library"
+      }
+    },
+    {
+      "id": "S-58",
+      "mn": {
+        "text": "Энэ ангилалд санаа олдсонгүй, өөр ангилал сонгоод үзээрэй.",
+        "action": "Шүүлтүүр цэвэрлэх"
+      },
+      "en": {
+        "text": "Nothing here for this category — pick another one.",
+        "action": "Reset filters"
+      }
+    },
+    {
+      "id": "S-59",
+      "mn": {
+        "text": "Энэ сард болзооны зардал бүртгэгдээгүй байна.",
+        "action": "Зардал нэмэх"
+      },
+      "en": {
+        "text": "No date spending logged for this month.",
+        "action": "Add an expense"
+      }
+    },
+    {
+      "id": "S-60",
+      "mn": {
+        "text": "Хамтын жагсаалт, зорилго, захидлаа эндээс эхлүүлээрэй.",
+        "action": "Эхлэх"
+      },
+      "en": {
+        "text": "Start your shared lists, goals and letters from here.",
+        "action": "Get started"
+      }
+    },
+    {
+      "id": "S-61",
+      "mn": {
+        "text": "Тэмдэглэлт өдөр нэмбэл цагт нь сануулна.",
+        "action": "Өдөр нэмэх"
+      },
+      "en": {
+        "text": "Add a special date and we'll remind you in time.",
+        "action": "Add a date"
+      }
+    },
+    {
+      "id": "S-63",
+      "mn": {
+        "text": "Жагсаалт хоосон, хамтдаа хийх анхны зүйлээ бичээрэй.",
+        "action": "Зүйл нэмэх"
+      },
+      "en": {
+        "text": "This list is empty — write down the first thing to do together.",
+        "action": "Add item"
+      }
+    },
+    {
+      "id": "S-64",
+      "mn": {
+        "text": "Хамтын зорилго алга, хоёулаа хүрэх нэг зорилго тавиарай.",
+        "action": "Зорилго тавих"
+      },
+      "en": {
+        "text": "No shared goals yet — set one to reach together.",
+        "action": "Set a goal"
+      }
+    },
+    {
+      "id": "S-65",
+      "mn": {
+        "text": "Захидлын хайрцаг хоосон, {partner} чинь чиний захидлыг уншаад баярлах болно.",
+        "action": "Захидал бичих"
+      },
+      "en": {
+        "text": "Your letterbox is empty — {partner} would love a letter from you.",
+        "action": "Write a letter"
+      }
+    },
+    {
+      "id": "S-68",
+      "mn": {
+        "text": "Цагийн капсул алга, ирээдүйд нээх дурсамжаа одоо хадгалаарай.",
+        "action": "Капсул үүсгэх"
+      },
+      "en": {
+        "text": "No time capsules yet — save something now to open later.",
+        "action": "Create a capsule"
+      }
+    },
+    {
+      "id": "S-69",
+      "mn": {
+        "text": "Өнөөдөр сэтгэл чинь ямар байгааг тэмдэглэвэл энд харагдана.",
+        "action": "Тэмдэглэх"
+      },
+      "en": {
+        "text": "Share how you feel today and your check-ins will show here.",
+        "action": "Check in"
+      }
+    },
+    {
+      "id": "S-70",
+      "mn": {
+        "text": "Газрын зураг хоосон, дурсамждаа байршил нэмбэл энд гарч ирнэ.",
+        "action": "Байршилтай дурсамж нэмэх"
+      },
+      "en": {
+        "text": "The map is empty — add places to your memories to see them here.",
+        "action": "Add a place"
+      }
+    },
+    {
+      "id": "S-72",
+      "mn": {
+        "text": "Энэ жилийн тоймд хангалттай дурсамж хараахан цуглараагүй байна.",
+        "action": "Дурсамж нэмэх"
+      },
+      "en": {
+        "text": "Not enough memories yet for this year's recap.",
+        "action": "Add memories"
+      }
+    }
+  ]
+}

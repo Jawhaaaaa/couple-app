@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "VALIDATION_FAILED",
+      "mn": "Зарим талбар буруу бөглөгдсөн байна. Тэмдэглэгдсэн хэсгийг засаад дахин оролдоорой.",
+      "en": "Some fields aren't filled in correctly. Fix the highlighted parts and try again."
+    },
+    {
+      "id": "TOKEN_INVALID",
+      "mn": "Нэвтрэлт чинь хүчингүй болсон байна. Дахин нэвтрээрэй.",
+      "en": "Your sign-in is no longer valid. Please sign in again."
+    },
+    {
+      "id": "TOKEN_EXPIRED",
+      "mn": "Нэвтрэлтийн хугацаа дууссан. Дахин нэвтрээд үргэлжлүүлээрэй.",
+      "en": "Your session has expired. Sign in again to continue."
+    },
+    {
+      "id": "ACCOUNT_SUSPENDED",
+      "mn": "Бүртгэл чинь түр хаагдсан байна. Дэлгэрэнгүйг мэдэхийн тулд тусламжийн багт хандаарай.",
+      "en": "Your account has been suspended. Please contact support to learn more."
+    },
+    {
+      "id": "NOT_FOUND",
+      "mn": "Хайсан зүйл чинь олдсонгүй, устгагдсан байж магадгүй. Жагсаалтаа шинэчлээд үзээрэй.",
+      "en": "We couldn't find that — it may have been deleted. Try refreshing the list."
+    },
+    {
+      "id": "NOT_OWNER",
+      "mn": "Үүнийг зөвхөн нэмсэн хүн нь засах боломжтой. Өөрчлөх шаардлагатай бол хайртай хүнээсээ асуугаарай.",
+      "en": "Only the person who added this can change it. Ask your other half if it needs an update."
+    },
+    {
+      "id": "NOT_PAIRED",
+      "mn": "Чи хараахан холбогдоогүй байна. Урилга илгээж хайртай хүнтэйгээ холбогдоорой.",
+      "en": "You're not paired yet. Send an invite to connect with your person."
+    },
+    {
+      "id": "VERSION_CONFLICT",
+      "mn": "Энэ зүйлийг яг одоо өөр газраас өөрчилсөн байна. Шинэ хувилбарыг хараад дахин хадгалаарай.",
+      "en": "This was just changed somewhere else. Check the latest version and save again."
+    },
+    {
+      "id": "SPACE_READ_ONLY",
+      "mn": "Хосын орон зай одоо зөвхөн унших горимд байна. Өгөгдлөө татаж авах боломжтой хэвээр.",
+      "en": "Your shared space is read-only right now. You can still download your data."
+    },
+    {
+      "id": "RATE_LIMITED",
+      "mn": "Хэт олон хүсэлт зэрэг ирлээ. Хэсэг хүлээгээд дахин оролдоорой.",
+      "en": "That's a lot of requests at once. Wait a moment and try again."
+    },
+    {
+      "id": "INTERNAL",
+      "mn": "Манай талд алдаа гарлаа. Жаахан хүлээгээд дахин оролдоорой.",
+      "en": "Something went wrong on our side. Please try again in a little while."
+    },
+    {
+      "id": "UPGRADE_REQUIRED",
+      "mn": "Програмын шинэ хувилбар гарсан байна. Шинэчлээд үргэлжлүүлээрэй.",
+      "en": "A newer version of the app is required. Update to continue."
+    },
+    {
+      "id": "PASSWORD_WEAK",
+      "mn": "Нууц үг хэт сул байна. Үсэг, тоо холилдсон арай урт нууц үг сонгоорой.",
+      "en": "That password is too weak. Choose a longer one mixing letters and numbers."
+    },
+    {
+      "id": "PASSWORD_COMMON",
+      "mn": "Энэ нууц үг хэт түгээмэл байна. Өөр, давтагдашгүй нууц үг сонгоорой.",
+      "en": "That password is too common. Pick something more unique."
+    },
+    {
+      "id": "AGE_RESTRICTED",
+      "mn": "Насны шаардлага хангаагүй тул бүртгүүлэх боломжгүй. Алдаа гэж бодож байвал тусламжийн багт хандаарай.",
+      "en": "Sorry, you don't meet the age requirement to sign up. Contact support if you think this is a mistake."
+    },
+    {
+      "id": "POLICY_NOT_ACCEPTED",
+      "mn": "Үргэлжлүүлэхийн тулд нууцлалын бодлого, үйлчилгээний нөхцөлийг зөвшөөрөх шаардлагатай. Уншаад зөвшөөрөөрэй.",
+      "en": "You need to accept the privacy policy and terms to continue. Please review and accept them."
+    },
+    {
+      "id": "CODE_INVALID",
+      "mn": "Код буруу байна. Дахин шалгаад оруулаарай.",
+      "en": "That code isn't right. Check it and enter it again."
+    },
+    {
+      "id": "CODE_LOCKED",
+      "mn": "Хэт олон удаа буруу код оруулсан тул түр хаагдлаа. Хэсэг хугацааны дараа дахин оролдоорой.",
+      "en": "Too many wrong attempts, so it's locked for now. Wait a bit and try again."
+    },
+    {
+      "id": "CODE_EXPIRED",
+      "mn": "Кодын хугацаа дууссан. Шинэ код аваад дахин оролдоорой.",
+      "en": "This code has expired. Request a new one and try again."
+    },
+    {
+      "id": "AUTH_INVALID_CREDENTIALS",
+      "mn": "Имэйл эсвэл нууц үг буруу байна. Дахин шалгаад нэвтрээрэй.",
+      "en": "Email or password is incorrect. Double-check and try again."
+    },
+    {
+      "id": "AUTH_EMAIL_NOT_VERIFIED",
+      "mn": "Имэйл хаяг чинь баталгаажаагүй байна. Ирсэн захидлын холбоосоор баталгаажуулаарай.",
+      "en": "Your email isn't verified yet. Use the link we sent to confirm it."
+    },
+    {
+      "id": "AUTH_SESSION_REVOKED",
+      "mn": "Энэ төхөөрөмж дээрх нэвтрэлт цуцлагдсан. Дахин нэвтэрч ороорой.",
+      "en": "You were signed out on this device. Please sign in again to continue."
+    },
+    {
+      "id": "PROVIDER_DISABLED",
+      "mn": "Энэ аргаар нэвтрэх боломж одоогоор хаалттай. Өөр аргаар нэвтрээрэй.",
+      "en": "Signing in this way isn't available right now. Please use another method."
+    },
+    {
+      "id": "MEDIA_TOO_LARGE",
+      "mn": "Файл хэт том байна. Жижиг хэмжээтэй файл сонгоорой.",
+      "en": "That file is too large. Choose a smaller one."
+    },
+    {
+      "id": "MEDIA_TYPE_FORBIDDEN",
+      "mn": "Энэ төрлийн файлыг хадгалах боломжгүй. Зураг, бичлэг эсвэл дуу сонгоорой.",
+      "en": "This file type isn't supported. Choose a photo, video or audio file."
+    },
+    {
+      "id": "SURVEY_NOT_DUE",
+      "mn": "Судалгаа одоохондоо нээгдээгүй байна. Дараа дахин ороод үзээрэй.",
+      "en": "This survey isn't open yet. Check back later."
+    },
+    {
+      "id": "UPSTREAM_UNAVAILABLE",
+      "mn": "Холбогдох үйлчилгээ түр ажиллахгүй байна. Удалгүй дахин оролдоод үзээрэй.",
+      "en": "A service we rely on is temporarily down. Please try again shortly."
+    },
+    {
+      "id": "ALREADY_PAIRED",
+      "mn": "Чи аль хэдийн холбогдсон байна. Хосын орон зай руугаа ороорой.",
+      "en": "You're already paired. Head to your shared space."
+    },
+    {
+      "id": "PAIRING_COOLDOWN",
+      "mn": "Саяхан холболт дууссан тул шинэ холболт хийхэд түр хүлээх шаардлагатай. Заасан хугацааны дараа дахин оролдоорой.",
+      "en": "A pairing ended recently, so there's a short wait before a new one. Try again after the time shown."
+    },
+    {
+      "id": "INVITE_INVALID",
+      "mn": "Урилгын код буруу эсвэл хүчингүй болсон байна. Шинэ урилга аваад дахин оролдоорой.",
+      "en": "This invite code is wrong or no longer valid. Ask for a new invite and try again."
+    },
+    {
+      "id": "INVITE_LOCKED",
+      "mn": "Урилга түр түгжигдсэн байна. Урилга илгээсэн хүнээс шинэ код аваарай.",
+      "en": "This invite is temporarily locked. Ask the sender for a fresh code."
+    },
+    {
+      "id": "ALREADY_DECIDED",
+      "mn": "Энэ саналд аль хэдийн хариу өгсөн байна. Шинэчлэгдсэн мэдээллийг хараарай.",
+      "en": "This has already been answered. Refresh to see the latest."
+    },
+    {
+      "id": "NOT_BREAKING",
+      "mn": "Холболт дуусгах хүсэлт одоогоор байхгүй байна. Хуудсаа шинэчлээд үзээрэй.",
+      "en": "There's no pairing end in progress. Refresh the page."
+    },
+    {
+      "id": "ALREADY_ANSWERED",
+      "mn": "Өнөөдрийн асуултад аль хэдийн хариулсан байна. Маргааш шинэ асуулт ирнэ.",
+      "en": "You've already answered today's question. A new one arrives tomorrow."
+    },
+    {
+      "id": "TEXT_TOO_LONG",
+      "mn": "Бичвэр хэт урт байна. Арай богиносгоод дахин хадгалаарай.",
+      "en": "That text is too long. Shorten it a little and save again."
+    },
+    {
+      "id": "VIDEO_TOO_LONG",
+      "mn": "Бичлэг хэт урт байна. Богино хэсгийг нь сонгоод дахин оролдоорой.",
+      "en": "That video is too long. Trim it and try again."
+    },
+    {
+      "id": "AUDIO_TOO_LONG",
+      "mn": "Дуут бичлэг хэт урт байна. Арай богино бичээд дахин илгээгээрэй.",
+      "en": "That voice note is too long. Record a shorter one and send again."
+    },
+    {
+      "id": "STORAGE_QUOTA_EXCEEDED",
+      "mn": "Хадгалах зай дүүрсэн байна. Хэрэггүй файлаа устгаад дахин оролдоорой.",
+      "en": "Your storage is full. Delete some files you don't need and try again."
+    },
+    {
+      "id": "CHUNK_SIZE_MISMATCH",
+      "mn": "Файл илгээх явцад алдаа гарлаа. Дахин илгээгээд үзээрэй.",
+      "en": "Something went wrong while uploading. Try sending the file again."
+    },
+    {
+      "id": "UPLOAD_INCOMPLETE",
+      "mn": "Файл бүрэн илгээгдээгүй байна. Сүлжээгээ шалгаад дахин илгээгээрэй.",
+      "en": "The upload didn't finish. Check your connection and send it again."
+    },
+    {
+      "id": "MEDIA_LIMIT_EXCEEDED",
+      "mn": "Нэг дор нэмэх файлын тоо хэтэрлээ. Цөөн файл сонгоод дахин оролдоорой.",
+      "en": "That's too many files at once. Pick fewer and try again."
+    },
+    {
+      "id": "EXPORT_EXPIRED",
+      "mn": "Татах холбоосын хугацаа дууссан. Тохиргооноос шинэ хуулбар хүсээрэй.",
+      "en": "This download link has expired. Request a new export in settings."
+    },
+    {
+      "id": "EXPORT_NOT_READY",
+      "mn": "Хуулбар чинь бэлтгэгдэж байна. Бэлэн болмогц мэдэгдэх тул түр хүлээгээрэй.",
+      "en": "Your export is still being prepared. We'll let you know when it's ready."
+    },
+    {
+      "id": "MESSAGE_DELETED",
+      "mn": "Энэ мессеж устгагдсан байна. Чатаа шинэчлээд үзээрэй.",
+      "en": "This message was deleted. Refresh the chat."
+    },
+    {
+      "id": "PROMISE_NOT_ENDED",
+      "mn": "Одоогийн амлалт хараахан дуусаагүй байна. Дуусмагц шинэ амлалт эхлүүлээрэй.",
+      "en": "Your current promise hasn't ended yet. Start a new one once it's done."
+    },
+    {
+      "id": "PLAN_NOT_PENDING",
+      "mn": "Энэ төлөвлөгөөнд аль хэдийн шийдвэр гарсан байна. Шинэ төлөвийг нь хараарай.",
+      "en": "This plan has already been decided. Check its latest status."
+    },
+    {
+      "id": "ALREADY_SWIPED",
+      "mn": "Энэ санааг аль хэдийн сонгосон байна. Дараагийн карт руу шилжээрэй.",
+      "en": "You've already swiped this idea. Move on to the next card."
+    },
+    {
+      "id": "LETTER_ALREADY_DELIVERED",
+      "mn": "Захидал аль хэдийн хүргэгдсэн тул өөрчлөх боломжгүй. Шинэ захидал бичээрэй.",
+      "en": "This letter has already been delivered and can't be changed. Write a new one instead."
+    },
+    {
+      "id": "CAPSULE_SEALED",
+      "mn": "Капсул битүүмжлэгдсэн тул нээгдэх өдөр хүртэл өөрчлөх боломжгүй. Тэр өдрийг тэвчээртэй хүлээгээрэй.",
+      "en": "This capsule is sealed and can't be changed until it opens. Hang on until then."
+    },
+    {
+      "id": "CHECKIN_PAST_DAY",
+      "mn": "Өнгөрсөн өдрийн тэмдэглэлийг өөрчлөх боломжгүй. Өнөөдрийн сэтгэл санаагаа тэмдэглээрэй.",
+      "en": "Past check-ins can't be changed. Log how you feel today instead."
+    },
+    {
+      "id": "PASSKEY_INVALID",
+      "mn": "Нэвтрэх түлхүүрийг баталгаажуулж чадсангүй. Дахин оролдох эсвэл өөр аргаар нэвтрээрэй.",
+      "en": "We couldn't verify your passkey. Try again or sign in another way."
+    },
+    {
+      "id": "ADMIN_ONLY",
+      "mn": "Энэ үйлдэл зөвхөн удирдлагын эрхтэй хүнд нээлттэй. Тусламж хэрэгтэй бол дэмжлэгийн багт хандаарай.",
+      "en": "Only administrators can do this. Contact support if you need help."
+    }
+  ]
+}

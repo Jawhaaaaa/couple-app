@@ -1,0 +1,390 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "g-morning-01",
+      "kind": "MORNING",
+      "mn": "Өглөөний мэнд! Өнөөдөр чамд сайхан өдөр болохыг хүсье.",
+      "en": "Good morning! Hope today treats you kindly."
+    },
+    {
+      "id": "g-morning-02",
+      "kind": "MORNING",
+      "mn": "Сайхан амарсан биз дээ? Шинэ өдөр чамайг хүлээж байна.",
+      "en": "Hope you slept well. A brand-new day is waiting for you."
+    },
+    {
+      "id": "g-morning-03",
+      "kind": "MORNING",
+      "mn": "Өглөөний мэнд! Чи {partner} хоёрт дулаахан өдөр хүсье.",
+      "en": "Good morning! Wishing you and {partner} a warm day."
+    },
+    {
+      "id": "g-morning-04",
+      "kind": "MORNING",
+      "mn": "Цайгаа уугаад, гүнзгий амьсгаа аваад — өнөөдөр бүх зүйл болно.",
+      "en": "Grab your tea, take a deep breath — today is going to be fine."
+    },
+    {
+      "id": "g-morning-05",
+      "kind": "MORNING",
+      "mn": "Өглөөний мэнд! Өнөөдөр нэг жижиг зүйлд баярлахаа мартуузай.",
+      "en": "Morning! Don't forget to enjoy one small thing today."
+    },
+    {
+      "id": "g-morning-06",
+      "kind": "MORNING",
+      "mn": "Нар мандлаа, чи ч бас гэрэлтээрэй.",
+      "en": "The sun is up — time for you to shine too."
+    },
+    {
+      "id": "g-morning-07",
+      "kind": "MORNING",
+      "mn": "Өнөөдөр {partner} чинь чамаас нэг дулаан үг сонсвол баярлана.",
+      "en": "{partner} would love a sweet word from you today."
+    },
+    {
+      "id": "g-morning-08",
+      "kind": "MORNING",
+      "mn": "Шинэ өдөр, шинэ боломж. Амжилт хүсье!",
+      "en": "New day, fresh start. You've got this!"
+    },
+    {
+      "id": "g-morning-09",
+      "kind": "MORNING",
+      "mn": "Өглөөний мэнд! Өнөөдөр өөртөө зөөлөн хандаарай.",
+      "en": "Good morning! Be gentle with yourself today."
+    },
+    {
+      "id": "g-morning-10",
+      "kind": "MORNING",
+      "mn": "Өглөөний мэнд, нарлаг сэтгэл хүсье!",
+      "en": "Morning! Sending you some sunshine."
+    },
+    {
+      "id": "g-morning-11",
+      "kind": "MORNING",
+      "mn": "Сэрээ юу? Өнөөдрийн асуулт чамайг хүлээж байна.",
+      "en": "Up and about? Today's question is ready for you."
+    },
+    {
+      "id": "g-morning-12",
+      "kind": "MORNING",
+      "mn": "Өнөөдөр чамайг инээлгэх зүйл олон байг.",
+      "en": "May today bring you lots of reasons to smile."
+    },
+    {
+      "id": "g-morning-13",
+      "kind": "MORNING",
+      "mn": "Хүйтэн өглөө ч гэсэн дулаахан бодлууд чамтай хамт.",
+      "en": "Even on a chilly morning, warm thoughts are with you."
+    },
+    {
+      "id": "g-morning-14",
+      "kind": "MORNING",
+      "mn": "Өглөөний мэнд! Яаралгүй, тайван эхлээрэй.",
+      "en": "Good morning! No rush — start slow and steady."
+    },
+    {
+      "id": "g-morning-15",
+      "kind": "MORNING",
+      "mn": "Өнөөдөр хийх нэг сайхан зүйлээ бодоод өдрөө эхлүүлээрэй.",
+      "en": "Start with one nice thing to look forward to today."
+    },
+    {
+      "id": "g-morning-16",
+      "kind": "MORNING",
+      "mn": "Сайхан өглөө! Өнөөдөр чи {partner} хоёр бага ч гэсэн хамт цаг гаргаарай.",
+      "en": "Lovely morning! Find a little time for each other today, you and {partner}."
+    },
+    {
+      "id": "g-morning-17",
+      "kind": "MORNING",
+      "mn": "Өчигдрийн ядаргааг орхиод шинээр эхэлцгээе.",
+      "en": "Leave yesterday's tiredness behind and begin anew."
+    },
+    {
+      "id": "g-morning-18",
+      "kind": "MORNING",
+      "mn": "Нэг аяга халуун цай, нэг сайхан бодол — өглөөг эхлүүлэхэд хангалттай.",
+      "en": "A warm cup and a kind thought — that's all a morning needs."
+    },
+    {
+      "id": "g-morning-19",
+      "kind": "MORNING",
+      "mn": "Өглөөний мэнд! Өнөөдөр чи гайхалтай байх болно.",
+      "en": "Good morning! You're going to do great today."
+    },
+    {
+      "id": "g-morning-20",
+      "kind": "MORNING",
+      "mn": "Өглөө бүр шинэ хуудас. Өнөөдрийн хуудсандаа юу бичих бол?",
+      "en": "Every morning is a fresh page. What will you write on today's?"
+    },
+    {
+      "id": "g-morning-21",
+      "kind": "MORNING",
+      "mn": "Цонхоо нээгээд цэвэр агаар амьсгалаарай.",
+      "en": "Open a window and breathe in some fresh air."
+    },
+    {
+      "id": "g-morning-22",
+      "kind": "MORNING",
+      "mn": "Өнөөдөр хэн нэгэнд инээмсэглэл бэлэглээрэй.",
+      "en": "Gift someone a smile today."
+    },
+    {
+      "id": "g-evening-01",
+      "kind": "EVENING",
+      "mn": "Өдрийг сайхан өнгөрүүлсэнд баяр хүргэе. Сайхан амраарай.",
+      "en": "Well done on another day. Rest well."
+    },
+    {
+      "id": "g-evening-02",
+      "kind": "EVENING",
+      "mn": "Сайхан нойрсоорой! Маргааш шинэ өдөр.",
+      "en": "Sleep tight! Tomorrow is a new day."
+    },
+    {
+      "id": "g-evening-03",
+      "kind": "EVENING",
+      "mn": "Оройн мэнд! Өнөөдрийнхөө нэг сайхан мөчийг хуваалцаарай.",
+      "en": "Good evening! Share one nice moment from your day."
+    },
+    {
+      "id": "g-evening-04",
+      "kind": "EVENING",
+      "mn": "Тайван орой. Утсаа хойш тавиад жаахан амсхийгээрэй.",
+      "en": "A calm evening. Put the phone down and catch your breath."
+    },
+    {
+      "id": "g-evening-05",
+      "kind": "EVENING",
+      "mn": "Өнөөдөр хангалттай хичээлээ. Одоо амрах цаг.",
+      "en": "You did enough today. Now it's time to rest."
+    },
+    {
+      "id": "g-evening-06",
+      "kind": "EVENING",
+      "mn": "Сайхан зүүдлээрэй, чи {partner} хоёр.",
+      "en": "Sweet dreams to you and {partner}."
+    },
+    {
+      "id": "g-evening-07",
+      "kind": "EVENING",
+      "mn": "Өдрийн ачааг тавиад, дулаахан хөнжилдөө ороорой.",
+      "en": "Set down the day and snuggle under a warm blanket."
+    },
+    {
+      "id": "g-evening-08",
+      "kind": "EVENING",
+      "mn": "Унтахынхаа өмнө юунд талархаж байгаагаа бодоорой.",
+      "en": "Before you sleep, think of one thing you're grateful for."
+    },
+    {
+      "id": "g-evening-09",
+      "kind": "EVENING",
+      "mn": "Оройн цай, тайван хөгжим — өдрийг дуусгах сайхан арга.",
+      "en": "Evening tea and soft music — a lovely way to end the day."
+    },
+    {
+      "id": "g-evening-10",
+      "kind": "EVENING",
+      "mn": "Маргааш чамайг сайхан зүйлс хүлээж байгаа.",
+      "en": "Good things are waiting for you tomorrow."
+    },
+    {
+      "id": "g-evening-11",
+      "kind": "EVENING",
+      "mn": "Оройн мэнд! Унтахын өмнө {partner} чинь нэг зүрх авбал баярлана.",
+      "en": "Good evening! {partner} would love a little heart before bed."
+    },
+    {
+      "id": "g-evening-12",
+      "kind": "EVENING",
+      "mn": "Өдөр дууслаа. Чи сайн ажилласан шүү.",
+      "en": "The day is done. You did well."
+    },
+    {
+      "id": "g-evening-13",
+      "kind": "EVENING",
+      "mn": "Одод гарч ирлээ. Тайван шөнө хүсье.",
+      "en": "The stars are out. Wishing you a peaceful night."
+    },
+    {
+      "id": "g-evening-14",
+      "kind": "EVENING",
+      "mn": "Өнөөдөр хэцүү байсан ч чи даван гарлаа.",
+      "en": "Even if today was tough, you made it through."
+    },
+    {
+      "id": "g-evening-15",
+      "kind": "EVENING",
+      "mn": "Гүнзгий амьсгаа аваад бүх бодлоо тавиарай.",
+      "en": "Take a deep breath and let your thoughts go."
+    },
+    {
+      "id": "g-evening-16",
+      "kind": "EVENING",
+      "mn": "Сайхан нойр, гэгээлэг зүүд хүсье.",
+      "en": "Wishing you deep sleep and bright dreams."
+    },
+    {
+      "id": "g-evening-17",
+      "kind": "EVENING",
+      "mn": "Маргааш хийх нэг сайхан зүйлээ бодсоор нойрсоорой.",
+      "en": "Fall asleep thinking of something fun for tomorrow."
+    },
+    {
+      "id": "g-evening-18",
+      "kind": "EVENING",
+      "mn": "Өнөөдрийн бүх зүйлд баярлалаа.",
+      "en": "Thanks for today, all of it."
+    },
+    {
+      "id": "g-evening-19",
+      "kind": "EVENING",
+      "mn": "Оройн мэнд! Чи {partner} хоёрт дулаахан, тайван орой хүсье.",
+      "en": "Good evening! Wishing you and {partner} a cozy, calm night."
+    },
+    {
+      "id": "g-evening-20",
+      "kind": "EVENING",
+      "mn": "Гэрэл унтраах цаг боллоо.",
+      "en": "Lights-out time."
+    },
+    {
+      "id": "g-evening-21",
+      "kind": "EVENING",
+      "mn": "Сар гэрэлтэж байна. Чи ч бас сайхан амраарай.",
+      "en": "The moon is shining. Time for you to rest too."
+    },
+    {
+      "id": "g-inactivity-01",
+      "kind": "INACTIVITY",
+      "mn": "Удаан уулзсангүй. Энд бүх зүйл чамайг хүлээж байна.",
+      "en": "It's been a while. Everything here is waiting for you."
+    },
+    {
+      "id": "g-inactivity-02",
+      "kind": "INACTIVITY",
+      "mn": "Сайн уу! Завтай үедээ нэг хараарай, {partner} чинь баярлах болно.",
+      "en": "Hi there! Stop by when you have a moment — {partner} will be glad."
+    },
+    {
+      "id": "g-inactivity-03",
+      "kind": "INACTIVITY",
+      "mn": "Хүссэн үедээ эргэж ирээрэй. Дурсамжууд чинь энд хадгалагдаж байна.",
+      "en": "Come back whenever you like. Your memories are right here."
+    },
+    {
+      "id": "g-inactivity-04",
+      "kind": "INACTIVITY",
+      "mn": "Чамайг санаж байлаа! Өнөөдрийн асуулт хүлээж байна.",
+      "en": "We missed you! Today's question is waiting."
+    },
+    {
+      "id": "g-inactivity-05",
+      "kind": "INACTIVITY",
+      "mn": "Амьдрал завгүй байдгийг ойлгож байна. Нэг минут гаргаад зүрх илгээх үү?",
+      "en": "Life gets busy, we know. Got a minute to send a little heart?"
+    },
+    {
+      "id": "g-inactivity-06",
+      "kind": "INACTIVITY",
+      "mn": "Сайн байна уу! {partner} чамтай шинэ дурсамж хуваалцахыг хүсэж магадгүй.",
+      "en": "Hello! {partner} might love to share a new memory with you."
+    },
+    {
+      "id": "g-milestone-d100",
+      "kind": "MILESTONE",
+      "milestone": "D100",
+      "mn": "Хамтдаа 100 хоног! Энэ бол сайхан эхлэл.",
+      "en": "100 days together! What a lovely beginning."
+    },
+    {
+      "id": "g-milestone-d200",
+      "kind": "MILESTONE",
+      "milestone": "D200",
+      "mn": "200 хоног хамтдаа. Дурсамж бүр чинь үнэ цэнтэй.",
+      "en": "200 days together. Every memory counts."
+    },
+    {
+      "id": "g-milestone-d300",
+      "kind": "MILESTONE",
+      "milestone": "D300",
+      "mn": "300 хоног! Чи {partner} хоёр гайхалтай хос.",
+      "en": "300 days! You and {partner} make a wonderful pair."
+    },
+    {
+      "id": "g-milestone-d365",
+      "kind": "MILESTONE",
+      "milestone": "D365",
+      "mn": "Хамтдаа бүтэн 365 хоног! Нэг жилийн дурсамжаа эргэн хараарай.",
+      "en": "365 days together! Look back on a whole year of memories."
+    },
+    {
+      "id": "g-milestone-d500",
+      "kind": "MILESTONE",
+      "milestone": "D500",
+      "mn": "500 хоног хамт! Энэ өдрийг жаахан онцгой болгоорой.",
+      "en": "500 days side by side! Make today a little special."
+    },
+    {
+      "id": "g-milestone-d1000",
+      "kind": "MILESTONE",
+      "milestone": "D1000",
+      "mn": "Мянган хоног! Хамтдаа туулсан өдөр бүрд баяр хүргэе.",
+      "en": "A thousand days! Here's to every one of them together."
+    },
+    {
+      "id": "g-milestone-y1",
+      "kind": "MILESTONE",
+      "milestone": "Y1",
+      "mn": "Нэг жилийн ойн баярын мэнд! Анхны жилийн мөч бүр үнэтэй.",
+      "en": "Happy first anniversary! Every moment of this first year matters."
+    },
+    {
+      "id": "g-milestone-y2",
+      "kind": "MILESTONE",
+      "milestone": "Y2",
+      "mn": "Хоёр жилийн ойн мэнд! Хамтдаа өсөж томорсоор.",
+      "en": "Happy two-year anniversary! Still growing together."
+    },
+    {
+      "id": "g-milestone-y3",
+      "kind": "MILESTONE",
+      "milestone": "Y3",
+      "mn": "Гурван жил хамтдаа! Та хоёрын түүх улам баялаг болж байна.",
+      "en": "Three years together! Your story keeps getting richer."
+    },
+    {
+      "id": "g-milestone-y5",
+      "kind": "MILESTONE",
+      "milestone": "Y5",
+      "mn": "Таван жилийн ой! Чи {partner} хоёрын хамтдаа бүтээсэн бүхэнд баяр хүргэе.",
+      "en": "Five years! Congratulations to you and {partner} on all you've built together."
+    },
+    {
+      "id": "g-milestone-y10",
+      "kind": "MILESTONE",
+      "milestone": "Y10",
+      "mn": "Арван жил! Та хоёрт арван жилийн ойн баярын мэнд хүргэе.",
+      "en": "Ten years! Happy tenth anniversary to the two of you."
+    },
+    {
+      "id": "g-milestone-birthday",
+      "kind": "MILESTONE",
+      "milestone": "BIRTHDAY",
+      "mn": "Төрсөн өдрийн мэнд хүргэе! Өнөөдөр бүхэлдээ чинийх.",
+      "en": "Happy birthday! Today is all about you."
+    },
+    {
+      "id": "g-milestone-birthday-partner",
+      "kind": "MILESTONE",
+      "milestone": "BIRTHDAY",
+      "mn": "Өнөөдөр {partner} төрсөн өдөр нь! Дулаахан үг хэлэхээ мартуузай.",
+      "en": "It's {partner}'s birthday today! Don't forget a few warm words."
+    }
+  ]
+}
