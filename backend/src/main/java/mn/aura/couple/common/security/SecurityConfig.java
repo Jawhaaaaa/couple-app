@@ -48,6 +48,8 @@ public class SecurityConfig {
             "/api/v1/auth/**",
             "/api/v1/policies/**",
             "/api/v1/version",
+            // STOMP CONNECT-ийн `Authorization`-оор нэвтэрнэ (CoupleChannelInterceptor)
+            "/ws",
             "/error"
     };
 
