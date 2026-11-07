@@ -578,6 +578,42 @@
       }
     },
     {
+      "id": "n-theme-declined-1",
+      "type": "THEME_DECLINED",
+      "mn": {
+        "title": "Одоохондоо хуучин өнгөөрөө",
+        "body": "{partner} одоогийн загвартаа үлдэхийг хүслээ."
+      },
+      "en": {
+        "title": "Keeping the current colors",
+        "body": "{partner} would rather keep the current theme for now."
+      }
+    },
+    {
+      "id": "n-theme-declined-2",
+      "type": "THEME_DECLINED",
+      "mn": {
+        "title": "Загвар хэвээрээ",
+        "body": "{partner} саналыг чинь хүлээж аваагүй ч өөр өнгө санал болгож болно."
+      },
+      "en": {
+        "title": "Theme stays the same",
+        "body": "{partner} passed on this one — you can always suggest another."
+      }
+    },
+    {
+      "id": "n-theme-declined-3",
+      "type": "THEME_DECLINED",
+      "mn": {
+        "title": "{partner} хариуллаа",
+        "body": "Энэ удаа өнгө солигдохгүй. Дараа дахиад хамт сонгоорой."
+      },
+      "en": {
+        "title": "{partner} replied",
+        "body": "The colors stay as they are this time. Pick one together later."
+      }
+    },
+    {
       "id": "n-promise-proposed-1",
       "type": "PROMISE_PROPOSED",
       "mn": {

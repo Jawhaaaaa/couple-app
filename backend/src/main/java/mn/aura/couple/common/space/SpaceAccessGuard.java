@@ -66,6 +66,30 @@ public class SpaceAccessGuard {
         return ctx;
     }
 
+    /**
+     * Бичих үйлдлийн хаалга (DD-AURA-034): space `BREAKING`/`ORPHANED` үед зөвхөн унших/экспорт →
+     * 423 `SPACE_READ_ONLY` (AC-127, AC-128).
+     */
+    public SpaceContext requireWritable() {
+        SpaceContext ctx = current();
+        requireWritable(ctx);
+        return ctx;
+    }
+
+    /** Хос шаарддаг бичих үйлдэл: SOLO → 409 `NOT_PAIRED`, тасалж буй → 423. */
+    public SpaceContext requireWritableCouple() {
+        SpaceContext ctx = requireCouple();
+        requireWritable(ctx);
+        return ctx;
+    }
+
+    public void requireWritable(SpaceContext ctx) {
+        List<String> status = jdbc.queryForList("SELECT status FROM space WHERE id = ?", String.class, ctx.spaceId());
+        if (status.isEmpty() || !"ACTIVE".equals(status.get(0))) {
+            throw new ApiException(ErrorCode.SPACE_READ_ONLY, HttpStatus.LOCKED);
+        }
+    }
+
     public static UUID currentUserId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null || !auth.isAuthenticated() || auth instanceof AnonymousAuthenticationToken) {
