@@ -53,6 +53,7 @@ function TabItem({ label, Icon, focused, vertical, onPress, testID }: ItemProps)
       accessibilityRole="tab"
       accessibilityLabel={label}
       accessibilityState={{ selected: focused }}
+      aria-selected={focused}
       testID={testID}
       style={[styles.item, vertical && styles.itemVertical]}
     >

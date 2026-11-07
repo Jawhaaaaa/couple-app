@@ -19,7 +19,8 @@ while :; do
   sleep 5
 done
 # Mailpit UI ба SMTP порт, SeaweedFS S3 хариу
-curl -fsS "http://localhost:${MAILPIT_UI_PORT:-8025}/readyz" >/dev/null
-code=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:${S3_HOST_PORT:-8333}/")
+mp=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:${MAILPIT_UI_PORT:-8025}/readyz" || true)
+[ "$mp" = "200" ] || { echo "Mailpit UI хариу $mp" >&2; exit 1; }
+code=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:${S3_HOST_PORT:-8333}/" || true)
 [ "$code" = "403" ] || [ "$code" = "200" ] || { echo "SeaweedFS S3 хариу $code" >&2; exit 1; }
 echo "AC-209: Mailpit UI, SeaweedFS S3 хариулав"
