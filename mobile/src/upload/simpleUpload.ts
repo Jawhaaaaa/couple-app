@@ -19,7 +19,7 @@ export interface SimpleUploadInput {
  * Жижиг файлын (аватар г.м.) chunk upload — гэрээний протокол (DD-AURA-013):
  * `POST /uploads` → chunk бүрд `PUT /uploads/{id}/chunks/{index}` (octet-stream,
  * сүүлийнхээс бусад нь яг `chunkSize`) → `POST /uploads/{id}/complete` → `MediaRef`.
- * Тасарсан upload-ыг сэргээх, дараалал (`uploadQueue`) нь дурсамжийн нэгжид.
+ * Тасарсан upload-ыг сэргээх, апп хаагдаж нээгдэхэд үргэлжлүүлэх нь `uploadQueue.ts`.
  */
 export async function simpleUpload(
   { purpose, fileName, mime, data, onProgress }: SimpleUploadInput,
@@ -35,20 +35,27 @@ export async function simpleUpload(
 
   for (let index = 0; index < totalChunks; index += 1) {
     if (!received.has(index)) {
-      const chunk = data.slice(index * chunkSize, Math.min(totalBytes, (index + 1) * chunkSize));
-      await unwrap(
-        client.PUT('/uploads/{uploadId}/chunks/{index}', {
-          params: { path: { uploadId: session.id, index } },
-          // Байтыг JSON болгохгүй — шууд илгээнэ
-          body: chunk as unknown as string,
-          bodySerializer: (body: unknown) => body as BodyInit,
-          headers: { 'Content-Type': 'application/octet-stream' },
-        }),
-      );
+      await unwrap(putChunk(client, session.id, index, chunkOf(data, index, chunkSize)));
     }
     onProgress?.((index + 1) / totalChunks);
   }
   return unwrap(client.POST('/uploads/{uploadId}/complete', { params: { path: { uploadId: session.id } } }));
+}
+
+/** `index` дэх chunk-ийн байт (сүүлийнхээс бусад нь яг `chunkSize`). */
+export function chunkOf(data: Blob, index: number, chunkSize: number): Blob {
+  return data.slice(index * chunkSize, Math.min(data.size, (index + 1) * chunkSize));
+}
+
+/** Нэг chunk-ийг `application/octet-stream`-ээр илгээнэ (`PUT /uploads/{id}/chunks/{index}`). */
+export function putChunk(client: ApiClient, uploadId: string, index: number, chunk: Blob) {
+  return client.PUT('/uploads/{uploadId}/chunks/{index}', {
+    params: { path: { uploadId, index } },
+    // Байтыг JSON болгохгүй — шууд илгээнэ
+    body: chunk as unknown as string,
+    bodySerializer: (body: unknown) => body as BodyInit,
+    headers: { 'Content-Type': 'application/octet-stream' },
+  });
 }
 
 /** Локал URI (`file://`, `blob:`, `data:`) → `Blob` (native ба вэбд `fetch` дэмжинэ). */

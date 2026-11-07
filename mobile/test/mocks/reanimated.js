@@ -31,7 +31,18 @@ module.exports = {
   default: Animated,
   ...Animated,
   useSharedValue: (v) => {
-    const ref = React.useRef({ value: v });
+    const ref = React.useRef(null);
+    if (!ref.current) {
+      ref.current = {
+        value: v,
+        get() {
+          return this.value;
+        },
+        set(next) {
+          this.value = typeof next === 'function' ? next(this.value) : next;
+        },
+      };
+    }
     return ref.current;
   },
   useDerivedValue: (fn) => ({ value: fn() }),

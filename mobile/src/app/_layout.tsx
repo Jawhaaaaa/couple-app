@@ -13,6 +13,7 @@ import { useT } from '@/i18n';
 import { useBootstrap } from '@/api/queries/bootstrap';
 import { AppButton } from '@/components/AppButton';
 import { AppText } from '@/components/AppText';
+import { SignalReceiver } from '@/components/home/SignalReceiver';
 import { Mascot } from '@/components/Mascot';
 import { OfflineBanner } from '@/components/OfflineBanner';
 import { ServerUnreachable } from '@/components/ServerUnreachable';
@@ -25,6 +26,7 @@ import { useSessionStore } from '@/stores/sessionStore';
 import { ThemeProvider, useTheme } from '@/theme/ThemeProvider';
 import { spacing } from '@/theme/tokens';
 import { fontAssets } from '@/theme/typography';
+import { startUploadQueue } from '@/upload/uploadRuntime';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 installSoundPlayer();
@@ -94,8 +96,15 @@ function ThemedStack() {
         <OfflineBanner />
       </SafeAreaView>
       <SplashGate>
-        <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.bg } }} />
+        <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.bg } }}>
+          <Stack.Screen
+            name="storage-full"
+            options={{ presentation: 'formSheet', sheetAllowedDetents: [0.6, 1], sheetGrabberVisible: true, sheetCornerRadius: 24 }}
+          />
+        </Stack>
         <TimezonePrompt />
+        {/* Хамтрагчийн зүрх/тэврэлт аль ч дэлгэц дээр (ANIM-02, AC-17) */}
+        <SignalReceiver />
       </SplashGate>
     </>
   );
@@ -110,6 +119,8 @@ export default function RootLayout() {
   }, [ready]);
 
   useEffect(() => startOutbox(), []);
+  // Тасарсан upload-ыг апп нээгдэх, сүлжээ сэргэх үед үргэлжлүүлнэ (AC-20)
+  useEffect(() => startUploadQueue(), []);
   // Нэвтэрсэн үед STOMP холболт (DD-AURA-008); токен солигдоход дахин холбогдоно
   useEffect(() => startRealtime(queryClient), []);
 

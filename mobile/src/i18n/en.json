@@ -365,5 +365,180 @@
       "uploading": "Uploading photo… {{percent}}%",
       "permission": "To choose a photo we need access to your photo library. Allow it in Settings."
     }
+  },
+  "home": {
+    "partnerFallback": "Your person",
+    "signalsToday": "Today: {{sent}} 💗 sent · {{received}} received",
+    "offset": {
+      "same": "same time",
+      "hours": "{{sign}}{{hours}} h",
+      "minutes": "{{sign}}{{minutes}} min",
+      "hoursMinutes": "{{sign}}{{hours}} h {{minutes}} min"
+    },
+    "countdown": {
+      "daysHours": "{{days}} d {{hours}} h",
+      "hoursMinutes": "{{hours}} h {{minutes}} min",
+      "minutes": "{{minutes}} min"
+    },
+    "weather": {
+      "a11y": "Weather {{temp}}",
+      "forecastA11y": "Forecast: {{min}} to {{max}}",
+      "range": "{{min}} / {{max}}"
+    },
+    "heart": {
+      "a11y": "Send a heart",
+      "hint": "Press and hold to send a hug",
+      "hugA11y": "Send a hug",
+      "cooldown": "Your heart is catching its breath… {{seconds}} s",
+      "cooldownA11y": "Heart is resting, you can send again in {{seconds}} seconds",
+      "queued": "Will be sent as soon as you are back online 💌",
+      "sent": "💗 Heart delivered",
+      "hugSent": "🤗 Hug delivered"
+    },
+    "person": {
+      "me": "Me",
+      "online": "Online",
+      "offline": "Offline for now",
+      "timeA11y": "{{name}}: time {{time}}",
+      "quiet": "🌙 taking some quiet time"
+    },
+    "distance": {
+      "km": "≈ {{km}} km",
+      "meetupIn": "{{when}} until you meet",
+      "noMeetup": "Mark your next meetup and count down together.",
+      "setMeetup": "Set a meetup",
+      "editMeetup": "Edit meetup"
+    },
+    "meetup": {
+      "title": "Next meetup",
+      "current": "Currently set: {{date}} {{time}}",
+      "date": "Date",
+      "time": "Time",
+      "timePlaceholder": "HH:MM",
+      "invalid": "Please enter a future date and time.",
+      "clear": "Clear meetup"
+    },
+    "unseen": {
+      "title_one": "{{name}} sent you {{count}} {{emoji}}",
+      "title_other": "{{name}} sent you {{count}} {{emoji}}"
+    },
+    "nextDate": {
+      "title": "Next date",
+      "in": "{{when}} to go"
+    },
+    "upcoming": {
+      "title": "Coming up",
+      "today": "Today",
+      "daysLeft_one": "{{count}} day left",
+      "daysLeft_other": "{{count}} days left"
+    },
+    "memories": {
+      "title": "Recent memories"
+    },
+    "messages": {
+      "title": "Messages",
+      "emptyText": "No new messages. Say what is on your mind.",
+      "open": "Open chat",
+      "unread_one": "{{count}} unread message",
+      "unread_other": "{{count}} unread messages"
+    },
+    "onThisDay": {
+      "title": "On this day",
+      "count_one": "{{count}} memory",
+      "count_other": "{{count}} memories"
+    },
+    "recap": {
+      "title": "Our year",
+      "label": "{{year}} — look back together"
+    },
+    "letters": {
+      "title": "Letters",
+      "incoming": "💌 A letter is coming to you {{when}}",
+      "soon": "soon"
+    },
+    "survey": {
+      "title": "One quick question",
+      "body": "How helpful is Aura for the two of you? Rate it from 1 to 5.",
+      "scoreA11y": "Rate {{score}}"
+    },
+    "update": {
+      "title": "New version available",
+      "body": "Aura {{version}} is out — update to try what is new."
+    },
+    "question": {
+      "title": "Today’s question",
+      "answer": "Answer",
+      "view": "View",
+      "revealed": "You both answered — take a look!",
+      "waiting": "Waiting for {{name}} to answer…",
+      "partnerAnswered": "{{name}} already answered. Answer to see it."
+    },
+    "thinking": {
+      "open": "Thinking of you"
+    },
+    "counter": {
+      "unit": "days together",
+      "since": "since {{date}}",
+      "hint": "Show details",
+      "a11y_one": "{{count}} day together, since {{date}}",
+      "a11y_other": "{{count}} days together, since {{date}}",
+      "confirmTitle": "Confirm your start date",
+      "confirmBody": "Once you both confirm the day you started, your days together are counted here.",
+      "confirm": "Enter start date",
+      "sheetTitle": "Our days",
+      "breakdown": "{{years}} years {{months}} months {{days}} days",
+      "startedOn": "Started on {{date}}",
+      "nextTitle": "Next milestones",
+      "nextDays_one": "{{count}} day",
+      "nextDays_other": "{{count}} days",
+      "nextYears_one": "{{count}} year anniversary",
+      "nextYears_other": "{{count}} year anniversary"
+    },
+    "solo": {
+      "title": "Hi, {{name}}!",
+      "body": "Invite your person — once you are linked, your days, hearts and questions show up here.",
+      "action": "Go to invite"
+    }
+  },
+  "signals": {
+    "heartFrom": "{{name}} sent you a heart",
+    "hugFrom": "{{name}} sent you a big hug",
+    "thinkingFrom": "{{name}} is thinking of you",
+    "quote": "“{{text}}”"
+  },
+  "thinking": {
+    "title": "Thinking of you",
+    "body": "Write one line — or nothing at all, the feeling still arrives.",
+    "label": "Your words",
+    "placeholder": "e.g. Morning coffee is not the same without you",
+    "counter": "{{length}}/{{max}}",
+    "counterA11y": "{{length}} of {{max}} characters",
+    "tooLong": "Please keep it to 80 characters.",
+    "cooldown": "Take a short breather and send again ({{seconds}} s).",
+    "send": "Send",
+    "sent": "💭 Delivered"
+  },
+  "question": {
+    "title": "Today’s question",
+    "today": "Today",
+    "label": "Your answer",
+    "placeholder": "Write from the heart…",
+    "counter": "{{length}}/{{max}}",
+    "submit": "Send answer",
+    "mine": "My answer",
+    "partners": "{{name}}",
+    "waiting": "Waiting for {{name}} to answer…",
+    "answerToSee": "{{name}} has answered — answer to see it.",
+    "alreadyAnswered": "You have already answered this question.",
+    "history": "Past questions",
+    "noAnswer": "No answer",
+    "soloBody": "Daily questions open once you are linked with your person."
+  },
+  "storage": {
+    "usage": "{{used}} / {{quota}} GB",
+    "usageA11y": "{{used}} GB of {{quota}} GB used",
+    "body": "Your shared storage is full, so new photos and videos cannot be saved right now.",
+    "hint": "Empty the trash or delete videos you no longer need to free up space.",
+    "trash": "Go to trash"
   }
 }
