@@ -1,0 +1,26 @@
+{
+  "description": "DD-AURA-019: mobile src/domain/dates.ts ба backend CoupleCalendar хоёулаа энэ хүснэгтээр шалгагдана (SD-01, SD-03).",
+  "counter": [
+    { "start": "2024-10-24", "today": "2026-11-07", "days": 745, "years": 2, "months": 0, "dayPart": 14, "ac": "AC-13, AC-69" },
+    { "start": "2026-11-07", "today": "2026-11-07", "days": 1, "years": 0, "months": 0, "dayPart": 0, "ac": "SD-01" },
+    { "start": "2026-11-08", "today": "2026-11-07", "days": 0, "years": 0, "months": 0, "dayPart": 0, "ac": "ирээдүй" },
+    { "start": "2024-02-29", "today": "2025-02-28", "days": 366, "years": 0, "months": 11, "dayPart": 30, "ac": "SD-03" },
+    { "start": "2024-01-31", "today": "2024-03-01", "days": 31, "years": 0, "months": 1, "dayPart": 1, "ac": "сарын сүүл" }
+  ],
+  "dayMilestone": [
+    { "start": "2024-10-24", "n": 100, "date": "2025-01-31" },
+    { "start": "2024-10-24", "n": 1000, "date": "2027-07-20" },
+    { "start": "2026-11-07", "n": 1, "date": "2026-11-07" }
+  ],
+  "yearMilestone": [
+    { "start": "2024-10-24", "years": 1, "date": "2025-10-24" },
+    { "start": "2024-02-29", "years": 1, "date": "2025-02-28", "ac": "AC-38" },
+    { "start": "2024-02-29", "years": 4, "date": "2028-02-29" }
+  ],
+  "nextAnnual": [
+    { "date": "1996-02-29", "onOrAfter": "2026-11-07", "next": "2027-02-28", "ac": "AC-38" },
+    { "date": "1995-05-14", "onOrAfter": "2026-05-14", "next": "2026-05-14" },
+    { "date": "1995-05-14", "onOrAfter": "2026-05-15", "next": "2027-05-14" },
+    { "date": "2027-01-01", "onOrAfter": "2026-11-07", "next": "2027-01-01" }
+  ]
+}
