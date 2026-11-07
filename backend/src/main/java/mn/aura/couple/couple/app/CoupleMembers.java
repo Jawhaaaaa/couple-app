@@ -15,9 +15,18 @@ import org.springframework.stereotype.Component;
 public class CoupleMembers {
 
     private final SpaceRepository spaces;
+    private final UserRefs users;
 
-    public CoupleMembers(SpaceRepository spaces) {
+    public CoupleMembers(SpaceRepository spaces, UserRefs users) {
         this.spaces = spaces;
+        this.users = users;
+    }
+
+    /** GAP-26: хоёр хүний профайлын хот өөр бол «алс зайн» (хосгүй бол false). */
+    public boolean isLongDistance(UUID userId) {
+        return partnerOf(userId)
+                .map(p -> CoupleAssembler.isLongDistance(users.row(userId).orElse(null), users.row(p).orElse(null)))
+                .orElse(false);
     }
 
     /** Space-ийн идэвхтэй гишүүд (SOLO-д нэг, COUPLE-д хоёр). */

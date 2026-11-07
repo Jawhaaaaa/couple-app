@@ -114,3 +114,10 @@ aura:
       enabled: ${AURA_APPLE_ENABLED:false}
       client-id: ${AURA_APPLE_CLIENT_ID:}
       client-secret: ${AURA_APPLE_CLIENT_SECRET:}
+  # Push (DD-AURA-022, PAR-AURA-004/006). VAPID хоосон → Web Push алгасна; Expo токен хоосон → алгасна.
+  # Түлхүүрийг deploy үед үүсгэж зөвхөн .env-д (OPS-AURA-003).
+  push:
+    vapid-public-key: ${AURA_VAPID_PUBLIC_KEY:}
+    vapid-private-key: ${AURA_VAPID_PRIVATE_KEY:}
+    vapid-subject: ${AURA_VAPID_SUBJECT:mailto:admin@aura.local}
+    expo-access-token: ${AURA_EXPO_PUSH_ACCESS_TOKEN:}

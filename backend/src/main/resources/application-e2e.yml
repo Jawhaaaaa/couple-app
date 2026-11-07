@@ -8,3 +8,7 @@ aura:
   oauth:
     google:
       id-token-alg: ${AURA_GOOGLE_ID_TOKEN_ALG:HS256}
+  # DD-AURA-027: E2E-ийн push sink (/api/v1/test/push-sink/**) нь backend өөрөө — http, localhost/backend хост
+  push:
+    endpoint-hosts: ${AURA_PUSH_ENDPOINT_HOSTS:localhost,backend}
+    allow-http-endpoints: true

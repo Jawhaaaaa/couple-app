@@ -13,3 +13,9 @@ aura:
   sentry:
     dsn: ""
     environment: test
+  # Зөвхөн тестийн VAPID түлхүүр (бодит нууц биш); push sink нь localhost дээр http-ээр
+  push:
+    vapid-public-key: BPcxbBp3veDT3vGfCAVyjFueUxHcyTU7SLrdNtwqPx_4uYges92uzVAYfRNK7uJDJa8Rs_7I_UIY_8bRGsLShj0
+    vapid-private-key: G2HWTcsIENb1FCQ_rBMi3GKji-JgtSVjM2I2uSvS5gI
+    endpoint-hosts: localhost
+    allow-http-endpoints: true

@@ -473,36 +473,36 @@
       "id": "n-invite-used-1",
       "type": "INVITE_USED",
       "mn": {
-        "title": "{partner} нэгдлээ",
-        "body": "Урилга чинь хүлээн авагдлаа. Та хоёрын орон зай бэлэн боллоо."
+        "title": "{partner} урилгыг чинь ашиглалаа",
+        "body": "Нэгдэх үү? Батлахад та хоёр холбогдоно."
       },
       "en": {
-        "title": "{partner} joined",
-        "body": "Your invite was accepted. Your shared space is ready."
+        "title": "{partner} used your invite",
+        "body": "Shall you two connect? Confirm to link up."
       }
     },
     {
       "id": "n-invite-used-2",
       "type": "INVITE_USED",
       "mn": {
-        "title": "Холбогдлоо",
-        "body": "{partner} урилгаар чинь орж ирлээ. Тавтай морил!"
+        "title": "Урилга чинь хүрлээ",
+        "body": "{partner} нэгдэхийг хүсэж байна — батлах уу?"
       },
       "en": {
-        "title": "You're connected",
-        "body": "{partner} joined with your invite. Welcome!"
+        "title": "Your invite arrived",
+        "body": "{partner} would like to join you — confirm?"
       }
     },
     {
       "id": "n-invite-used-3",
       "type": "INVITE_USED",
       "mn": {
-        "title": "Хоёулаа боллоо",
-        "body": "{partner} одоо энд байна. Эхний дурсамжаа хамтдаа нэмээрэй."
+        "title": "{partner} хүлээж байна",
+        "body": "Урилгаар чинь орж ирлээ. Нэг товшоод батлаарай."
       },
       "en": {
-        "title": "It's the two of you now",
-        "body": "{partner} is here. Add your first memory together."
+        "title": "{partner} is waiting",
+        "body": "They came in through your invite. One tap to confirm."
       }
     },
     {
