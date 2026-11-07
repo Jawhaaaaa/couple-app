@@ -230,8 +230,9 @@ public class UploadSessionService implements TestRunnableJob {
             insertMedia(row, "IMAGE", ImageProcessor.MIME, stored, refs.variantsJson(variants), img.blurhash(), img.width(),
                     img.height(), "READY", now);
         } else {
-            // Видео/дууг хөрвүүлэх ажил (T-34, T-46) `MediaUploaded`-ийг сонсож PROCESSING → READY болгоно
-            insertMedia(row, kind.name(), row.detectedMime(), stored, "{}", null, null, null, "READY", now);
+            // Видео (T-34) ба дууг (T-46) хөрвүүлэх ажил `MediaUploaded`-ийг сонсож PROCESSING → READY болгоно
+            String status = kind == Kind.VIDEO ? "PROCESSING" : "READY";
+            insertMedia(row, kind.name(), row.detectedMime(), stored, "{}", null, null, null, status, now);
         }
         quota.adjust(row.spaceId(), stored - row.totalBytes());
         jdbc.update("UPDATE upload_session SET status = 'COMPLETED', updated_at = ? WHERE id = ?", Timestamp.from(now), uploadId);

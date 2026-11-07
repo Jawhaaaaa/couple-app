@@ -12,6 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 import mn.aura.couple.AbstractIntegrationTest;
+import mn.aura.couple.ItBeans;
 import mn.aura.couple.common.config.AuraProperties;
 import mn.aura.couple.common.mail.MailCapture;
 import mn.aura.couple.common.mail.MailMessage;
@@ -19,6 +20,7 @@ import mn.aura.couple.common.time.MutableClock;
 import mn.aura.couple.weather.OpenMeteoStub;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -29,6 +31,7 @@ import org.springframework.test.context.DynamicPropertySource;
  * Бүх auth IT нэг Spring context хуваалцана. Тест бүр давтагдашгүй имэйл ашиглана (нэг DB).
  */
 @ActiveProfiles("e2e")
+@Import(ItBeans.class)
 public abstract class AbstractAuthIT extends AbstractIntegrationTest {
 
     protected static final StubOAuthIdp IDP = StubOAuthIdp.start();
