@@ -3604,7 +3604,7 @@ export interface components {
              * @default ALL
              * @enum {string}
              */
-            animation: "ALL" | "REDUCED" | false;
+            animation: "ALL" | "REDUCED" | "OFF";
             /** @default true */
             haptics: boolean;
             /** @default false */
@@ -3622,7 +3622,7 @@ export interface components {
             /** @enum {string} */
             dateFormat?: "YMD_DOT" | "DMY_SLASH" | "MDY_SLASH";
             /** @enum {string} */
-            animation?: "ALL" | "REDUCED" | false;
+            animation?: "ALL" | "REDUCED" | "OFF";
             haptics?: boolean;
             sound?: boolean;
             checkinAutoShare?: boolean;

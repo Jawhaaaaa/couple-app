@@ -7053,7 +7053,7 @@ components:
           default: YMD_DOT
         animation:
           type: string
-          enum: [ALL, REDUCED, false]
+          enum: [ALL, REDUCED, "OFF"]
           default: ALL
         haptics: {type: boolean, default: true}
         sound: {type: boolean, default: false}
@@ -7075,7 +7075,7 @@ components:
           enum: [YMD_DOT, DMY_SLASH, MDY_SLASH]
         animation:
           type: string
-          enum: [ALL, REDUCED, false]
+          enum: [ALL, REDUCED, "OFF"]
         haptics: {type: boolean}
         sound: {type: boolean}
         checkinAutoShare: {type: boolean}
