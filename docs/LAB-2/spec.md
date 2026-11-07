@@ -4,8 +4,8 @@ type: spec
 title: Aura — хосын мобайл апп (iOS + Android + PWA) · Спек
 status: draft
 work_item: LAB-2
-<!-- LAB-2 · spec · Спек бичих · 2026-11-07 -->
 ---
+<!-- LAB-2 · spec · Спек бичих · 2026-11-07 -->
 
 # LAB-2 — Aura хосын апп: спек
 
