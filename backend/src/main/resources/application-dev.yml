@@ -1,0 +1,6 @@
+# DEV (docker compose). Cookie нь HTTP дээр ажиллахын тулд secure=false.
+aura:
+  cookie:
+    secure: ${AURA_COOKIE_SECURE:false}
+  cors:
+    allowed-origins: ${AURA_CORS_ALLOWED_ORIGINS:http://localhost:8090}

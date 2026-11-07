@@ -1,0 +1,5 @@
+# E2E (`SPRING_PROFILES_ACTIVE=dev,e2e`). `MutableClock` ба `/api/v1/test/**` зөвхөн энэ profile-д
+# идэвхжинэ (DD-AURA-011, INV-10). Prod-д хэзээ ч бүү нэм.
+aura:
+  sentry:
+    dsn: ""

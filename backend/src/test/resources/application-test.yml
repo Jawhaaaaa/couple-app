@@ -1,0 +1,12 @@
+# Integration тест (AbstractIntegrationTest). Datasource, S3, SMTP-ийг Testcontainers тавина.
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 4
+      minimum-idle: 1
+aura:
+  cors:
+    allowed-origins: http://allowed.example,http://localhost:8090
+  sentry:
+    dsn: ""
+    environment: test
