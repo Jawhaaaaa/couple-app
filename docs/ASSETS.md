@@ -64,6 +64,7 @@ AC-AS-01). `mobile/src/assets/__tests__/assets-registry.test.ts` нь `mobile/as
 |---|---|---|---|
 | Playfair Display (`@expo-google-fonts/playfair-display`) | https://fonts.google.com/specimen/Playfair+Display | SIL OFL 1.1 | Гарчиг, тоолуур, ишлэл |
 | Nunito (`@expo-google-fonts/nunito`) | https://fonts.google.com/specimen/Nunito | SIL OFL 1.1 | Бие, товч, шошго |
+| `backend/src/main/resources/fonts/*.ttf` (Nunito 400/700, Playfair Display 400/400 italic — дээрх багцаас хуулсан) | https://fonts.google.com/specimen/Nunito · https://fonts.google.com/specimen/Playfair+Display | SIL OFL 1.1 | Серверийн PDF ном (DD-AURA-024, T-42) |
 | Lucide (`lucide-react-native`) | https://lucide.dev | ISC | Дүрс |
 | Lottie (`lottie-react-native`, `@lottiefiles/dotlottie-react`) | https://github.com/lottie-react-native/lottie-react-native · https://github.com/LottieFiles/dotlottie-web | Apache-2.0 · MIT | Lottie тоглуулагч |
 | React Native Reanimated, Gesture Handler, SVG | https://github.com/software-mansion | MIT | Хөдөлгөөн, бөөм |
