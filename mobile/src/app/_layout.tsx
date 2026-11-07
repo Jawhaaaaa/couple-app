@@ -1,23 +1,89 @@
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { type ReactNode, useEffect, useState } from 'react';
+import { Linking, StyleSheet, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import '@/i18n';
+// i18n-ийг бусад модулиас өмнө эхлүүлнэ (side effect)
+import { useT } from '@/i18n';
+import { useBootstrap } from '@/api/queries/bootstrap';
+import { AppButton } from '@/components/AppButton';
+import { AppText } from '@/components/AppText';
+import { Mascot } from '@/components/Mascot';
 import { OfflineBanner } from '@/components/OfflineBanner';
+import { ServerUnreachable } from '@/components/ServerUnreachable';
+import { TimezonePrompt } from '@/components/TimezonePrompt';
 import { installSoundPlayer } from '@/motion/sound';
 import { startOutbox } from '@/offline/outboxRuntime';
 import { persistOptions, queryClient } from '@/offline/persist';
+import { startRealtime } from '@/realtime';
+import { useSessionStore } from '@/stores/sessionStore';
 import { ThemeProvider, useTheme } from '@/theme/ThemeProvider';
+import { spacing } from '@/theme/tokens';
 import { fontAssets } from '@/theme/typography';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 installSoundPlayer();
+
+/**
+ * S-01 Splash (spec §6.1): хувилбар, сесс, `me` ачаалж дуустал маскот; сервер
+ * хүрэхгүй ба кэш хоосон бол S-96; `minVersion` > апп бол шинэчлэх. Нэг удаа
+ * бэлэн болсны дараа навигацийг дахин салгахгүй (оролт, түүх хэвээр).
+ */
+function SplashGate({ children }: { children: ReactNode }) {
+  const boot = useBootstrap();
+  const [opened, setOpened] = useState(false);
+  if (boot.status === 'ready' && !opened) setOpened(true);
+
+  // Сесс хүчингүй болбол (AUTH_SESSION_REVOKED, refresh дууссан) S-03 руу (AC-56, AC-168)
+  useEffect(
+    () =>
+      useSessionStore.subscribe((state, prev) => {
+        if (prev.accessToken && !state.accessToken && state.signedOut) {
+          queryClient.removeQueries({ queryKey: ['me'] });
+          router.replace('/login');
+        }
+      }),
+    [],
+  );
+
+  if (boot.status === 'updateRequired') return <UpdateRequired url={boot.version?.storeUrl ?? boot.version?.downloadUrl} />;
+  if (opened) return children;
+  if (boot.status === 'unreachable') return <ServerUnreachable onRetry={boot.retry} />;
+  return <Splash />;
+}
+
+function Splash() {
+  const t = useT();
+  return (
+    <View style={styles.center} testID="screen-S-01" accessibilityLabel={t('a11y.splash')}>
+      <Mascot size={120} />
+      <AppText variant="display">{t('app.name')}</AppText>
+    </View>
+  );
+}
+
+function UpdateRequired({ url }: { url: string | null | undefined }) {
+  const t = useT();
+  return (
+    <View style={styles.center} testID="update-required" accessibilityRole="alert">
+      <Mascot size={110} pose="tilt" />
+      <AppText variant="h2" style={styles.text}>
+        {t('states.updateRequiredTitle')}
+      </AppText>
+      <AppText color="textMuted" style={styles.text}>
+        {t('states.updateRequiredBody')}
+      </AppText>
+      {url ? (
+        <AppButton label={t('common.update')} onPress={() => void Linking.openURL(url)} testID="update-open" />
+      ) : null}
+    </View>
+  );
+}
 
 function ThemedStack() {
   const { mode, colors } = useTheme();
@@ -27,7 +93,10 @@ function ThemedStack() {
       <SafeAreaView edges={['top']} style={{ backgroundColor: colors.bg }}>
         <OfflineBanner />
       </SafeAreaView>
-      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.bg } }} />
+      <SplashGate>
+        <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.bg } }} />
+        <TimezonePrompt />
+      </SplashGate>
     </>
   );
 }
@@ -41,6 +110,8 @@ export default function RootLayout() {
   }, [ready]);
 
   useEffect(() => startOutbox(), []);
+  // Нэвтэрсэн үед STOMP холболт (DD-AURA-008); токен солигдоход дахин холбогдоно
+  useEffect(() => startRealtime(queryClient), []);
 
   if (!ready) return null;
   return (
@@ -54,4 +125,8 @@ export default function RootLayout() {
   );
 }
 
-const styles = StyleSheet.create({ root: { flex: 1 } });
+const styles = StyleSheet.create({
+  root: { flex: 1 },
+  center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: spacing.md, padding: spacing.xl },
+  text: { textAlign: 'center' },
+});

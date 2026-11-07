@@ -51,6 +51,8 @@ export function createApiClient({ baseUrl = API_BASE, fetch: fetchFn = globalThi
       },
       body: JSON.stringify(usesCookieRefresh ? {} : { refreshToken }),
     });
+    // 5xx — сервер түр унасан: токен хүчинтэй хэвээр байж болох тул «сесс алга» гэж үзэхгүй
+    if (res.status >= 500) throw new Error(`refresh HTTP ${res.status}`);
     if (!res.ok) return null;
     const tokens = (await res.json()) as TokenResponse;
     await setRefreshToken(tokens.refreshToken);
@@ -67,16 +69,32 @@ export function createApiClient({ baseUrl = API_BASE, fetch: fetchFn = globalThi
     useSessionStore.getState().clear();
   }
 
-  /** Зэрэг дуудлагад нэг refresh. */
-  function refreshOnce(): Promise<string | null> {
+  /** Зэрэг дуудлагад нэг refresh (сүлжээний/5xx алдаа бол reject). */
+  function sharedRefresh(): Promise<string | null> {
     if (!refreshing) {
-      refreshing = doRefresh()
-        .catch(() => null)
-        .finally(() => {
-          refreshing = null;
-        });
+      refreshing = doRefresh().finally(() => {
+        refreshing = null;
+      });
     }
     return refreshing;
+  }
+
+  /** Зэрэг дуудлагад нэг refresh; ямар ч алдаа → `null` (AC-168). */
+  function refreshOnce(): Promise<string | null> {
+    return sharedRefresh().catch(() => null);
+  }
+
+  /**
+   * Апп нээхэд (S-01) хадгалсан refresh-ээр сесс сэргээнэ. Сервер хүрэхгүй бол
+   * `unreachable` — кэштэй `me` байвал offline-д үргэлжлүүлнэ (AC-156).
+   */
+  async function restoreSession(): Promise<'restored' | 'none' | 'unreachable'> {
+    if (useSessionStore.getState().accessToken) return 'restored';
+    try {
+      return (await sharedRefresh()) ? 'restored' : 'none';
+    } catch {
+      return 'unreachable';
+    }
   }
 
   /** Body-г дахин илгээхийн тулд анхны хүсэлтийн хуулбар (id → Request). */
@@ -87,6 +105,8 @@ export function createApiClient({ baseUrl = API_BASE, fetch: fetchFn = globalThi
       const token = useSessionStore.getState().accessToken;
       if (token) request.headers.set('Authorization', `Bearer ${token}`);
       request.headers.set('Accept-Language', usePrefsStore.getState().locale);
+      // Вэб: refresh нь зөвхөн `aura_rt` cookie-д (DD-AURA-006) — backend үүнийг толгойгоор танина
+      if (usesCookieRefresh) request.headers.set('X-Aura-Client', 'web');
       originals.set(id, request.clone());
       return request;
     },
@@ -112,7 +132,7 @@ export function createApiClient({ baseUrl = API_BASE, fetch: fetchFn = globalThi
 
   const client = createClient<paths>({ baseUrl, fetch: (req: Request) => fetchFn(req), credentials: 'include' });
   client.use(auth);
-  return Object.assign(client, { refreshOnce, signOut });
+  return Object.assign(client, { refreshOnce, restoreSession, signOut });
 }
 
 export type ApiClient = ReturnType<typeof createApiClient>;

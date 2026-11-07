@@ -18,7 +18,8 @@
     "openSettings": "Open settings",
     "notifications": "Notifications",
     "profile": "Profile",
-    "settings": "Settings"
+    "settings": "Settings",
+    "update": "Update"
   },
   "tabs": {
     "home": "Home",
@@ -43,7 +44,8 @@
       "calendar": "Calendar access is needed to add the date to your calendar."
     },
     "updateRequiredTitle": "Update required",
-    "storageFullTitle": "Storage is full"
+    "storageFullTitle": "Storage is full",
+    "updateRequiredBody": "A new version of Aura is out. Update to keep going."
   },
   "theme": {
     "dark": "Dark",
@@ -75,6 +77,140 @@
     "unreadCount_one": "{{count}} unread",
     "unreadCount_other": "{{count}} unread",
     "avatar": "Profile and settings",
-    "mascot": "Mascots Bubble and Bumble"
+    "mascot": "Mascots Bubble and Bumble",
+    "splash": "Aura is loading"
+  },
+  "auth": {
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "newPassword": "New password",
+      "name": "Name",
+      "birthDate": "Date of birth",
+      "birthDatePlaceholder": "YYYY.MM.DD",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password"
+    },
+    "validation": {
+      "emailInvalid": "Enter a valid email address.",
+      "nameRequired": "Tell us your name.",
+      "passwordRequired": "Enter your password.",
+      "birthDateIncomplete": "Enter your full date of birth.",
+      "birthDateInvalid": "That date doesn't look right. Please check it.",
+      "ageRestricted": "Aura is for people aged 18+."
+    },
+    "password": {
+      "tooShort": "Use at least 8 characters.",
+      "tooLong": "Use no more than 128 characters.",
+      "common": "This password is too common. Pick another one.",
+      "sameAsEmail": "Your password can't be the same as your email.",
+      "meter": "Password strength: {{level}}",
+      "level0": "Empty",
+      "level1": "Weak",
+      "level2": "Fair",
+      "level3": "Good",
+      "level4": "Strong"
+    },
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your cozy space for two.",
+      "submit": "Sign in",
+      "forgot": "Forgot password",
+      "register": "Create an account",
+      "or": "or",
+      "google": "Continue with Google",
+      "apple": "Continue with Apple",
+      "rateLimited": "Too many attempts. Try again in {{minutes}} min.",
+      "offline": "You can sign in once you're back online."
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "A cozy space for the two of you to start together.",
+      "submit": "Sign up",
+      "haveAccount": "Already have an account? Sign in",
+      "policyLabel": "I've read and agree to the Privacy Policy and Terms of Service",
+      "policyRead": "Read the policy and terms",
+      "policyHide": "Hide",
+      "policyError": "Couldn't load the policy. Please try again.",
+      "offline": "You can sign up once you're back online."
+    },
+    "verify": {
+      "title": "Verify your email",
+      "subtitle": "We sent a 6-digit code to {{email}}.",
+      "codeLabel": "6-digit code",
+      "submit": "Verify",
+      "resend": "Resend code",
+      "resendIn": "You can resend in {{seconds}} s",
+      "resent": "We sent a new code. Check your inbox.",
+      "editEmail": "Change email",
+      "attemptsLeft_one": "Wrong code. {{count}} attempt left.",
+      "attemptsLeft_other": "Wrong code. {{count}} attempts left.",
+      "locked": "Too many wrong tries. Locked for {{minutes}} min.",
+      "checkingLink": "Checking your link…",
+      "missingEmail": "We lost your email address. Sign in or sign up again."
+    },
+    "forgot": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we'll send you a reset link.",
+      "submit": "Send link",
+      "sent": "If that address has an account, a reset link is on its way. Check your inbox.",
+      "backToLogin": "Back to sign in"
+    },
+    "reset": {
+      "title": "Set a new password",
+      "subtitle": "Choose a new password. You'll be signed out on other devices.",
+      "submit": "Save password",
+      "done": "Your password is updated. Sign in with your new one.",
+      "missingToken": "This link is incomplete. Open the link from your email again.",
+      "requestNew": "Get a new link"
+    },
+    "notMe": {
+      "title": "Wasn't you?",
+      "body": "We'll sign you out everywhere and ask for your password next time.",
+      "confirm": "Sign out everywhere",
+      "done": "You've been signed out everywhere. Reset your password and sign in again.",
+      "missingToken": "This link is incomplete. Open the link from your email again."
+    },
+    "oauth": {
+      "signingIn": "Signing you in…",
+      "failed": "Couldn't sign in with Google. Please try again.",
+      "linkTitle": "Link your account",
+      "linkBody": "An account with this email already exists. Enter its password to link them.",
+      "linkSubmit": "Link account"
+    },
+    "policyUpdate": {
+      "title": "We've updated our policy",
+      "subtitle": "Please read and accept the new version to continue.",
+      "version": "Version {{version}}",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "accept": "Accept and continue"
+    }
+  },
+  "setup": {
+    "profile": {
+      "title": "Tell us about you",
+      "subtitle": "Choose how your person will see you.",
+      "avatar": "Profile photo",
+      "avatarLater": "You can add a photo later in Settings.",
+      "callName": "Nickname",
+      "callNameHint": "What your person calls you.",
+      "timezone": "Time zone: {{zone}}",
+      "city": "City",
+      "cityPlaceholder": "Type your city",
+      "cityUnavailable": "City search isn't available right now. You can add it later in Settings.",
+      "cityEmpty": "No matching cities.",
+      "citySelected": "Selected city: {{city}}",
+      "cityClear": "Clear city",
+      "save": "Save and continue",
+      "later": "Later"
+    }
+  },
+  "timezone": {
+    "prompt": "Switch your time zone to {{zone}}?",
+    "body": "This device is in a different zone from your profile ({{current}}).",
+    "accept": "Yes, switch",
+    "decline": "No, keep it",
+    "failed": "Couldn't change your time zone. You can change it later in Settings."
   }
 }

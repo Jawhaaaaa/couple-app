@@ -11,7 +11,7 @@ import { API_BASE, API_URL, MAILPIT_URL } from '../support/env';
 test.describe('E2E орчин', () => {
   test('апп-ын shell хоёр context-д тусдаа нээгдэнэ', async ({ partnerA, partnerB }) => {
     for (const { page } of [partnerA, partnerB]) {
-      await page.goto('/');
+      await page.goto('/home');
       await expect(page.getByTestId('tab-home')).toBeVisible();
       await expect(page.getByTestId('screen-S-20')).toBeVisible();
     }

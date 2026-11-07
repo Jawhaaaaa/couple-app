@@ -6,7 +6,7 @@ const TABS = ['Нүүр', 'Дурсамж', 'Чат', 'Төлөвлөгөө', '�
 test.describe('AC-192 өргөнөөр layout', () => {
   test('утсанд доод навигаци 5 таб', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto('/');
+    await page.goto('/home');
     const bar = page.getByTestId('bottom-tabs');
     await expect(bar).toBeVisible();
     for (const label of TABS) await expect(bar.getByRole('tab', { name: label })).toBeVisible();
@@ -17,7 +17,7 @@ test.describe('AC-192 өргөнөөр layout', () => {
   test('вэб ≥ 1024 px-д зүүн талын навигаци', async ({ page, isMobile }) => {
     test.skip(isMobile, 'Вэбийн өргөн дэлгэц зөвхөн desktop профайлд');
     await page.setViewportSize({ width: 1280, height: 800 });
-    await page.goto('/');
+    await page.goto('/home');
     const nav = page.getByTestId('sidebar-nav');
     await expect(nav).toBeVisible();
     const box = await nav.boundingBox();
@@ -27,7 +27,7 @@ test.describe('AC-192 өргөнөөр layout', () => {
   });
 
   test('таб солиход дэлгэц солигдоно (ANIM-10)', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/home');
     await page.getByTestId('tab-chat').click();
     await expect(page.getByTestId('screen-S-40')).toBeVisible();
     await expect(page.getByRole('tab', { name: 'Чат', selected: true })).toBeVisible();
