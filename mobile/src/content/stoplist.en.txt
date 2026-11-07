@@ -1,0 +1,134 @@
+# Aura — English content stoplist (Appendix B.1, B.2, §3.6).
+# One lowercase term per line. Lines starting with `#` are comments.
+# Matching (content.test.ts):
+#   - text is lowercased, every non letter/digit becomes a space,
+#     placeholders like `{partner}` are removed;
+#   - `term`   — whole word / whole phrase;
+#   - `term*`  — word prefix.
+# Prices (digits + ₮/MNT/$) are checked by a regex in the test, not here.
+
+# --- explicit sexual content ---
+sex
+sexy
+sexual*
+naked
+nude*
+nudity
+erotic*
+porn*
+intercourse
+foreplay
+orgasm*
+lingerie
+
+# --- ex-partners / past relationships ---
+ex
+exes
+ex boyfriend*
+ex girlfriend*
+ex husband*
+ex wife*
+former partner*
+former boyfriend*
+former girlfriend*
+previous relationship*
+past relationship*
+first love*
+
+# --- jealousy ---
+jealous*
+envy
+envious
+
+# --- money / income comparison ---
+salary
+salaries
+income*
+paycheck*
+earns more
+earn more
+who makes more
+
+# --- criticizing family ---
+in law
+in laws
+mother in law*
+father in law*
+your mother is wrong
+your family is wrong
+
+# --- body / weight ---
+weight*
+weigh
+weighs
+fat
+fatter
+fattest
+skinny
+diet
+dieting
+calorie*
+body shape
+lose weight
+belly fat
+
+# --- religion / politics debate ---
+religio*
+politic*
+election*
+voted for*
+political party*
+president*
+parliament*
+
+# --- testing / blaming the partner ---
+your fault
+blame*
+prove you
+prove that you
+if you really loved*
+why do you never
+why don t you ever
+
+# --- alcohol as a main theme (B.2) ---
+alcohol*
+beer*
+wine*
+winery
+vodka*
+whiskey*
+whisky*
+cocktail*
+drunk*
+booze*
+liquor*
+tipsy
+hangover*
+brewery*
+pub
+pubs
+pub crawl*
+bar crawl*
+happy hour*
+
+# --- specific brands / business promotion (B.2) ---
+kfc
+mcdonald*
+starbucks
+pizza hut
+burger king
+netflix
+coca cola
+pepsi
+emart
+ikea
+shangri la
+spotify
+
+# --- tone (§3.6): no streaks, no scores ---
+streak*
+
+# --- false encryption claims ---
+end to end
+e2e
+encrypt*

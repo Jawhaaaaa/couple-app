@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aura.local/content/content.schema.json",
+  "title": "Aura content library (Appendix B)",
+  "description": "Every content file is {version: 1, items: [...]}. Pick the $defs entry by file kind: questions, dateIdeas, notifications, greetings, emptyStates, firstWeek, onboarding, errors.",
+  "$defs": {
+    "text": { "type": "string", "minLength": 1, "pattern": "\\S" },
+    "shortText": { "$ref": "#/$defs/text", "maxLength": 120 },
+    "titleBody": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "body"],
+      "properties": {
+        "title": { "$ref": "#/$defs/text", "maxLength": 80 },
+        "body": { "$ref": "#/$defs/text", "maxLength": 240 }
+      }
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "items"],
+      "properties": {
+        "version": { "const": 1 },
+        "items": { "type": "array", "minItems": 1 }
+      }
+    },
+
+    "questionItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "category", "depth", "mn", "en"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^q-[0-9]{3,4}$" },
+        "category": { "enum": ["MEMORY", "KNOWING", "FUTURE", "FUN", "DEEP"] },
+        "depth": { "enum": [1, 2, 3] },
+        "mn": { "$ref": "#/$defs/shortText" },
+        "en": { "$ref": "#/$defs/shortText" }
+      }
+    },
+    "questions": {
+      "$ref": "#/$defs/file",
+      "properties": { "items": { "minItems": 365, "items": { "$ref": "#/$defs/questionItem" } } }
+    },
+
+    "ideaText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "description"],
+      "properties": {
+        "title": { "$ref": "#/$defs/text", "maxLength": 40 },
+        "description": { "$ref": "#/$defs/text" }
+      }
+    },
+    "dateIdeaItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "category", "budgetBand", "seasons", "setting", "longDistance", "mongolia", "durationMinutes", "preparation", "mn", "en"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^lib-[a-z0-9][a-z0-9-]*$" },
+        "category": { "enum": ["FOOD", "TRAVEL", "HOME", "SPORT", "CULTURE", "OUTDOOR", "OTHER"] },
+        "budgetBand": { "enum": ["FREE", "UPTO_50K", "50K_150K", "OVER_150K"] },
+        "seasons": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["WINTER", "SPRING", "SUMMER", "AUTUMN"] }
+        },
+        "setting": { "enum": ["HOME", "OUTDOOR"] },
+        "longDistance": { "type": "boolean" },
+        "mongolia": { "type": "boolean" },
+        "durationMinutes": { "type": "integer", "minimum": 0 },
+        "preparation": { "enum": ["NONE", "LIGHT", "PLANNED"] },
+        "mn": { "$ref": "#/$defs/ideaText" },
+        "en": { "$ref": "#/$defs/ideaText" },
+        "safety": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mn", "en"],
+          "properties": { "mn": { "$ref": "#/$defs/text" }, "en": { "$ref": "#/$defs/text" } }
+        }
+      }
+    },
+    "dateIdeas": {
+      "$ref": "#/$defs/file",
+      "properties": { "items": { "minItems": 150, "items": { "$ref": "#/$defs/dateIdeaItem" } } }
+    },
+
+    "notificationItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "mn", "en"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^n-[a-z0-9-]+$" },
+        "type": {
+          "enum": ["MESSAGE_NEW", "MEMORY_CREATED", "MEMORY_COMMENT", "HEART_RECEIVED", "HUG_RECEIVED", "THINKING_OF_YOU",
+            "DATE_PROPOSED", "DATE_RESPONDED", "DATE_REMINDER", "ANNIVERSARY_REMINDER", "LETTER_DELIVERED", "CAPSULE_OPENED",
+            "QUESTION_PARTNER_ANSWERED", "INVITE_USED", "PAIRING_CANCELLED", "THEME_PROPOSED", "PROMISE_PROPOSED", "EXPORT_READY",
+            "BREAKUP_STARTED", "QUIET_MODE_ON", "STORAGE_WARNING", "INACTIVITY_NUDGE"]
+        },
+        "mn": { "$ref": "#/$defs/titleBody" },
+        "en": { "$ref": "#/$defs/titleBody" }
+      }
+    },
+    "notifications": {
+      "$ref": "#/$defs/file",
+      "properties": { "items": { "items": { "$ref": "#/$defs/notificationItem" } } }
+    },
+
+    "greetingItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "mn", "en"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^g-[a-z0-9-]+$" },
+        "kind": { "enum": ["MORNING", "EVENING", "INACTIVITY", "MILESTONE"] },
+        "milestone": { "enum": ["D100", "D200", "D300", "D365", "D500", "D1000", "Y1", "Y2", "Y3", "Y5", "Y10", "BIRTHDAY"] },
+        "mn": { "$ref": "#/$defs/shortText" },
+        "en": { "$ref": "#/$defs/shortText" }
+      },
+      "if": { "properties": { "kind": { "const": "MILESTONE" } } },
+      "then": { "required": ["milestone"] },
+      "else": { "not": { "required": ["milestone"] } }
+    },
+    "greetings": {
+      "$ref": "#/$defs/file",
+      "properties": { "items": { "items": { "$ref": "#/$defs/greetingItem" } } }
+    },
+
+    "emptyStateText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "action"],
+      "properties": {
+        "text": { "$ref": "#/$defs/text", "maxLength": 140 },
+        "action": { "$ref": "#/$defs/text", "maxLength": 32 }
+      }
+    },
+    "emptyStateItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "mn", "en"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^S-[0-9]{2,3}$" },
+        "mn": { "$ref": "#/$defs/emptyStateText" },
+        "en": { "$ref": "#/$defs/emptyStateText" }
+      }
+    },
+    "emptyStates": {
+      "$ref": "#/$defs/file",
+      "properties": { "items": { "items": { "$ref": "#/$defs/emptyStateItem" } } }
+    },
+
+    "firstWeekItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "day", "mn", "en"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^fw-[1-7]$" },
+        "day": { "type": "integer", "minimum": 1, "maximum": 7 },
+        "mn": { "$ref": "#/$defs/titleBody" },
+        "en": { "$ref": "#/$defs/titleBody" }
+      }
+    },
+    "firstWeek": {
+      "$ref": "#/$defs/file",
+      "properties": { "items": { "minItems": 7, "maxItems": 7, "items": { "$ref": "#/$defs/firstWeekItem" } } }
+    },
+
+    "onboardingItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "mn", "en"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^ob-[0-9]+$" },
+        "mn": { "$ref": "#/$defs/titleBody" },
+        "en": { "$ref": "#/$defs/titleBody" }
+      }
+    },
+    "onboarding": {
+      "$ref": "#/$defs/file",
+      "properties": { "items": { "minItems": 3, "maxItems": 4, "items": { "$ref": "#/$defs/onboardingItem" } } }
+    },
+
+    "errorItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "mn", "en"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "mn": { "$ref": "#/$defs/text", "maxLength": 200 },
+        "en": { "$ref": "#/$defs/text", "maxLength": 200 }
+      }
+    },
+    "errors": {
+      "$ref": "#/$defs/file",
+      "properties": { "items": { "items": { "$ref": "#/$defs/errorItem" } } }
+    }
+  }
+}
