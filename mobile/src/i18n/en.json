@@ -540,5 +540,270 @@
     "body": "Your shared storage is full, so new photos and videos cannot be saved right now.",
     "hint": "Empty the trash or delete videos you no longer need to free up space.",
     "trash": "Go to trash"
+  },
+  "memories": {
+    "capture": "Capture a moment",
+    "count_one": "{{count}} memory",
+    "count_other": "{{count}} memories",
+    "counter": "{{length}} / {{max}}",
+    "views": {
+      "timeline": "Timeline",
+      "map": "Map",
+      "recap": "Recap"
+    },
+    "filters": {
+      "shared": "Shared",
+      "private": "Private",
+      "favorite": "Favorites",
+      "hasLocation": "With a place"
+    },
+    "timeline": {
+      "month_one": "{{month}} {{year}} · {{count}} memory",
+      "month_other": "{{month}} {{year}} · {{count}} memories"
+    },
+    "card": {
+      "by": "Added by {{name}}",
+      "private": "Private",
+      "uploading": "Uploading…",
+      "favorite": "Favorite",
+      "comments_one": "{{count}} comment",
+      "comments_other": "{{count}} comments"
+    },
+    "places": {
+      "title": "Places list",
+      "note": "The map is coming soon — for now, here are the places you've been, with how many memories each.",
+      "empty": "No memories with a place yet. Add a place when you save your next memory.",
+      "emptyAction": "Add a memory"
+    },
+    "recaps": {
+      "empty": "On your anniversary we'll put together a recap of that year's memories for you two.",
+      "emptyAction": "Add a memory"
+    },
+    "detail": {
+      "title": "Memory",
+      "privateNote": "Only you can see this — a private memory you haven't shared.",
+      "favorite": "Add to favorites",
+      "unfavorite": "Remove from favorites",
+      "edit": "Edit",
+      "delete": "Delete",
+      "tagA11y": "Search for {{tag}}",
+      "groupA11y": "Open the {{name}} album"
+    },
+    "media": {
+      "processing": "Processing…",
+      "failed": "We couldn't process this file.",
+      "alt": "{{title}} — {{index}} of {{total}}",
+      "position": "{{index}} / {{total}}",
+      "fullscreen": "View full screen",
+      "openHint": "Tap to zoom in",
+      "save": "Save",
+      "saved": "The save sheet is open."
+    },
+    "perspective": {
+      "title": "Two perspectives",
+      "mine": "My perspective",
+      "partners": "{{name}}'s perspective",
+      "mineEmpty": "Write down how you remember this moment.",
+      "partnerEmpty": "{{name}} hasn't written their side yet.",
+      "placeholder": "How do you remember this moment?",
+      "write": "Write my side",
+      "edit": "Edit my side",
+      "remove": "Remove"
+    },
+    "reactions": {
+      "LOVE": "Love",
+      "ADORE": "Adore",
+      "HEART_EYES": "Heart eyes",
+      "KISS": "Kiss",
+      "HUG": "Hug",
+      "SPARKLE": "Sparkle",
+      "add": "Leave a heart",
+      "remove": "Remove my reaction",
+      "more": "Choose another reaction",
+      "hint": "Long-press to pick from 6 reactions",
+      "count_one": "{{reaction}}: {{count}}",
+      "count_other": "{{reaction}}: {{count}}"
+    },
+    "comments": {
+      "title": "Comments",
+      "empty": "Be the first to leave a comment.",
+      "label": "Write a comment",
+      "placeholder": "What does this moment bring back?",
+      "send": "Send",
+      "pending": "Sending…",
+      "edit": "Edit",
+      "editLabel": "Edit your comment",
+      "edited": "edited",
+      "delete": "Delete",
+      "deleteTitle": "Delete your comment?"
+    },
+    "delete": {
+      "title": "Delete this memory?",
+      "body": "It stays in the trash for 30 days — you can restore it until then.",
+      "partnerComments_one": "{{owner}} {{count}} comment will be deleted too",
+      "partnerComments_other": "{{owner}} {{count}} comments will be deleted too",
+      "confirm": "Delete"
+    },
+    "conflict": {
+      "title": "This memory was just changed somewhere else",
+      "titleBy": "{{name}} just changed this memory",
+      "body": "Choose which version to keep — the one you pick is saved.",
+      "mine": "My version",
+      "theirs": "Their version",
+      "keepMine": "My version",
+      "keepTheirs": "Their version"
+    },
+    "editor": {
+      "newTitle": "New memory",
+      "editTitle": "Edit memory",
+      "mediaTitle": "Photos & videos",
+      "limits": "Up to {{max}} photos and videos per memory. Videos up to 60 seconds and 200 MB. Photos are resized and their location data removed before upload.",
+      "count": "{{count}} / {{max}} files",
+      "pick": "Choose photos & videos",
+      "camera": "Take a photo",
+      "photo": "Photo {{index}}",
+      "video": "Video {{index}}",
+      "uploaded": "Uploaded",
+      "waiting": "Waiting to upload",
+      "progress": "Uploading… {{percent}}%",
+      "progressA11y": "{{name}}: {{percent}}% uploaded",
+      "uploadFailed": "This file didn't upload. Remove it and try adding it again.",
+      "sourceMissing": "We couldn't find this file. Please choose it again.",
+      "someFailed": "Some files didn't upload — remove them and save again.",
+      "removeMedia": "Remove {{name}}",
+      "altLabel": "Photo description (for screen readers)",
+      "altPlaceholder": "For example: The two of us laughing by the lake",
+      "needMedia": "Add at least one photo or video.",
+      "reject": {
+        "TOO_MANY": "{{name}} wasn't added — a memory holds up to {{max}} files.",
+        "VIDEO_TOO_LONG": "{{name}}: the video is longer than 60 seconds. Pick a shorter clip.",
+        "VIDEO_TOO_LARGE": "{{name}}: the video is larger than 200 MB.",
+        "TYPE": "{{name}}: that's not a photo or video."
+      },
+      "detailsTitle": "Details",
+      "title": "Title",
+      "titlePlaceholder": "For example: Our first trip",
+      "titleRequired": "Give this moment a name.",
+      "date": "Date",
+      "datePlaceholder": "YYYY-MM-DD",
+      "dateInvalid": "Write the date like 2026-11-07.",
+      "fromPhoto": "From the photo",
+      "description": "Description",
+      "descriptionPlaceholder": "What happened that day?",
+      "locationTitle": "Place",
+      "placeName": "Place name",
+      "placePlaceholder": "For example: Hustai National Park",
+      "lat": "Latitude",
+      "lon": "Longitude",
+      "locationHint": "If the photo has a location, it fills in by itself. Otherwise enter a place name, latitude and longitude.",
+      "locationInvalid": "A place needs a name and a valid latitude (−90…90) and longitude (−180…180).",
+      "clearLocation": "Clear place",
+      "tagsTitle": "Tags",
+      "tag": "Tag",
+      "tagPlaceholder": "For example: trip",
+      "addTag": "Add",
+      "addTagA11y": "Add the {{tag}} tag",
+      "removeTag": "Remove the {{tag}} tag",
+      "groupsTitle": "Albums",
+      "groupsHint": "A memory can be in more than one album.",
+      "uploading": "Uploading files…",
+      "offline": "You're offline. What you wrote is saved as a draft — files upload once you're back online.",
+      "queued": "Your memory will be saved once you're back online.",
+      "discard": "Discard draft",
+      "discardTitle": "Discard this draft?",
+      "discardBody": "What you wrote and the files you chose will be removed.",
+      "draftNote": "Even if you leave this page, what you wrote stays in your draft."
+    },
+    "search": {
+      "title": "Search",
+      "open": "Search memories",
+      "placeholder": "Search memories…",
+      "q": "Search words",
+      "from": "From",
+      "to": "To",
+      "place": "Place",
+      "author": "Added by",
+      "anyone": "Both of us",
+      "me": "Me",
+      "tag": "Tag",
+      "group": "Album",
+      "clear": "Clear filters",
+      "hint": "Type a word or pick a filter and matching memories will show up here.",
+      "offline": "Search needs the internet. Try again once you're online."
+    },
+    "groups": {
+      "title": "Albums",
+      "new": "New album",
+      "newLabel": "Album name",
+      "newPlaceholder": "For example: Our first trip",
+      "create": "Create",
+      "rename": "Rename",
+      "delete": "Delete album",
+      "deleteTitle": "Delete the “{{name}}” album?",
+      "deleteBody_one": "Only the album is deleted — the {{count}} memory in it stays.",
+      "deleteBody_other": "Only the album is deleted — the {{count}} memories in it stay.",
+      "emptyGroup": "No memories in this album yet. Pick it when you add or edit a memory.",
+      "takeOut": "Remove from album",
+      "offline": "Creating an album needs the internet."
+    },
+    "favorites": {
+      "title": "Favorites"
+    },
+    "trash": {
+      "title": "Trash",
+      "note": "Deleted memories stay here for 30 days, then they're gone for good.",
+      "daysLeft_one": "Deleted for good in {{count}} day",
+      "daysLeft_other": "Deleted for good in {{count}} days",
+      "today": "Deleted for good today",
+      "restore": "Restore",
+      "restored": "“{{title}}” is back.",
+      "purge": "Delete for good",
+      "purgeTitle": "Delete for good?",
+      "purgeBody": "“{{title}}”, its photos and comments can't be brought back."
+    },
+    "export": {
+      "title": "Export",
+      "kind": "What should we prepare?",
+      "kinds": {
+        "BOOK_PDF": "PDF book",
+        "ALBUM_ZIP": "Photo album (ZIP)",
+        "FULL": "All data"
+      },
+      "pdfNote": "A book with a page for each month and every photo with its description.",
+      "zipNote": "An archive of the original photos and videos, named by date and title.",
+      "scope": "What to include",
+      "scopes": {
+        "all": "All memories",
+        "group": "An album",
+        "range": "Between dates"
+      },
+      "noGroups": "No albums yet. Create one first.",
+      "start": "Start preparing",
+      "started": "We've started. You'll get a notification when it's ready.",
+      "busy": "One export is being prepared. Start the next one when it's done.",
+      "history": "Previous exports",
+      "none": "No exports yet.",
+      "status": {
+        "QUEUED": "Queued",
+        "RUNNING": "Preparing…",
+        "READY": "Ready",
+        "FAILED": "Failed",
+        "EXPIRED": "Expired"
+      },
+      "expires": "Available to download until {{date}}",
+      "download": "Download",
+      "failedHint": "We couldn't prepare it. Try starting it again.",
+      "offline": "Export needs the internet. Try again once you're online."
+    },
+    "recap": {
+      "position": "Slide {{index}} of {{total}}",
+      "pause": "Pause",
+      "play": "Resume",
+      "prev": "Previous slide",
+      "next": "Next slide",
+      "openMemory": "Open this memory",
+      "done": "Finish",
+      "thanks": "Thank you for every day you've made together."
+    }
   }
 }

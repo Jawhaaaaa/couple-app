@@ -41,7 +41,7 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Aura uses the camera to scan your partner's invite QR code.",
+          "cameraPermission": "Aura uses the camera to scan your partner's invite QR code and to capture photos for your memories.",
           "microphonePermission": false,
           "recordAudioAndroid": false
         }
@@ -49,11 +49,13 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Aura uses your photo library so you can choose a profile photo.",
-          "cameraPermission": false,
+          "photosPermission": "Aura uses your photo library so you can choose a profile photo and add photos and videos to your memories.",
+          "cameraPermission": "Aura uses the camera to scan your partner's invite QR code and to capture photos for your memories.",
           "microphonePermission": false
         }
-      ]
+      ],
+      "expo-video",
+      "expo-sharing"
     ],
     "experiments": {
       "typedRoutes": true,

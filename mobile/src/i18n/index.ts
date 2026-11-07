@@ -30,3 +30,4 @@ export function useT() {
 export { i18n };
 export * from './calendarDate';
 export * from './format';
+export * from './possessive';

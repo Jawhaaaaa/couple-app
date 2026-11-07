@@ -180,7 +180,7 @@ export function RecentMemoriesSection({ items }: { items: MemorySummary[] }) {
           return (
             <Pressable
               key={m.id}
-              onPress={() => router.push('/memories')}
+              onPress={() => router.push(`/memories/${m.id}`)}
               accessibilityRole="link"
               accessibilityLabel={`${m.title}. ${formatDate(m.occurredOn, dateFormat)}`}
               testID="home-memory"
@@ -245,7 +245,7 @@ export function RecapSection({ data }: { data: Dashboard['recap'] }) {
   if (!data) return null;
   return (
     <Section name="recap" title={t('home.recap.title')}>
-      <LinkRow icon={Sparkles} label={t('home.recap.label', { year: data.yearLabel })} href="/memories" testID="home-recap" />
+      <LinkRow icon={Sparkles} label={t('home.recap.label', { year: data.yearLabel })} href={`/recap/${data.id}`} testID="home-recap" />
     </Section>
   );
 }

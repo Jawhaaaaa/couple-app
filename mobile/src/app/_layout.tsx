@@ -101,6 +101,10 @@ function ThemedStack() {
             name="storage-full"
             options={{ presentation: 'formSheet', sheetAllowedDetents: [0.6, 1], sheetGrabberVisible: true, sheetCornerRadius: 24 }}
           />
+          {/* S-32 дурсамж нэмэх/засах (modal), S-33 медиа үзэгч ба S-38 жилийн хураангуй (fullScreenModal) */}
+          <Stack.Screen name="memory-editor" options={{ presentation: 'modal' }} />
+          <Stack.Screen name="media/[id]" options={{ presentation: 'fullScreenModal', animation: 'fade' }} />
+          <Stack.Screen name="recap/[id]" options={{ presentation: 'fullScreenModal', animation: 'fade' }} />
         </Stack>
         <TimezonePrompt />
         {/* Хамтрагчийн зүрх/тэврэлт аль ч дэлгэц дээр (ANIM-02, AC-17) */}
