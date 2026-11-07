@@ -40,6 +40,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class SecurityConfig {
 
     static final String TEST_PATHS = "/api/v1/test/**";
+    static final String AUTH_PATH_PREFIX = "/api/v1/auth/";
+    static final String LOGOUT_PATH = "/api/v1/auth/logout";
     static final String[] PUBLIC_PATHS = {
             "/actuator/health/**",
             "/actuator/prometheus",
@@ -116,11 +118,23 @@ public class SecurityConfig {
                     result.ifPresent(a -> SecurityContextHolder.getContext().setAuthentication(a));
                 } catch (AuthenticationException ex) {
                     SecurityContextHolder.clearContext();
-                    entryPoint.commence(request, response, ex);
-                    return;
+                    if (!ignoresBearerFailure(request)) {
+                        entryPoint.commence(request, response, ex);
+                        return;
+                    }
                 }
             }
             chain.doFilter(request, response);
+        }
+
+        /**
+         * Нийтийн auth замууд (`/auth/refresh`, `/auth/login` …) хугацаа дууссан access-тэй хүсэлтийг
+         * анонимоор хүлээн авна — client бүх хүсэлтэд Bearer хавсаргасан ч refresh ажиллана.
+         * `/auth/logout` нь session-ээ таних ёстой тул хамаарахгүй.
+         */
+        static boolean ignoresBearerFailure(HttpServletRequest request) {
+            String path = request.getRequestURI().substring(request.getContextPath().length());
+            return path.startsWith(AUTH_PATH_PREFIX) && !path.equals(LOGOUT_PATH);
         }
     }
 }
