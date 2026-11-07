@@ -1,12 +1,14 @@
 import { StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/AppText';
+import { useT } from '@/i18n';
 import { spacing } from '@/theme/tokens';
 
 export default function Index() {
+  const t = useT();
   return (
     <View style={styles.root}>
-      <AppText variant="display">Aura</AppText>
+      <AppText variant="display">{t('app.name')}</AppText>
     </View>
   );
 }

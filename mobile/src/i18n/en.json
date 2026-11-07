@@ -1,0 +1,80 @@
+{
+  "app": {
+    "name": "Aura",
+    "tagline": "A warm little space for the two of you"
+  },
+  "common": {
+    "retry": "Try again",
+    "cancel": "Cancel",
+    "save": "Save",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "skip": "Skip",
+    "done": "Done",
+    "ok": "OK",
+    "loading": "Loading…",
+    "stillLoading": "Bubble and Bumble are waiting with you…",
+    "openSettings": "Open settings",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "tabs": {
+    "home": "Home",
+    "memories": "Memories",
+    "chat": "Chat",
+    "plans": "Plans",
+    "together": "Together"
+  },
+  "states": {
+    "offline": "You're offline — showing what's saved. Anything you write will be sent once you reconnect.",
+    "errorTitle": "Couldn't load this",
+    "errorBody": "Something went wrong. Please try again.",
+    "serverUnreachableTitle": "Can't reach the server",
+    "serverUnreachableBody": "Check your connection and try again. Your data is safe.",
+    "permissionTitle": "Permission needed",
+    "permission": {
+      "camera": "Camera access is needed to take a photo.",
+      "photos": "Photo library access is needed to pick photos.",
+      "location": "Location access is needed to tag a place.",
+      "microphone": "Microphone access is needed to record a voice message.",
+      "notifications": "Notifications let you know when a heart or message arrives.",
+      "calendar": "Calendar access is needed to add the date to your calendar."
+    },
+    "updateRequiredTitle": "Update required",
+    "storageFullTitle": "Storage is full"
+  },
+  "theme": {
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System",
+    "palette": {
+      "CORAL": "Coral",
+      "LAVENDER": "Lavender",
+      "FOREST": "Forest",
+      "OCEAN": "Ocean"
+    }
+  },
+  "animation": {
+    "ALL": "All",
+    "REDUCED": "Reduced",
+    "OFF": "Off"
+  },
+  "dateFormat": {
+    "YMD_DOT": "2026.11.07",
+    "DMY_SLASH": "07/11/2026",
+    "MDY_SLASH": "11/07/2026"
+  },
+  "language": {
+    "mn": "Монгол",
+    "en": "English"
+  },
+  "a11y": {
+    "notificationsBell": "Notifications",
+    "unreadCount_one": "{{count}} unread",
+    "unreadCount_other": "{{count}} unread",
+    "avatar": "Profile and settings",
+    "mascot": "Mascots Bubble and Bumble"
+  }
+}

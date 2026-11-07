@@ -4,6 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 
+import '@/i18n';
 import { ThemeProvider, useTheme } from '@/theme/ThemeProvider';
 import { fontAssets } from '@/theme/typography';
 
