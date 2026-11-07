@@ -106,6 +106,11 @@ public class MediaStorageService implements DisposableBean {
                 RequestBody.fromBytes(bytes));
     }
 
+    /** Том файл (экспортын ZIP) — санах ойд ачаалахгүй. */
+    public void putFile(String key, java.nio.file.Path file, String contentType) {
+        s3.putObject(b -> b.bucket(bucket).key(key).contentType(contentType), RequestBody.fromFile(file));
+    }
+
     public byte[] get(String key) {
         ResponseBytes<GetObjectResponse> bytes = s3.getObjectAsBytes(b -> b.bucket(bucket).key(key));
         return bytes.asByteArray();

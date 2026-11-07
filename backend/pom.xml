@@ -34,6 +34,8 @@
     <openapi-generator.version>7.27.0</openapi-generator.version>
     <!-- Argon2id (spring-security-crypto-ийн Argon2PasswordEncoder) — DD-AURA-030 -->
     <bouncycastle.version>1.81</bouncycastle.version>
+    <!-- Серверийн PDF ном (DD-AURA-024, SD-05) — PDFBox 3 -->
+    <openhtmltopdf.version>1.1.110</openhtmltopdf.version>
   </properties>
 
   <dependencyManagement>
@@ -166,6 +168,13 @@
       <groupId>com.drewnoakes</groupId>
       <artifactId>metadata-extractor</artifactId>
       <version>${metadata-extractor.version}</version>
+    </dependency>
+
+    <!-- PDF ном (T-42, DD-AURA-024) -->
+    <dependency>
+      <groupId>io.github.openhtmltopdf</groupId>
+      <artifactId>openhtmltopdf-pdfbox</artifactId>
+      <version>${openhtmltopdf.version}</version>
     </dependency>
 
     <!-- Гэрээнээс үүссэн интерфейсийн хамаарал (DD-AURA-002) -->
