@@ -80,6 +80,14 @@ public class StorageQuota {
         return usageOf(updated.get(0));
     }
 
+    /**
+     * Нөөцөлсөн хэмжээг бодит хадгалсан хэмжээгээр засна (жишээ нь зураг дахин кодлогдож багассан) —
+     * квот шалгахгүй: файл аль хэдийн хадгалагдсан, хэрэглэгчийн оруулсныг алдахгүй (INV-07).
+     */
+    public void adjust(UUID spaceId, long deltaBytes) {
+        jdbc.update("UPDATE space SET storage_bytes = GREATEST(0, storage_bytes + ?) WHERE id = ?", deltaBytes, spaceId);
+    }
+
     private Usage usageOf(long used) {
         return new Usage(used, quotaBytes, used >= (long) Math.ceil(quotaBytes * warnRatio));
     }

@@ -19,6 +19,7 @@ import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.S3Configuration;
+import software.amazon.awssdk.services.s3.model.CompletedPart;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 import software.amazon.awssdk.services.s3.model.ListObjectsV2Request;
 import software.amazon.awssdk.services.s3.model.ListObjectsV2Response;
@@ -138,6 +139,35 @@ public class MediaStorageService implements DisposableBean {
             token = Boolean.TRUE.equals(page.isTruncated()) ? page.nextContinuationToken() : null;
         } while (token != null);
         return deleted;
+    }
+
+    /** Resumable upload-ын S3 multipart эхлэл (DD-AURA-012) — S3-ийн upload ID. */
+    public String createMultipart(String key, String contentType) {
+        return s3.createMultipartUpload(b -> b.bucket(bucket).key(key).contentType(contentType)).uploadId();
+    }
+
+    /** Нэг хэсэг (part дугаар 1-ээс) — ETag буцаана. Сүүлийнхээс бусад нь ≥ 5 MiB байна (S3). */
+    public String uploadPart(String key, String uploadId, int partNumber, byte[] bytes) {
+        return s3.uploadPart(b -> b.bucket(bucket).key(key).uploadId(uploadId).partNumber(partNumber)
+                .contentLength((long) bytes.length), RequestBody.fromBytes(bytes)).eTag();
+    }
+
+    /** `etags` нь part 1, 2, … дарааллаар. */
+    public void completeMultipart(String key, String uploadId, List<String> etags) {
+        List<CompletedPart> parts = new ArrayList<>();
+        for (int i = 0; i < etags.size(); i++) {
+            parts.add(CompletedPart.builder().partNumber(i + 1).eTag(etags.get(i)).build());
+        }
+        s3.completeMultipartUpload(b -> b.bucket(bucket).key(key).uploadId(uploadId)
+                .multipartUpload(m -> m.parts(parts)));
+    }
+
+    public void abortMultipart(String key, String uploadId) {
+        s3.abortMultipartUpload(b -> b.bucket(bucket).key(key).uploadId(uploadId));
+    }
+
+    public long size(String key) {
+        return s3.headObject(b -> b.bucket(bucket).key(key)).contentLength();
     }
 
     /** Анхдагч хугацаатай (`aura.s3.presign-ttl`, 15 мин) presigned GET. */
