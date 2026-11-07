@@ -1,6 +1,7 @@
 package mn.aura.couple.auth.api;
 
 import java.util.List;
+import java.util.UUID;
 import mn.aura.couple.api.MeApi;
 import mn.aura.couple.api.model.AccountDeletionRequest;
 import mn.aura.couple.api.model.AccountDeletionResult;
@@ -18,6 +19,8 @@ import mn.aura.couple.api.model.ProfileUpdate;
 import mn.aura.couple.api.model.SurveyAnswer;
 import mn.aura.couple.api.model.SurveyPrompt;
 import mn.aura.couple.api.model.TaskStatusRequest;
+import mn.aura.couple.account.app.PreferenceService;
+import mn.aura.couple.account.app.ProfileService;
 import mn.aura.couple.auth.app.EmailChangeService;
 import mn.aura.couple.auth.app.MeAssembler;
 import mn.aura.couple.auth.app.PasswordChangeService;
@@ -44,13 +47,17 @@ public class MeController implements MeApi {
     private final PasswordChangeService passwordChange;
     private final EmailChangeService emailChange;
     private final PolicyAcceptanceService policy;
+    private final ProfileService profile;
+    private final PreferenceService preferences;
 
     public MeController(MeAssembler me, PasswordChangeService passwordChange, EmailChangeService emailChange,
-                        PolicyAcceptanceService policy) {
+                        PolicyAcceptanceService policy, ProfileService profile, PreferenceService preferences) {
         this.me = me;
         this.passwordChange = passwordChange;
         this.emailChange = emailChange;
         this.policy = policy;
+        this.profile = profile;
+        this.preferences = preferences;
     }
 
     @Override
@@ -88,22 +95,26 @@ public class MeController implements MeApi {
 
     @Override
     public ResponseEntity<Me> updateMe(ProfileUpdate body) {
-        throw notYet();
+        UUID userId = current().userId();
+        profile.update(userId, body);
+        return ResponseEntity.ok(me.load(userId));
     }
 
     @Override
     public ResponseEntity<Me> setAvatar(AvatarRequest body) {
-        throw notYet();
+        UUID userId = current().userId();
+        profile.setAvatar(userId, body.getMediaId());
+        return ResponseEntity.ok(me.load(userId));
     }
 
     @Override
     public ResponseEntity<Preferences> getPreferences() {
-        throw notYet();
+        return ResponseEntity.ok(preferences.get(current().userId()));
     }
 
     @Override
     public ResponseEntity<Preferences> updatePreferences(PreferencesUpdate body) {
-        throw notYet();
+        return ResponseEntity.ok(preferences.update(current().userId(), body));
     }
 
     @Override

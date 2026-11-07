@@ -12,13 +12,13 @@ import mn.aura.couple.api.model.SpaceStatus;
 import mn.aura.couple.api.model.SpaceSummary;
 import mn.aura.couple.common.ApiException;
 import mn.aura.couple.common.config.AuraProperties;
+import mn.aura.couple.media.app.MediaRefs;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 /**
  * Гэрээний `Me` (TokenResponse.user, GET /me). Идэвхтэй space: COUPLE байвал түүнийг, үгүй бол SOLO
  * (`SpaceAccessGuard`-тай ижил дүрэм). `policyUpdateRequired` = зөвшөөрсөн хувилбар ≠ `aura.policy.version` (AC-63).
- * Аватар (`MediaRef`) T-26-д нэмэгдэнэ.
  */
 @Component
 public class MeAssembler {
@@ -26,7 +26,7 @@ public class MeAssembler {
     private static final String SQL = """
             SELECT u.id, u.email, u.display_name, u.call_name, u.birth_date, u.timezone, u.locale,
                    u.city_name, u.city_lat, u.city_lon, u.country_code, u.email_verified_at, u.policy_version,
-                   u.online_visible, u.typing_visible, sp.id AS space_id, sp.kind AS space_kind, sp.status AS space_status
+                   u.online_visible, u.typing_visible, u.avatar_media_id, sp.id AS space_id, sp.kind AS space_kind, sp.status AS space_status
               FROM users u
               LEFT JOIN LATERAL (
                     SELECT s.id, s.kind, s.status
@@ -39,9 +39,11 @@ public class MeAssembler {
 
     private final JdbcTemplate jdbc;
     private final String currentPolicy;
+    private final MediaRefs media;
 
-    public MeAssembler(JdbcTemplate jdbc, AuraProperties properties) {
+    public MeAssembler(JdbcTemplate jdbc, AuraProperties properties, MediaRefs media) {
         this.jdbc = jdbc;
+        this.media = media;
         this.currentPolicy = properties.policy().version();
     }
 
@@ -68,6 +70,7 @@ public class MeAssembler {
                     rs.getBoolean("typing_visible"),
                     space);
             me.callName(rs.getString("call_name"));
+            me.avatar(media.nullable(rs.getObject("avatar_media_id", UUID.class)));
             String cityName = rs.getString("city_name");
             if (cityName != null) {
                 BigDecimal lat = rs.getBigDecimal("city_lat");
