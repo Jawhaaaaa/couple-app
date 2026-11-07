@@ -81,6 +81,8 @@ services:
       AURA_CORS_ALLOWED_ORIGINS: ${AURA_CORS_ALLOWED_ORIGINS:-http://localhost:8090}
       AURA_COOKIE_SECURE: ${AURA_COOKIE_SECURE:-false}
       AURA_SENTRY_DSN: ${AURA_SENTRY_DSN:-}
+      AURA_WEATHER_BASE_URL: ${AURA_WEATHER_BASE_URL:-https://api.open-meteo.com}
+      AURA_GEOCODING_BASE_URL: ${AURA_GEOCODING_BASE_URL:-https://geocoding-api.open-meteo.com}
     depends_on:
       postgres:
         condition: service_healthy

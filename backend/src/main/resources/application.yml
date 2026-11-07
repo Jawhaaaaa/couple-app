@@ -121,3 +121,8 @@ aura:
     vapid-private-key: ${AURA_VAPID_PRIVATE_KEY:}
     vapid-subject: ${AURA_VAPID_SUBJECT:mailto:admin@aura.local}
     expo-access-token: ${AURA_EXPO_PUSH_ACCESS_TOKEN:}
+  # Цаг агаар ба geocoding — Open-Meteo (§8.4, CC BY 4.0). E2E-д e2e/mocks/openMeteo.ts
+  weather:
+    base-url: ${AURA_WEATHER_BASE_URL:https://api.open-meteo.com}
+    geocoding-base-url: ${AURA_GEOCODING_BASE_URL:https://geocoding-api.open-meteo.com}
+    cache-ttl: 30m

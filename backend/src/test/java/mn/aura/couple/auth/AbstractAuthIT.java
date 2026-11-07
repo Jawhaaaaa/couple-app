@@ -16,6 +16,7 @@ import mn.aura.couple.common.config.AuraProperties;
 import mn.aura.couple.common.mail.MailCapture;
 import mn.aura.couple.common.mail.MailMessage;
 import mn.aura.couple.common.time.MutableClock;
+import mn.aura.couple.weather.OpenMeteoStub;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -31,6 +32,8 @@ import org.springframework.test.context.DynamicPropertySource;
 public abstract class AbstractAuthIT extends AbstractIntegrationTest {
 
     protected static final StubOAuthIdp IDP = StubOAuthIdp.start();
+    /** Цаг агаар ба geocoding (T-28) — бүх IT нэг stub хуваалцана. */
+    protected static final OpenMeteoStub METEO = OpenMeteoStub.start();
     protected static final ObjectMapper MAPPER = new ObjectMapper();
     protected static final String PASSWORD = "Saran-Tsetseg-2026";
 
@@ -53,6 +56,8 @@ public abstract class AbstractAuthIT extends AbstractIntegrationTest {
         registry.add("aura.oauth.google.issuer", IDP::issuer);
         registry.add("aura.oauth.google.id-token-alg", () -> "HS256");
         registry.add("aura.web.base-url", () -> "http://localhost:8090");
+        registry.add("aura.weather.base-url", METEO::url);
+        registry.add("aura.weather.geocoding-base-url", METEO::url);
     }
 
     @AfterEach
