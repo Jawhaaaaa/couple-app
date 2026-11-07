@@ -985,3 +985,4 @@ Mobile build хувьсагч: `EXPO_PUBLIC_API_URL`, `EXPO_PUBLIC_WS_URL`, `EXP
 - Эрсдэл: SeaweedFS-ийн presigned URL утсанд хүрэхийн тулд `AURA_S3_PUBLIC_ENDPOINT` LAN IP-тай байх ёстой (GAP-10); prod-д Caddy `/media/*` → seaweedfs proxy.
 - Эрсдэл: `expo-screen-capture` (Android FLAG_SECURE, iOS мэдэгдэл) Expo Go-д байгаа эсэхийг T-15 `bundledNativeModules.json`-оор батална; байхгүй бол `isExpoGo` хамгаалалттай (RSK-AURA-002).
 - Эрсдэл: iOS PWA-д WebSocket арын төлөвт тасардаг — нээгдэхэд дахин холбогдож query invalidate (DD-AURA-008); арын үед push л.
+- Нээлттэй: Лаванда, Ой, Далай палитрын hex утгыг E1 өгөөгүй. T-05 нь AC-DS-01-ийн шалгуурыг хангах утгыг `tokens.ts`-д тогтооно; `lld.html` дахь эдгээр сэдвийн дээж зөвхөн дүрслэл.
