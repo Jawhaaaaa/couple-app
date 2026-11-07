@@ -100,7 +100,11 @@ public final class StompTestClient implements AutoCloseable {
     @Override
     public void close() {
         if (session.isConnected()) {
-            session.disconnect();
+            try {
+                session.disconnect();
+            } catch (org.springframework.messaging.MessageDeliveryException e) {
+                // ERROR frame-ийн дараа сервер холболтыг аль хэдийн хаасан — хаах зүйл үлдээгүй
+            }
         }
     }
 

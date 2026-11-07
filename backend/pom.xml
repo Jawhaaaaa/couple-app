@@ -286,6 +286,8 @@
                 <documentationProvider>none</documentationProvider>
                 <annotationLibrary>none</annotationLibrary>
                 <skipDefaultInterface>true</skipDefaultInterface>
+                <!-- PATCH-ийн байхгүй жагсаалт null хэвээр (хоосон list-ээр minItems зөрчигдөхгүй) -->
+                <containerDefaultToNull>true</containerDefaultToNull>
                 <dateLibrary>java8</dateLibrary>
                 <sourceFolder>src/main/java</sourceFolder>
               </configOptions>
