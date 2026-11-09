@@ -10,7 +10,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Controller;
 
 /**
- * Client → сервер STOMP (asyncapi `typing`, `presence`). `chat.delivered` — `ChatMessageService` (T-43).
+ * Client → сервер STOMP (asyncapi `typing`, `presence`). `chat.delivered` — `chat.api.ChatDeliveryController` (T-43).
  */
 @Controller
 public class RealtimeController {
