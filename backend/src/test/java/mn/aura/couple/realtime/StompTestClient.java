@@ -89,6 +89,14 @@ public final class StompTestClient implements AutoCloseable {
         }
     }
 
+    /** `millis` хугацаанд ирсэн бүх үйл явдал (нууц агуулга WS-ээр гараагүйг шалгахад). */
+    public java.util.List<JsonNode> drain(long millis) throws InterruptedException {
+        Thread.sleep(millis);
+        java.util.List<JsonNode> out = new java.util.ArrayList<>();
+        events.drainTo(out);
+        return out;
+    }
+
     public String nextError(long millis) throws InterruptedException {
         return errors.poll(millis, TimeUnit.MILLISECONDS);
     }

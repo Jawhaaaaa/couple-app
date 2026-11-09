@@ -19,6 +19,7 @@ import mn.aura.couple.api.model.ProfileUpdate;
 import mn.aura.couple.api.model.SurveyAnswer;
 import mn.aura.couple.api.model.SurveyPrompt;
 import mn.aura.couple.api.model.TaskStatusRequest;
+import mn.aura.couple.account.app.CelebrationSeenService;
 import mn.aura.couple.account.app.PreferenceService;
 import mn.aura.couple.account.app.ProfileService;
 import mn.aura.couple.auth.app.EmailChangeService;
@@ -49,15 +50,18 @@ public class MeController implements MeApi {
     private final PolicyAcceptanceService policy;
     private final ProfileService profile;
     private final PreferenceService preferences;
+    private final CelebrationSeenService celebrations;
 
     public MeController(MeAssembler me, PasswordChangeService passwordChange, EmailChangeService emailChange,
-                        PolicyAcceptanceService policy, ProfileService profile, PreferenceService preferences) {
+                        PolicyAcceptanceService policy, ProfileService profile, PreferenceService preferences,
+                        CelebrationSeenService celebrations) {
         this.me = me;
         this.passwordChange = passwordChange;
         this.emailChange = emailChange;
         this.policy = policy;
         this.profile = profile;
         this.preferences = preferences;
+        this.celebrations = celebrations;
     }
 
     @Override
@@ -134,12 +138,13 @@ public class MeController implements MeApi {
 
     @Override
     public ResponseEntity<List<Celebration>> listCelebrations() {
-        throw notYet();
+        return ResponseEntity.ok(celebrations.unseen(current().userId()));
     }
 
     @Override
     public ResponseEntity<Void> markCelebrationSeen(String eventKey) {
-        throw notYet();
+        celebrations.markSeen(current().userId(), eventKey);
+        return ResponseEntity.noContent().build();
     }
 
     @Override
