@@ -14,6 +14,8 @@ import mn.aura.couple.api.model.ReactionInput;
 import mn.aura.couple.api.model.ReactionSummary;
 import mn.aura.couple.api.model.ReadReceipt;
 import mn.aura.couple.chat.app.ChatMessageService;
+import mn.aura.couple.chat.app.ChatSearchService;
+import mn.aura.couple.chat.app.PinService;
 import mn.aura.couple.common.ApiException;
 import mn.aura.couple.common.space.SpaceAccessGuard;
 import org.springframework.http.HttpStatus;
@@ -26,10 +28,14 @@ public class ChatController implements ChatApi {
 
     private final SpaceAccessGuard guard;
     private final ChatMessageService messages;
+    private final ChatSearchService search;
+    private final PinService pins;
 
-    public ChatController(SpaceAccessGuard guard, ChatMessageService messages) {
+    public ChatController(SpaceAccessGuard guard, ChatMessageService messages, ChatSearchService search, PinService pins) {
         this.guard = guard;
         this.messages = messages;
+        this.search = search;
+        this.pins = pins;
     }
 
     @Override
@@ -74,38 +80,34 @@ public class ChatController implements ChatApi {
 
     @Override
     public ResponseEntity<MessageSearchPage> searchMessages(String q, String cursor, Integer limit) {
-        guard.requireCouple();
-        throw ApiException.notFound(); // T-44
+        return ResponseEntity.ok(search.search(guard.requireCouple(), q, cursor, limit));
     }
 
     @Override
     public ResponseEntity<MessagePage> jumpToDate(LocalDate date) {
-        guard.requireCouple();
-        throw ApiException.notFound(); // T-44
+        return ResponseEntity.ok(search.jump(guard.requireCouple(), date));
     }
 
     @Override
     public ResponseEntity<MessagePage> listChatMedia(String kind, String cursor, Integer limit) {
-        guard.requireCouple();
-        throw ApiException.notFound(); // T-44
+        return ResponseEntity.ok(search.media(guard.requireCouple(), kind, cursor, limit));
     }
 
     @Override
     public ResponseEntity<List<Message>> listPinnedMessages() {
-        guard.requireCouple();
-        throw ApiException.notFound(); // T-44
+        return ResponseEntity.ok(pins.pinned(guard.requireCouple()));
     }
 
     @Override
     public ResponseEntity<Void> pinMessage(UUID messageId) {
-        guard.requireWritableCouple();
-        throw ApiException.notFound(); // T-44
+        pins.pin(guard.requireWritableCouple(), messageId);
+        return ResponseEntity.noContent().build();
     }
 
     @Override
     public ResponseEntity<Void> unpinMessage(UUID messageId) {
-        guard.requireWritableCouple();
-        throw ApiException.notFound(); // T-44
+        pins.unpin(guard.requireWritableCouple(), messageId);
+        return ResponseEntity.noContent().build();
     }
 
     // --- Алга болдог мессеж (T-45) ---
