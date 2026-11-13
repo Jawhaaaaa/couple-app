@@ -1066,5 +1066,16 @@
       "failed": "Couldn't save. Please try again."
     },
     "badYear": "No review found for this year."
+  },
+  "devices": {
+    "title": "Active devices",
+    "thisDevice": "this device",
+    "lastUsed": "Last used {{date}} {{time}}",
+    "signOut": "Sign out",
+    "signOutDevice": "Sign out {{name}}",
+    "signOutAll": "Sign out everywhere",
+    "confirmTitle": "Sign out of all devices?",
+    "confirmBody": "Every session, including this one, will be closed. The fastest protection if your phone is lost.",
+    "requirePassword": "Require password to sign in again (remote lock)"
   }
 }
