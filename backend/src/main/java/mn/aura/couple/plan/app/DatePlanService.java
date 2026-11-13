@@ -569,6 +569,12 @@ public class DatePlanService {
         return b.toString();
     }
 
+    /** Болзооны дэлгэрэнгүй (зардал г.м.) өөрчлөгдсөнийг хоёр талд мэдэгдэнэ — `plan.updated`. */
+    @Transactional
+    public void touched(SpaceContext ctx, UUID planId) {
+        publish(ctx, loadById(planId));
+    }
+
     /** Илгээгдсэн сануулгын дараа дараагийн давталтуудыг нөхөж товлох (ReminderScheduler, T-68). */
     @Transactional
     public void refreshReminders(UUID planId) {
@@ -723,9 +729,8 @@ public class DatePlanService {
         List<Expense> expenses = expenses(s.id());
         long actual = expenses.stream().mapToLong(Expense::getAmountMnt).sum();
         Long planned = shown.plannedBudget();
-        BudgetLine budget = new BudgetLine(s.id(), shown.title(), planned, actual,
-                planned == null ? 0L : Math.max(0, actual - planned));
-        budget.startsAt(sum.getStartsAt());
+        BudgetLine budget = BudgetSummaryService.line(
+                new BudgetSummaryService.PlanBudget(s.id(), shown.title(), o.startsAt(), planned), actual);
         long done = checklist.stream().filter(ChecklistItem::getDone).count();
         DatePlan plan = new DatePlan(s.id(), sum.getTitle(), sum.getStartsAt(), sum.getTimezone(), sum.getStatus(),
                 sum.getRecurrence(), new ArrayList<>(s.reminderOffsets()), counterOptions(s.id()), checklist,
