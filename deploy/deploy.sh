@@ -25,7 +25,9 @@ if [ "${SKIP_PULL:-0}" != "1" ]; then
   log "git pull"
   git pull --ff-only
 fi
-log "хувилбар: $(git rev-parse --short HEAD)"
+AURA_COMMIT_SHA="$(git rev-parse --short HEAD)"
+export AURA_COMMIT_SHA   # вэб апп-ын «Тухай» хэсэгт (EXPO_PUBLIC_COMMIT_SHA)
+log "хувилбар: $AURA_COMMIT_SHA"
 
 "${DC[@]}" config -q
 

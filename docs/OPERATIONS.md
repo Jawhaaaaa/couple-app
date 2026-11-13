@@ -71,7 +71,8 @@ docker buildx build --platform linux/arm64 -t aura-backend:arm64 .
 docker buildx build --platform linux/arm64 -t aura-mobile-web:arm64 mobile
 ```
 
-QEMU-гээр удаан (backend 15–30 мин). Image-ийн arm64 дэмжлэг: `deploy/tests/prod-config.test.sh`.
+Backend QEMU-гээр удаан (15–30 мин). Mobile-ийн build stage `--platform=$BUILDPLATFORM` тул
+native хурдаар (export нь статик файл), зөвхөн nginx давхарга arm64. Image-ийн arm64 дэмжлэг: `deploy/tests/prod-config.test.sh`.
 
 ## 4. Лог (OPS-AURA-006)
 

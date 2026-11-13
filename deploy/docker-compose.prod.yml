@@ -161,7 +161,14 @@ services:
     build:
       context: ../mobile
       args:
+        # Bundle-д шигтгэгдэнэ — нууц утга 0 (AC-195). Жагсаалт: mobile/src/config.ts
         EXPO_PUBLIC_API_URL: https://${AURA_DOMAIN}
+        EXPO_PUBLIC_WS_URL: wss://${AURA_DOMAIN}/ws
+        EXPO_PUBLIC_APP_VERSION: ${AURA_APP_LATEST_VERSION:-}
+        EXPO_PUBLIC_BUILD: ${AURA_BUILD:-prod}
+        EXPO_PUBLIC_COMMIT_SHA: ${AURA_COMMIT_SHA:-}
+        # AURA_GOOGLE_CLIENT_ID тохируулсан бол .env.prod-д EXPO_PUBLIC_OAUTH_GOOGLE=true
+        EXPO_PUBLIC_OAUTH_GOOGLE: ${EXPO_PUBLIC_OAUTH_GOOGLE:-false}
     image: aura-mobile-web:prod
     restart: "no"
     entrypoint: ["/bin/sh", "-c"]
