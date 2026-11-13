@@ -1,0 +1,204 @@
+# PROD орчин (T-90, LLD §4.5, spec §8.6): Oracle Cloud Always Free Ampere A1 (linux/arm64).
+#   caddy (80/443, автомат HTTPS) → backend (/api/*, /ws), seaweedfs (/<bucket>/* — presigned URL),
+#   бусад нь SPA-ийн статик файл (mobile-web-ийн export, Caddy өөрөө үйлчилнэ).
+# Mailpit байхгүй — SMTP нь гадны үнэгүй үйлчилгээ (PAR-AURA-003).
+#
+# Ажиллуулах (репогийн үндэсээс):
+#   docker compose -f deploy/docker-compose.prod.yml --env-file .env.prod up -d --build
+# Шалгах:
+#   docker compose -f deploy/docker-compose.prod.yml --env-file .env.prod.example config -q
+#
+# Бүх image linux/arm64-тэй (AC-161): caddy:2, postgres:16, chrislusf/seaweedfs, rclone/rclone —
+# multi-arch; backend ба mobile-web нь VM дээр native arm64-ээр build хийгдэнэ.
+# Лог: json-file, үйлчилгээ бүр ≤ 10 × 20 MB (OPS-AURA-006, docs/OPERATIONS.md).
+name: aura
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "20m"
+    max-file: "10"
+
+services:
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      AURA_DOMAIN: ${AURA_DOMAIN:?AURA_DOMAIN .env.prod-д тавина}
+      ACME_EMAIL: ${ACME_EMAIL:?ACME_EMAIL .env.prod-д тавина}
+      AURA_S3_BUCKET: ${AURA_S3_BUCKET:-aura-media}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - web:/srv/web:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      mobile-web:
+        condition: service_completed_successfully
+      backend:
+        condition: service_started
+      seaweedfs:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:2019/config/ >/dev/null"]
+      interval: 15s
+      timeout: 3s
+      retries: 5
+    logging: *logging
+
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-aura}
+      POSTGRES_USER: ${POSTGRES_USER:-aura}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD .env.prod-д тавина}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    shm_size: 256m
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    logging: *logging
+
+  # S3-нийцтэй медиа сан (MinIO ХОРИОТОЙ — spec §1). Identity-г эхлэхдээ орчны хувьсагчаас
+  # үүсгэнэ: нууц түлхүүр репод (deploy/dev/seaweedfs-s3.json шиг) бичигдэхгүй (INV-10).
+  seaweedfs:
+    image: chrislusf/seaweedfs:3.97
+    restart: unless-stopped
+    environment:
+      S3_ACCESS_KEY: ${AURA_S3_ACCESS_KEY:?AURA_S3_ACCESS_KEY .env.prod-д тавина}
+      S3_SECRET_KEY: ${AURA_S3_SECRET_KEY:?AURA_S3_SECRET_KEY .env.prod-д тавина}
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        umask 077
+        printf '{"identities":[{"name":"aura","credentials":[{"accessKey":"%s","secretKey":"%s"}],"actions":["Admin","Read","List","Tagging","Write"]}]}' \
+          "$$S3_ACCESS_KEY" "$$S3_SECRET_KEY" > /tmp/s3.json
+        exec /entrypoint.sh server -s3 -s3.config=/tmp/s3.json -ip=seaweedfs -ip.bind=0.0.0.0
+    volumes:
+      - seaweed:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:9333/cluster/status >/dev/null && wget -qO- http://127.0.0.1:8333/status >/dev/null"]
+      interval: 10s
+      timeout: 3s
+      retries: 20
+      start_period: 15s
+    logging: *logging
+
+  backend:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: aura-backend:prod
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-aura}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-aura}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      AURA_JWT_SECRET: ${AURA_JWT_SECRET:?AURA_JWT_SECRET .env.prod-д тавина}
+      AURA_S3_ENDPOINT: http://seaweedfs:8333
+      # Presigned URL нь https://<домэйн>/<bucket>/<key> — Caddy seaweedfs руу Host-ыг хэвээр дамжуулна (sigv4)
+      AURA_S3_PUBLIC_ENDPOINT: https://${AURA_DOMAIN}
+      AURA_S3_REGION: ${AURA_S3_REGION:-us-east-1}
+      AURA_S3_BUCKET: ${AURA_S3_BUCKET:-aura-media}
+      AURA_S3_ACCESS_KEY: ${AURA_S3_ACCESS_KEY}
+      AURA_S3_SECRET_KEY: ${AURA_S3_SECRET_KEY}
+      AURA_S3_PATH_STYLE: "true"
+      SPRING_MAIL_HOST: ${SPRING_MAIL_HOST:?SPRING_MAIL_HOST .env.prod-д тавина}
+      SPRING_MAIL_PORT: ${SPRING_MAIL_PORT:-587}
+      SPRING_MAIL_USERNAME: ${SPRING_MAIL_USERNAME:-}
+      SPRING_MAIL_PASSWORD: ${SPRING_MAIL_PASSWORD:-}
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: ${SPRING_MAIL_SMTP_AUTH:-true}
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: ${SPRING_MAIL_STARTTLS:-true}
+      AURA_MAIL_FROM: ${AURA_MAIL_FROM:?AURA_MAIL_FROM .env.prod-д тавина}
+      AURA_VAPID_PUBLIC_KEY: ${AURA_VAPID_PUBLIC_KEY:-}
+      AURA_VAPID_PRIVATE_KEY: ${AURA_VAPID_PRIVATE_KEY:-}
+      AURA_VAPID_SUBJECT: ${AURA_VAPID_SUBJECT:-}
+      AURA_EXPO_PUSH_ACCESS_TOKEN: ${AURA_EXPO_PUSH_ACCESS_TOKEN:-}
+      AURA_GOOGLE_CLIENT_ID: ${AURA_GOOGLE_CLIENT_ID:-}
+      AURA_GOOGLE_CLIENT_SECRET: ${AURA_GOOGLE_CLIENT_SECRET:-}
+      AURA_OAUTH_REDIRECT_BASE: https://${AURA_DOMAIN}
+      AURA_WEB_BASE_URL: https://${AURA_DOMAIN}
+      AURA_ADMIN_EMAILS: ${AURA_ADMIN_EMAILS:-}
+      AURA_CORS_ALLOWED_ORIGINS: https://${AURA_DOMAIN}
+      AURA_COOKIE_SECURE: "true"
+      AURA_STORAGE_QUOTA_BYTES: ${AURA_STORAGE_QUOTA_BYTES:-10737418240}
+      AURA_SENTRY_DSN: ${AURA_SENTRY_DSN:-}
+      AURA_SENTRY_ENVIRONMENT: prod
+      AURA_WEATHER_BASE_URL: ${AURA_WEATHER_BASE_URL:-https://api.open-meteo.com}
+      AURA_GEOCODING_BASE_URL: ${AURA_GEOCODING_BASE_URL:-https://geocoding-api.open-meteo.com}
+      AURA_APP_LATEST_VERSION: ${AURA_APP_LATEST_VERSION:-}
+      AURA_APP_MIN_VERSION: ${AURA_APP_MIN_VERSION:-}
+      AURA_DOWNLOAD_URL: ${AURA_DOWNLOAD_URL:-}
+    # Ampere A1 Always Free: 4 OCPU / 24 GB. JVM нь хязгаарын 70%-ийг heap-д авна (Dockerfile).
+    mem_limit: ${BACKEND_MEM_LIMIT:-4g}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      seaweedfs:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/actuator/health | grep -q UP"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 60s
+    stop_grace_period: 30s
+    logging: *logging
+
+  # Вэб апп (Expo web export). Нэг удаагийн контейнер: export-ийг `web` volume руу хуулаад гарна,
+  # Caddy түүнийг `try_files {path} /index.html`-ээр үйлчилнэ. Хуучин hash-тай chunk-ууд үлдэнэ —
+  # шинэчлэлтийн үеэр нээлттэй байсан таб хуучин chunk-аа ачаалж чадна.
+  mobile-web:
+    build:
+      context: ../mobile
+      args:
+        EXPO_PUBLIC_API_URL: https://${AURA_DOMAIN}
+    image: aura-mobile-web:prod
+    restart: "no"
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["cp -a /usr/share/nginx/html/. /out/ && echo 'web export хуулагдав'"]
+    volumes:
+      - web:/out
+    logging: *logging
+
+  # Backup-ын хэрэгсэл (T-91): `docker compose ... --profile tools run --rm rclone <команд>`.
+  # Тохиргоо нь орчны хувьсагчаар (RCLONE_CONFIG_<REMOTE>_*), файл үүсгэхгүй.
+  rclone:
+    image: rclone/rclone:1.71
+    profiles: ["tools"]
+    environment:
+      RCLONE_CONFIG_SEAWEED_TYPE: s3
+      RCLONE_CONFIG_SEAWEED_PROVIDER: SeaweedFS
+      RCLONE_CONFIG_SEAWEED_ENDPOINT: http://seaweedfs:8333
+      RCLONE_CONFIG_SEAWEED_ACCESS_KEY_ID: ${AURA_S3_ACCESS_KEY}
+      RCLONE_CONFIG_SEAWEED_SECRET_ACCESS_KEY: ${AURA_S3_SECRET_KEY}
+      RCLONE_CONFIG_SEAWEED_REGION: ${AURA_S3_REGION:-us-east-1}
+      RCLONE_CONFIG_SEAWEED_FORCE_PATH_STYLE: "true"
+      # Oracle Object Storage (S3-нийцтэй API, Customer Secret Key) — docs/BACKUP.md
+      RCLONE_CONFIG_ORACLE_TYPE: s3
+      RCLONE_CONFIG_ORACLE_PROVIDER: Other
+      RCLONE_CONFIG_ORACLE_ENDPOINT: ${OCI_S3_ENDPOINT:-}
+      RCLONE_CONFIG_ORACLE_REGION: ${OCI_REGION:-}
+      RCLONE_CONFIG_ORACLE_ACCESS_KEY_ID: ${OCI_ACCESS_KEY:-}
+      RCLONE_CONFIG_ORACLE_SECRET_ACCESS_KEY: ${OCI_SECRET_KEY:-}
+      RCLONE_CONFIG_ORACLE_FORCE_PATH_STYLE: "true"
+      RCLONE_CONFIG_ORACLE_NO_CHECK_BUCKET: "true"
+    volumes:
+      - ${BACKUP_DIR:-/var/backups/aura}:/backups
+    logging: *logging
+
+volumes:
+  pgdata:
+  seaweed:
+  web:
+  caddy_data:
+  caddy_config:
