@@ -445,7 +445,8 @@
     "onThisDay": {
       "title": "On this day",
       "count_one": "{{count}} memory",
-      "count_other": "{{count}} memories"
+      "count_other": "{{count}} memories",
+      "year": "{{year}}"
     },
     "recap": {
       "title": "Our year",

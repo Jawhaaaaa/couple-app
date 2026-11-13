@@ -445,7 +445,8 @@
     "onThisDay": {
       "title": "Жилийн өмнөх өнөөдөр",
       "count_one": "{{count}} дурсамж",
-      "count_other": "{{count}} дурсамж"
+      "count_other": "{{count}} дурсамж",
+      "year": "{{year}} он"
     },
     "recap": {
       "title": "Бидний жил",

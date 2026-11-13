@@ -279,3 +279,16 @@ export function mediaUrl(media: MediaRef | null | undefined, size: 'sm' | 'md' |
   if (size === 'md') return urls.md ?? urls.lg ?? urls.original;
   return urls.lg ?? urls.original;
 }
+
+/** S-23 «Жилийн өмнөх өнөөдөр» (FR-3.6, AC-73): өмнөх жилүүдийн ижил өдрийн дурсамжууд жилээр. */
+export type OnThisDayGroup = S['OnThisDayGroup'];
+export const ON_THIS_DAY_KEY = ['memories', 'on-this-day'] as const;
+
+export function useOnThisDay() {
+  const accessToken = useSessionStore((s) => s.accessToken);
+  return useQuery({
+    queryKey: ON_THIS_DAY_KEY,
+    queryFn: (): Promise<OnThisDayGroup[]> => unwrap(api.GET('/memories/on-this-day')),
+    enabled: !!accessToken,
+  });
+}

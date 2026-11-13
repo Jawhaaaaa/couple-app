@@ -233,7 +233,7 @@ export function OnThisDaySection({ data }: { data: Dashboard['onThisDay'] }) {
         icon={Images}
         label={data.memories[0]?.title ?? t('home.onThisDay.title')}
         detail={t('home.onThisDay.count', { count: data.count })}
-        href="/memories"
+        href="/home/on-this-day"
         testID="home-on-this-day"
       />
     </Section>

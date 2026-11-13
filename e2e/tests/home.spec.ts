@@ -1,9 +1,13 @@
+import { randomUUID } from 'node:crypto';
+
 import { expect } from '@playwright/test';
 
 import { test } from '../fixtures/twoPartners';
-import { resetServerClock, setClock } from '../support/clock';
+import { sendTextApi } from '../support/chat';
+import { createMemoryApi, makeJpeg } from '../support/memories';
+import { resetServerClock, setClock, setServerClock } from '../support/clock';
 import { confirmStartDate, linkedCouple, patchMe } from '../support/couple';
-import { signInUi } from '../support/users';
+import { apiJson, signInUi } from '../support/users';
 
 /**
  * S-20 Нүүр (T-31, FR-3): тоолуур SD-01 (AC-13), хамтрагчийн цаг ба бүсийн зөрүү (AC-14),
@@ -92,6 +96,54 @@ test.describe('S-20 нүүр', () => {
       await expect(page).toHaveURL(url);
       await page.goto('/home');
       await expect(page.getByTestId('screen-S-20')).toBeVisible();
+    }
+  });
+
+  test('AC-72 (а) болзоо, ой, сүүлийн дурсамж, уншаагүй мессеж бодит өгөгдлөөр', async ({ partnerA, partnerB }) => {
+    const [a, b] = await linkedCouple(partnerA.name, partnerB.name, 'ac72a');
+    await confirmStartDate(a, b, '2025-01-01');
+    const startsAt = new Date(Date.now() + 3 * 24 * 3600_000).toISOString();
+    await apiJson(b, 'POST', '/plans', {
+      clientId: randomUUID(),
+      title: 'Хустайн нуруу руу',
+      startsAt,
+      timezone: 'Asia/Ulaanbaatar',
+      reminderOffsets: [60],
+      recurrence: 'NONE',
+      checklist: [],
+    });
+    await createMemoryApi(b, await makeJpeg(partnerA.page), { title: 'Анхны цас', occurredOn: '2026-11-01' });
+    await sendTextApi(b, 'Уншаагүй мессеж 1');
+    await sendTextApi(b, 'Уншаагүй мессеж 2');
+
+    await signInUi(partnerA.page, a);
+    const page = partnerA.page;
+    await expect(page.getByTestId('home-next-date')).toContainText('Хустайн нуруу руу');
+    await expect(page.getByTestId('home-upcoming-item').first()).toBeVisible();
+    await expect(page.getByTestId('home-memory').filter({ hasText: 'Анхны цас' })).toBeVisible();
+    await expect(page.getByTestId('home-unread-messages')).toContainText('2');
+  });
+
+  test('AC-73 2025-11-07-ны дурсамжтай хост 2026-11-07-нд «Жилийн өмнөх өнөөдөр» → S-23; өөр өдөр нуугдана', async ({ partnerA, partnerB }) => {
+    await setServerClock('2026-11-07T04:00:00Z');
+    try {
+      const [a, b] = await linkedCouple(partnerA.name, partnerB.name, 'ac73');
+      await confirmStartDate(a, b, '2024-10-24');
+      await createMemoryApi(a, await makeJpeg(partnerA.page), { title: 'Нэг жилийн өмнө', occurredOn: '2025-11-07' });
+      await partnerA.page.clock.setFixedTime(new Date('2026-11-07T04:00:00Z'));
+      await signInUi(partnerA.page, a);
+      await partnerA.page.getByTestId('home-on-this-day').click();
+      await expect(partnerA.page.getByTestId('screen-S-23')).toBeVisible();
+      await expect(partnerA.page.getByTestId('on-this-day-year')).toContainText('2025');
+      await expect(partnerA.page.getByText('Нэг жилийн өмнө')).toBeVisible();
+
+      await setServerClock('2026-11-08T04:00:00Z');
+      await partnerA.page.clock.setFixedTime(new Date('2026-11-08T04:00:00Z'));
+      await partnerA.page.goto('/home');
+      await expect(partnerA.page.getByTestId('screen-S-20')).toBeVisible();
+      await expect(partnerA.page.getByTestId('home-on-this-day')).toHaveCount(0);
+    } finally {
+      await resetServerClock();
     }
   });
 });
