@@ -4,6 +4,7 @@ import { api } from '@/api/client';
 import type { Message } from '@/api/queries/chat';
 import ChatScreen from '@/app/(tabs)/chat';
 import { outbox } from '@/offline/outboxRuntime';
+import { uploadQueue } from '@/upload/uploadRuntime';
 import { routeEvent } from '@/realtime/eventRouter';
 import { defaultPrefs, usePrefsStore } from '@/stores/prefsStore';
 import { useSessionStore } from '@/stores/sessionStore';
@@ -23,6 +24,33 @@ jest.mock('expo-screen-capture', () => ({
   preventScreenCaptureAsync: jest.fn(async () => {}),
   allowScreenCaptureAsync: jest.fn(async () => {}),
   addScreenshotListener: jest.fn(() => ({ remove: jest.fn() })),
+}));
+
+const mockRecorder = {
+  isRecording: false,
+  uri: 'file:///voice.m4a' as string | null,
+  prepareToRecordAsync: jest.fn(async () => {}),
+  record: jest.fn(() => {
+    mockRecorder.isRecording = true;
+  }),
+  stop: jest.fn(async () => {
+    mockRecorder.isRecording = false;
+  }),
+  getStatus: jest.fn(() => ({ durationMillis: 4200 })),
+};
+jest.mock('expo-audio', () => ({
+  RecordingPresets: { HIGH_QUALITY: {} },
+  requestRecordingPermissionsAsync: jest.fn(async () => ({ granted: true })),
+  setAudioModeAsync: jest.fn(async () => {}),
+  useAudioRecorder: () => mockRecorder,
+  useAudioRecorderState: () => ({ durationMillis: 4200, metering: -20, isRecording: mockRecorder.isRecording }),
+  useAudioPlayer: () => ({ play: jest.fn(), pause: jest.fn(), seekTo: jest.fn() }),
+  useAudioPlayerStatus: () => ({ playing: false, currentTime: 0, duration: 0, didJustFinish: false }),
+}));
+
+jest.mock('@/upload/simpleUpload', () => ({
+  ...jest.requireActual('@/upload/simpleUpload'),
+  blobFromUri: jest.fn(async () => ({ size: 2048 })),
 }));
 
 jest.mock('@/auth/tokenStore', () => ({
@@ -165,5 +193,32 @@ describe('S-40 чат', () => {
     await screen.findByText('Сайн уу, хайраа');
     await fireEvent.press(screen.getByTestId('composer-heart'));
     await waitFor(() => expect(api.POST).toHaveBeenCalledWith('/signals', { body: expect.objectContaining({ kind: 'HEART' }) }));
+  });
+
+  it('AC-32 S-45 дуу бичиж (түгжсэн горим) илгээхэд VOICE upload → VOICE мессеж', async () => {
+    const upload = jest.spyOn(uploadQueue, 'upload').mockResolvedValue({ id: 'media-v1' } as never);
+    spies.push(upload);
+    await renderWithClient(<ChatScreen />);
+    await screen.findByText('Сайн уу, хайраа');
+    await fireEvent(screen.getByTestId('composer-voice'), 'accessibilityAction', { nativeEvent: { actionName: 'activate' } });
+    expect(await screen.findByTestId('screen-S-45')).toBeTruthy();
+    expect(mockRecorder.record).toHaveBeenCalled();
+    await fireEvent.press(screen.getByTestId('voice-send'));
+    await waitFor(() =>
+      expect(upload).toHaveBeenCalledWith(expect.objectContaining({ purpose: 'VOICE', mime: 'audio/mp4', durationMs: 4200, uri: 'file:///voice.m4a' })),
+    );
+    await waitFor(() => expect(enqueue).toHaveBeenCalledWith(expect.objectContaining({ body: expect.objectContaining({ kind: 'VOICE', mediaId: 'media-v1' }) })));
+    expect(screen.queryByTestId('screen-S-45')).toBeNull();
+  });
+
+  it('S-45 цуцалбал upload хийхгүй', async () => {
+    const upload = jest.spyOn(uploadQueue, 'upload').mockResolvedValue({ id: 'x' } as never);
+    spies.push(upload);
+    await renderWithClient(<ChatScreen />);
+    await screen.findByText('Сайн уу, хайраа');
+    await fireEvent(screen.getByTestId('composer-voice'), 'accessibilityAction', { nativeEvent: { actionName: 'activate' } });
+    await fireEvent.press(await screen.findByTestId('voice-cancel'));
+    expect(upload).not.toHaveBeenCalled();
+    expect(screen.queryByTestId('screen-S-45')).toBeNull();
   });
 });

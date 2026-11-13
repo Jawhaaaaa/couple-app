@@ -845,7 +845,16 @@
     "editing": "Editing message",
     "replyingTo": "Replying to {{name}}",
     "voice": {
-      "record": "Record a voice message"
+      "record": "Record a voice message",
+      "slideToCancel": "Slide to cancel · push up to lock",
+      "cancel": "Cancel recording",
+      "send": "Send voice message",
+      "elapsedA11y": "Recorded {{time}}",
+      "play": "Play voice message, {{time}}",
+      "pause": "Pause",
+      "processing": "Processing…",
+      "denied": "Microphone access is off, so recording isn't possible. Allow it in your phone settings.",
+      "unsupported": "This browser can't record audio. Try Safari or Chrome."
     },
     "deleted": "Message deleted",
     "edited": "edited",

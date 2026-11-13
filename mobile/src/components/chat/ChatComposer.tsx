@@ -5,6 +5,8 @@ import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import type { Message } from '@/api/queries/chat';
 import { AppText } from '@/components/AppText';
 import { MESSAGE_MAX } from '@/chat/sendMessage';
+import type { VoiceMode, VoicePhase } from '@/chat/useVoiceRecording';
+import { MicGesture } from '@/chat/micGesture';
 import { useNetworkStatus } from '@/hooks/useNetworkStatus';
 import { useT } from '@/i18n';
 import { AnimatedMoment } from '@/motion/AnimatedMoment';
@@ -30,9 +32,43 @@ interface Props {
   onAttach: () => void;
   attaching?: boolean;
   /** Дуу бичих (T-46, S-45) — өгвөл микрофоны товч гарна. */
-  onVoice?: () => void;
-  /** Бичлэгийн overlay идэвхтэй үед input-ийн оронд. */
+  voice?: VoiceControls;
+  /** Бичлэгийн overlay идэвхтэй үед input-ийн оронд (микрофоны товч байрандаа үлдэнэ). */
   overlay?: ReactNode;
+}
+
+export interface VoiceControls {
+  phase: VoicePhase;
+  mode: VoiceMode;
+  start: (mode: VoiceMode) => void;
+  cancel: () => void;
+  finish: () => void;
+  lock: () => void;
+}
+
+/**
+ * S-45 микрофоны товч (`MicGesture`): дарж байх хооронд бичнэ (суллавал илгээнэ), зүүн тийш
+ * гулсуулбал цуцална, дээш түлхвэл түгжинэ. Богино товшилт — гар чөлөөтэй горим; дэлгэц уншигчид мөн.
+ */
+function VoiceMicButton({ voice, color, label }: { voice: VoiceControls; color: string; label: string }) {
+  const [gesture] = useState(() => new MicGesture());
+  useEffect(() => {
+    gesture.setHandlers(voice);
+  }, [gesture, voice]);
+  return (
+    <View
+      {...gesture.responder.panHandlers}
+      accessible
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      accessibilityActions={[{ name: 'activate' }]}
+      onAccessibilityAction={() => voice.start('locked')}
+      testID="composer-voice"
+      style={styles.icon}
+    >
+      <Mic size={22} color={color} strokeWidth={iconStroke} />
+    </View>
+  );
 }
 
 function IconButton({ label, onPress, children, disabled, testID }: { label: string; onPress: () => void; children: ReactNode; disabled?: boolean; testID: string }) {
@@ -55,7 +91,7 @@ function IconButton({ label, onPress, children, disabled, testID }: { label: str
  * S-40 input (FR-6.1, FR-6.10): текст, зураг, emoji, дуу, «Хайртай» (FR-4.1-тэй ижил `POST /signals`,
  * AC-178), reply/засварын мөр. Бичих үед `/app/typing` (ANIM-08, AC-177).
  */
-export function ChatComposer({ replyTo, editing, partnerName, onCancelContext, onSend, onAttach, attaching, onVoice, overlay }: Props) {
+export function ChatComposer({ replyTo, editing, partnerName, onCancelContext, onSend, onAttach, attaching, voice, overlay }: Props) {
   const t = useT();
   const colors = useColors();
   const { offline } = useNetworkStatus();
@@ -155,63 +191,63 @@ export function ChatComposer({ replyTo, editing, partnerName, onCancelContext, o
           {heartNote}
         </AppText>
       ) : null}
-      {overlay ?? (
-        <View style={styles.row}>
-          {!editing ? (
-            <IconButton label={t('chat.attachImage')} onPress={onAttach} disabled={attaching} testID="composer-attach">
-              <ImagePlus size={22} color={colors.textMuted} strokeWidth={iconStroke} />
-            </IconButton>
-          ) : null}
-          <View style={[styles.inputWrap, { backgroundColor: colors.surfaceRaised, borderColor: colors.border }]}>
-            <TextInput
-              value={text}
-              onChangeText={change}
-              onBlur={stopTyping}
-              placeholder={t('chat.placeholder', { name: partnerName })}
-              placeholderTextColor={colors.textMuted}
-              multiline
-              maxLength={MESSAGE_MAX}
-              accessibilityLabel={t('chat.inputLabel')}
-              style={[typeScale.body, styles.input, { color: colors.text }]}
-              testID="composer-input"
-            />
-            <IconButton label={t('chat.emoji')} onPress={() => setEmojiOpen((o) => !o)} testID="composer-emoji-toggle">
-              <Smile size={20} color={colors.textMuted} strokeWidth={iconStroke} />
-            </IconButton>
-          </View>
-          {text.trim() ? (
-            <IconButton label={editing ? t('chat.saveEdit') : t('chat.send')} onPress={submit} testID="composer-send">
-              <SendHorizontal size={22} color={colors.primary} strokeWidth={iconStroke} />
-            </IconButton>
-          ) : (
-            <>
-              {onVoice && !editing ? (
-                <IconButton label={t('chat.voice.record')} onPress={onVoice} testID="composer-voice">
-                  <Mic size={22} color={colors.textMuted} strokeWidth={iconStroke} />
-                </IconButton>
-              ) : null}
-              <AnimatedMoment anim="ANIM-01" playing={burst > 0}>
-                {() => (
-                  <View>
-                    {burst > 0 ? <ParticleBurst burstKey={`chat-heart-${burst}`} count={6} distance={48} /> : null}
-                    <Pressable
-                      onPress={() => void heart()}
-                      disabled={cooling}
-                      accessibilityRole="button"
-                      accessibilityLabel={t('chat.heart')}
-                      accessibilityState={{ disabled: cooling }}
-                      testID="composer-heart"
-                      style={[styles.heart, { backgroundColor: colors.primary, opacity: cooling ? 0.5 : 1 }]}
-                    >
-                      <Heart size={22} color={colors.onPrimary} fill={colors.onPrimary} />
-                    </Pressable>
-                  </View>
-                )}
-              </AnimatedMoment>
-            </>
-          )}
-        </View>
-      )}
+      {/* Байрлал тогтмол: [оролт эсвэл overlay] · [микрофон] · [илгээх/зүрх] — бичиж эхлэхэд микрофон
+          дахин mount болохгүй тул удаан даралтын gesture тасрахгүй */}
+      <View style={styles.row}>
+        {overlay ?? (
+          <>
+            {!editing ? (
+              <IconButton label={t('chat.attachImage')} onPress={onAttach} disabled={attaching} testID="composer-attach">
+                <ImagePlus size={22} color={colors.textMuted} strokeWidth={iconStroke} />
+              </IconButton>
+            ) : null}
+            <View style={[styles.inputWrap, { backgroundColor: colors.surfaceRaised, borderColor: colors.border }]}>
+              <TextInput
+                value={text}
+                onChangeText={change}
+                onBlur={stopTyping}
+                placeholder={t('chat.placeholder', { name: partnerName })}
+                placeholderTextColor={colors.textMuted}
+                multiline
+                maxLength={MESSAGE_MAX}
+                accessibilityLabel={t('chat.inputLabel')}
+                style={[typeScale.body, styles.input, { color: colors.text }]}
+                testID="composer-input"
+              />
+              <IconButton label={t('chat.emoji')} onPress={() => setEmojiOpen((o) => !o)} testID="composer-emoji-toggle">
+                <Smile size={20} color={colors.textMuted} strokeWidth={iconStroke} />
+              </IconButton>
+            </View>
+          </>
+        )}
+        {voice && !editing && (overlay ? voice.mode === 'hold' : !text.trim()) ? (
+          <VoiceMicButton voice={voice} color={overlay ? colors.primary : colors.textMuted} label={t('chat.voice.record')} />
+        ) : null}
+        {overlay ? null : text.trim() ? (
+          <IconButton label={editing ? t('chat.saveEdit') : t('chat.send')} onPress={submit} testID="composer-send">
+            <SendHorizontal size={22} color={colors.primary} strokeWidth={iconStroke} />
+          </IconButton>
+        ) : (
+          <AnimatedMoment anim="ANIM-01" playing={burst > 0}>
+            {() => (
+              <View>
+                {burst > 0 ? <ParticleBurst burstKey={`chat-heart-${burst}`} count={6} distance={48} /> : null}
+                <Pressable
+                  onPress={() => void heart()}
+                  disabled={cooling}
+                  accessibilityRole="button"
+                  accessibilityLabel={t('chat.heart')}
+                  accessibilityState={{ disabled: cooling }}
+                  testID="composer-heart"
+                  style={[styles.heart, { backgroundColor: colors.primary, opacity: cooling ? 0.5 : 1 }]}
+                >
+                  <Heart size={22} color={colors.onPrimary} fill={colors.onPrimary} />
+                </Pressable>
+              </View>
+            )}
+          </AnimatedMoment>
+        )}
+      </View>
     </View>
   );
 }

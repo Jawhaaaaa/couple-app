@@ -21,6 +21,8 @@ import { ChatComposer } from '@/components/chat/ChatComposer';
 import { type MessageAction, MessageActions } from '@/components/chat/MessageActions';
 import { type BubbleModel, MessageBubble } from '@/components/chat/MessageBubble';
 import { TypingHearts } from '@/components/chat/TypingHearts';
+import { VoiceMessagePlayer } from '@/components/chat/VoiceMessagePlayer';
+import { VoiceRecorderOverlay } from '@/components/chat/VoiceRecorderOverlay';
 import { ConfirmSheet } from '@/components/ConfirmSheet';
 import { FormMessage } from '@/components/FormMessage';
 import { ScreenState } from '@/components/ScreenState';
@@ -28,6 +30,8 @@ import { TabScreen } from '@/components/TabScreen';
 import { type ChatWindow, lastUnreadFromPartner, startsNewDay } from '@/chat/chatCache';
 import { type NewMessage, type PendingMessage, sendMessage, usePendingMessages } from '@/chat/sendMessage';
 import { useChatWindow } from '@/chat/useChatWindow';
+import { type VoiceClip, useVoiceRecording } from '@/chat/useVoiceRecording';
+import { voiceFileName } from '@/chat/voice';
 import { emptyStateText } from '@/content/emptyStates';
 import { useErrorText } from '@/hooks/useErrorText';
 import { useNow } from '@/hooks/useNow';
@@ -42,6 +46,7 @@ import { usePrefsStore } from '@/stores/prefsStore';
 import { useSessionStore } from '@/stores/sessionStore';
 import { useColors } from '@/theme/ThemeProvider';
 import { iconStroke, radius, spacing, touchTarget } from '@/theme/tokens';
+import { blobFromUri } from '@/upload/simpleUpload';
 import { uploadQueue } from '@/upload/uploadRuntime';
 
 /** «Бичиж байна» дохио ирээгүй бол 6 с-ийн дараа нуух (сүлжээ тасарсан ч гацахгүй). */
@@ -212,6 +217,31 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
     }
   };
 
+  /** S-45 бичлэг дууссан — upload (`purpose: VOICE`, сервер нэг формат руу хөрвүүлнэ) → VOICE мессеж. */
+  const sendVoice = async (clip: VoiceClip) => {
+    setActionError(null);
+    setAttaching(true);
+    try {
+      const blob = await blobFromUri(clip.uri);
+      const media = await uploadQueue.upload({
+        purpose: 'VOICE',
+        fileName: voiceFileName(clip.mime),
+        mime: clip.mime,
+        durationMs: clip.durationMs,
+        totalBytes: blob.size,
+        ...(Platform.OS === 'web' ? { data: blob } : { uri: clip.uri }),
+      });
+      await sendMessage({ kind: 'VOICE', mediaId: media.id, ...(replyTo ? { replyToId: replyTo.id } : {}) });
+      setReplyTo(null);
+    } catch (e) {
+      setActionError(e);
+    } finally {
+      setAttaching(false);
+    }
+  };
+  const voice = useVoiceRecording((clip) => void sendVoice(clip));
+  const recordingVoice = voice.phase === 'recording' || voice.phase === 'starting';
+
   const react = async (m: Message, emoji: Parameters<typeof reactToMessage>[1]) => {
     setSelected(null);
     playHaptic('ANIM-07');
@@ -344,6 +374,7 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
                 onOpen={(m) => {
                   if (m.media?.urls.original) void Linking.openURL(m.media.urls.original);
                 }}
+                renderVoice={(m, mine) => <VoiceMessagePlayer message={m} mine={mine} />}
               />
             </View>
           );
@@ -369,7 +400,33 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
           onSend={(text) => void send(text)}
           onAttach={() => void attach()}
           attaching={attaching}
+          voice={{
+            phase: voice.phase,
+            mode: voice.mode,
+            start: (mode) => void voice.start(mode),
+            cancel: () => void voice.cancel(),
+            finish: () => void voice.finish(),
+            lock: voice.lock,
+          }}
+          overlay={
+            recordingVoice ? (
+              <VoiceRecorderOverlay
+                mode={voice.mode}
+                durationMs={voice.durationMs}
+                levels={voice.levels}
+                onCancel={() => void voice.cancel()}
+                onSend={() => void voice.finish()}
+              />
+            ) : undefined
+          }
         />
+        {voice.phase === 'denied' || voice.phase === 'unsupported' ? (
+          <FormMessage
+            kind="info"
+            text={voice.phase === 'denied' ? t('chat.voice.denied') : t('chat.voice.unsupported')}
+            testID="voice-unavailable"
+          />
+        ) : null}
       </KeyboardAvoidingView>
       <MessageActions
         message={selected}

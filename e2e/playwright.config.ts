@@ -25,7 +25,14 @@ export default defineConfig({
     timezoneId: 'Asia/Ulaanbaatar',
   },
   projects: [
-    { name: 'chromium-pixel7', use: { ...devices['Pixel 7'] } },
+    {
+      name: 'chromium-pixel7',
+      // AC-32, AC-158: MediaRecorder-ийг хуурамч микрофоноор (зөвшөөрлийн цонхгүй)
+      use: {
+        ...devices['Pixel 7'],
+        launchOptions: { args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream'] },
+      },
+    },
     { name: 'webkit-iphone14', use: { ...devices['iPhone 14'] } },
     {
       name: 'firefox-mobile',
