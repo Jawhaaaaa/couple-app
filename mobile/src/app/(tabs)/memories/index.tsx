@@ -15,6 +15,7 @@ import { useRecaps } from '@/api/queries/recaps';
 import { AppButton } from '@/components/AppButton';
 import { AppText } from '@/components/AppText';
 import { Chip, ChipRow } from '@/components/Chip';
+import { PlacesMap } from '@/components/map/PlacesMap';
 import { MemoryCard } from '@/components/memories/MemoryCard';
 import { isFreshMemory, PolaroidIn } from '@/components/memories/PolaroidIn';
 import { ScreenState } from '@/components/ScreenState';
@@ -44,7 +45,7 @@ const openEditor = () => router.push('/memory-editor');
  * S-30 Дурсамж (FR-5.3, FR-5.13): `?view=timeline|map|recap&scope=`. Timeline нь сараар
  * бүлэглэсэн, наалддаг толгойтой («2026 оны 11 сар · 2 дурсамж», AC-80), хязгааргүй ачаална;
  * «Хувийн» chip нь `scope=private` (R-4, AC-67). Газрын зураг таб — газруудын жагсаалт
- * (Leaflet газрын зураг дараагийн нэгжид), Recap таб — жилийн хураангуйнууд.
+ * (Leaflet газрын зураг, S-70-тэй ижил), Recap таб — жилийн хураангуйнууд.
  */
 export default function MemoriesScreen() {
   const t = useT();
@@ -211,7 +212,7 @@ function Timeline({ filters, onClearFilters }: { filters: MemoryFilters; onClear
   );
 }
 
-/** «Газрын зураг» таб (FR-5.13): газрын зураг (S-70) ирэх хүртэл газруудыг тоотой нь жагсаана. */
+/** «Газрын зураг» таб (FR-5.13, AC-86): S-70-тэй ижил газрын зураг (`/memories/places`) + газруудын жагсаалт. */
 function PlacesList() {
   const t = useT();
   const colors = useColors();
@@ -230,10 +231,10 @@ function PlacesList() {
       testID="memories-places"
       ListHeaderComponent={
         <View style={styles.listHeader}>
+          <PlacesMap places={places.data} height={300} />
           <AppText variant="h3" accessibilityRole="header">
             {t('memories.places.title')}
           </AppText>
-          <AppText color="textMuted">{t('memories.places.note')}</AppText>
         </View>
       }
       renderItem={({ item }) => (

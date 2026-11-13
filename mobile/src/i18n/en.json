@@ -943,5 +943,12 @@
       "locationDenied": "Location access is off. Allow it in settings.",
       "locationFailed": "Couldn't get your location. Please try again."
     }
+  },
+  "map": {
+    "title": "Places we've been",
+    "subtitle_one": "{{count}} place — tap a pin to see its memories",
+    "subtitle_other": "{{count}} places — tap a pin to see their memories",
+    "attribution": "Map: {{osm}}",
+    "openMemories": "See memories"
   }
 }
