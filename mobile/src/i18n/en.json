@@ -838,7 +838,6 @@
     "emoji": "Emoji",
     "send": "Send",
     "saveEdit": "Save edit",
-    "attachImage": "Send a photo",
     "heart": "Love — send a heart",
     "heartCooldown": "Hearts are resting — {{seconds}} s",
     "heartFailed": "Couldn't send the heart. Please try again.",
@@ -878,11 +877,51 @@
       "title": "Message",
       "reply": "Reply",
       "edit": "Edit",
-      "delete": "Delete"
+      "delete": "Delete",
+      "pin": "Pin",
+      "unpin": "Unpin",
+      "copy": "Copy",
+      "copied": "Copied",
+      "openMap": "Open in map",
+      "toMemory": "Turn into memory"
     },
     "deleteConfirm": {
       "title": "Delete this message?",
       "body": "Both of you will see “Message deleted”. This can't be undone."
+    },
+    "search": {
+      "title": "Search chat",
+      "label": "Search for",
+      "placeholder": "e.g. Terelj",
+      "offline": "Search needs an internet connection.",
+      "jumpLabel": "Jump to date",
+      "jump": "Jump"
+    },
+    "media": {
+      "title": "Media & files",
+      "images": "Photos",
+      "files": "Files",
+      "voice": "Voice",
+      "links": "Links",
+      "longPressHint": "Long-press to see it in the chat"
+    },
+    "pins": {
+      "title": "Pinned messages",
+      "openHint": "Tap to see it in the chat",
+      "bannerA11y_one": "{{count}} pinned message — see all",
+      "bannerA11y_other": "{{count}} pinned messages — see all"
+    },
+    "backToLatest": "Back to latest messages",
+    "attach": {
+      "title": "Attach",
+      "image": "Photo",
+      "file": "File",
+      "location": "Location",
+      "tooLarge": "The file is larger than 50 MB. Please choose a smaller one.",
+      "forbidden": "This type of file can't be sent (apps, scripts).",
+      "myLocation": "My location",
+      "locationDenied": "Location access is off. Allow it in settings.",
+      "locationFailed": "Couldn't get your location. Please try again."
     }
   }
 }

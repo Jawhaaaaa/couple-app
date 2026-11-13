@@ -24,6 +24,8 @@ export interface DraftPrefill {
   description?: string;
   place?: Place | string | null;
   datePlanId?: string;
+  /** Серверт аль хэдийн байгаа медиа (чатаас «Дурсамж болгох», AC-91). */
+  media?: { id: string; kind: 'image' | 'video'; previewUri: string | null }[];
 }
 
 export function parseDraftParam(raw: string | string[] | undefined): DraftPrefill | null {
@@ -41,6 +43,15 @@ export function parseDraftParam(raw: string | string[] | undefined): DraftPrefil
       description: str(p.description),
       place: typeof place === 'string' || (place && typeof place === 'object') ? (place as Place | string) : null,
       datePlanId: str(p.datePlanId),
+      media: Array.isArray(p.media)
+        ? (p.media as unknown[])
+            .filter((m): m is Record<string, unknown> => !!m && typeof m === 'object' && typeof (m as { id?: unknown }).id === 'string')
+            .map((m) => ({
+              id: m.id as string,
+              kind: m.kind === 'video' ? ('video' as const) : ('image' as const),
+              previewUri: typeof m.previewUri === 'string' ? m.previewUri : null,
+            }))
+        : undefined,
     };
   } catch {
     // Эвдэрсэн параметр — хоосон ноорогоос эхэлнэ (хэрэглэгчийн өгөгдөл алдагдахгүй)
@@ -68,6 +79,17 @@ export function applyPrefill(draft: MemoryDraft, prefill: DraftPrefill | null): 
     next.locationTouched = true;
   }
   if (prefill.datePlanId) next.datePlanId = prefill.datePlanId;
+  if (prefill.media?.length) {
+    next.media = prefill.media.map((m, i) => ({
+      key: m.id,
+      localId: null,
+      mediaId: m.id,
+      previewUri: m.previewUri,
+      kind: m.kind,
+      name: `chat-${i + 1}`,
+      altText: '',
+    }));
+  }
   return next;
 }
 

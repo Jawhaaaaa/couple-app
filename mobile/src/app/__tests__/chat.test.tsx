@@ -16,7 +16,7 @@ jest.mock('expo-router', () => ({
   useLocalSearchParams: () => ({}),
   useFocusEffect: (fn: () => void | (() => void)) => {
     const { useEffect } = jest.requireActual('react');
-    useEffect(fn, []);
+    useEffect(() => fn(), [fn]);
   },
 }));
 

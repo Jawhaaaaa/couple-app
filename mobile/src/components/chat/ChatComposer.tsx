@@ -1,4 +1,4 @@
-import { Heart, ImagePlus, Mic, Pencil, Reply, SendHorizontal, Smile, X } from 'lucide-react-native';
+import { FileText, Heart, Image as ImageIcon, MapPin, Mic, Paperclip, Pencil, Reply, SendHorizontal, Smile, X } from 'lucide-react-native';
 import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
@@ -21,6 +21,8 @@ import { typeScale } from '@/theme/typography';
 /** «Бичиж байна»-г хамгийн олондоо 3 с тутам илгээнэ; 4 с бичихгүй бол унтраана. */
 const TYPING_THROTTLE_MS = 3000;
 const TYPING_IDLE_MS = 4000;
+export type AttachKind = 'image' | 'file' | 'location';
+
 export const QUICK_EMOJI = ['💗', '🥰', '😘', '🤗', '😂', '😮', '😢', '✨'] as const;
 
 interface Props {
@@ -29,7 +31,7 @@ interface Props {
   partnerName: string;
   onCancelContext: () => void;
   onSend: (text: string) => void;
-  onAttach: () => void;
+  onAttach: (kind: AttachKind) => void;
   attaching?: boolean;
   /** Дуу бичих (T-46, S-45) — өгвөл микрофоны товч гарна. */
   voice?: VoiceControls;
@@ -98,6 +100,7 @@ export function ChatComposer({ replyTo, editing, partnerName, onCancelContext, o
   // Засах горимд эх текстээр эхэлнэ — эцэг нь `key`-ээр шинэчилнэ
   const [text, setText] = useState(editing?.text ?? '');
   const [emojiOpen, setEmojiOpen] = useState(false);
+  const [attachOpen, setAttachOpen] = useState(false);
   const [burst, setBurst] = useState(0);
   const [heartNote, setHeartNote] = useState<string | null>(null);
   const [cooling, setCooling] = useState(false);
@@ -177,6 +180,32 @@ export function ChatComposer({ replyTo, editing, partnerName, onCancelContext, o
           </IconButton>
         </View>
       ) : null}
+      {attachOpen && !editing ? (
+        <View style={styles.emojiRow} testID="composer-attach-menu">
+          {(
+            [
+              ['image', ImageIcon, t('chat.attach.image')],
+              ['file', FileText, t('chat.attach.file')],
+              ['location', MapPin, t('chat.attach.location')],
+            ] as const
+          ).map(([kind, Icon, label]) => (
+            <Pressable
+              key={kind}
+              onPress={() => {
+                setAttachOpen(false);
+                onAttach(kind);
+              }}
+              accessibilityRole="button"
+              accessibilityLabel={label}
+              testID={`composer-attach-${kind}`}
+              style={[styles.attachItem, { backgroundColor: colors.surfaceRaised }]}
+            >
+              <Icon size={20} color={colors.primary} strokeWidth={iconStroke} />
+              <AppText variant="label">{label}</AppText>
+            </Pressable>
+          ))}
+        </View>
+      ) : null}
       {emojiOpen ? (
         <View style={styles.emojiRow} testID="composer-emoji">
           {QUICK_EMOJI.map((e) => (
@@ -197,8 +226,8 @@ export function ChatComposer({ replyTo, editing, partnerName, onCancelContext, o
         {overlay ?? (
           <>
             {!editing ? (
-              <IconButton label={t('chat.attachImage')} onPress={onAttach} disabled={attaching} testID="composer-attach">
-                <ImagePlus size={22} color={colors.textMuted} strokeWidth={iconStroke} />
+              <IconButton label={t('chat.attach.title')} onPress={() => setAttachOpen((o) => !o)} disabled={attaching} testID="composer-attach">
+                <Paperclip size={22} color={colors.textMuted} strokeWidth={iconStroke} />
               </IconButton>
             ) : null}
             <View style={[styles.inputWrap, { backgroundColor: colors.surfaceRaised, borderColor: colors.border }]}>
@@ -256,7 +285,8 @@ const styles = StyleSheet.create({
   root: { borderTopWidth: 1, paddingHorizontal: spacing.xs, paddingTop: spacing.xs, paddingBottom: spacing.xs, gap: spacing.xs },
   context: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs, borderRadius: radius.input, paddingLeft: spacing.sm },
   contextText: { flex: 1 },
-  emojiRow: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' },
+  emojiRow: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: spacing.xs },
+  attachItem: { flexDirection: 'row', alignItems: 'center', gap: spacing.xxs, minHeight: touchTarget, paddingHorizontal: spacing.sm, borderRadius: radius.pill },
   note: { textAlign: 'center' },
   row: { flexDirection: 'row', alignItems: 'flex-end', gap: spacing.xxs },
   inputWrap: { flex: 1, flexDirection: 'row', alignItems: 'flex-end', borderRadius: radius.input, borderWidth: 1, paddingLeft: spacing.sm },

@@ -12,6 +12,8 @@ export type MessageReaction = S['ReactionSummary'];
 export type ReactionEmoji = S['ReactionEmoji'];
 export type ChatPlace = S['Place'];
 export type SharedPromise = S['SharedPromise'];
+export type MessageSearchPage = S['MessageSearchPage'];
+export type ChatMediaKind = 'IMAGE' | 'FILE' | 'VOICE' | 'LINK';
 
 /** S-40-ийн харагдах цонх (`chatCache.ts`) — `['messages']` угтвартай тул чатын бүх realtime үүнийг шинэчилнэ. */
 export const MESSAGES_KEY = ['messages', 'window'] as const;
@@ -66,4 +68,32 @@ export function updateChatSettings(disappearSeconds: DisappearSeconds): Promise<
 /** iOS дэлгэцийн зураг илэрсэн — илгээгчид мэдэгдэнэ (FR-6.9). */
 export async function reportScreenshot(messageId: string): Promise<void> {
   await unwrap(api.POST('/messages/{messageId}/screenshot', { params: { path: { messageId } } }));
+}
+
+// --- T-48: хайлт, огноо руу үсрэх, медиа, pin (S-42…S-44) ---
+
+export const PINNED_KEY = ['messages', 'pinned'] as const;
+
+export function searchMessages(q: string, cursor: string | null): Promise<MessageSearchPage> {
+  return unwrap(api.GET('/messages/search', { params: { query: { q, limit: 20, ...(cursor ? { cursor } : {}) } } }));
+}
+
+export function jumpToDate(date: string): Promise<MessagePage> {
+  return unwrap(api.GET('/messages/jump', { params: { query: { date } } }));
+}
+
+export function listChatMedia(kind: ChatMediaKind, cursor: string | null): Promise<MessagePage & { nextCursor?: string | null }> {
+  return unwrap(api.GET('/messages/media', { params: { query: { kind, limit: 30, ...(cursor ? { cursor } : {}) } } }));
+}
+
+export function listPinned(): Promise<Message[]> {
+  return unwrap(api.GET('/messages/pinned'));
+}
+
+export async function setPinned(messageId: string, pinned: boolean): Promise<void> {
+  await unwrap(
+    pinned
+      ? api.PUT('/messages/{messageId}/pin', { params: { path: { messageId } } })
+      : api.DELETE('/messages/{messageId}/pin', { params: { path: { messageId } } }),
+  );
 }

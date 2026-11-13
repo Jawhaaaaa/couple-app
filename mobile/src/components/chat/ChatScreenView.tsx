@@ -1,6 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { router, useFocusEffect } from 'expo-router';
-import { CalendarHeart, Handshake, Timer } from 'lucide-react-native';
+import * as Clipboard from 'expo-clipboard';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { CalendarHeart, Copy, FolderOpen, Handshake, MapPin, Pin, PinOff, Search, Sparkles, Timer } from 'lucide-react-native';
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, AppState, FlatList, KeyboardAvoidingView, Linking, Platform, Pressable, StyleSheet, View } from 'react-native';
 
@@ -8,6 +9,11 @@ import {
   deleteMessage,
   editMessage,
   fetchCurrentPromise,
+  fetchMessages,
+  jumpToDate,
+  listPinned,
+  PINNED_KEY,
+  setPinned,
   markMessagesRead,
   type Message,
   MESSAGES_KEY,
@@ -17,7 +23,7 @@ import {
 import { useDashboard } from '@/api/queries/dashboard';
 import { partnerName as partnerNameOf, useCoupleQuery } from '@/api/queries/pairing';
 import { AppText } from '@/components/AppText';
-import { ChatComposer } from '@/components/chat/ChatComposer';
+import { type AttachKind, ChatComposer } from '@/components/chat/ChatComposer';
 import { type MessageAction, MessageActions } from '@/components/chat/MessageActions';
 import { type BubbleModel, MessageBubble } from '@/components/chat/MessageBubble';
 import { TypingHearts } from '@/components/chat/TypingHearts';
@@ -27,6 +33,7 @@ import { ConfirmSheet } from '@/components/ConfirmSheet';
 import { FormMessage } from '@/components/FormMessage';
 import { ScreenState } from '@/components/ScreenState';
 import { TabScreen } from '@/components/TabScreen';
+import { currentPlace, mapUrl, memoryPrefillFrom, pickAndUploadFile } from '@/chat/attachments';
 import { type ChatWindow, lastUnreadFromPartner, startsNewDay } from '@/chat/chatCache';
 import { type NewMessage, type PendingMessage, sendMessage, usePendingMessages } from '@/chat/sendMessage';
 import { useChatWindow } from '@/chat/useChatWindow';
@@ -52,12 +59,6 @@ import { uploadQueue } from '@/upload/uploadRuntime';
 /** «Бичиж байна» дохио ирээгүй бол 6 с-ийн дараа нуух (сүлжээ тасарсан ч гацахгүй). */
 const TYPING_TIMEOUT_MS = 6000;
 const QUOTE_SEARCH_PAGES = 5;
-
-export interface ChatScreenExtras {
-  /** T-48: S-41-ийн нэмэлт үйлдэл, толгойн товчнууд. */
-  extraActions?: (m: Message, mine: boolean, close: () => void) => MessageAction[];
-  headerButtons?: ReactNode;
-}
 
 function pendingToMessage(p: PendingMessage, me: string, myName: string): Message {
   return {
@@ -90,7 +91,7 @@ function HeaderButton({ label, onPress, children, testID }: { label: string; onP
  * реакц (ANIM-07), «Бичиж байна» (ANIM-08, AC-177), «Хайртай» (AC-178), толгойд хамтрагч, дараагийн
  * болзоо ба амлалт. Алга болдог мессеж харагдаж байхад дэлгэцийн хамгаалалт (FR-6.9).
  */
-export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras = {}) {
+export function ChatScreenView() {
   const t = useT();
   const colors = useColors();
   const errorText = useErrorText();
@@ -100,6 +101,16 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
   const couple = useCoupleQuery();
   const dashboard = useDashboard();
   const promise = useQuery({ queryKey: ['promise'], queryFn: fetchCurrentPromise });
+  const params = useLocalSearchParams<{ around?: string; date?: string }>();
+  const focusId = typeof params.around === 'string' && params.around ? params.around : null;
+  const focusDate = typeof params.date === 'string' && params.date ? params.date : null;
+  const history = useQuery({
+    queryKey: ['messages', 'focus', focusId ?? focusDate],
+    queryFn: () => (focusId ? fetchMessages({ around: focusId, limit: 40 }) : jumpToDate(focusDate ?? '')),
+    enabled: !!(focusId || focusDate),
+  });
+  const inHistory = !!(focusId || focusDate);
+  const pinned = useQuery({ queryKey: PINNED_KEY, queryFn: listPinned });
   const chat = useChatWindow();
   const pending = usePendingMessages();
   const listRef = useRef<FlatList<BubbleModel>>(null);
@@ -114,6 +125,7 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
   const [highlight, setHighlight] = useState<string | null>(null);
   const [attaching, setAttaching] = useState(false);
   const [focused, setFocused] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
   const readSent = useRef<string | null>(null);
 
   const partner = partnerNameOf(couple.data) ?? t('chat.partnerFallback');
@@ -163,13 +175,14 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
   }, [items, me, focused]);
 
   const rows = useMemo<BubbleModel[]>(() => {
+    if (inHistory) return (history.data?.items ?? []).map((m) => ({ key: m.id, message: m }));
     const known = new Set(items.map((m) => m.clientMessageId));
     const server = items.map((m) => ({ key: m.id, message: m }));
     const local = pending
       .filter((p) => !known.has(p.clientMessageId))
       .map((p) => ({ key: `pending-${p.clientMessageId}`, message: pendingToMessage(p, me, myName), sending: true }));
     return [...server, ...local];
-  }, [items, pending, me, myName]);
+  }, [items, pending, me, myName, inHistory, history.data]);
   const inverted = useMemo(() => [...rows].reverse(), [rows]);
 
   // Алга болдог мессеж харагдаж байх үеийн хамгаалалт (Android FLAG_SECURE, iOS мэдэгдэл; вэб — GAP-12)
@@ -198,8 +211,29 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
     listRef.current?.scrollToOffset({ offset: 0, animated: true });
   };
 
-  const attach = async () => {
+  const attach = async (kind: AttachKind) => {
     setActionError(null);
+    setNotice(null);
+    if (kind === 'file') {
+      setAttaching(true);
+      try {
+        const out = await pickAndUploadFile();
+        if (out.status === 'rejected') setNotice(out.reason === 'TOO_LARGE' ? t('chat.attach.tooLarge') : t('chat.attach.forbidden'));
+        if (out.status === 'uploaded') await sendMessage({ kind: 'FILE', mediaId: out.mediaId, ...(replyTo ? { replyToId: replyTo.id } : {}) });
+      } catch (e) {
+        setActionError(e);
+      } finally {
+        setAttaching(false);
+      }
+      return;
+    }
+    if (kind === 'location') {
+      const out = await currentPlace(t('chat.attach.myLocation'));
+      if (out.status === 'denied') setNotice(t('chat.attach.locationDenied'));
+      else if (out.status === 'failed') setNotice(t('chat.attach.locationFailed'));
+      else await sendMessage({ kind: 'LOCATION', location: out.place, ...(replyTo ? { replyToId: replyTo.id } : {}) });
+      return;
+    }
     const picked = await pickMedia('library', MEDIA_MAX - 1);
     if (picked.status !== 'picked') return;
     const asset = picked.assets[0];
@@ -281,6 +315,64 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
     }
   };
 
+  /** S-41-ийн нэмэлт үйлдэл (FR-6.7, FR-6.8): pin (хоёулаа хасаж болно), хуулах, газрын зураг, дурсамж болгох. */
+  const menuActions = (m: Message): MessageAction[] => {
+    const close = () => setSelected(null);
+    const list: MessageAction[] = [
+      {
+        key: m.pinnedAt ? 'unpin' : 'pin',
+        label: m.pinnedAt ? t('chat.actions.unpin') : t('chat.actions.pin'),
+        icon: m.pinnedAt ? PinOff : Pin,
+        onPress: () => {
+          close();
+          setPinned(m.id, !m.pinnedAt)
+            .then(() => {
+              void pinned.refetch();
+              void chat.refetch();
+            })
+            .catch(setActionError);
+        },
+      },
+    ];
+    if (m.text) {
+      list.push({
+        key: 'copy',
+        label: t('chat.actions.copy'),
+        icon: Copy,
+        onPress: () => {
+          close();
+          void Clipboard.setStringAsync(m.text ?? '').then(() => setNotice(t('chat.actions.copied')));
+        },
+      });
+    }
+    if (m.kind === 'LOCATION' && m.location) {
+      const place = m.location;
+      list.push({
+        key: 'map',
+        label: t('chat.actions.openMap'),
+        icon: MapPin,
+        onPress: () => {
+          close();
+          void Linking.openURL(mapUrl(place));
+        },
+      });
+    }
+    if (m.kind === 'TEXT' || m.kind === 'IMAGE' || m.kind === 'LOCATION') {
+      list.push({
+        key: 'memory',
+        label: t('chat.actions.toMemory'),
+        icon: Sparkles,
+        onPress: () => {
+          close();
+          router.push({ pathname: '/memory-editor', params: { draft: JSON.stringify(memoryPrefillFrom(m, tz)) } });
+        },
+      });
+    }
+    return list;
+  };
+
+  const lastPinned = pinned.data?.[pinned.data.length - 1];
+  const historyAnchor = inHistory ? (focusId ?? history.data?.items[0]?.id ?? null) : null;
   const nextDate = dashboard.data?.nextDate;
   const partnerCard = dashboard.data?.partner;
   const header = (
@@ -297,7 +389,12 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
             </AppText>
           ) : null}
         </View>
-        {headerButtons}
+        <HeaderButton label={t('chat.search.title')} onPress={() => router.push('/chat/search')} testID="chat-open-search">
+          <Search size={22} color={colors.text} strokeWidth={iconStroke} />
+        </HeaderButton>
+        <HeaderButton label={t('chat.media.title')} onPress={() => router.push('/chat/media')} testID="chat-open-media">
+          <FolderOpen size={22} color={colors.text} strokeWidth={iconStroke} />
+        </HeaderButton>
         <HeaderButton label={t('chat.disappearing.title')} onPress={() => router.push('/chat/disappearing')} testID="chat-open-disappearing">
           <Timer size={22} color={colors.text} strokeWidth={iconStroke} />
         </HeaderButton>
@@ -328,12 +425,38 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
           </View>
         </Pressable>
       ) : null}
+      {pinned.data && pinned.data.length > 0 ? (
+        <Pressable
+          onPress={() => router.push('/chat/pins')}
+          accessibilityRole="button"
+          accessibilityLabel={t('chat.pins.bannerA11y', { count: pinned.data.length })}
+          style={[styles.promise, { backgroundColor: colors.surface, borderColor: colors.border }]}
+          testID="chat-pinned-banner"
+        >
+          <Pin size={16} color={colors.secondary} strokeWidth={iconStroke} />
+          <AppText variant="caption" numberOfLines={1} style={styles.headerMain}>
+            {lastPinned ? (lastPinned.text ?? t(`chat.kind.${lastPinned.kind}`)) : ''}
+          </AppText>
+          <AppText variant="label" color="secondary">
+            {pinned.data.length}
+          </AppText>
+        </Pressable>
+      ) : null}
+      {inHistory ? (
+        <Pressable onPress={() => router.replace('/chat')} accessibilityRole="button" style={styles.headerPill} testID="chat-back-to-latest">
+          <AppText variant="label" color="primary">
+            {t('chat.backToLatest')}
+          </AppText>
+        </Pressable>
+      ) : null}
     </View>
   );
 
   const empty = emptyStateText('S-40', locale);
   let content: ReactNode;
-  if (chat.isLoading && rows.length === 0) content = <ScreenState kind="loading" rows={6} />;
+  if (inHistory && history.isLoading) content = <ScreenState kind="loading" rows={6} />;
+  else if (inHistory && history.isError) content = <ScreenState kind="error" onRetry={() => void history.refetch()} />;
+  else if (chat.isLoading && rows.length === 0) content = <ScreenState kind="loading" rows={6} />;
   else if (chat.isError && rows.length === 0) content = <ScreenState kind="error" onRetry={() => void chat.refetch()} />;
   else if (rows.length === 0) content = <ScreenState kind="empty" text={empty.text} actionLabel={empty.action} onAction={() => void sendMessage({ kind: 'HEART' })} />;
   else
@@ -344,7 +467,9 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
         data={inverted}
         keyExtractor={(r) => r.key}
         testID="chat-list"
-        onEndReached={() => void chat.loadOlder()}
+        onEndReached={() => {
+          if (!inHistory) void chat.loadOlder();
+        }}
         onEndReachedThreshold={0.3}
         onScrollToIndexFailed={(info) => {
           // Хэмжээ хараахан тооцогдоогүй мөр — нэг удаа дахин оролдоно
@@ -368,11 +493,12 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
                 mine={item.message.sender.id === me}
                 now={now}
                 partnerName={partner}
-                highlighted={highlight === item.message.id}
+                highlighted={highlight === item.message.id || item.message.id === historyAnchor}
                 onLongPress={setSelected}
                 onQuotePress={(id) => void jumpTo(id)}
                 onOpen={(m) => {
-                  if (m.media?.urls.original) void Linking.openURL(m.media.urls.original);
+                  if (m.kind === 'LOCATION' && m.location) void Linking.openURL(mapUrl(m.location));
+                  else if (m.media?.urls.original) void Linking.openURL(m.media.urls.original);
                 }}
                 renderVoice={(m, mine) => <VoiceMessagePlayer message={m} mine={mine} />}
               />
@@ -388,6 +514,7 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
         {header}
         <View style={styles.flex}>{content}</View>
         {actionError ? <FormMessage text={errorText(actionError)} testID="chat-error" /> : null}
+        {notice ? <FormMessage kind="info" text={notice} testID="chat-notice" /> : null}
         <ChatComposer
           key={editing ? `edit-${editing.id}` : 'compose'}
           replyTo={replyTo}
@@ -398,7 +525,7 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
             setEditing(null);
           }}
           onSend={(text) => void send(text)}
-          onAttach={() => void attach()}
+          onAttach={(kind) => void attach(kind)}
           attaching={attaching}
           voice={{
             phase: voice.phase,
@@ -447,7 +574,7 @@ export function ChatScreenView({ extraActions, headerButtons }: ChatScreenExtras
           setSelected(null);
           setConfirmDelete(m);
         }}
-        extra={selected && extraActions ? extraActions(selected, selected.sender.id === me, () => setSelected(null)) : []}
+        extra={selected ? menuActions(selected) : []}
       />
       <ConfirmSheet
         visible={!!confirmDelete}
