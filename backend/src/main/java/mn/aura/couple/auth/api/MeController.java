@@ -27,6 +27,7 @@ import mn.aura.couple.auth.app.MeAssembler;
 import mn.aura.couple.auth.app.PasswordChangeService;
 import mn.aura.couple.auth.app.PolicyAcceptanceService;
 import mn.aura.couple.common.ApiException;
+import mn.aura.couple.couple.app.AccountDeletionService;
 import mn.aura.couple.common.ErrorCode;
 import mn.aura.couple.common.security.AuraAuthentication;
 import org.springframework.http.HttpStatus;
@@ -51,10 +52,12 @@ public class MeController implements MeApi {
     private final ProfileService profile;
     private final PreferenceService preferences;
     private final CelebrationSeenService celebrations;
+    private final AccountDeletionService deletion;
 
     public MeController(MeAssembler me, PasswordChangeService passwordChange, EmailChangeService emailChange,
                         PolicyAcceptanceService policy, ProfileService profile, PreferenceService preferences,
-                        CelebrationSeenService celebrations) {
+                        CelebrationSeenService celebrations, AccountDeletionService deletion) {
+        this.deletion = deletion;
         this.me = me;
         this.passwordChange = passwordChange;
         this.emailChange = emailChange;
@@ -123,7 +126,9 @@ public class MeController implements MeApi {
 
     @Override
     public ResponseEntity<AccountDeletionResult> deleteAccount(AccountDeletionRequest body) {
-        throw notYet();
+        AccountDeletionResult result = new AccountDeletionResult(
+                deletion.delete(current().userId(), body.getPassword(), body.getConfirmPhrase()).orElse(null));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(result);
     }
 
     @Override

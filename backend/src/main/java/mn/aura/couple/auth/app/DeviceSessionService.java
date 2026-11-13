@@ -86,6 +86,12 @@ public class DeviceSessionService {
         return revokeAll(userId, reason, null, true);
     }
 
+    /** Бүх session хааж access-ийг шууд хүчингүй болгоно (акаунт устгал г.м. бусад домэйнд). */
+    @Transactional
+    public List<UUID> revokeEverywhere(UUID userId) {
+        return revokeAll(userId, DeviceSession.RevokedReason.REVOKE_ALL, null, true);
+    }
+
     private void announce(UUID userId, List<UUID> revoked) {
         for (UUID id : revoked) {
             events.publishEvent(RealtimeEvent.of("session.revoked", null, List.of(userId), java.util.Map.of("sessionId", id)));

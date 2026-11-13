@@ -936,6 +936,42 @@
         "title": "Good evening",
         "body": "Share today's best moment with {partner}."
       }
+    },
+    {
+      "id": "n-partner-deleted-1",
+      "type": "PARTNER_DELETED",
+      "mn": {
+        "title": "{partner} акаунтаа устгалаа",
+        "body": "Хамтын дурсамжаа 30 хоногийн дотор хуулбарлан авах боломжтой."
+      },
+      "en": {
+        "title": "{partner} deleted their account",
+        "body": "You can export your shared memories within 30 days."
+      }
+    },
+    {
+      "id": "n-partner-deleted-2",
+      "type": "PARTNER_DELETED",
+      "mn": {
+        "title": "Хамтын орон зай хаагдана",
+        "body": "{partner} Aura-аас гарсан. 30 хоногийн дотор хуулбараа татаж аваарай."
+      },
+      "en": {
+        "title": "Your shared space will close",
+        "body": "{partner} has left Aura. Download your copy within 30 days."
+      }
+    },
+    {
+      "id": "n-partner-deleted-3",
+      "type": "PARTNER_DELETED",
+      "mn": {
+        "title": "Дурсамжаа хадгалаарай",
+        "body": "{partner} акаунтаа устгасан тул хамтын орон зай 30 хоногийн дараа устна."
+      },
+      "en": {
+        "title": "Keep your memories",
+        "body": "{partner} deleted their account, so your shared space will be removed in 30 days."
+      }
     }
   ]
 }
