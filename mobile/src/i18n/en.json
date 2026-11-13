@@ -1077,5 +1077,18 @@
     "confirmTitle": "Sign out of all devices?",
     "confirmBody": "Every session, including this one, will be closed. The fastest protection if your phone is lost.",
     "requirePassword": "Require password to sign in again (remote lock)"
+  },
+  "dataSettings": {
+    "title": "Data & storage",
+    "usage": "Using {{used}} / {{quota}} GB",
+    "warning": "Storage is over 80% full. You can delete files you no longer need or empty the trash.",
+    "exportTitle": "Copy of all your data",
+    "exportNote": "JSON + every photo, video and voice note + an easy-to-read HTML page. We'll notify you when it's ready; the link works for 7 days. Your partner's private items (gift ideas, unshared moods) are not included.",
+    "exportStart": "Prepare a copy",
+    "exportStarted": "Started — we'll let you know when it's ready.",
+    "exportBusy": "A copy is already being prepared. Try again once it finishes.",
+    "exports": "Copies",
+    "trash": "Trash",
+    "trashNote": "Deleted memories are kept for 30 days."
   }
 }

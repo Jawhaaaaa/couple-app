@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { Bell, ChevronRight, CircleUser, Lock } from 'lucide-react-native';
+import { Bell, ChevronRight, CircleUser, Database, Lock } from 'lucide-react-native';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/AppText';
@@ -46,6 +46,17 @@ export default function SettingsScreen() {
         >
           <Lock size={22} color={colors.primary} strokeWidth={iconStroke} />
           <AppText style={styles.flex}>{t('lock.settings.screenTitle')}</AppText>
+          <ChevronRight size={20} color={colors.textMuted} strokeWidth={iconStroke} />
+        </Pressable>
+        <Pressable
+          onPress={() => router.push('/settings/data')}
+          accessibilityRole="button"
+          accessibilityLabel={t('dataSettings.title')}
+          testID="settings-data"
+          style={({ pressed }) => [styles.row, { backgroundColor: colors.surface, borderColor: colors.border, opacity: pressed ? 0.85 : 1 }]}
+        >
+          <Database size={22} color={colors.primary} strokeWidth={iconStroke} />
+          <AppText style={styles.flex}>{t('dataSettings.title')}</AppText>
           <ChevronRight size={20} color={colors.textMuted} strokeWidth={iconStroke} />
         </Pressable>
       </View>
