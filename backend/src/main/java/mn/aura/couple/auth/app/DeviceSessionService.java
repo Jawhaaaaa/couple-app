@@ -6,7 +6,9 @@ import mn.aura.couple.auth.domain.DeviceSession;
 import mn.aura.couple.auth.domain.DeviceSessionRepository;
 import mn.aura.couple.auth.domain.UserAccountRepository;
 import mn.aura.couple.common.ApiException;
+import mn.aura.couple.common.event.RealtimeEvent;
 import mn.aura.couple.common.time.TimeProvider;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronization;
@@ -15,6 +17,8 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 /**
  * Төхөөрөмжийн session (DD-AURA-006/007). Хэрэглэгч тутмын бүх session-ийг хаах үед
  * `users.session_version`-ийг нэмж бүх access JWT-г шууд хүчингүй болгоно (AC-03, AC-07, AC-125).
+ * Хаагдсан session бүрд хэрэглэгчийн бусад төхөөрөмж рүү `session.revoked {sessionId}` (asyncapi) — тэр төхөөрөмж
+ * дараагийн хүсэлтийг хүлээлгүй S-03 руу гарна (AC-56).
  */
 @Service
 public class DeviceSessionService {
@@ -22,13 +26,15 @@ public class DeviceSessionService {
     private final DeviceSessionRepository sessions;
     private final UserAccountRepository users;
     private final SessionVersionCache cache;
+    private final ApplicationEventPublisher events;
     private final TimeProvider time;
 
     public DeviceSessionService(DeviceSessionRepository sessions, UserAccountRepository users,
-                                SessionVersionCache cache, TimeProvider time) {
+                                SessionVersionCache cache, ApplicationEventPublisher events, TimeProvider time) {
         this.sessions = sessions;
         this.users = users;
         this.cache = cache;
+        this.events = events;
         this.time = time;
     }
 
@@ -52,6 +58,7 @@ public class DeviceSessionService {
                 .orElseThrow(ApiException::notFound);
         sessions.revoke(s.id(), reason, time.now());
         afterCommit(() -> cache.invalidateSession(sessionId));
+        announce(userId, List.of(sessionId));
     }
 
     /**
@@ -65,7 +72,24 @@ public class DeviceSessionService {
             users.bumpSessionVersion(userId);
         }
         afterCommit(() -> cache.invalidateUser(userId));
+        announce(userId, revoked);
         return revoked;
+    }
+
+    /**
+     * Алсаас түгжих (GAP-24 анхдагч, AC-187): бүх session хааж, дараагийн нэвтрэлтэд нууц үг шаардана —
+     * OAuth/passkey шууд нэвтрүүлэхгүй.
+     */
+    @Transactional
+    public List<UUID> lockRemotely(UUID userId, DeviceSession.RevokedReason reason) {
+        users.setRequirePassword(userId);
+        return revokeAll(userId, reason, null, true);
+    }
+
+    private void announce(UUID userId, List<UUID> revoked) {
+        for (UUID id : revoked) {
+            events.publishEvent(RealtimeEvent.of("session.revoked", null, List.of(userId), java.util.Map.of("sessionId", id)));
+        }
     }
 
     public void touch(UUID sessionId) {

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Гэрээний `Sessions` tag (AC-56, AC-125). Хаагдсан session-ийн access ба refresh шууд хүчингүй
  * (`SessionVersionCache`). «Бүгдээс гарах» нь `session_version`-ийг нэмж бүх access-ийг хаана;
- * `requirePassword` бол дараагийн нэвтрэлтэд нууц үг шаардана. Дэлгэрэнгүй (WS `session.revoked`,
- * алсаас түгжих — GAP-24) T-71-д.
+ * `requirePassword` бол алсаас түгжих (GAP-24): дараагийн нэвтрэлтэд нууц үг шаардана (AC-187). Хаагдсан session бүрд
+ * WS `session.revoked`.
  */
 @RestController
 public class SessionsController implements SessionsApi {
@@ -51,9 +51,10 @@ public class SessionsController implements SessionsApi {
     public ResponseEntity<Void> revokeAllSessions(RevokeAllRequest body) {
         UUID userId = MeController.current().userId();
         if (Boolean.TRUE.equals(body.getRequirePassword())) {
-            users.setRequirePassword(userId);
+            sessions.lockRemotely(userId, mn.aura.couple.auth.domain.DeviceSession.RevokedReason.REVOKE_ALL);
+        } else {
+            sessions.revokeAll(userId, mn.aura.couple.auth.domain.DeviceSession.RevokedReason.REVOKE_ALL, null, true);
         }
-        sessions.revokeAll(userId, mn.aura.couple.auth.domain.DeviceSession.RevokedReason.REVOKE_ALL, null, true);
         return ResponseEntity.noContent().build();
     }
 }

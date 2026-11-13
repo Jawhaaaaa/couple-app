@@ -44,7 +44,6 @@ public class NotMeService {
             throw new ApiException(ErrorCode.TOKEN_EXPIRED, HttpStatus.GONE);
         }
         tokens.consume(token.id(), now);
-        users.setRequirePassword(token.userId());
-        sessions.revokeAll(token.userId(), DeviceSession.RevokedReason.NOT_ME, null, true);
+        sessions.lockRemotely(token.userId(), DeviceSession.RevokedReason.NOT_ME);
     }
 }
