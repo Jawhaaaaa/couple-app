@@ -151,7 +151,7 @@ crontab /opt/aura/deploy/backup/crontab.example
 crontab -l
 ```
 
-`deploy/backup/crontab.example`: DuckDNS 5 мин тутам, `pg_dump` шөнө бүр 03:15 UTC, медиа sync
+`deploy/backup/crontab.example`: DuckDNS 5 мин тутам, `pg_dump` шөнө бүр 03:15 (Улаанбаатар; cron UTC-ээр 19:15), медиа sync
 03:45, сэргээх тест ням гариг 04:30, сэрэмжлүүлэг 5 мин тутам, лог архив 00:05. Oracle Object
 Storage руу гадаад хуулбар — `docs/BACKUP.md` §3.
 
