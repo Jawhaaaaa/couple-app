@@ -50,11 +50,13 @@ public class DataExportService implements JobHandler {
     private final MediaStorageService storage;
     private final ApplicationEventPublisher events;
     private final ObjectMapper mapper;
+    private final ExportMails mails;
     private final TimeProvider time;
 
     public DataExportService(JdbcTemplate jdbc, JobQueue jobs, List<ExportGenerator> generators,
                              MediaStorageService storage, ApplicationEventPublisher events, ObjectMapper mapper,
-                             TimeProvider time) {
+                             ExportMails mails, TimeProvider time) {
+        this.mails = mails;
         this.jdbc = jdbc;
         this.jobs = jobs;
         this.generators = generators.stream().collect(Collectors.toMap(ExportGenerator::kind, g -> g));
@@ -152,6 +154,7 @@ public class DataExportService implements JobHandler {
                     Timestamp.from(now), Timestamp.from(now.plus(LINK_TTL)), Timestamp.from(now), id);
             events.publishEvent(new Notify(userId, (UUID) row.get("space_id"), null, "EXPORT_READY", Map.of(),
                     "/settings/data"));
+            mails.ready(userId); // апп ба имэйл мэдэгдэл (AC-126)
         } finally {
             try (var paths = Files.walk(dir)) {
                 for (Path p : paths.sorted(java.util.Comparator.reverseOrder()).toList()) {
