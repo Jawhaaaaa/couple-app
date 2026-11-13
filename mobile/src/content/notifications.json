@@ -828,6 +828,42 @@
         "title": "Today's question is ready",
         "body": "A question is waiting for you. It only takes a minute."
       }
+    },
+    {
+      "id": "n-screenshot-taken-1",
+      "type": "SCREENSHOT_TAKEN",
+      "mn": {
+        "title": "Дэлгэцийн зураг авлаа",
+        "body": "{partner} алга болдог мессежийн дэлгэцийн зургийг авлаа."
+      },
+      "en": {
+        "title": "Screenshot taken",
+        "body": "{partner} took a screenshot of a disappearing message."
+      }
+    },
+    {
+      "id": "n-screenshot-taken-2",
+      "type": "SCREENSHOT_TAKEN",
+      "mn": {
+        "title": "Мессежийг хадгалжээ",
+        "body": "{partner} алга болох мессежийг дэлгэцийн зургаар хадгаллаа."
+      },
+      "en": {
+        "title": "Message saved",
+        "body": "{partner} saved a disappearing message as a screenshot."
+      }
+    },
+    {
+      "id": "n-screenshot-taken-3",
+      "type": "SCREENSHOT_TAKEN",
+      "mn": {
+        "title": "Дэлгэцийн зураг",
+        "body": "{partner} чиний алга болдог мессежийг зураг болгон авлаа — мэдэж байг гэж хэлж байна."
+      },
+      "en": {
+        "title": "Screenshot",
+        "body": "{partner} captured your disappearing message — just letting you know."
+      }
     }
   ]
 }

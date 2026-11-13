@@ -15,8 +15,8 @@ import mn.aura.couple.api.model.ReactionSummary;
 import mn.aura.couple.api.model.ReadReceipt;
 import mn.aura.couple.chat.app.ChatMessageService;
 import mn.aura.couple.chat.app.ChatSearchService;
+import mn.aura.couple.chat.app.DisappearingSettingsService;
 import mn.aura.couple.chat.app.PinService;
-import mn.aura.couple.common.ApiException;
 import mn.aura.couple.common.space.SpaceAccessGuard;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,12 +30,15 @@ public class ChatController implements ChatApi {
     private final ChatMessageService messages;
     private final ChatSearchService search;
     private final PinService pins;
+    private final DisappearingSettingsService disappearing;
 
-    public ChatController(SpaceAccessGuard guard, ChatMessageService messages, ChatSearchService search, PinService pins) {
+    public ChatController(SpaceAccessGuard guard, ChatMessageService messages, ChatSearchService search, PinService pins,
+                          DisappearingSettingsService disappearing) {
         this.guard = guard;
         this.messages = messages;
         this.search = search;
         this.pins = pins;
+        this.disappearing = disappearing;
     }
 
     @Override
@@ -114,13 +117,14 @@ public class ChatController implements ChatApi {
 
     @Override
     public ResponseEntity<Void> reportScreenshot(UUID messageId) {
-        guard.requireWritableCouple();
-        throw ApiException.notFound(); // T-45
+        disappearing.screenshot(guard.requireWritableCouple(), messageId);
+        return ResponseEntity.noContent().build();
     }
 
     @Override
     public ResponseEntity<ChatSettings> updateChatSettings(ChatSettings body) {
-        guard.requireWritableCouple();
-        throw ApiException.notFound(); // T-45
+        int seconds = disappearing.update(guard.requireWritableCouple(),
+                body.getDisappearSeconds() == null ? null : body.getDisappearSeconds().getValue());
+        return ResponseEntity.ok(new ChatSettings(ChatSettings.DisappearSecondsEnum.fromValue(seconds)));
     }
 }

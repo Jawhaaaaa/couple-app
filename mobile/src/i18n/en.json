@@ -805,5 +805,23 @@
       "done": "Finish",
       "thanks": "Thank you for every day you've made together."
     }
+  },
+  "chat": {
+    "disappearing": {
+      "title": "Disappearing messages",
+      "body": "Once your partner reads a message, it is removed from both phones and the server after the chosen time. Messages already sent are not affected.",
+      "option": {
+        "off": "Off",
+        "minute": "1 minute",
+        "hour": "1 hour",
+        "day": "1 day"
+      },
+      "saved": "Saved — applies to your next messages.",
+      "offline": "You can change this once you're back online.",
+      "protectionNative": "Screenshots are blocked on Android. On iPhone, your partner is notified if you take one.",
+      "protectionWeb": "Screenshot protection doesn't work in the web version — browsers can't block or detect screenshots.",
+      "remaining": "{{time}} left",
+      "waiting": "Timer starts once it's read"
+    }
   }
 }
