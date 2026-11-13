@@ -231,7 +231,8 @@ public class UploadSessionService implements TestRunnableJob {
                     img.height(), "READY", now);
         } else {
             // Видео (T-34) ба дууг (T-46) хөрвүүлэх ажил `MediaUploaded`-ийг сонсож PROCESSING → READY болгоно
-            String status = kind == Kind.VIDEO ? "PROCESSING" : "READY";
+            String status = kind == Kind.VIDEO || AudioTranscodeJob.transcodes(kind.name(), row.purpose())
+                    ? "PROCESSING" : "READY";
             insertMedia(row, kind.name(), row.detectedMime(), stored, "{}", null, null, null, status, now);
         }
         quota.adjust(row.spaceId(), stored - row.totalBytes());

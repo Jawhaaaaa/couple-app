@@ -50,6 +50,22 @@ public final class DockerCommandRunner implements CommandRunner {
         return new Result(r.getExitCode(), r.getStdout(), r.getStderr());
     }
 
+    /**
+     * Тестийн дуу: lavfi sine-ээр `seconds` урт, `file`-ийн өргөтгөлөөр (`voice.webm` → opus, `voice.m4a` → AAC).
+     * Эхний хагас нь чимээгүй — долгион тэгш биш гэдгийг шалгахад.
+     */
+    public byte[] testAudio(int seconds, String file) throws Exception {
+        Path dir = Files.createTempDirectory("aura-testaudio-");
+        String codec = file.endsWith(".webm") || file.endsWith(".ogg") ? "libopus" : "aac";
+        Result r = run(dir, List.of("ffmpeg", "-y", "-v", "error", "-f", "lavfi", "-i",
+                "sine=frequency=440:duration=" + seconds, "-af", "volume='if(lt(t," + (seconds / 2.0) + "),0,1)':eval=frame",
+                "-c:a", codec, "-metadata", "location=+47.9077+106.8832/", file));
+        if (!r.ok()) {
+            throw new IllegalStateException(r.stderr());
+        }
+        return Files.readAllBytes(dir.resolve(file));
+    }
+
     /** Тестийн оролт: lavfi-ээр `seconds` урт, 1920×1080, дуутай видео үүсгэнэ. */
     public byte[] testVideo(int seconds) throws Exception {
         Path dir = Files.createTempDirectory("aura-testvideo-");
