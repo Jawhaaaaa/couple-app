@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { ChevronRight, CircleUser } from 'lucide-react-native';
+import { Bell, ChevronRight, CircleUser } from 'lucide-react-native';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/AppText';
@@ -24,6 +24,17 @@ export default function SettingsScreen() {
         >
           <CircleUser size={22} color={colors.primary} strokeWidth={iconStroke} />
           <AppText style={styles.flex}>{t('common.profile')}</AppText>
+          <ChevronRight size={20} color={colors.textMuted} strokeWidth={iconStroke} />
+        </Pressable>
+        <Pressable
+          onPress={() => router.push('/settings/notifications')}
+          accessibilityRole="button"
+          accessibilityLabel={t('notificationSettings.title')}
+          testID="settings-notifications"
+          style={({ pressed }) => [styles.row, { backgroundColor: colors.surface, borderColor: colors.border, opacity: pressed ? 0.85 : 1 }]}
+        >
+          <Bell size={22} color={colors.primary} strokeWidth={iconStroke} />
+          <AppText style={styles.flex}>{t('notificationSettings.title')}</AppText>
           <ChevronRight size={20} color={colors.textMuted} strokeWidth={iconStroke} />
         </Pressable>
       </View>

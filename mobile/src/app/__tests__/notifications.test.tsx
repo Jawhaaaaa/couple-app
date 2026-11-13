@@ -92,8 +92,11 @@ describe('AC-120 S-24 мэдэгдлийн жагсаалт', () => {
     expect(postSpy).not.toHaveBeenCalled();
     expect(router.push).toHaveBeenCalledWith('/memories/m4');
 
+    // Гадны URL хэзээ ч нээгдэхгүй — төрлийнх нь апп доторх дэлгэц рүү (AC-50)
     await fireEvent.press(screen.getByTestId('notification-item-unread'));
-    expect(router.push).toHaveBeenCalledTimes(1);
+    const last = (router.push as jest.Mock).mock.calls.at(-1)?.[0] as string;
+    expect(last.startsWith('/')).toBe(true);
+    expect(last).not.toContain('evil');
   });
 
   it('хоосон бол S-24-ийн хоосон төлөв', async () => {

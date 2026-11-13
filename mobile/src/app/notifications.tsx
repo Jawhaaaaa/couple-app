@@ -23,14 +23,10 @@ import { emptyStateText } from '@/content/emptyStates';
 import { useErrorText } from '@/hooks/useErrorText';
 import { useOnlineOnly } from '@/hooks/useOnlineOnly';
 import { formatDate, formatTime, useT } from '@/i18n';
+import { routeForNotification } from '@/notifications/notificationRoutes';
 import { usePrefsStore } from '@/stores/prefsStore';
 import { useColors } from '@/theme/ThemeProvider';
 import { radius, spacing, touchTarget } from '@/theme/tokens';
-
-/** Апп доторх зам л (`/memories/…`) — гадны URL-ыг мэдэгдлээс нээхгүй. */
-function isInAppLink(link: string): boolean {
-  return link.startsWith('/') && !link.startsWith('//');
-}
 
 /**
  * S-24 Мэдэгдлийн жагсаалт (FR-13.4, AC-120): `GET /notifications` хуудаслалттай,
@@ -64,7 +60,7 @@ export default function NotificationsScreen() {
 
   const open = (n: AppNotification) => {
     if (!n.readAt) read.mutate(n);
-    if (isInAppLink(n.deepLink)) router.push(n.deepLink as Href);
+    router.push(routeForNotification(n) as Href);
   };
 
   let body: ReactNode;

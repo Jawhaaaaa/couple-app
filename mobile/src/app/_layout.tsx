@@ -19,6 +19,7 @@ import { OfflineBanner } from '@/components/OfflineBanner';
 import { ServerUnreachable } from '@/components/ServerUnreachable';
 import { TimezonePrompt } from '@/components/TimezonePrompt';
 import { installSoundPlayer } from '@/motion/sound';
+import { useNotificationTapRouting } from '@/notifications/useNotificationTapRouting';
 import { startOutbox } from '@/offline/outboxRuntime';
 import { persistOptions, queryClient } from '@/offline/persist';
 import { startRealtime } from '@/realtime';
@@ -127,6 +128,7 @@ export default function RootLayout() {
   useEffect(() => startUploadQueue(), []);
   // Нэвтэрсэн үед STOMP холболт (DD-AURA-008); токен солигдоход дахин холбогдоно
   useEffect(() => startRealtime(queryClient), []);
+  useNotificationTapRouting();
 
   if (!ready) return null;
   return (

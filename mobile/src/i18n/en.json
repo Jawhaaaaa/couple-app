@@ -951,5 +951,52 @@
     "subtitle_other": "{{count}} places — tap a pin to see their memories",
     "attribution": "Map: {{osm}}",
     "openMemories": "See memories"
-  }
+  },
+  "notificationSettings": {
+    "title": "Notifications",
+    "timeInvalid": "Use HH:MM, e.g. 23:00",
+    "types": {
+      "title": "What to notify you about",
+      "note": "Turned-off types won't be pushed, but they still appear in your in-app notification list.",
+      "messages": "Messages",
+      "signals": "Hearts, hugs and “thinking of you”",
+      "memories": "Memories and comments",
+      "plans": "Date and promise requests",
+      "reminders": "Date and anniversary reminders",
+      "letters": "Letters and capsules",
+      "question": "Daily question answered",
+      "nudges": "Gentle nudge after a quiet week"
+    },
+    "dnd": {
+      "title": "Do not disturb",
+      "note": "No pushes during this time; you'll get one combined notification afterwards. Times are in your zone.",
+      "start": "Start",
+      "end": "End"
+    },
+    "hideContent": {
+      "label": "Hide content",
+      "hint": "The lock screen only shows generic text like “New message”."
+    },
+    "greetings": {
+      "title": "Morning and evening greetings",
+      "morning": "“Good morning”",
+      "evening": "“Sleep well”",
+      "morningAt": "Morning time",
+      "eveningAt": "Evening time"
+    },
+    "quiet": {
+      "title": "Quiet time",
+      "note": "Notifications pause for a while. Your partner only sees “🌙 taking a quiet moment”.",
+      "option": {
+        "60": "1 hour",
+        "1440": "1 day",
+        "10080": "7 days"
+      },
+      "stop": "End quiet time",
+      "on": "Quiet time is on 🌙",
+      "off": "Quiet time ended"
+    },
+    "push": "Turn on push notifications"
+  },
+  "settings": {}
 }

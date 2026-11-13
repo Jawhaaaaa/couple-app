@@ -75,3 +75,53 @@ export function setNotificationsCache(
   client.setQueryData<NotificationPages>(NOTIFICATIONS_KEY, update(previous));
   return previous;
 }
+
+// --- S-83 мэдэгдлийн тохиргоо (FR-13.2, FR-13.3, FR-13.5, FR-13.7) ---
+
+export type NotificationSettings = components['schemas']['NotificationSettings'];
+export type QuietModeState = components['schemas']['QuietModeState'];
+export const NOTIFICATION_SETTINGS_KEY = ['notification-settings'] as const;
+
+export function fetchNotificationSettings(): Promise<NotificationSettings> {
+  return unwrap(api.GET('/notification-settings'));
+}
+
+export function saveNotificationSettings(body: NotificationSettings): Promise<NotificationSettings> {
+  return unwrap(api.PUT('/notification-settings', { body }));
+}
+
+/** «Түр тайван байх» 1 цаг – 7 хоног (AC-123). */
+export function enableQuietMode(durationMinutes: number): Promise<QuietModeState> {
+  return unwrap(api.PUT('/me/quiet-mode', { body: { durationMinutes } }));
+}
+
+export async function disableQuietMode(): Promise<void> {
+  await unwrap(api.DELETE('/me/quiet-mode'));
+}
+
+/** Төрлүүдийг бүлгээр асаах/унтраах (AC-119) — бүлгийн бүх төрөл хамт. */
+export const NOTIFICATION_GROUPS: readonly { key: string; types: readonly string[] }[] = [
+  { key: 'messages', types: ['MESSAGE_NEW', 'SCREENSHOT_TAKEN'] },
+  { key: 'signals', types: ['HEART_RECEIVED', 'HUG_RECEIVED', 'THINKING_OF_YOU'] },
+  { key: 'memories', types: ['MEMORY_CREATED', 'MEMORY_COMMENT'] },
+  { key: 'plans', types: ['DATE_PROPOSED', 'DATE_RESPONDED', 'PROMISE_PROPOSED'] },
+  { key: 'reminders', types: ['DATE_REMINDER', 'ANNIVERSARY_REMINDER'] },
+  { key: 'letters', types: ['LETTER_DELIVERED', 'CAPSULE_OPENED'] },
+  { key: 'question', types: ['QUESTION_PARTNER_ANSWERED'] },
+  { key: 'nudges', types: ['INACTIVITY_NUDGE'] },
+];
+
+export function groupEnabled(settings: Pick<NotificationSettings, 'disabledTypes'>, types: readonly string[]): boolean {
+  return types.every((t) => !settings.disabledTypes.includes(t));
+}
+
+export function toggleGroup(settings: NotificationSettings, types: readonly string[], enabled: boolean): NotificationSettings {
+  const set = new Set(settings.disabledTypes);
+  for (const t of types) {
+    if (enabled) set.delete(t);
+    else set.add(t);
+  }
+  return { ...settings, disabledTypes: [...set] };
+}
+
+export const LOCAL_TIME_RE = /^([01][0-9]|2[0-3]):[0-5][0-9]$/;
