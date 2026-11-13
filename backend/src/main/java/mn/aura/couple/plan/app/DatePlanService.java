@@ -575,11 +575,23 @@ public class DatePlanService {
         publish(ctx, loadById(planId));
     }
 
+    /** Давтагдах болзооны сануулга илгээгдмэгц дараагийн давталтуудыг нөхөнө (`ReminderScheduler`, T-68). */
+    @org.springframework.context.event.EventListener
+    public void onReminderFired(ReminderRegistry.Fired fired) {
+        if (fired.type() == SourceType.DATE_PLAN) {
+            try {
+                refreshReminders(UUID.fromString(fired.sourceId()));
+            } catch (IllegalArgumentException e) {
+                // ID биш эх — алгасна
+            }
+        }
+    }
+
     /** Илгээгдсэн сануулгын дараа дараагийн давталтуудыг нөхөж товлох (ReminderScheduler, T-68). */
     @Transactional
     public void refreshReminders(UUID planId) {
         List<Row> rows = query("WHERE p.id = :id AND p.series_id IS NULL", new MapSqlParameterSource("id", planId));
-        if (!rows.isEmpty()) {
+        if (!rows.isEmpty() && rows.get(0).recurring()) { // энгийн болзооны сануулга аль хэдийн бүгд товлогдсон
             syncReminders(rows.get(0));
         }
     }

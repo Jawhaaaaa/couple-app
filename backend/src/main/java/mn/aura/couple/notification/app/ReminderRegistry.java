@@ -30,6 +30,10 @@ public class ReminderRegistry {
     public record Scheduled(UUID id, UUID userId, String kind, Instant fireAt, String status) {
     }
 
+    /** Сануулга илгээгдлээ — эх домэйн дараагийн давталтыг нөхөж товлоно (жишээ нь давтагдах болзоо). */
+    public record Fired(SourceType type, String sourceId, UUID userId) {
+    }
+
     private final JdbcTemplate jdbc;
     private final ObjectMapper mapper;
     private final TimeProvider time;

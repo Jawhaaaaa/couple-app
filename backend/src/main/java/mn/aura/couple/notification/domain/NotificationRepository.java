@@ -35,7 +35,9 @@ public class NotificationRepository {
                              LocalTime greetingEveningAt, Instant quietUntil, Set<String> disabledTypes) {
     }
 
-    public record OutboxRow(UUID id, UUID userId, UUID notificationId, Instant deliverAfter, boolean deferred) {
+    /** `skipLocal` — сануулгын push: native локал сануулгатай subscription-д илгээхгүй (DD-AURA-023). */
+    public record OutboxRow(UUID id, UUID userId, UUID notificationId, Instant deliverAfter, boolean deferred,
+                            boolean skipLocal) {
     }
 
     private final JdbcTemplate jdbc;
@@ -128,18 +130,24 @@ public class NotificationRepository {
     }
 
     public void enqueuePush(UUID id, UUID userId, UUID notificationId, Instant deliverAfter, boolean deferred) {
-        jdbc.update("INSERT INTO push_outbox (id, user_id, notification_id, deliver_after, deferred) VALUES (?, ?, ?, ?, ?)",
-                id, userId, notificationId, ts(deliverAfter), deferred);
+        enqueuePush(id, userId, notificationId, deliverAfter, deferred, false);
+    }
+
+    public void enqueuePush(UUID id, UUID userId, UUID notificationId, Instant deliverAfter, boolean deferred,
+                            boolean skipLocal) {
+        jdbc.update("INSERT INTO push_outbox (id, user_id, notification_id, deliver_after, deferred, skip_local) "
+                + "VALUES (?, ?, ?, ?, ?, ?)", id, userId, notificationId, ts(deliverAfter), deferred, skipLocal);
     }
 
     /** Хугацаа нь болсон PENDING мөрүүдийг түгжиж авна (олон процесс/thread давхар илгээхгүй). */
     public List<OutboxRow> lockDue(Instant now, UUID onlyUser, int limit) {
-        String sql = "SELECT id, user_id, notification_id, deliver_after, deferred FROM push_outbox "
+        String sql = "SELECT id, user_id, notification_id, deliver_after, deferred, skip_local FROM push_outbox "
                 + "WHERE status = 'PENDING' AND deliver_after <= ?" + (onlyUser == null ? "" : " AND user_id = ?")
                 + " ORDER BY deliver_after, id LIMIT ? FOR UPDATE SKIP LOCKED";
         Object[] args = onlyUser == null ? new Object[] {ts(now), limit} : new Object[] {ts(now), onlyUser, limit};
         return jdbc.query(sql, (rs, i) -> new OutboxRow(rs.getObject("id", UUID.class), rs.getObject("user_id", UUID.class),
-                rs.getObject("notification_id", UUID.class), instant(rs, "deliver_after"), rs.getBoolean("deferred")), args);
+                rs.getObject("notification_id", UUID.class), instant(rs, "deliver_after"), rs.getBoolean("deferred"),
+                rs.getBoolean("skip_local")), args);
     }
 
     public void markOutbox(List<UUID> ids, String status, Instant now) {

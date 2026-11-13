@@ -66,6 +66,15 @@ public class NotificationTexts {
         return variants.get(random.nextInt(variants.size())).id();
     }
 
+    /** Төрлийн эхний хувилбараар (тогтвортой) — сануулгын жагсаалтын гарчиг (`GET /reminders`). */
+    public Text renderFirst(String type, String locale, Map<String, String> params) {
+        List<Variant> variants = byType.get(type);
+        if (variants == null || variants.isEmpty()) {
+            return new Text("Aura", "");
+        }
+        return render(variants.get(0).id(), locale, params);
+    }
+
     public Text render(String variantId, String locale, Map<String, String> params) {
         Variant v = Optional.ofNullable(byId.get(variantId))
                 .orElseThrow(() -> new IllegalArgumentException("Мэдэгдлийн хувилбар алга: " + variantId));

@@ -118,7 +118,7 @@ public class PushDeliveryService implements TestRunnableJob, DisposableBean {
         List<OutboxRow> single = new ArrayList<>(rows.stream().filter(r -> !r.deferred()).toList());
         if (deferred.size() >= 2) {
             NotificationTexts.Text merged = NotificationTexts.merged(deferred.size(), locale);
-            send(subs, new PushMessage(deferred.get(deferred.size() - 1).notificationId(), "MERGED", merged.title(),
+            send(targets(subs, deferred.stream().allMatch(OutboxRow::skipLocal)), new PushMessage(deferred.get(deferred.size() - 1).notificationId(), "MERGED", merged.title(),
                     merged.body(), "/notifications"));
             repo.markOutbox(deferred.stream().map(OutboxRow::id).toList(), "MERGED", now);
         } else {
@@ -133,9 +133,14 @@ public class PushDeliveryService implements TestRunnableJob, DisposableBean {
             NotificationTexts.Text text = settings.hideContent()
                     ? NotificationTexts.hidden(n.type(), locale)
                     : texts.render(n.variantId(), locale, n.params());
-            send(subs, new PushMessage(n.id(), n.type(), text.title(), text.body(), n.deepLink()));
+            send(targets(subs, row.skipLocal()), new PushMessage(n.id(), n.type(), text.title(), text.body(), n.deepLink()));
             repo.markOutbox(List.of(row.id()), "SENT", now);
         }
+    }
+
+    /** Сануулгын push бол native локал сануулгатай subscription-ийг хасна (давхардахгүй, DD-AURA-023). */
+    private static List<SubscriptionRow> targets(List<SubscriptionRow> subs, boolean skipLocal) {
+        return skipLocal ? subs.stream().filter(s -> !s.localReminders()).toList() : subs;
     }
 
     private void send(List<SubscriptionRow> subs, PushMessage message) {

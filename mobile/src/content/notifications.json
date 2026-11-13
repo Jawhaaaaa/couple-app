@@ -864,6 +864,78 @@
         "title": "Screenshot",
         "body": "{partner} captured your disappearing message — just letting you know."
       }
+    },
+    {
+      "id": "n-greeting-morning-1",
+      "type": "GREETING_MORNING",
+      "mn": {
+        "title": "Өглөөний мэнд",
+        "body": "{partner} чамд сайхан өдөр хүсэж байна."
+      },
+      "en": {
+        "title": "Good morning",
+        "body": "{partner} is wishing you a lovely day."
+      }
+    },
+    {
+      "id": "n-greeting-morning-2",
+      "type": "GREETING_MORNING",
+      "mn": {
+        "title": "Шинэ өдөр эхэллээ",
+        "body": "Цайгаа уугаад {partner}-д нэг мэндчилгээ илгээгээрэй."
+      },
+      "en": {
+        "title": "A new day begins",
+        "body": "Grab your tea and send {partner} a quick hello."
+      }
+    },
+    {
+      "id": "n-greeting-morning-3",
+      "type": "GREETING_MORNING",
+      "mn": {
+        "title": "Сайхан амарсан уу?",
+        "body": "Өнөөдөр чи {partner} хоёрт дулаахан өдөр байх болтугай."
+      },
+      "en": {
+        "title": "Did you sleep well?",
+        "body": "May today be a warm one for you and {partner}."
+      }
+    },
+    {
+      "id": "n-greeting-evening-1",
+      "type": "GREETING_EVENING",
+      "mn": {
+        "title": "Сайхан амраарай",
+        "body": "{partner} чамд тайван шөнө хүсэж байна."
+      },
+      "en": {
+        "title": "Sleep well",
+        "body": "{partner} is wishing you a peaceful night."
+      }
+    },
+    {
+      "id": "n-greeting-evening-2",
+      "type": "GREETING_EVENING",
+      "mn": {
+        "title": "Өдөр дуусах дөхлөө",
+        "body": "Унтахын өмнө {partner}-д нэг үг бичээрэй."
+      },
+      "en": {
+        "title": "The day is winding down",
+        "body": "Send {partner} a few words before bed."
+      }
+    },
+    {
+      "id": "n-greeting-evening-3",
+      "type": "GREETING_EVENING",
+      "mn": {
+        "title": "Оройн мэнд",
+        "body": "Өнөөдрийн сайхан мөчөө {partner}-тэй хуваалцаарай."
+      },
+      "en": {
+        "title": "Good evening",
+        "body": "Share today's best moment with {partner}."
+      }
     }
   ]
 }

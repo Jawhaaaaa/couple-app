@@ -55,6 +55,14 @@ public class NotificationDispatcher {
     }
 
     public UUID dispatch(Notify n) {
+        return dispatch(n, false);
+    }
+
+    /**
+     * @param reminder хуваарьт сануулга (`ReminderScheduler`) — native локал сануулгатай төхөөрөмж өөрөө товлосон тул
+     *                 тэр subscription-д push явахгүй (DD-AURA-023, AC-180)
+     */
+    public UUID dispatch(Notify n, boolean reminder) {
         Instant now = time.now();
         UUID id = Ids.newId();
         String variant = texts.pickVariant(n.type());
@@ -66,7 +74,7 @@ public class NotificationDispatcher {
         if (!settings.disabledTypes().contains(n.type()) && !quiet) {
             Instant dndEnd = NotificationPreferenceService.dndEndsAt(settings,
                     ZoneId.of(repo.timezone(n.recipientId())), now);
-            repo.enqueuePush(Ids.newId(), n.recipientId(), id, dndEnd == null ? now : dndEnd, dndEnd != null);
+            repo.enqueuePush(Ids.newId(), n.recipientId(), id, dndEnd == null ? now : dndEnd, dndEnd != null, reminder);
             if (dndEnd == null) {
                 events.publishEvent(new PushDue(n.recipientId()));
             }
