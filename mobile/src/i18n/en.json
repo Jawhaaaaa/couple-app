@@ -822,6 +822,58 @@
       "protectionWeb": "Screenshot protection doesn't work in the web version — browsers can't block or detect screenshots.",
       "remaining": "{{time}} left",
       "waiting": "Timer starts once it's read"
+    },
+    "partnerFallback": "Partner",
+    "me": "Me",
+    "localTime": "{{time}} there",
+    "online": "Online",
+    "nextDate": "Next date: {{title}} · {{date}}",
+    "promise": {
+      "proposed": "Promise proposed",
+      "active": "This week's promise"
+    },
+    "typing": "{{name}} is typing",
+    "placeholder": "Message {{name}}…",
+    "inputLabel": "Message",
+    "emoji": "Emoji",
+    "send": "Send",
+    "saveEdit": "Save edit",
+    "attachImage": "Send a photo",
+    "heart": "Love — send a heart",
+    "heartCooldown": "Hearts are resting — {{seconds}} s",
+    "heartFailed": "Couldn't send the heart. Please try again.",
+    "editing": "Editing message",
+    "replyingTo": "Replying to {{name}}",
+    "voice": {
+      "record": "Record a voice message"
+    },
+    "deleted": "Message deleted",
+    "edited": "edited",
+    "longPressHint": "Long-press to react, reply or edit",
+    "quoteA11y": "Quote: {{text}}. Tap to jump to the original",
+    "status": {
+      "SENDING": "Sending",
+      "SENT": "Sent",
+      "DELIVERED": "Delivered",
+      "READ": "Read"
+    },
+    "kind": {
+      "TEXT": "Message",
+      "IMAGE": "Photo",
+      "VOICE": "Voice message",
+      "FILE": "File",
+      "LOCATION": "Location",
+      "HEART": "Heart"
+    },
+    "actions": {
+      "title": "Message",
+      "reply": "Reply",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "deleteConfirm": {
+      "title": "Delete this message?",
+      "body": "Both of you will see “Message deleted”. This can't be undone."
     }
   }
 }

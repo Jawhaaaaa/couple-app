@@ -18,7 +18,16 @@ export function startRealtime(queryClient: QueryClient): () => void {
   client = new RealtimeClient({
     url: WS_URL,
     getToken: () => useSessionStore.getState().accessToken,
-    onEvent: (e) => routeEvent(e, queryClient),
+    onEvent: (e) => {
+      routeEvent(e, queryClient);
+      // Апп нээлттэй (аль ч дэлгэц) — хамтрагчийн мессеж төхөөрөмжид хүрсэн (AC-176)
+      if (e.type === 'chat.message.created') {
+        const m = e.payload as { id?: string; sender?: { id?: string } };
+        if (m.id && m.sender?.id && m.sender.id !== useSessionStore.getState().userId) {
+          client?.send(SEND_DESTINATIONS.chatDelivered, { upToMessageId: m.id });
+        }
+      }
+    },
     onReconnect: () => onReconnect(queryClient),
   });
   let token = useSessionStore.getState().accessToken;

@@ -79,11 +79,15 @@ export function toCandidate(asset: ImagePicker.ImagePickerAsset, index: number):
 }
 
 /**
- * Нэг файлыг бэлтгэж upload дараалалд (`purpose: MEMORY`) оруулна: зургийг GPS-гүй, ≤ 2560 px
+ * Нэг файлыг бэлтгэж upload дараалалд (`purpose`, анхдагч MEMORY; чат — CHAT/FILE) оруулна: зургийг GPS-гүй, ≤ 2560 px
  * JPEG болгоно (AC-21, AC-172); видео нь хэвээр (сервер хөрвүүлнэ). Native-д файлын URI,
  * вэбд Blob (IndexedDB-д хадгалагдаж хуудас дахин ачаалсан ч үргэлжилнэ, AC-20).
  */
-export async function queueAsset(asset: ImagePicker.ImagePickerAsset, index: number): Promise<DraftMedia> {
+export async function queueAsset(
+  asset: ImagePicker.ImagePickerAsset,
+  index: number,
+  purpose: 'MEMORY' | 'CHAT' | 'FILE' = 'MEMORY',
+): Promise<DraftMedia> {
   const kind = assetKind(asset) ?? 'image';
   let uri = asset.uri;
   let mime = asset.mimeType ?? (kind === 'video' ? 'video/mp4' : 'image/jpeg');
@@ -105,7 +109,7 @@ export async function queueAsset(asset: ImagePicker.ImagePickerAsset, index: num
   }
   const durationMs = kind === 'video' && asset.duration ? Math.round(asset.duration) : undefined;
   const item = await uploadQueue.add({
-    purpose: 'MEMORY',
+    purpose,
     fileName: name,
     mime,
     totalBytes,
