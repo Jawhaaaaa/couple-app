@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+import mn.aura.couple.plan.app.DatePlanService;
 import mn.aura.couple.api.model.Comment;
 import mn.aura.couple.api.model.MediaRef;
 import mn.aura.couple.api.model.Memory;
@@ -42,12 +43,15 @@ public class MemoryAssembler {
     private final MediaRefs media;
     private final UserRefs users;
     private final ObjectMapper mapper;
+    private final DatePlanService datePlans;
 
-    public MemoryAssembler(NamedParameterJdbcTemplate jdbc, MediaRefs media, UserRefs users, ObjectMapper mapper) {
+    public MemoryAssembler(NamedParameterJdbcTemplate jdbc, MediaRefs media, UserRefs users, ObjectMapper mapper,
+                           DatePlanService datePlans) {
         this.jdbc = jdbc;
         this.media = media;
         this.users = users;
         this.mapper = mapper;
+        this.datePlans = datePlans;
     }
 
     record Row(UUID id, UUID spaceId, String spaceKind, UUID authorId, String title, String description,
@@ -104,6 +108,12 @@ public class MemoryAssembler {
         m.cover(items.isEmpty() ? null : media.nullable(items.get(0).getMedia()));
         m.dateSource(Memory.DateSourceEnum.fromValue(r.dateSource()));
         m.locationSource(Memory.LocationSourceEnum.fromValue(r.locationSource()));
+        // Болзооноос үүссэн/холбосон дурсамж (AC-95) — хоёр талаас харагдана
+        List<UUID> plan = jdbc.queryForList("""
+                SELECT date_plan_id FROM memory WHERE id = :id AND date_plan_id IS NOT NULL
+                UNION ALL SELECT id FROM date_plan WHERE memory_id = :id
+                """, p, UUID.class);
+        m.datePlan(plan.isEmpty() ? null : datePlans.summaryOf(r.spaceId(), plan.get(0)).orElse(null));
         return m;
     }
 

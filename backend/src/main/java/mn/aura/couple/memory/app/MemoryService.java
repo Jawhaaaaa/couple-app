@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import mn.aura.couple.plan.app.DatePlanService;
 import mn.aura.couple.api.model.Comment;
 import mn.aura.couple.api.model.CommentPage;
 import mn.aura.couple.api.model.Memory;
@@ -63,15 +64,24 @@ public class MemoryService {
     private final UserRefs users;
     private final ApplicationEventPublisher events;
     private final TimeProvider time;
+    private final DatePlanService datePlans;
 
     public MemoryService(NamedParameterJdbcTemplate jdbc, MemoryAssembler assembler, CoupleMembers couples,
-                         UserRefs users, ApplicationEventPublisher events, TimeProvider time) {
+                         UserRefs users, ApplicationEventPublisher events, TimeProvider time, DatePlanService datePlans) {
+        this.datePlans = datePlans;
         this.jdbc = jdbc;
         this.assembler = assembler;
         this.couples = couples;
         this.users = users;
         this.events = events;
         this.time = time;
+    }
+
+    /** Болзоо энэ space-ийнх байх ёстой (AC-95) — өөр space-ийнх → 404. */
+    private void requirePlan(SpaceContext ctx, UUID planId) {
+        if (planId != null && !datePlans.exists(ctx.spaceId(), planId)) {
+            throw ApiException.notFound();
+        }
     }
 
     public MemoryScope scope(SpaceContext ctx) {
@@ -91,6 +101,7 @@ public class MemoryService {
         if (in.getMedia() == null || in.getMedia().isEmpty() || in.getMedia().size() > MAX_MEDIA) {
             throw ApiException.badRequest(ErrorCode.MEDIA_LIMIT_EXCEEDED, "media");
         }
+        requirePlan(ctx, in.getDatePlanId());
         UUID id = Ids.newId();
         Instant now = time.now();
         Set<String> tags = normalizeTags(in.getTags());
@@ -173,6 +184,7 @@ public class MemoryService {
                     : in.getLocationSource() == null ? "MANUAL" : in.getLocationSource().getValue());
         }
         if (in.getDatePlanId() != null) {
+            requirePlan(ctx, in.getDatePlanId());
             sets.add("date_plan_id = :datePlan");
             p.addValue("datePlan", in.getDatePlanId());
         }
