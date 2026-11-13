@@ -830,7 +830,27 @@
     "nextDate": "Next date: {{title}} · {{date}}",
     "promise": {
       "proposed": "Promise proposed",
-      "active": "This week's promise"
+      "active": "This week's promise",
+      "title": "Shared promise",
+      "intro": "One small promise for the two of you this week — like “a phone-free evening every Sunday”. Once your partner agrees, it shows at the top of your chat.",
+      "label": "Promise",
+      "placeholder": "This week we will…",
+      "propose": "Propose",
+      "status": {
+        "PROPOSED": "Waiting for a reply",
+        "ACTIVE": "This week's promise",
+        "ENDED": "The week is over",
+        "DECLINED": "Declined"
+      },
+      "by": "Proposed by {{name}}",
+      "waiting": "Waiting for your partner to reply.",
+      "accept": "Agree",
+      "decline": "Not this time",
+      "keptQuestion": "Did you keep your promise?",
+      "kept": "Yes",
+      "notKept": "Next time",
+      "partnerKept": "Your partner said they kept it 💗",
+      "partnerNotKept": "Your partner said “next time”"
     },
     "typing": "{{name}} is typing",
     "placeholder": "Message {{name}}…",

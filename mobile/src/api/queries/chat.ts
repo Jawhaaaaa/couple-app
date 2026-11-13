@@ -97,3 +97,22 @@ export async function setPinned(messageId: string, pinned: boolean): Promise<voi
       : api.DELETE('/messages/{messageId}/pin', { params: { path: { messageId } } }),
   );
 }
+
+// --- T-49: хамтын амлалт (FR-6.11, S-47) ---
+
+export const PROMISE_KEY = ['promise'] as const;
+export const PROMISE_MAX = 140;
+
+export function proposePromise(text: string): Promise<SharedPromise> {
+  return unwrap(api.POST('/promises', { body: { text } }));
+}
+
+export function respondPromise(promiseId: string, accept: boolean): Promise<SharedPromise> {
+  return accept
+    ? unwrap(api.POST('/promises/{promiseId}/accept', { params: { path: { promiseId } } }))
+    : unwrap(api.POST('/promises/{promiseId}/decline', { params: { path: { promiseId } } }));
+}
+
+export function promiseOutcome(promiseId: string, kept: boolean): Promise<SharedPromise> {
+  return unwrap(api.POST('/promises/{promiseId}/outcome', { params: { path: { promiseId } }, body: { kept } }));
+}

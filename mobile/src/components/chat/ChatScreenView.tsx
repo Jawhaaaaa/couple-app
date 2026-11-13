@@ -417,7 +417,7 @@ export function ChatScreenView() {
           <Handshake size={16} color={colors.primary} strokeWidth={iconStroke} />
           <View style={styles.headerMain}>
             <AppText variant="label" color="primary">
-              {promise.data.status === 'PROPOSED' ? t('chat.promise.proposed') : t('chat.promise.active')}
+              {promise.data.status === 'PROPOSED' ? t('chat.promise.proposed') : promise.data.status === 'ENDED' ? t('chat.promise.keptQuestion') : t('chat.promise.active')}
             </AppText>
             <AppText variant="caption" numberOfLines={2}>
               {promise.data.text}
