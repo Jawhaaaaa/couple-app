@@ -20,6 +20,7 @@ import { ServerUnreachable } from '@/components/ServerUnreachable';
 import { TimezonePrompt } from '@/components/TimezonePrompt';
 import { AppLockProvider } from '@/lock/AppLockProvider';
 import { installSoundPlayer } from '@/motion/sound';
+import { useLocalReminderSync } from '@/notifications/useLocalReminderSync';
 import { useNotificationTapRouting } from '@/notifications/useNotificationTapRouting';
 import { startOutbox } from '@/offline/outboxRuntime';
 import { persistOptions, queryClient } from '@/offline/persist';
@@ -131,6 +132,7 @@ export default function RootLayout() {
   // Нэвтэрсэн үед STOMP холболт (DD-AURA-008); токен солигдоход дахин холбогдоно
   useEffect(() => startRealtime(queryClient), []);
   useNotificationTapRouting();
+  useLocalReminderSync();
 
   if (!ready) return null;
   return (
