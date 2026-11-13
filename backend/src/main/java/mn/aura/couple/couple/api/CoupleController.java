@@ -12,10 +12,10 @@ import mn.aura.couple.api.model.SoloShareResult;
 import mn.aura.couple.api.model.StartDateProposal;
 import mn.aura.couple.api.model.ThemeProposal;
 import mn.aura.couple.api.model.ThemeProposalRequest;
-import mn.aura.couple.common.ApiException;
 import mn.aura.couple.common.space.SpaceAccessGuard;
 import mn.aura.couple.common.space.SpaceContext;
 import mn.aura.couple.couple.app.CoupleAssembler;
+import mn.aura.couple.couple.app.CoupleBreakupService;
 import mn.aura.couple.couple.app.CoupleSettingsService;
 import mn.aura.couple.couple.app.SoloContentShareService;
 import mn.aura.couple.couple.app.StartDateService;
@@ -35,9 +35,12 @@ public class CoupleController implements CoupleApi {
     private final StartDateService startDates;
     private final SoloContentShareService soloShare;
     private final CoupleSettingsService settings;
+    private final CoupleBreakupService breakups;
 
     public CoupleController(SpaceAccessGuard guard, CoupleAssembler assembler, StartDateService startDates,
-                            SoloContentShareService soloShare, CoupleSettingsService settings) {
+                            SoloContentShareService soloShare, CoupleSettingsService settings,
+                            CoupleBreakupService breakups) {
+        this.breakups = breakups;
         this.guard = guard;
         this.assembler = assembler;
         this.startDates = startDates;
@@ -92,11 +95,13 @@ public class CoupleController implements CoupleApi {
 
     @Override
     public ResponseEntity<BreakupState> startBreakup(BreakupRequest body) {
-        throw ApiException.notFound();
+        return ResponseEntity.status(org.springframework.http.HttpStatus.ACCEPTED)
+                .body(breakups.start(guard.requireWritableCouple(), body.getPassword(),
+                        body.getConfirmStep() == null ? null : body.getConfirmStep().getValue()));
     }
 
     @Override
     public ResponseEntity<BreakupState> restoreCouple() {
-        throw ApiException.notFound();
+        return ResponseEntity.ok(breakups.restore(guard.requireCouple())); // BREAKING үед ч зөвшөөрөгдөнө
     }
 }
