@@ -1,0 +1,110 @@
+<!doctype html>
+<!--
+  S-99 татах хуудас (T-89, AC-58) — апп-аас гадуурх DEV хуудас. Энэ нь ЗАГВАР: `render.mjs` нь
+  {{…}}-ийг бөглөж, QR-ыг SVG болгон шигтгэнэ (гадаад QR API-гүй). Гараар бүү засварла — гаралт нь
+  devbuild-out volume-д (`docker compose --profile devbuild …`, DEPLOYED.md).
+-->
+<html lang="mn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Aura — суулгах</title>
+  <style>
+    :root { --coral: #e8685a; --ink: #2b2230; --muted: #6d6472; --card: #fff; --bg: #fdf3ef; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); }
+    main { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; }
+    h1 { margin: 0 0 4px; font-size: 28px; }
+    h2 { margin: 0 0 8px; font-size: 20px; }
+    .meta { color: var(--muted); font-size: 14px; margin: 0 0 24px; }
+    .card { background: var(--card); border-radius: 16px; padding: 20px; margin: 0 0 16px; box-shadow: 0 2px 10px rgba(43, 34, 48, .08); }
+    .row { display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; }
+    .qr { width: 220px; height: 220px; flex: none; background: #fff; }
+    .qr svg { width: 100%; height: 100%; display: block; }
+    .body { flex: 1 1 260px; min-width: 0; }
+    ol { padding-left: 20px; margin: 8px 0 0; }
+    li { margin: 4px 0; }
+    code { background: #f4ecef; border-radius: 6px; padding: 2px 6px; word-break: break-all; }
+    .btn { display: inline-block; min-height: 44px; padding: 10px 18px; border-radius: 12px; background: var(--coral); color: #fff; text-decoration: none; font-weight: 600; }
+    .note { color: var(--muted); font-size: 14px; }
+    .warn { border-left: 4px solid var(--coral); }
+  </style>
+</head>
+<body>
+<main data-testid="screen-S-99">
+  <h1>Aura суулгах</h1>
+  <p class="meta" data-testid="version">
+    Хувилбар <strong>{{VERSION}}</strong> · build {{BUILD}} · commit <code>{{COMMIT}}</code> · {{BUILT_AT}}
+  </p>
+
+  <section class="card" data-testid="section-apk">
+    <h2>Android — APK</h2>
+    <!-- apk:ready -->
+    <div class="row">
+      <div class="qr" data-testid="qr-apk" data-qr-text="{{APK_URL}}" role="img" aria-label="APK татах QR код">{{QR_APK}}</div>
+      <div class="body">
+        <p><a class="btn" data-testid="apk-link" href="{{APK_FILE}}" download>APK татах ({{APK_SIZE}})</a></p>
+        <ol>
+          <li>Утасны камераар QR уншуулах эсвэл дээрх товчийг дарна.</li>
+          <li>Татаж дуусмагц файлыг нээнэ. «Тодорхойгүй эх сурвалжаас суулгах»-ыг Chrome-д зөвшөөрнө.</li>
+          <li>«Суулгах» → Aura-г нээж бүртгүүлнэ.</li>
+        </ol>
+        <p class="note">Android 7.0 ба түүнээс дээш. Шинэ хувилбар суулгахад өмнөхийн өгөгдөл хадгалагдана.</p>
+      </div>
+    </div>
+    <!-- /apk:ready -->
+    <!-- apk:missing -->
+    <p data-testid="apk-missing">APK хараахан build хийгдээгүй байна. DEV машин дээр:
+      <code>docker compose --profile devbuild run --rm expo-dev apk</code></p>
+    <!-- /apk:missing -->
+  </section>
+
+  <section class="card" data-testid="section-expo">
+    <h2>iPhone — Expo Go</h2>
+    <div class="row">
+      <div class="qr" data-testid="qr-expo" data-qr-text="{{EXPO_URL}}" role="img" aria-label="Expo Go QR код">{{QR_EXPO}}</div>
+      <div class="body">
+        <ol>
+          <li>App Store-оос <strong>Expo Go</strong>-г суулгана.</li>
+          <li>iPhone-ийн камераар энэ QR-ыг уншуулж «Expo Go-д нээх»-ийг дарна.</li>
+          <li>Эсвэл Expo Go → «Enter URL manually»: <code data-testid="expo-url">{{EXPO_URL}}</code></li>
+        </ol>
+        <p class="note">Android дээр ч Expo Go-оор нээж болно (Expo Go апп доторх «Scan QR code»).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" data-testid="section-pwa">
+    <h2>Вэб апп (PWA)</h2>
+    <div class="row">
+      <div class="qr" data-testid="qr-pwa" data-qr-text="{{PWA_URL}}" role="img" aria-label="Вэб апп-ын QR код">{{QR_PWA}}</div>
+      <div class="body">
+        <p><a class="btn" data-testid="pwa-link" href="{{PWA_URL}}">{{PWA_URL}}</a></p>
+        <p><strong>iPhone (Safari):</strong></p>
+        <ol>
+          <li>Хаягийг Safari-гаар нээнэ.</li>
+          <li>Доод талын «Хуваалцах» товч → <strong>«Нүүр дэлгэцэнд нэмэх»</strong> → «Нэмэх».</li>
+          <li>Нүүр дэлгэц дээрх Aura дүрсээр нээнэ.</li>
+        </ol>
+        <p><strong>Android (Chrome):</strong></p>
+        <ol>
+          <li>Хаягийг Chrome-оор нээнэ.</li>
+          <li>Баруун дээд ⋮ цэс → <strong>«Апп суулгах»</strong> (эсвэл «Нүүр дэлгэцэнд нэмэх»).</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="card warn" data-testid="section-notes">
+    <h2>Анхаарах</h2>
+    <ul>
+      <li>Утас энэ компьютертэй <strong>нэг Wi-Fi сүлжээнд</strong> байх ёстой.</li>
+      <li>DEV хаяг нь <code>http</code> тул мэдэгдэл (Web Push), Google нэвтрэлт, passkey вэб апп-д ажиллахгүй —
+        эдгээрийг prod-ийн HTTPS хаяг дээр шалгана.</li>
+      <li>Энэ хуудас ба APK зөвхөн туршилтад — бусдад бүү түгээ.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

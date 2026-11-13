@@ -101,6 +101,8 @@ jobs:
         working-directory: e2e
         run: |
           npm ci
+          # S-99 (download-page.spec.ts) QR-ыг render.mjs-ээр үүсгэнэ — mobile-ийн хамаарлын ижил хувилбар
+          npm i --no-save --no-audit --no-fund qrcode@1.5.4
           npx playwright install --with-deps chromium webkit firefox
           npx playwright test
       - name: Compose лог
