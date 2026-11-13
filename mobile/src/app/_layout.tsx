@@ -18,6 +18,7 @@ import { Mascot } from '@/components/Mascot';
 import { OfflineBanner } from '@/components/OfflineBanner';
 import { ServerUnreachable } from '@/components/ServerUnreachable';
 import { TimezonePrompt } from '@/components/TimezonePrompt';
+import { AppLockProvider } from '@/lock/AppLockProvider';
 import { installSoundPlayer } from '@/motion/sound';
 import { useNotificationTapRouting } from '@/notifications/useNotificationTapRouting';
 import { startOutbox } from '@/offline/outboxRuntime';
@@ -135,7 +136,9 @@ export default function RootLayout() {
     <GestureHandlerRootView style={styles.root}>
       <PersistQueryClientProvider client={queryClient} persistOptions={persistOptions}>
         <ThemeProvider>
-          <ThemedStack />
+          <AppLockProvider>
+            <ThemedStack />
+          </AppLockProvider>
         </ThemeProvider>
       </PersistQueryClientProvider>
     </GestureHandlerRootView>

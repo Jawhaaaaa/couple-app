@@ -998,5 +998,44 @@
     },
     "push": "Turn on push notifications"
   },
-  "settings": {}
+  "settings": {},
+  "lock": {
+    "title": "Enter your PIN",
+    "entered_one": "{{count}} digit entered",
+    "entered_other": "{{count}} digits entered",
+    "wrong": "Wrong PIN. Please try again.",
+    "wait": "Too many wrong attempts — please wait a moment.",
+    "waitCountdown": "Try again in {{seconds}} seconds.",
+    "untilSignOut_one": "{{left}} more wrong attempt and you'll need to sign in with your password.",
+    "untilSignOut_other": "{{left}} more wrong attempts and you'll need to sign in with your password.",
+    "delete": "Delete last digit",
+    "biometric": "Unlock with Face ID / fingerprint",
+    "biometricPrompt": "Unlock Aura",
+    "biometricFailed": "Couldn't recognise you. Please enter your PIN.",
+    "settings": {
+      "screenTitle": "Privacy & security",
+      "title": "App lock",
+      "note": "Aura asks for your PIN (or Face ID / fingerprint) when it opens. The PIN never leaves this device.",
+      "enable": "Set a PIN",
+      "pin": "New PIN (4–6 digits)",
+      "newPin": "New PIN (4–6 digits)",
+      "confirmPin": "Enter the PIN again",
+      "currentPin": "Current PIN",
+      "pinRule": "The PIN must be 4–6 digits.",
+      "mismatch": "The PINs didn't match. Please try again.",
+      "saved": "App lock is on 🔒",
+      "disabled": "App lock is off",
+      "timeout": "Lock after",
+      "after": {
+        "0": "Immediately",
+        "60": "1 min",
+        "300": "5 min",
+        "900": "15 min"
+      },
+      "biometric": "Use Face ID / fingerprint",
+      "change": "Change PIN",
+      "lockNow": "Lock now",
+      "disable": "Turn off app lock"
+    }
+  }
 }
