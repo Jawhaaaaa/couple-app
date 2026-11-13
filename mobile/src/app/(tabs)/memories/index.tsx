@@ -268,14 +268,32 @@ function RecapList() {
   const recaps = useRecaps();
   if (recaps.isPending) return <ScreenState kind="loading" rows={2} />;
   if (!recaps.data) return <ScreenState kind="error" message={errorText(recaps.error)} onRetry={() => void recaps.refetch()} />;
-  if (recaps.data.length === 0) {
-    return <ScreenState kind="empty" text={t('memories.recaps.empty')} actionLabel={t('memories.recaps.emptyAction')} onAction={openEditor} />;
-  }
+  const year = new Date().getFullYear();
+  const yearCards = (
+    <View style={styles.listHeader}>
+      {[year, year - 1].map((y) => (
+        <Pressable
+          key={y}
+          onPress={() => router.push(`/year/${y}`)}
+          accessibilityRole="link"
+          testID={`memories-year-${y}`}
+          style={({ pressed }) => [styles.row, { backgroundColor: colors.surface, borderColor: colors.border, opacity: pressed ? 0.85 : 1 }]}
+        >
+          <Sparkles size={22} color={colors.secondary} strokeWidth={iconStroke} />
+          <AppText variant="bodyStrong" style={styles.flex}>
+            {t('stats.yearReview', { year: y })}
+          </AppText>
+        </Pressable>
+      ))}
+    </View>
+  );
   return (
     <FlatList
       data={recaps.data}
       keyExtractor={(r) => r.id}
       contentContainerStyle={styles.list}
+      ListHeaderComponent={yearCards}
+      ListEmptyComponent={<AppText color="textMuted">{t('memories.recaps.empty')}</AppText>}
       testID="memories-recaps"
       renderItem={({ item }) => (
         <Pressable

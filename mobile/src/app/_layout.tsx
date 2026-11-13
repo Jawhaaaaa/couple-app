@@ -107,6 +107,7 @@ function ThemedStack() {
           <Stack.Screen name="memory-editor" options={{ presentation: 'modal' }} />
           <Stack.Screen name="media/[id]" options={{ presentation: 'fullScreenModal', animation: 'fade' }} />
           <Stack.Screen name="recap/[id]" options={{ presentation: 'fullScreenModal', animation: 'fade' }} />
+          <Stack.Screen name="year/[year]" options={{ presentation: 'fullScreenModal', animation: 'fade' }} />
         </Stack>
         <TimezonePrompt />
         {/* Хамтрагчийн зүрх/тэврэлт аль ч дэлгэц дээр (ANIM-02, AC-17) */}

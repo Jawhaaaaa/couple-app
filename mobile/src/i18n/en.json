@@ -1037,5 +1037,34 @@
       "lockNow": "Lock now",
       "disable": "Turn off app lock"
     }
+  },
+  "stats": {
+    "title": "Our numbers",
+    "daysTogether": "days together",
+    "memories": "memories",
+    "photos": "photos",
+    "videos": "videos",
+    "dates": "dates",
+    "goalsCompleted": "goals reached",
+    "letters": "letters",
+    "heartsSent": "hearts sent",
+    "footsteps": "Places we've been",
+    "cities_one": "{{count}} city",
+    "cities_other": "{{count}} cities",
+    "countries_one": "{{count}} country",
+    "countries_other": "{{count}} countries",
+    "distance": "≈ {{km}} km travelled",
+    "openMap": "See on the map",
+    "yearReview": "Our year {{year}}",
+    "yearTitle": "Our year {{year}}",
+    "topPlace": "Most visited: {{place}}",
+    "note": "Only the two of you see these numbers. Not a score — just memories counted.",
+    "saveImage": "Save as image",
+    "save": {
+      "saved": "Image saved",
+      "denied": "Photo library access is off.",
+      "failed": "Couldn't save. Please try again."
+    },
+    "badYear": "No review found for this year."
   }
 }
