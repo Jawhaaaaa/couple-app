@@ -4,6 +4,7 @@ import { type ReactNode, useState } from 'react';
 import { Pressable, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 
 import { useMeQuery } from '@/api/queries/bootstrap';
+import { usePartnerName } from '@/api/queries/couple';
 import { type Dashboard, type SignalSummary, useDashboard } from '@/api/queries/dashboard';
 import { AppButton } from '@/components/AppButton';
 import { AppText } from '@/components/AppText';
@@ -78,7 +79,9 @@ export default function HomeScreen() {
 function CoupleBody({ data, now }: { data: Dashboard; now: number }) {
   const t = useT();
   const colors = useColors();
-  const partner = data.partner;
+  // Миний өгсөн хоч dashboard-ийн нэрийг дарна (AC-137)
+  const nickname = usePartnerName();
+  const partner = data.partner && nickname ? { ...data.partner, name: nickname } : data.partner;
   const name = partner?.name ?? t('home.partnerFallback');
   const liveAt = useSignalFx((s) => s.liveAt);
 

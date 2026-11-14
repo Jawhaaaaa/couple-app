@@ -16,6 +16,7 @@ import {
   setFavorite,
   useMemory,
 } from '@/api/queries/memories';
+import { displayUser } from '@/api/queries/couple';
 import { mediaThumb, partnerName, useCoupleQuery } from '@/api/queries/pairing';
 import { AppText } from '@/components/AppText';
 import { Chip, ChipRow } from '@/components/Chip';
@@ -79,6 +80,7 @@ function MemoryDetail({ memory }: { memory: Memory }) {
   const { disabled: offline } = useOnlineOnly();
   const couple = useCoupleQuery();
   const own = memory.author.id === userId;
+  const author = displayUser(couple.data, memory.author);
   const [preview, setPreview] = useState<DeletePreview | null>(null);
 
   const minePerspective = memory.perspectives.find((p) => p.author.id === userId) ?? null;
@@ -137,9 +139,9 @@ function MemoryDetail({ memory }: { memory: Memory }) {
           </View>
         ) : null}
         <View style={styles.row}>
-          <UserAvatar uri={mediaThumb(memory.author.avatar)} label={memory.author.displayName} size={32} />
+          <UserAvatar uri={mediaThumb(author.avatar)} label={author.name} size={32} />
           <AppText variant="label" testID="memory-author">
-            {t('memories.card.by', { name: memory.author.displayName })}
+            {t('memories.card.by', { name: author.name })}
           </AppText>
         </View>
         {memory.visibility === 'PRIVATE' ? (

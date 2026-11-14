@@ -14,6 +14,7 @@ import Animated, {
 
 import { useT } from '@/i18n';
 import { useMotionPreference } from '@/motion/useMotionPreference';
+import { usePrefsStore } from '@/stores/prefsStore';
 import { useColors } from '@/theme/ThemeProvider';
 import { type MascotColorName, mascotColors } from '@/theme/tokens';
 
@@ -26,7 +27,7 @@ interface Props {
   /** «Бөмбөлөг» эсвэл «Бөмбий» — хоёр дахь нь толин тусгалаар харагдана. */
   name?: MascotName;
   size?: number;
-  /** Хэрэглэгчийн сонгосон бүсний өнгө (FR-18.7). */
+  /** Бүсний өнгө; өгөөгүй бол хэрэглэгчийн сонгосон өнгө (FR-18.7, S-82). */
   beltColor?: MascotColorName;
   pose?: MascotPose;
   testID?: string;
@@ -37,8 +38,10 @@ interface Props {
  * амьсгалах (scale 1→1.03), нүд ирмэх, толгой хазайлгах, даллах. Reduce motion /
  * «Унтраах»-д статик (ANIM-11).
  */
-export function Mascot({ name = 'bombolog', size = 120, beltColor = 'coral', pose = 'idle', testID }: Props) {
+export function Mascot({ name = 'bombolog', size = 120, beltColor: beltProp, pose = 'idle', testID }: Props) {
   const t = useT();
+  const chosenBelt = usePrefsStore((s) => s.mascotColor);
+  const beltColor: MascotColorName = beltProp ?? (chosenBelt in mascotColors ? chosenBelt : 'coral');
   const colors = useColors();
   const level = useMotionPreference();
   const breathe = useSharedValue(1);

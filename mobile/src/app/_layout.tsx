@@ -17,6 +17,7 @@ import { SignalReceiver } from '@/components/home/SignalReceiver';
 import { Mascot } from '@/components/Mascot';
 import { OfflineBanner } from '@/components/OfflineBanner';
 import { ServerUnreachable } from '@/components/ServerUnreachable';
+import { SettingsSync } from '@/components/settings/SettingsSync';
 import { SpaceStatusBanner } from '@/components/settings/SpaceStatusBanner';
 import { TimezonePrompt } from '@/components/TimezonePrompt';
 import { AppLockProvider } from '@/lock/AppLockProvider';
@@ -100,6 +101,8 @@ function ThemedStack() {
         <OfflineBanner />
         {/* Зөвхөн харах/экспорт горим — хос тасалсан эсвэл хамтрагч устгагдсан (AC-127, AC-128) */}
         <SpaceStatusBanner />
+        {/* Хосын сэдэв, маскотын өнгө → локал палитр (AC-138, AC-190) */}
+        <SettingsSync />
       </SafeAreaView>
       <SplashGate>
         <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.bg } }}>

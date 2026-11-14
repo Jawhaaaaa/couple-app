@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
 import { v7 as uuidv7 } from 'uuid';
 
+import { useDisplayUser } from '@/api/queries/couple';
 import { type Comment, COMMENT_MAX, deleteComment, memoryKey, updateComment } from '@/api/queries/memories';
 import { mediaThumb } from '@/api/queries/pairing';
 import { AppButton } from '@/components/AppButton';
@@ -125,6 +126,7 @@ function CommentRow({ memoryId, comment, offline }: { memoryId: string; comment:
   const dateFormat = usePrefsStore((s) => s.dateFormat);
   const userId = useSessionStore((s) => s.userId);
   const own = comment.author.id === userId;
+  const author = useDisplayUser()(comment.author);
   const [editing, setEditing] = useState(false);
   const [confirming, setConfirming] = useState(false);
   const [text, setText] = useState(comment.text);
@@ -150,9 +152,9 @@ function CommentRow({ memoryId, comment, offline }: { memoryId: string; comment:
   return (
     <View style={[styles.bubble, { backgroundColor: own ? colors.surfaceRaised : colors.surface, borderColor: colors.border }]} testID="comment">
       <View style={styles.meta}>
-        <UserAvatar uri={mediaThumb(comment.author.avatar)} label={comment.author.displayName} size={28} />
+        <UserAvatar uri={mediaThumb(author.avatar)} label={author.name} size={28} />
         <AppText variant="label" style={styles.flex}>
-          {comment.author.displayName}
+          {author.name}
         </AppText>
         <AppText variant="caption" color="textMuted">
           {`${formatDate(created, dateFormat)} ${formatTime(created, locale)}`}

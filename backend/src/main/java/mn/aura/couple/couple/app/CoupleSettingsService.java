@@ -72,9 +72,12 @@ public class CoupleSettingsService {
                     nick == null || nick.isEmpty() ? null : nick, ctx.spaceId(), ctx.userId());
         }
         if (update.getPartnerAvatarMediaId() != null) {
-            media.findInSpace(update.getPartnerAvatarMediaId(), ctx.spaceId()).orElseThrow(ApiException::notFound);
+            UUID mediaId = update.getPartnerAvatarMediaId();
+            if (media.findInSpace(mediaId, ctx.spaceId()).isEmpty() && !isOwnPrivateImage(ctx.userId(), mediaId)) {
+                throw ApiException.notFound();
+            }
             jdbc.update("UPDATE space_member SET partner_avatar_media_id = ? WHERE space_id = ? AND user_id = ?",
-                    update.getPartnerAvatarMediaId(), ctx.spaceId(), ctx.userId());
+                    mediaId, ctx.spaceId(), ctx.userId());
         }
         if (update.getMascotColor() != null) {
             jdbc.update("""
@@ -83,6 +86,19 @@ public class CoupleSettingsService {
                     """, ctx.userId(), update.getMascotColor());
         }
         return assembler.forUser(ctx.spaceId(), ctx.userId());
+    }
+
+    /**
+     * Хамтрагчийн зургийг client `AVATAR` зорилгоор (дуудагчийн SOLO space-д) upload хийдэг — хамтрагчид
+     * харагдахгүй хувийн зураг (AC-137). Зөвхөн дуудагчийн өөрийн SOLO space-ийн IMAGE байх ёстой.
+     */
+    private boolean isOwnPrivateImage(UUID userId, UUID mediaId) {
+        Integer n = jdbc.queryForObject("""
+                SELECT count(*) FROM media m
+                  JOIN space_member sm ON sm.space_id = m.space_id AND sm.user_id = ? AND sm.space_kind = 'SOLO'
+                 WHERE m.id = ? AND m.owner_id = ? AND m.kind = 'IMAGE'
+                """, Integer.class, userId, mediaId, userId);
+        return n != null && n > 0;
     }
 
     /** Хоч арилгах (`partnerNickname: null`) — үүсгэсэн DTO нь null ба байхгүйг ялгадаггүй тул бусад талбаргүй үед. */

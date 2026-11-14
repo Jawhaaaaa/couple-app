@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-import type { PaletteName, ThemePreference } from '@/theme/tokens';
+import type { MascotColorName, PaletteName, ThemePreference } from '@/theme/tokens';
 
 /** Огнооны формат (FR-18.2): 2026.11.07 / 07/11/2026 / 11/07/2026. */
 export type DateFormat = 'YMD_DOT' | 'DMY_SLASH' | 'MDY_SLASH';
@@ -18,6 +18,8 @@ export interface PrefsState {
   animation: AnimationSetting;
   haptics: boolean;
   sound: boolean;
+  /** Маскотын бүсний өнгө (FR-18.7, AC-190) — серверийн `Preferences.mascotColor`/`Couple.myView`-ээс. */
+  mascotColor: MascotColorName;
   set: (patch: Partial<Omit<PrefsState, 'set'>>) => void;
 }
 
@@ -30,6 +32,7 @@ export const defaultPrefs = {
   animation: 'ALL',
   haptics: true,
   sound: false,
+  mascotColor: 'coral',
 } as const satisfies Omit<PrefsState, 'set'>;
 
 export const usePrefsStore = create<PrefsState>()(

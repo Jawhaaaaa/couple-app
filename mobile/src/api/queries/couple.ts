@@ -1,13 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useCallback } from 'react';
 
 import { api, unwrap } from '@/api/client';
 import type { components } from '@/api/schema';
+import { blobFromUri, simpleUpload } from '@/upload/simpleUpload';
 
-import { type Couple, useCoupleQuery } from './pairing';
+import { type Couple, type MediaRef, partnerName, useCoupleQuery } from './pairing';
 
 type S = components['schemas'];
 export type BreakupState = S['BreakupState'];
 export type SpaceStatus = S['SpaceStatus'];
+export type CoupleTheme = S['Theme'];
+export type MyViewUpdate = S['MyViewUpdate'];
+export type ThemeProposal = S['ThemeProposal'];
+export const COUPLE_THEMES: CoupleTheme[] = ['CORAL', 'LAVENDER', 'FOREST', 'OCEAN'];
 
 /**
  * Хосын тохиргоо ба тасалалт (FR-14.6, FR-18.5…18.7) — гэрээ `contracts/openapi.yaml` (Couple).
@@ -63,4 +69,79 @@ export function useBreakupMutations() {
   const breakup = useMutation({ mutationFn: startBreakup, onSuccess: apply });
   const restore = useMutation({ mutationFn: restoreCouple, onSuccess: apply });
   return { breakup, restore };
+}
+
+/** `PATCH /couple/my-view` — хоч, хамтрагчийн зураг, маскотын өнгө; зөвхөн дуудагчид (AC-137, AC-190). */
+export function updateMyView(body: MyViewUpdate): Promise<Couple> {
+  return unwrap(api.PATCH('/couple/my-view', { body }));
+}
+
+/** `POST /couple/theme-proposals` (AC-138) — хүлээгдэж буй санал байвал 409. */
+export function proposeTheme(theme: CoupleTheme): Promise<ThemeProposal> {
+  return unwrap(api.POST('/couple/theme-proposals', { body: { theme } }));
+}
+
+export function acceptThemeProposal(proposalId: string): Promise<Couple> {
+  return unwrap(api.POST('/couple/theme-proposals/{proposalId}/accept', { params: { path: { proposalId } } }));
+}
+
+export function declineThemeProposal(proposalId: string): Promise<unknown> {
+  return unwrap(api.POST('/couple/theme-proposals/{proposalId}/decline', { params: { path: { proposalId } } }));
+}
+
+/**
+ * Хамтрагчид өгөх хувийн зураг: `AVATAR` зорилгоор (дуудагчийн SOLO space — хамтрагчид харагдахгүй)
+ * upload хийгээд `partnerAvatarMediaId` болгоно (AC-137).
+ */
+export async function uploadPartnerAvatar(uri: string, onProgress?: (fraction: number) => void): Promise<Couple> {
+  const data = await blobFromUri(uri);
+  const media = await simpleUpload({ purpose: 'AVATAR', fileName: 'partner.jpg', mime: 'image/jpeg', data, onProgress });
+  return updateMyView({ partnerAvatarMediaId: media.id });
+}
+
+/** S-82-ийн бичих үйлдлүүд — хариуг `['couple']`-д шууд тусгана. */
+export function useCoupleSettingsMutations() {
+  const queryClient = useQueryClient();
+  const setCouple = (couple: Couple) => queryClient.setQueryData(COUPLE_KEY, couple);
+  const refresh = () => void queryClient.invalidateQueries({ queryKey: COUPLE_KEY });
+  return {
+    myView: useMutation({ mutationFn: updateMyView, onSuccess: setCouple }),
+    partnerAvatar: useMutation({ mutationFn: (uri: string) => uploadPartnerAvatar(uri), onSuccess: setCouple }),
+    propose: useMutation({ mutationFn: proposeTheme, onSuccess: refresh }),
+    accept: useMutation({ mutationFn: acceptThemeProposal, onSuccess: setCouple }),
+    decline: useMutation({ mutationFn: declineThemeProposal, onSuccess: refresh }),
+  };
+}
+
+/** Хамтрагчийн харагдах зураг: миний өгсөн хувийн зураг → түүний профайл зураг (AC-137). */
+export function partnerAvatar(couple: Couple | null | undefined): MediaRef | null {
+  return couple?.myView?.partnerAvatar ?? couple?.partner?.avatar ?? null;
+}
+
+export interface DisplayUser {
+  name: string;
+  avatar: MediaRef | null;
+}
+
+/**
+ * Хэрэглэгчийн лавлагааг (зохиогч, илгээгч) дэлгэцэд харуулах нэр, зураг болгоно: хамтрагч бол миний
+ * өгсөн хоч ба зураг (AC-137 — «A-гийн бүх дэлгэцэд тэр хоч, avatar»), бусад нь хэвээр.
+ */
+export function displayUser(couple: Couple | null | undefined, ref: { id: string; displayName: string; avatar?: MediaRef | null }): DisplayUser {
+  if (couple?.partner && couple.myView && ref.id === couple.partner.id) {
+    return { name: couple.myView.partnerNickname ?? ref.displayName, avatar: couple.myView.partnerAvatar ?? ref.avatar ?? null };
+  }
+  return { name: ref.displayName, avatar: ref.avatar ?? null };
+}
+
+/** `displayUser`-ийн hook хувилбар — `['couple']` кэшээс. */
+export function useDisplayUser(): (ref: { id: string; displayName: string; avatar?: MediaRef | null }) => DisplayUser {
+  const couple = useCoupleQuery().data;
+  return useCallback((ref) => displayUser(couple, ref), [couple]);
+}
+
+/** Хамтрагчийн нэр (хоч → дуудах нэр → нэр); хос биш бол `null`. */
+export function usePartnerName(): string | null {
+  const couple = useCoupleQuery().data;
+  return couple?.myView ? partnerName(couple) : null;
 }

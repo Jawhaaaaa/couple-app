@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { Heart, Lock, MapPin, MessageCircle } from 'lucide-react-native';
 import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
 
+import { useDisplayUser } from '@/api/queries/couple';
 import type { MemorySummary } from '@/api/queries/memories';
 import { AppText } from '@/components/AppText';
 import { UserAvatar } from '@/components/UserAvatar';
@@ -17,12 +18,13 @@ import { MemoryCover } from './MemoryCover';
 export function useMemoryLabel() {
   const t = useT();
   const locale = usePrefsStore((s) => s.locale);
+  const display = useDisplayUser();
   return (m: MemorySummary) =>
     [
       m.title,
       formatDateLong(m.occurredOn, locale),
       m.location?.name,
-      t('memories.card.by', { name: m.author.displayName }),
+      t('memories.card.by', { name: display(m.author).name }),
       m.visibility === 'PRIVATE' ? t('memories.card.private') : null,
       m.status === 'UPLOADING' ? t('memories.card.uploading') : null,
       m.favorite ? t('memories.card.favorite') : null,
@@ -38,6 +40,8 @@ export function useMemoryLabel() {
  */
 export function MemoryCard({ memory }: { memory: MemorySummary }) {
   const t = useT();
+  // Хамтрагч бол миний өгсөн хоч, зураг (AC-137)
+  const author = useDisplayUser()(memory.author);
   const colors = useColors();
   const locale = usePrefsStore((s) => s.locale);
   const label = useMemoryLabel();
@@ -88,9 +92,9 @@ export function MemoryCard({ memory }: { memory: MemorySummary }) {
           </View>
         ) : null}
         <View style={styles.footer}>
-          <UserAvatar uri={mediaThumb(memory.author.avatar)} label={t('memories.card.by', { name: memory.author.displayName })} size={28} />
+          <UserAvatar uri={mediaThumb(author.avatar)} label={t('memories.card.by', { name: author.name })} size={28} />
           <AppText variant="caption" color="textMuted" numberOfLines={1} style={styles.flex}>
-            {memory.author.displayName}
+            {author.name}
           </AppText>
           <View style={styles.row}>
             <MessageCircle size={16} color={colors.textMuted} strokeWidth={iconStroke} />

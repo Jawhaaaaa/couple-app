@@ -5,6 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut, ZoomIn } from 'react-native-reanimated';
 
 import { type Dashboard, DASHBOARD_KEY, type SignalKind } from '@/api/queries/dashboard';
+import { type Couple, partnerName } from '@/api/queries/pairing';
 import { AppText } from '@/components/AppText';
 import { useT } from '@/i18n';
 import { AnimatedMoment } from '@/motion/AnimatedMoment';
@@ -76,7 +77,11 @@ export function SignalReceiver() {
   }, [current]);
 
   if (!current) return null;
-  const name = queryClient.getQueryData<Dashboard>(DASHBOARD_KEY)?.partner?.name ?? t('home.partnerFallback');
+  const couple = queryClient.getQueryData<Couple>(['couple']);
+  const name =
+    (couple?.myView ? partnerName(couple) : null) ??
+    queryClient.getQueryData<Dashboard>(DASHBOARD_KEY)?.partner?.name ??
+    t('home.partnerFallback');
   const entering = level === 'off' ? undefined : level === 'reduced' ? FadeIn : ZoomIn.springify();
   const message =
     current.kind === 'HUG'

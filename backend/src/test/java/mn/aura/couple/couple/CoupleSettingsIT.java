@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import java.net.http.HttpResponse;
+import java.util.UUID;
 import mn.aura.couple.AbstractSpaceIT;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,34 @@ class CoupleSettingsIT extends AbstractSpaceIT {
         HttpResponse<String> theirs = call(b, "GET", "/couple");
         assertThat(theirs.body()).doesNotContain("Бөмбөгөө");
         assertThat(ok(theirs, 200).path("myView").path("mascotColor").asText()).isEqualTo("coral");
+    }
+
+    @Test
+    @DisplayName("AC-137 хамтрагчийн зураг: өөрийн хувийн (AVATAR, SOLO) зураг зөвшөөрөгдөнө, хамтрагчид харагдахгүй; бусдын зураг 404")
+    void partnerAvatarIsPrivate() {
+        TestUser a = user("pav-a");
+        TestUser b = user("pav-b");
+        pair(a, b);
+        UUID mine = soloImage(a);
+        JsonNode view = ok(call(a, "PATCH", "/couple/my-view", body("partnerAvatarMediaId", mine.toString())), 200);
+        assertThat(view.path("myView").path("partnerAvatar").path("id").asText()).isEqualTo(mine.toString());
+
+        HttpResponse<String> theirs = call(b, "GET", "/couple");
+        assertThat(theirs.body()).doesNotContain(mine.toString());
+
+        UUID foreign = soloImage(b);
+        assertThat(call(a, "PATCH", "/couple/my-view", body("partnerAvatarMediaId", foreign.toString())).statusCode())
+                .isEqualTo(404);
+        assertThat(call(a, "PATCH", "/couple/my-view", body("partnerAvatarMediaId", UUID.randomUUID().toString()))
+                .statusCode()).isEqualTo(404);
+    }
+
+    private UUID soloImage(TestUser u) {
+        UUID id = UUID.randomUUID();
+        jdbc.update("INSERT INTO media (id, space_id, owner_id, kind, mime, size_bytes, s3_key, status) "
+                + "VALUES (?, ?, ?, 'IMAGE', 'image/jpeg', 1000, ?, 'READY')", id, soloSpace(u), u.id(),
+                "spaces/x/" + id + "/original");
+        return id;
     }
 
     @Test
