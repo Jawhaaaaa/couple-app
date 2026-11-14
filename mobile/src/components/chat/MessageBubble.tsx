@@ -4,6 +4,7 @@ import { memo, type ReactNode } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import type { Message } from '@/api/queries/chat';
+import { mediaPlaceholder } from '@/api/queries/memories';
 import { AppText } from '@/components/AppText';
 import { remainingSeconds } from '@/chat/disappearing';
 import { formatTime, useT } from '@/i18n';
@@ -94,7 +95,7 @@ export const MessageBubble = memo(function MessageBubble({
               <Pressable onPress={() => onOpen?.(m)} accessibilityRole="imagebutton" accessibilityLabel={t('chat.kind.IMAGE')}>
                 <Image
                   source={{ uri: m.media.urls.md ?? m.media.urls.original }}
-                  placeholder={m.media.blurhash ? { blurhash: m.media.blurhash } : undefined}
+                  placeholder={mediaPlaceholder(m.media, 'md')}
                   style={styles.image}
                   contentFit="cover"
                 />

@@ -11,6 +11,7 @@ import {
   type MemorySummary,
   type OccasionSummary,
 } from '@/api/queries/dashboard';
+import { mediaPlaceholder } from '@/api/queries/memories';
 import { mediaThumb } from '@/api/queries/pairing';
 import { AppButton } from '@/components/AppButton';
 import { AppText } from '@/components/AppText';
@@ -182,7 +183,7 @@ export function RecentMemoriesSection({ items }: { items: MemorySummary[] }) {
               style={({ pressed }) => [styles.memory, { backgroundColor: colors.surfaceRaised, opacity: pressed ? 0.85 : 1 }]}
             >
               {thumb ? (
-                <Image source={{ uri: thumb }} style={styles.thumb} contentFit="cover" accessible={false} />
+                <Image source={{ uri: thumb }} placeholder={mediaPlaceholder(m.cover, 'sm')} style={styles.thumb} contentFit="cover" accessible={false} />
               ) : (
                 <View style={[styles.thumb, styles.thumbEmpty]}>
                   <Images size={28} color={colors.textMuted} strokeWidth={iconStroke} />

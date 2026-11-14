@@ -4,7 +4,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { invalidateLetters, type Letter, letterKey, markLetterRead, useLetter } from '@/api/queries/letters';
-import { mediaUrl } from '@/api/queries/memories';
+import { mediaPlaceholder, mediaUrl } from '@/api/queries/memories';
 import { AppButton } from '@/components/AppButton';
 import { AppText } from '@/components/AppText';
 import { ScreenState } from '@/components/ScreenState';
@@ -75,7 +75,7 @@ function LetterBody({ letter }: { letter: Letter }) {
             {letter.body}
           </AppText>
           {letter.media.map((m) => (
-            <Image key={m.id} source={{ uri: mediaUrl(m, 'lg') ?? undefined }} style={styles.image} contentFit="cover" accessibilityLabel={t('letters.read.photo')} />
+            <Image key={m.id} source={{ uri: mediaUrl(m, 'lg') ?? undefined }} placeholder={mediaPlaceholder(m, 'lg')} style={styles.image} contentFit="cover" accessibilityLabel={t('letters.read.photo')} />
           ))}
           <AppText variant="bodyStrong" style={[styles.sign, { color: paper.ink }]}>
             {t('letters.read.signed', { name: authorName })}

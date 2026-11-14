@@ -280,6 +280,22 @@ export function mediaUrl(media: MediaRef | null | undefined, size: 'sm' | 'md' |
   return urls.lg ?? urls.original;
 }
 
+/**
+ * Зураг ачаалж дуустал харагдах орлуулга (FR-19.10, AC-160): blurhash байвал түүгээр, үгүй бол
+ * жижиг (`sm`) thumbnail — том хувилбар (`md`/`lg`) ачаалагдах хооронд. `sm`-ийг өөрийг нь
+ * харуулахад орлуулга хэрэггүй (blurhash л).
+ */
+export function mediaPlaceholder(
+  media: Pick<MediaRef, 'blurhash' | 'urls'> | null | undefined,
+  size: 'sm' | 'md' | 'lg' = 'md',
+): { blurhash: string } | { uri: string } | undefined {
+  if (!media) return undefined;
+  if (media.blurhash) return { blurhash: media.blurhash };
+  const thumb = media.urls.sm;
+  if (size === 'sm' || !thumb || thumb === mediaUrl(media as MediaRef, size)) return undefined;
+  return { uri: thumb };
+}
+
 /** S-23 «Жилийн өмнөх өнөөдөр» (FR-3.6, AC-73): өмнөх жилүүдийн ижил өдрийн дурсамжууд жилээр. */
 export type OnThisDayGroup = S['OnThisDayGroup'];
 export const ON_THIS_DAY_KEY = ['memories', 'on-this-day'] as const;

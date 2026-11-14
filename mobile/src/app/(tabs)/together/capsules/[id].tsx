@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { type Capsule, capsuleKey, type CapsulePart, invalidateCapsules, putMyCapsulePart, sealCapsule, useCapsule } from '@/api/queries/capsules';
-import { mediaUrl } from '@/api/queries/memories';
+import { mediaPlaceholder, mediaUrl } from '@/api/queries/memories';
 import { AppButton } from '@/components/AppButton';
 import { AppText } from '@/components/AppText';
 import { ConfirmSheet } from '@/components/ConfirmSheet';
@@ -198,7 +198,7 @@ function CapsuleBody({ capsule }: { capsule: Capsule }) {
                   </AppText>
                   <AppText variant="quote">{p.body ?? ''}</AppText>
                   {(p.media ?? []).map((m) => (
-                    <Image key={m.id} source={{ uri: mediaUrl(m, 'lg') ?? undefined }} style={styles.image} contentFit="cover" accessibilityLabel={t('letters.read.photo')} />
+                    <Image key={m.id} source={{ uri: mediaUrl(m, 'lg') ?? undefined }} placeholder={mediaPlaceholder(m, 'lg')} style={styles.image} contentFit="cover" accessibilityLabel={t('letters.read.photo')} />
                   ))}
                 </View>
               );

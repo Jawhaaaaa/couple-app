@@ -1,5 +1,4 @@
 import { useQueryClient } from '@tanstack/react-query';
-import type { AnimationObject } from 'lottie-react-native';
 import { useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut, ZoomIn } from 'react-native-reanimated';
@@ -10,6 +9,7 @@ import { AppText } from '@/components/AppText';
 import { useT } from '@/i18n';
 import { AnimatedMoment } from '@/motion/AnimatedMoment';
 import { playHaptic, playHugHaptic } from '@/motion/haptics';
+import type { LottieLoader } from '@/motion/lottieSource';
 import { SizedLottie } from '@/motion/SizedLottie';
 import { useMotionPreference } from '@/motion/useMotionPreference';
 import { onRealtime } from '@/realtime/eventRouter';
@@ -18,8 +18,9 @@ import { useSignalFx } from '@/signals/sendSignal';
 import { useColors } from '@/theme/ThemeProvider';
 import { radius, spacing } from '@/theme/tokens';
 
-const heartLottie = require('../../../assets/lottie/noto/red-heart.json') as AnimationObject;
-const hugLottie = require('../../../assets/lottie/noto/hug.json') as AnimationObject;
+// Lottie JSON дохио ирэх үед л татагдана (AC-160) — эхний ачааллын bundle-д орохгүй
+const heartLottie: LottieLoader = () => import('../../../assets/lottie/noto/red-heart.json');
+const hugLottie: LottieLoader = () => import('../../../assets/lottie/noto/hug.json');
 
 /** ANIM-02 ≈ 1.6 с; «Чамайг бодож байна»-ын бичвэрийг уншихад арай урт. */
 export const RECEIVE_MS: Record<SignalKind, number> = { HEART: 1600, HUG: 1600, THINKING: 3200 };

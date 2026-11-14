@@ -92,8 +92,9 @@
     "lint": "expo lint",
     "test": "jest",
     "typecheck": "tsc --noEmit",
-    "export:web": "expo export --platform web && node scripts/build-sw.cjs",
+    "export:web": "expo export --platform web && node scripts/build-sw.cjs && node scripts/check-bundle-size.mjs",
     "build:sw": "node scripts/build-sw.cjs",
+    "check:size": "node scripts/check-bundle-size.mjs",
     "generate:pwa-icons": "node scripts/generate-pwa-icons.mjs",
     "gen:api": "openapi-typescript ../contracts/openapi.yaml -o src/api/schema.d.ts"
   },

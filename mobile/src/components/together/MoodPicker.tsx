@@ -1,4 +1,3 @@
-import type { AnimationObject } from 'lottie-react-native';
 import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
@@ -7,16 +6,18 @@ import { MOOD_LEVELS } from '@/domain/moodChart';
 import { useT } from '@/i18n';
 import { AnimatedMoment } from '@/motion/AnimatedMoment';
 import { playHaptic } from '@/motion/haptics';
+import type { LottieLoader } from '@/motion/lottieSource';
 import { SizedLottie } from '@/motion/SizedLottie';
 import { useColors } from '@/theme/ThemeProvider';
 import { radius, spacing, touchTarget } from '@/theme/tokens';
 
-const MOOD_LOTTIE: Record<number, AnimationObject> = {
-  1: require('../../../assets/lottie/noto/mood-1.json') as AnimationObject,
-  2: require('../../../assets/lottie/noto/mood-2.json') as AnimationObject,
-  3: require('../../../assets/lottie/noto/mood-3.json') as AnimationObject,
-  4: require('../../../assets/lottie/noto/mood-4.json') as AnimationObject,
-  5: require('../../../assets/lottie/noto/mood-5.json') as AnimationObject,
+/** Lottie JSON сонгох үед л татагдана (AC-160) — эхний ачааллын bundle-д орохгүй. */
+const MOOD_LOTTIE: Record<number, LottieLoader> = {
+  1: () => import('../../../assets/lottie/noto/mood-1.json'),
+  2: () => import('../../../assets/lottie/noto/mood-2.json'),
+  3: () => import('../../../assets/lottie/noto/mood-3.json'),
+  4: () => import('../../../assets/lottie/noto/mood-4.json'),
+  5: () => import('../../../assets/lottie/noto/mood-5.json'),
 };
 export const MOOD_EMOJI: Record<number, string> = { 1: '😢', 2: '😕', 3: '😐', 4: '🙂', 5: '😄' };
 

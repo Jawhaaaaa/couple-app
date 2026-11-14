@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import { Images } from 'lucide-react-native';
 import { type ImageStyle, StyleSheet, View, type ViewStyle } from 'react-native';
 
-import { type MediaRef, mediaUrl } from '@/api/queries/memories';
+import { type MediaRef, mediaPlaceholder, mediaUrl } from '@/api/queries/memories';
 import { useColors } from '@/theme/ThemeProvider';
 import { iconStroke } from '@/theme/tokens';
 
@@ -16,7 +16,7 @@ interface Props {
   testID?: string;
 }
 
-/** Нүүр зураг: blurhash орлуулгатай `expo-image`; видео бол poster. Медиагүй бол дүрс. */
+/** Нүүр зураг: blurhash (эсвэл жижиг thumbnail) орлуулгатай `expo-image`; видео бол poster. Медиагүй бол дүрс. */
 export function MemoryCover({ media, size = 'md', style, alt, fit = 'cover', testID }: Props) {
   const colors = useColors();
   const uri = media?.kind === 'VIDEO' ? (media.urls.poster ?? null) : mediaUrl(media, size);
@@ -30,7 +30,7 @@ export function MemoryCover({ media, size = 'md', style, alt, fit = 'cover', tes
   return (
     <Image
       source={{ uri }}
-      placeholder={media.blurhash ? { blurhash: media.blurhash } : undefined}
+      placeholder={mediaPlaceholder(media, size)}
       contentFit={fit}
       transition={200}
       style={[styles.image, { backgroundColor: colors.surfaceRaised }, style]}
