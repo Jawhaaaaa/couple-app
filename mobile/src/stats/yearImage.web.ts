@@ -1,12 +1,18 @@
 import type { RefObject } from 'react';
 
 import type { YearInReview } from '@/api/queries/stats';
+import { shareOrDownload } from '@/pwa/webFallbacks';
 
-export type SaveOutcome = 'saved' | 'denied' | 'failed';
+export type SaveOutcome = 'saved' | 'denied' | 'failed' | 'dismissed';
+
+function canvasBlob(canvas: HTMLCanvasElement): Promise<Blob | null> {
+  return new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+}
 
 /**
- * Вэбэд «Бидний жил»-ийг canvas-аар зурж PNG татна (AC-118, FR-19.8) — DOM-оос зураг авах сан
- * шаардахгүй. `labels`: `title`, `colors` (`bg`, `text`, `primary`, `muted`) ба тоонуудын шошго.
+ * Вэбэд «Бидний жил»-ийг canvas-аар зурж PNG болгоно (AC-118, FR-19.8) — DOM-оос зураг авах сан
+ * шаардахгүй. Web Share-тэй утасны хөтөчид хуваалцах цонх («Зураг хадгалах»), үгүй бол татна
+ * (`shareOrDownload`, AC-158). `labels`: `title`, `colors` (`bg`, `text`, `primary`, `muted`) ба тоонуудын шошго.
  */
 export async function saveYearImage(_stage: RefObject<unknown>, data: YearInReview, labels: Record<string, string>): Promise<SaveOutcome> {
   try {
@@ -38,12 +44,10 @@ export async function saveYearImage(_stage: RefObject<unknown>, data: YearInRevi
     ctx.fillStyle = labels.muted;
     ctx.font = '36px Nunito, sans-serif';
     ctx.fillText('Aura', 540, 1290);
-    const url = canvas.toDataURL('image/png');
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `aura-${data.year}.png`;
-    a.click();
-    return 'saved';
+    const blob = await canvasBlob(canvas);
+    if (!blob) return 'failed';
+    const outcome = await shareOrDownload({ title: labels.title, file: { blob, fileName: `aura-${data.year}.png`, mime: 'image/png' } });
+    return outcome === 'dismissed' ? 'dismissed' : 'saved';
   } catch {
     return 'failed';
   }

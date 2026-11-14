@@ -38,6 +38,7 @@ import {
   applyExif,
   applyPrefill,
   buildCreateBody,
+  coordinateLabel,
   buildUpdateBody,
   DESCRIPTION_MAX,
   draftFromMemory,
@@ -54,6 +55,7 @@ import { suggestFromAssets } from '@/memories/exif';
 import { admitPicks, MEDIA_MAX, type Rejection } from '@/memories/limits';
 import { assetExif, pickMedia, type PickSource, queueAsset, toCandidate } from '@/memories/pickMedia';
 import { outbox } from '@/offline/outboxRuntime';
+import { currentCoords } from '@/platform/location';
 import { type DraftMedia, emptyDraft, type MemoryDraft, NEW_DRAFT, useDraftsHydrated, useDraftStore } from '@/stores/draftStore';
 import { useColors } from '@/theme/ThemeProvider';
 import { iconStroke, radius, spacing } from '@/theme/tokens';
@@ -134,6 +136,8 @@ function EditorForm({ draftKey, draft, memoryId }: { draftKey: string; draft: Me
   const [pickError, setPickError] = useState<unknown>(null);
   const [denied, setDenied] = useState(false);
   const [picking, setPicking] = useState(false);
+  const [locating, setLocating] = useState(false);
+  const [locationNotice, setLocationNotice] = useState<'denied' | 'failed' | null>(null);
   const [tagInput, setTagInput] = useState('');
   const [groupName, setGroupName] = useState('');
   const [groupError, setGroupError] = useState<unknown>(null);
@@ -147,6 +151,29 @@ function EditorForm({ draftKey, draft, memoryId }: { draftKey: string; draft: Me
   const latest = () => useDraftStore.getState().drafts[draftKey] ?? draft;
   const errors = showErrors ? validateDraft(draft) : [];
   const has = (e: DraftError) => errors.includes(e);
+
+  // Одоогийн байршил (S-32, FR-5.2): вэбэд navigator.geolocation (AC-158), native-д expo-location
+  const locate = async () => {
+    setLocationNotice(null);
+    setLocating(true);
+    try {
+      const out = await currentCoords();
+      if (out.status !== 'ok') {
+        setLocationNotice(out.status);
+        return;
+      }
+      const current = latest();
+      update({
+        lat: String(out.lat),
+        lon: String(out.lon),
+        placeName: current.placeName.trim() || coordinateLabel(out.lat, out.lon),
+        locationSource: 'MANUAL',
+        locationTouched: true,
+      });
+    } finally {
+      setLocating(false);
+    }
+  };
 
   const pick = async (source: PickSource) => {
     setPickError(null);
@@ -392,6 +419,14 @@ function EditorForm({ draftKey, draft, memoryId }: { draftKey: string; draft: Me
         <AppText variant="caption" color={has('LOCATION') ? 'danger' : 'textMuted'} testID="editor-location-hint">
           {has('LOCATION') ? t('memories.editor.locationInvalid') : t('memories.editor.locationHint')}
         </AppText>
+        <AppButton variant="secondary" label={t('memories.editor.useMyLocation')} onPress={() => void locate()} loading={locating} testID="editor-location-current" />
+        {locationNotice ? (
+          <FormMessage
+            kind="info"
+            text={locationNotice === 'denied' ? t('memories.editor.locationDenied') : t('memories.editor.locationFailed')}
+            testID="editor-location-notice"
+          />
+        ) : null}
         {draft.placeName || draft.lat || draft.lon ? (
           <AppButton
             variant="ghost"

@@ -51,7 +51,8 @@ export default function YearInReviewScreen() {
       ...(review.data.topPlace ? { topPlace: t('stats.topPlace', { place: review.data.topPlace.placeName }) } : {}),
     };
     for (const key of Object.keys(review.data.totals)) labels[`total.${key}`] = t(`stats.${key}`, { defaultValue: '' });
-    setSaved(await saveYearImage(stage, review.data, labels));
+    const outcome = await saveYearImage(stage, review.data, labels);
+    setSaved(outcome === 'dismissed' ? null : outcome);
     setSaving(false);
   };
 

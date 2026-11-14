@@ -4,7 +4,8 @@ import { captureRef } from 'react-native-view-shot';
 
 import type { YearInReview } from '@/api/queries/stats';
 
-export type SaveOutcome = 'saved' | 'denied' | 'failed';
+/** `dismissed` — вэбэд хуваалцах цонхыг хэрэглэгч хаасан (мэдэгдэл харуулахгүй). */
+export type SaveOutcome = 'saved' | 'denied' | 'failed' | 'dismissed';
 
 /**
  * S-72-ыг зураг болгон хадгалах (AC-118): native-д слайдын талбайг PNG болгоод (`react-native-view-shot`)

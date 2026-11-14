@@ -23,6 +23,7 @@ import { SpaceStatusBanner } from '@/components/settings/SpaceStatusBanner';
 import { TimezonePrompt } from '@/components/TimezonePrompt';
 import { UpdateBanner } from '@/components/UpdateBanner';
 import { AppLockProvider } from '@/lock/AppLockProvider';
+import { HapticFlash } from '@/motion/HapticFlash';
 import { installSoundPlayer } from '@/motion/sound';
 import { useLocalReminderSync } from '@/notifications/useLocalReminderSync';
 import { useNotificationTapRouting } from '@/notifications/useNotificationTapRouting';
@@ -117,6 +118,8 @@ function ThemedStack() {
         {/* Вэб: нэвтэрсний дараа S-100 суулгах / S-101 мэдэгдэл (FR-19.2, FR-19.3) */}
         <PwaPrompts />
       </SplashGate>
+      {/* Вэб (iOS Safari): haptic-ийн оронд тод дүрслэл (FR-19.7, AC-217 (б)) */}
+      <HapticFlash />
     </>
   );
 }

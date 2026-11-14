@@ -33,6 +33,20 @@ export function registerSoundPlayer(player: SoundPlayer | null) {
   soundPlayer = player;
 }
 
+type VisualListener = (spec: HapticSpec) => void;
+const visualListeners = new Set<VisualListener>();
+
+/**
+ * Чичиргээгүй вэбэд (iOS Safari, AC-217 (б)) haptic-ийн оронд тод дүрслэл үзүүлэгч (`HapticFlash`)
+ * энд бүртгүүлнэ. Буцаах функц — бүртгэлээс гаргана.
+ */
+export function onVisualHaptic(listener: VisualListener): () => void {
+  visualListeners.add(listener);
+  return () => {
+    visualListeners.delete(listener);
+  };
+}
+
 function nativeOnce(kind: HapticKind): Promise<void> {
   switch (kind) {
     case 'impactLight':
@@ -71,6 +85,7 @@ function perform(spec: HapticSpec | null, soundKey: AnimId | 'HUG'): HapticOutco
       navigator.vibrate(webVibrationPattern(spec));
       return 'vibrate';
     }
+    for (const listener of visualListeners) listener(spec);
     return 'visual';
   }
   for (let i = 0; i < spec.times; i++) {

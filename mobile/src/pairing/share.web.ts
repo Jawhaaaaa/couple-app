@@ -1,26 +1,18 @@
 import * as Clipboard from 'expo-clipboard';
 
+import { shareOrDownload } from '@/pwa/webFallbacks';
+
 import type { ShareInviteInput, ShareOutcome } from './share';
 
 export type { ShareInviteInput, ShareOutcome } from './share';
 
 /**
- * Вэб: Web Share API (утасны хөтөч) байвал түүгээр; үгүй бол холбоосыг санах ойд
- * хуулна (desktop хөтөч).
+ * Вэб (FR-19.8, AC-158): Web Share API (утасны хөтөч) байвал түүгээр; үгүй бол холбоосыг
+ * санах ойд хуулна (desktop хөтөч) — `shareOrDownload`.
  */
 export async function shareInvite({ message, link }: ShareInviteInput): Promise<ShareOutcome> {
-  if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
-    try {
-      await navigator.share({ text: message, url: link });
-      return 'shared';
-    } catch (error) {
-      // Хэрэглэгч хуваалцах цонхыг хаавал AbortError — алдаа биш
-      if (error instanceof Error && error.name === 'AbortError') return 'dismissed';
-      // Бусад алдаа (зөвшөөрөлгүй, дэмжигдээгүй өгөгдөл) — доорх хуулах нөөц рүү
-    }
-  }
-  await Clipboard.setStringAsync(`${message}\n${link}`);
-  return 'copied';
+  const outcome = await shareOrDownload({ text: message, url: link, copy: (text) => Clipboard.setStringAsync(text).then(() => undefined) });
+  return outcome === 'downloaded' ? 'copied' : outcome;
 }
 
 export async function copyText(text: string): Promise<void> {

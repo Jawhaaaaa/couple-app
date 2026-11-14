@@ -5,6 +5,7 @@ import { router } from 'expo-router';
 import { api } from '@/api/client';
 import MemoryEditorScreen from '@/app/memory-editor';
 import { outbox } from '@/offline/outboxRuntime';
+import { currentCoords } from '@/platform/location';
 import { useDraftStore } from '@/stores/draftStore';
 import { defaultPrefs, usePrefsStore } from '@/stores/prefsStore';
 import { useSessionStore } from '@/stores/sessionStore';
@@ -27,6 +28,8 @@ jest.mock('expo-image-picker', () => ({
   launchImageLibraryAsync: jest.fn(),
   launchCameraAsync: jest.fn(),
 }));
+
+jest.mock('@/platform/location', () => ({ currentCoords: jest.fn() }));
 
 jest.mock('@/upload/stripGps', () => ({
   stripGps: jest.fn(async ({ width, height }: { width: number; height: number }) => ({
@@ -210,6 +213,19 @@ describe('S-32 дурсамж нэмэх', () => {
     await first.unmount();
     await renderWithClient(<MemoryEditorScreen />);
     await waitFor(() => expect(screen.getByTestId('editor-title').props.value).toBe('Дуусаагүй бодол'));
+  });
+
+  it('AC-158 «Одоогийн байршлыг ашиглах» (вэбэд navigator.geolocation) координат, нэрийг бөглөнө; татгалзвал гараар', async () => {
+    (currentCoords as jest.Mock).mockResolvedValueOnce({ status: 'denied' }).mockResolvedValueOnce({ status: 'ok', lat: 47.91887, lon: 106.91701 });
+    await openNew();
+    await fireEvent.press(screen.getByTestId('editor-location-current'));
+    expect(await screen.findByTestId('editor-location-notice')).toHaveTextContent(/гараар/);
+    expect(screen.getByTestId('editor-lat').props.value).toBe('');
+    await fireEvent.press(screen.getByTestId('editor-location-current'));
+    await waitFor(() => expect(screen.getByTestId('editor-lat').props.value).toBe('47.91887'));
+    expect(screen.getByTestId('editor-lon').props.value).toBe('106.91701');
+    expect(screen.getByTestId('editor-place').props.value).toBe('47.91887, 106.91701');
+    expect(screen.queryByTestId('editor-location-notice')).toBeNull();
   });
 
   it('?draft= (чат/болзоо) гарчиг, огноо, газар, тайлбараар бөглөнө', async () => {

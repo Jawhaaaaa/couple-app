@@ -4,6 +4,7 @@ import { Platform } from 'react-native';
 
 import type { ChatPlace, Message } from '@/api/queries/chat';
 import type { DraftPrefill } from '@/memories/editorModel';
+import { currentCoords } from '@/platform/location';
 import { blobFromUri } from '@/upload/simpleUpload';
 import { uploadQueue } from '@/upload/uploadRuntime';
 
@@ -44,14 +45,15 @@ export async function pickAndUploadFile(): Promise<PickFileOutcome> {
 
 export type LocationOutcome = { status: 'ok'; place: ChatPlace } | { status: 'denied' } | { status: 'failed' };
 
-/** S-40 «Байршил» — одоогийн байршил (зөвшөөрөлтэй), native-д хотын нэрийг урвуу geocoding-оор. */
+/**
+ * S-40 «Байршил» — одоогийн байршил (зөвшөөрөлтэй; вэбэд `navigator.geolocation`, AC-158),
+ * native-д хотын нэрийг урвуу geocoding-оор.
+ */
 export async function currentPlace(fallbackName: string): Promise<LocationOutcome> {
-  const permission = await Location.requestForegroundPermissionsAsync();
-  if (!permission.granted) return { status: 'denied' };
+  const coords = await currentCoords();
+  if (coords.status !== 'ok') return coords;
   try {
-    const pos = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
-    const lat = Math.round(pos.coords.latitude * 1e5) / 1e5;
-    const lon = Math.round(pos.coords.longitude * 1e5) / 1e5;
+    const { lat, lon } = coords;
     let name = fallbackName;
     let city: string | null = null;
     let countryCode: string | null = null;

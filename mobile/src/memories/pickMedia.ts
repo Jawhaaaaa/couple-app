@@ -19,7 +19,8 @@ export type PickResult =
 /**
  * S-32 медиа сонголт (FR-5.1): зургийн сангаас олныг (≤ 20 − байгаа) эсвэл камераар нэг
  * зураг. `exif: true` — огноо, GPS-ийн санал (AC-79). Вэбд image-picker нь
- * `<input type=file accept capture>`-аар ажиллана (зөвшөөрөл асуухгүй).
+ * `<input type=file accept capture>`-аар ажиллана (зөвшөөрөл асуухгүй, FR-19.8, AC-158): камер —
+ * `accept="image/*" capture="environment"` (арын камер), сан — `accept="image/*,video/*" multiple`.
  */
 export async function pickMedia(source: PickSource, existing: number): Promise<PickResult> {
   if (Platform.OS !== 'web') {
@@ -29,7 +30,7 @@ export async function pickMedia(source: PickSource, existing: number): Promise<P
   }
   const result =
     source === 'camera'
-      ? await ImagePicker.launchCameraAsync({ mediaTypes: ['images'], exif: true, quality: 1 })
+      ? await ImagePicker.launchCameraAsync({ mediaTypes: ['images'], cameraType: 'back' as ImagePicker.CameraType, exif: true, quality: 1 })
       : await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ['images', 'videos'],
           allowsMultipleSelection: true,
