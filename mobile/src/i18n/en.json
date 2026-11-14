@@ -1401,5 +1401,45 @@
       "hint": "Tap to close"
     },
     "hubCard": "Anniversaries and birthdays"
+  },
+  "breakup": {
+    "title": "End pairing",
+    "step": "{{step}} / 3",
+    "warnTitle": "Before you end the pairing",
+    "warnBody": "Once you end the pairing, your shared space becomes view-and-download only for 14 days. You can't add or edit memories or messages during that time.",
+    "warnRestore": "If you both tap \"Restore\" within 14 days, everything comes back as it was.",
+    "warnPurge": "After 14 days, all shared data (memories, messages, photos) is permanently deleted from the server.",
+    "warnPartner": "{{partner}} will be notified.",
+    "continue": "I understand, continue",
+    "confirmTitle": "Final confirmation",
+    "confirmBody": "Enter your password and tap \"End pairing\". Within 14 days, only the two of you together can undo this.",
+    "password": "Password",
+    "passwordHint": "If you signed up with Google/Apple, you can leave this empty.",
+    "passwordWrong": "That password is incorrect.",
+    "confirm": "End pairing",
+    "exportTitle": "Save your data",
+    "exportBody": "The pairing has ended. For the next 14 days you can download a copy of all your shared memories, messages and photos.",
+    "exportOpen": "Download a copy",
+    "exportLater": "Later",
+    "stateTitle": "Pairing ended",
+    "daysLeft": "{{count}} days until deletion",
+    "daysLeft_one": "{{count}} day until deletion",
+    "daysLeft_other": "{{count}} days until deletion",
+    "readOnly": "You can view and download for now — adding or editing is turned off.",
+    "restoreTitle": "Restore",
+    "restoreBody": "If you both tap \"Restore\", all your data comes back as it was.",
+    "restore": "Restore",
+    "restoreMine": "You've confirmed. The pairing comes back as soon as {{partner}} confirms too.",
+    "restorePartner": "{{partner}} wants to restore. Confirm to bring it back.",
+    "restored": "Pairing restored — everything is as it was.",
+    "partnerFallback": "Your partner",
+    "notPaired": "You're not paired with anyone right now.",
+    "orphaned": "Your partner deleted their account, so your shared space is view-and-download only.",
+    "offline": "Ending or restoring a pairing needs an internet connection."
+  },
+  "spaceBanner": {
+    "breaking": "Pairing ended — download your data or restore together within {{count}} days.",
+    "orphaned": "Your partner deleted their account — download your data within {{count}} days.",
+    "open": "Details"
   }
 }

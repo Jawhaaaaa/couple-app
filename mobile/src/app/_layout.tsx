@@ -17,6 +17,7 @@ import { SignalReceiver } from '@/components/home/SignalReceiver';
 import { Mascot } from '@/components/Mascot';
 import { OfflineBanner } from '@/components/OfflineBanner';
 import { ServerUnreachable } from '@/components/ServerUnreachable';
+import { SpaceStatusBanner } from '@/components/settings/SpaceStatusBanner';
 import { TimezonePrompt } from '@/components/TimezonePrompt';
 import { AppLockProvider } from '@/lock/AppLockProvider';
 import { installSoundPlayer } from '@/motion/sound';
@@ -97,6 +98,8 @@ function ThemedStack() {
       <StatusBar style={mode === 'dark' ? 'light' : 'dark'} />
       <SafeAreaView edges={['top']} style={{ backgroundColor: colors.bg }}>
         <OfflineBanner />
+        {/* Зөвхөн харах/экспорт горим — хос тасалсан эсвэл хамтрагч устгагдсан (AC-127, AC-128) */}
+        <SpaceStatusBanner />
       </SafeAreaView>
       <SplashGate>
         <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.bg } }}>
