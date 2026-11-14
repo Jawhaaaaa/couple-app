@@ -4,7 +4,7 @@ Expo web export дээр утасны профайлаар (Pixel 7 · iPhone 14
 Хоёр хамтрагч = хоёр browser context (`fixtures/twoPartners.ts`). Тестийн нэр AC ID-тай.
 
 ```bash
-cd mobile && npx expo export --platform web          # апп (scripts/serve-dist.mjs үйлчилнэ, :8091)
+cd mobile && npm run export:web                       # апп + sw.js (scripts/serve-dist.mjs үйлчилнэ, :8091)
 SPRING_PROFILES_ACTIVE=dev,e2e docker compose up -d --build   # backend, postgres, seaweedfs, mailpit
 cd e2e && npm ci && npx playwright test
 ```

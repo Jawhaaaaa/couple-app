@@ -129,9 +129,21 @@ describe('T-83 UpdateBanner', () => {
     const waiting = fakeWorker();
     await act(async () => usePwaStore.setState({ waiting: waiting as unknown as ServiceWorker }));
     expect(screen.getByTestId('pwa-update-banner')).toHaveTextContent(/Шинэ хувилбар бэлэн/);
-    const nav = fakeNav().nav;
+    const { nav, container } = fakeNav();
     Object.defineProperty(globalThis, 'navigator', { value: nav, configurable: true });
-    await fireEvent.press(screen.getByTestId('pwa-update-apply'));
-    await waitFor(() => expect(waiting.postMessage).toHaveBeenCalledWith({ type: 'SKIP_WAITING' }), { timeout: 2000 });
+    // Анхдагч reload нь window.location.reload — тестийн орчинд location байхгүй тул орлуулна
+    const reload = jest.fn();
+    const prevLocation = Object.getOwnPropertyDescriptor(window, 'location');
+    Object.defineProperty(window, 'location', { value: { reload }, configurable: true });
+    try {
+      await fireEvent.press(screen.getByTestId('pwa-update-apply'));
+      await waitFor(() => expect(waiting.postMessage).toHaveBeenCalledWith({ type: 'SKIP_WAITING' }), { timeout: 2000 });
+      // Удирдлага шилжмэгц reload; fallback timer дараа нь дахин reload хийхгүй (тестийн дараа timer үлдэхгүй)
+      container.emit('controllerchange');
+      expect(reload).toHaveBeenCalledTimes(1);
+    } finally {
+      if (prevLocation) Object.defineProperty(window, 'location', prevLocation);
+      else delete (window as { location?: unknown }).location;
+    }
   });
 });

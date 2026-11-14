@@ -5,6 +5,11 @@ spring:
       maximum-pool-size: 4
       minimum-idle: 1
 aura:
+  # IT бүр (өөр @TestPropertySource-той context) өөрийн MutableClock-той ч нэг DB хуваалцана. Фон
+  # ReminderScheduler нь өөр context-ийн ирээдүйн цагаар бусад тестийн PENDING сануулгыг SENT болгож
+  # байсан (ReminderSchedulerIT-ийн тогтворгүй уналт) — тестэд зөвхөн runOnce()-оор ажиллана.
+  jobs:
+    reminder-interval: PT24H
   # Зөвхөн тестийн утга (≥ 32 байт) — бодит нууц биш
   jwt:
     secret: test-only-jwt-secret-0123456789abcdefghijklmnop

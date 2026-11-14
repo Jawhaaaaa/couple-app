@@ -59,6 +59,20 @@ describe('T-83 service worker (sw/sw.js)', () => {
     expect(await (await dispatch('fetch', { request })).response!.text()).toBe('chunk');
   });
 
+  it('static — runtime кэшэд бичиж чадахгүй (квот, тасарсан урсгал) үед ч сүлжээний хариу хөтөчид хүрнэ', async () => {
+    const { fetchMock, dispatch, caches } = loadServiceWorker();
+    fetchMock.mockImplementation(async () => new Response('chunk'));
+    const open = caches.api.open;
+    caches.api.open = async (name: string) => ({
+      ...(await open(name)),
+      put: async () => {
+        throw new Error('QuotaExceededError');
+      },
+    });
+    const { response } = await dispatch('fetch', { request: get('/_expo/static/js/web/index-1.js') });
+    expect(await response!.text()).toBe('chunk');
+  });
+
   it('AC-191 SKIP_WAITING мессежээр л идэвхжинэ; activate хуучин precache-ийг устгана', async () => {
     const { self, clients, dispatch, caches, sw } = loadServiceWorker({ __AURA_VERSION__: 'new' });
     await caches.api.open('aura-precache-old');

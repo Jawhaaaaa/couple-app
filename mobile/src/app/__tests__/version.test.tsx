@@ -89,7 +89,8 @@ afterEach(() => {
 describe('«Шинэ хувилбар бэлэн» карт (FR-17.5)', () => {
   it('AC-141 S-20 нүүрэнд — GET /version?current=апп-ын хувилбар, товшвол татах хуудас (DEV)', async () => {
     await renderWithClient(<HomeScreen />);
-    await waitFor(() => expect(screen.getByTestId('home-update')).toBeTruthy());
+    // S-20 олон query-тэй хүнд дэлгэц — ачаалалтай машин дээр 1 с-ийн анхдагч хүрэлцдэггүй
+    await waitFor(() => expect(screen.getByTestId('home-update')).toBeTruthy(), { timeout: 5000 });
     expect(getSpy).toHaveBeenCalledWith('/version', { params: { query: { platform: 'ios', current: '1.1.0' } } });
     expect(screen.getByTestId('home-update-body')).toHaveTextContent('Aura 1.2.0 гарлаа (танайх 1.1.0). Шинэчлээд шинэ боломжуудыг туршаарай.');
     await fireEvent.press(screen.getByTestId('home-update-open'));

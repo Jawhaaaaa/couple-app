@@ -67,14 +67,24 @@ async function trimRuntime(cache) {
   for (let i = 0; i < extra; i++) await cache.delete(keys[i]);
 }
 
-async function cacheFirst(request) {
+/**
+ * Кэш бичилт нь хариунаас тусдаа: квот дүүрсэн, хуудас шилжиж урсгал тасарсан г.м. үед `cache.put`
+ * унасан ч сүлжээнээс ирсэн хариу хөтөчид хүрнэ (өмнө нь Firefox «ServiceWorker … unexpected error»
+ * гэж chunk ачаалахаа больдог байсан). Бичилтийг `waitUntil`-д өгснөөр SW дуусахаас өмнө зогсохгүй.
+ */
+async function cacheFirst(request, event) {
   const hit = await caches.match(request, { ignoreVary: true });
   if (hit) return hit;
   const res = await fetch(request);
   if (res && res.ok && res.type !== 'opaque') {
-    const cache = await caches.open(RUNTIME_NAME);
-    await cache.put(request, res.clone());
-    await trimRuntime(cache);
+    const copy = res.clone(); // хөтөч body-г уншиж эхлэхээс өмнө
+    const store = (async () => {
+      const cache = await caches.open(RUNTIME_NAME);
+      await cache.put(request, copy);
+      await trimRuntime(cache);
+    })().catch(() => undefined);
+    if (event && event.waitUntil) event.waitUntil(store);
+    else await store;
   }
   return res;
 }
@@ -111,7 +121,7 @@ self.addEventListener('message', (event) => {
 self.addEventListener('fetch', (event) => {
   const strategy = strategyFor(event.request, self.location.origin);
   if (strategy === 'navigate') event.respondWith(navigate(event.request));
-  else if (strategy === 'cache-first') event.respondWith(cacheFirst(event.request));
+  else if (strategy === 'cache-first') event.respondWith(cacheFirst(event.request, event));
 });
 
 const DEFAULT_TITLE = 'Aura';

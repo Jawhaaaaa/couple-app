@@ -3,6 +3,7 @@ package mn.aura.couple;
 import java.time.Duration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -20,6 +21,9 @@ import org.testcontainers.utility.MountableFile;
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
+// Context бүр нэг DB хуваалцаж фон JobRunner нь бусад тестийн ажлыг (VIDEO_TRANSCODE г.м.) авч болно.
+// ItBeans-гүй context хостын ffprobe-оор унагаад backoff-д оруулдаг байсан (VideoTranscodeIT-ийн тогтворгүй уналт).
+@Import(ItBeans.class)
 public abstract class AbstractIntegrationTest {
 
     public static final String S3_ACCESS_KEY = "aura-dev-access";

@@ -2,7 +2,8 @@
 /**
  * `mobile/dist`-ийг (expo export --platform web) SPA хэлбэрээр үйлчилнэ —
  * nginx-ийн `try_files $uri /index.html`-тэй ижил. Урьдчилж:
- *   cd mobile && npx expo export --platform web
+ *   cd mobile && npm run export:web
+ * (`npx expo export` дангаараа `sw.js`-гүй — service worker бүртгэл index.html авч console error өгнө)
  */
 import { createReadStream, existsSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
@@ -25,7 +26,7 @@ const TYPES = {
 };
 
 if (!existsSync(join(DIST, 'index.html'))) {
-  console.error('mobile/dist алга — эхлээд `cd mobile && npx expo export --platform web`');
+  console.error('mobile/dist алга — эхлээд `cd mobile && npm run export:web`');
   process.exit(1);
 }
 
