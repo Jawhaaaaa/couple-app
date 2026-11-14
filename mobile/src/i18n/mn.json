@@ -1925,5 +1925,31 @@
     "noticeOff": "Push мэдэгдэл унтраастай байна.",
     "noticeDenied": "Push мэдэгдэл хаагдсан байна.",
     "noticeAction": "Мэдэгдэл асаах"
+  },
+  "passkey": {
+    "title": "Passkey түгжээ",
+    "open": "Passkey түгжээ (Face ID / Touch ID)",
+    "heading": "Face ID / Touch ID-аар түгжих",
+    "intro": "Вэб хувилбарт passkey-ээр Aura-г нээнэ. Биометр ажиллахгүй үед PIN ашиглана.",
+    "pinBackup": "PIN нөөц",
+    "pinSet": "Тохируулсан ✓",
+    "pinNotSet": "Тохируулаагүй",
+    "setPinFirst": "Эхлээд PIN тохируулах",
+    "setup": "Passkey тохируулах",
+    "saved": "Passkey тохируулагдлаа. Дараагийн удаа апп түгжигдэхэд Face ID / Touch ID асууна.",
+    "enabled": "Passkey асаалттай",
+    "test": "Одоо шалгах",
+    "verified": "Passkey ажиллаж байна.",
+    "notVerified": "Баталгаажсангүй — PIN ашиглана уу.",
+    "remove": "Passkey устгах",
+    "removeTitle": "Passkey устгах уу?",
+    "removeBody": "Устгасны дараа түгжээг зөвхөн PIN-ээр нээнэ.",
+    "removed": "Passkey устгагдлаа. Түгжээ PIN-ээр нээгдэнэ.",
+    "unsupported": "Энэ хөтөч эсвэл төхөөрөмж passkey дэмждэггүй — түгжээг PIN-ээр нээнэ.",
+    "offline": "Passkey тохируулах, шалгахад интернэт хэрэгтэй. Офлайн үед PIN-ээр нээнэ.",
+    "failedTitle": "Passkey бүртгэгдсэнгүй",
+    "failedBody": "Төхөөрөмж биометр баталгаажуулалтаас татгалзлаа эсвэл сервертэй холбогдсонгүй.",
+    "native": "Утасны апп-д Face ID / хурууны хээг «Нууцлал ба аюулгүй байдал» хэсгээс асаана.",
+    "toSecurity": "Нууцлал ба аюулгүй байдал"
   }
 }

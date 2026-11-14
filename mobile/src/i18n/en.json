@@ -1925,5 +1925,31 @@
     "noticeOff": "Push notifications are off.",
     "noticeDenied": "Push notifications are blocked.",
     "noticeAction": "Turn on notifications"
+  },
+  "passkey": {
+    "title": "Passkey lock",
+    "open": "Passkey lock (Face ID / Touch ID)",
+    "heading": "Lock with Face ID / Touch ID",
+    "intro": "On the web, Aura opens with a passkey. If biometrics don't work, use your PIN.",
+    "pinBackup": "PIN backup",
+    "pinSet": "Set ✓",
+    "pinNotSet": "Not set",
+    "setPinFirst": "Set a PIN first",
+    "setup": "Set up passkey",
+    "saved": "Passkey is set. Next time Aura locks, it will ask for Face ID / Touch ID.",
+    "enabled": "Passkey is on",
+    "test": "Test now",
+    "verified": "Your passkey works.",
+    "notVerified": "Not verified — please use your PIN.",
+    "remove": "Remove passkey",
+    "removeTitle": "Remove passkey?",
+    "removeBody": "After removing it, the lock opens with your PIN only.",
+    "removed": "Passkey removed. The lock opens with your PIN.",
+    "unsupported": "This browser or device doesn't support passkeys — the lock opens with your PIN.",
+    "offline": "Setting up or testing a passkey needs internet. Offline, unlock with your PIN.",
+    "failedTitle": "Passkey wasn't registered",
+    "failedBody": "The device declined biometric verification or couldn't reach the server.",
+    "native": "In the phone app, turn on Face ID / fingerprint in Privacy & security.",
+    "toSecurity": "Privacy & security"
   }
 }

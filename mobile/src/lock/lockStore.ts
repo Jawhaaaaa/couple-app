@@ -8,8 +8,10 @@ export interface LockState extends AttemptState {
   /** PIN тохируулсан (нууц нь secure store-д). */
   enabled: boolean;
   timeoutSec: LockTimeout;
-  /** Native — Face ID / хурууны хээ; вэб — passkey (T-85). */
+  /** Native — Face ID / хурууны хээ (`expo-local-authentication`). */
   biometric: boolean;
+  /** Вэб — бүртгэсэн passkey-ийн credential id (S-102, AC-157); `null` бол passkey-гүй. */
+  passkeyId: string | null;
   /** PIN-ийн урт (4–6) — тэр урттай болмогц автоматаар шалгана. */
   pinLength: number;
   /** Одоо түгжигдсэн (санах ойд; persist хийхгүй — хүйтэн эхлэлд `enabled` бол үргэлж түгжинэ). */
@@ -23,6 +25,7 @@ export const useLockStore = create<LockState>()(
       enabled: false,
       timeoutSec: 60,
       biometric: false,
+      passkeyId: null,
       pinLength: 4,
       locked: false,
       ...RESET_ATTEMPTS,
@@ -32,10 +35,11 @@ export const useLockStore = create<LockState>()(
       name: 'aura.lock',
       storage: createJSONStorage(() => AsyncStorage),
       // Буруу оролдлогын тоо ч хадгалагдана — апп-ыг дахин нээж тоолуурыг тэглэхгүй (AC-52)
-      partialize: ({ enabled, timeoutSec, biometric, pinLength, failures, lockedUntil }) => ({
+      partialize: ({ enabled, timeoutSec, biometric, passkeyId, pinLength, failures, lockedUntil }) => ({
         enabled,
         timeoutSec,
         biometric,
+        passkeyId,
         pinLength,
         failures,
         lockedUntil,

@@ -9,18 +9,22 @@ import { useColors } from '@/theme/ThemeProvider';
 
 import { shouldLock } from './lockPolicy';
 import { useLockStore } from './lockStore';
+import { passkeyUnlockFor } from './passkey';
 
 /**
  * Апп түгжээ (FR-14.1, DD-AURA-033, AC-124): арын төлөвт `timeoutSec`-ээс удаан байсны дараа урд
  * гарахад (вэбэд `visibilitychange` — RN Web-ийн AppState) S-14-ийг бүх агуулгын дээр харуулна.
  * App switcher-ийн preview: iOS — `enableAppSwitcherProtectionAsync`, бусад — апп идэвхгүй үед
- * агуулгыг хаах бүрхэвч (вэбэд баталгаагүй — GAP-20).
+ * агуулгыг хаах бүрхэвч (вэбэд баталгаагүй — GAP-20). Вэбэд passkey бүртгэсэн бол S-14 нь эхлээд
+ * passkey асууна (AC-157), PIN нь нөөц.
  */
 export function AppLockProvider({ children, onPasskey }: { children: ReactNode; onPasskey?: () => Promise<boolean> }) {
   const colors = useColors();
   const enabled = useLockStore((s) => s.enabled);
   const locked = useLockStore((s) => s.locked);
   const signedIn = useSessionStore((s) => !!s.accessToken);
+  const passkeyId = useLockStore((s) => s.passkeyId);
+  const passkey = onPasskey ?? passkeyUnlockFor(Platform.OS, passkeyId);
   const [covered, setCovered] = useState(false);
   const backgroundAt = useRef<number | null>(null);
 
@@ -57,7 +61,7 @@ export function AppLockProvider({ children, onPasskey }: { children: ReactNode; 
           <Mascot size={96} pose="idle" />
         </View>
       ) : null}
-      {showLock ? <LockScreen onPasskey={onPasskey} /> : null}
+      {showLock ? <LockScreen onPasskey={passkey} autoPrompt={!!passkey} /> : null}
     </View>
   );
 }

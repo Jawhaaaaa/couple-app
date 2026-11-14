@@ -1,6 +1,6 @@
 import * as LocalAuthentication from 'expo-local-authentication';
 import { Delete, Fingerprint } from 'lucide-react-native';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
 
 import { api } from '@/api/client';
@@ -48,10 +48,11 @@ export async function unlockWithBiometric(prompt: string): Promise<boolean> {
 }
 
 /**
- * S-14 Түгжээ (FR-14.1): PIN гар (4–6 орон), биометр товч (native), буруу оролдлогын хүлээлт
- * (5 → 1 мин), 10 буруу → нууц үгээр нэвтрэх. Түгжигдсэн үед апп-ын агуулгыг бүхэлд нь хаана.
+ * S-14 Түгжээ (FR-14.1): PIN гар (4–6 орон), биометр товч (native) / passkey (вэб), буруу оролдлогын
+ * хүлээлт (5 → 1 мин), 10 буруу → нууц үгээр нэвтрэх. Түгжигдсэн үед апп-ын агуулгыг бүхэлд нь хаана.
+ * `autoPrompt` — дэлгэц гармагц passkey-г нэг удаа өөрөө асууна (AC-157); бүтэлгүйтвэл чимээгүй PIN.
  */
-export function LockScreen({ onPasskey }: { onPasskey?: () => Promise<boolean> }) {
+export function LockScreen({ onPasskey, autoPrompt = false }: { onPasskey?: () => Promise<boolean>; autoPrompt?: boolean }) {
   const t = useT();
   const colors = useColors();
   const now = useNow(1000);
@@ -84,6 +85,14 @@ export function LockScreen({ onPasskey }: { onPasskey?: () => Promise<boolean> }
     const ok = onPasskey ? await onPasskey() : await unlockWithBiometric(t('lock.biometricPrompt'));
     if (!ok) setMessage(t('lock.biometricFailed'));
   };
+
+  const prompted = useRef(false);
+  useEffect(() => {
+    if (!autoPrompt || !onPasskey || prompted.current) return;
+    prompted.current = true;
+    // Хөтөч хэрэглэгчийн үйлдэлгүй асуулгыг татгалзаж болно — тэр үед товч ба PIN үлдэнэ
+    void onPasskey().catch(() => false);
+  }, [autoPrompt, onPasskey]);
 
   return (
     <View style={[styles.root, { backgroundColor: colors.bg }]} testID="screen-S-14" accessibilityViewIsModal>
