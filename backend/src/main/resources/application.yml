@@ -97,6 +97,14 @@ aura:
   # GAP-16 анхдагч: админы имэйл (таслалаар). Хоосон бол /admin/** хэнд ч 403 ADMIN_ONLY (AC-186, AC-206)
   admin:
     emails: ${AURA_ADMIN_EMAILS:}
+  # Апп-ын хувилбар (GET /version, AC-141). Хоосон бол анхдагч (1.0.0, dev, 0000000)
+  app:
+    latest-version: ${AURA_APP_LATEST_VERSION:}
+    min-version: ${AURA_APP_MIN_VERSION:}
+    build: ${AURA_APP_BUILD:}
+    commit-sha: ${AURA_APP_COMMIT_SHA:}
+    download-url: ${AURA_DOWNLOAD_URL:}
+    store-url: ${AURA_APP_STORE_URL:}
   policy:
     version: ${AURA_POLICY_VERSION:2026-11-07}
   # Вэб апп-ын гаднах хаяг — имэйлийн холбоос (/verify-email, /reset-password, /not-me) ба OAuth-ийн

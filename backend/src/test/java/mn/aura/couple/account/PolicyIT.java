@@ -15,7 +15,7 @@ class PolicyIT extends AbstractSpaceIT {
 
     /** `mobile/src/platform/__tests__/policy-guards.test.ts`-ийн FALSE_SECURITY-тэй ижил (AC-193, INV-09). */
     static final Pattern FALSE_SECURITY = Pattern.compile(
-            "end[\s-]?to[\s-]?end|\bE2EE?\b|encrypted locally|encrypted end|төгсгөлөөс төгсгөл|шифрлэгдсэн",
+            "end[\\s-]?to[\\s-]?end|\\bE2EE?\\b|encrypted locally|encrypted end|төгсгөлөөс төгсгөл|шифрлэгдсэн",
             Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
 
     private JsonNode policy(String query) {

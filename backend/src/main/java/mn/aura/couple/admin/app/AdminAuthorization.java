@@ -35,7 +35,7 @@ public class AdminAuthorization {
         if (raw == null || raw.isBlank()) {
             return Set.of();
         }
-        return Arrays.stream(raw.split("[,;\s]+"))
+        return Arrays.stream(raw.split("[,;\\s]+"))
                 .map(String::strip)
                 .filter(s -> !s.isEmpty())
                 .map(s -> s.toLowerCase(Locale.ROOT))

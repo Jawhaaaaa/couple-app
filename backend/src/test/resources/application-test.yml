@@ -13,6 +13,14 @@ aura:
   # AdminIT (GAP-16): тогтмол админ имэйл — бусад IT-ийн санамсаргүй имэйлтэй давхцахгүй
   admin:
     emails: admin-it@aura.test, Ops-IT@Aura.Test
+  # VersionIT (AC-141)
+  app:
+    latest-version: 1.2.0
+    min-version: 1.1.0
+    build: "142"
+    commit-sha: 830FBFE
+    download-url: http://localhost:8090/download
+    store-url: https://play.google.com/store/apps/details?id=mn.aura.couple
   sentry:
     dsn: ""
     environment: test
