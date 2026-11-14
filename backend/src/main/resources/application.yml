@@ -94,6 +94,9 @@ aura:
     dsn: ${AURA_SENTRY_DSN:}
     environment: ${AURA_SENTRY_ENVIRONMENT:${spring.profiles.active:default}}
     release: ${AURA_APP_LATEST_VERSION:}
+  # GAP-16 анхдагч: админы имэйл (таслалаар). Хоосон бол /admin/** хэнд ч 403 ADMIN_ONLY (AC-186, AC-206)
+  admin:
+    emails: ${AURA_ADMIN_EMAILS:}
   policy:
     version: ${AURA_POLICY_VERSION:2026-11-07}
   # Вэб апп-ын гаднах хаяг — имэйлийн холбоос (/verify-email, /reset-password, /not-me) ба OAuth-ийн

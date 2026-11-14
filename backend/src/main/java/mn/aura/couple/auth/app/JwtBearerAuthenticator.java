@@ -33,7 +33,8 @@ public class JwtBearerAuthenticator implements BearerTokenAuthenticator {
             throw new ApiAuthenticationException(ErrorCode.TOKEN_INVALID);
         }
         if (state.sessionRevoked() || state.sessionVersion() != claims.sessionVersion()
-                || "DELETED".equals(state.userStatus())) {
+                || "DELETED".equals(state.userStatus()) || "SUSPENDED".equals(state.userStatus())) {
+            // Түдгэлзсэн (AC-186): session-ууд хаагдсан ч кэшийн 5 с-ийн цонхонд ч нэвтрүүлэхгүй
             throw new ApiAuthenticationException(ErrorCode.AUTH_SESSION_REVOKED);
         }
         return Optional.of(new AuraAuthentication(claims.userId(), claims.sessionId()));

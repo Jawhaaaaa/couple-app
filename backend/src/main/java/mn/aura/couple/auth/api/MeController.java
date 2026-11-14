@@ -22,6 +22,8 @@ import mn.aura.couple.api.model.TaskStatusRequest;
 import mn.aura.couple.account.app.CelebrationSeenService;
 import mn.aura.couple.account.app.PreferenceService;
 import mn.aura.couple.account.app.ProfileService;
+import mn.aura.couple.account.app.SurveyService;
+import mn.aura.couple.admin.app.AppOpenCounter;
 import mn.aura.couple.auth.app.EmailChangeService;
 import mn.aura.couple.auth.app.MeAssembler;
 import mn.aura.couple.auth.app.PasswordChangeService;
@@ -53,10 +55,15 @@ public class MeController implements MeApi {
     private final PreferenceService preferences;
     private final CelebrationSeenService celebrations;
     private final AccountDeletionService deletion;
+    private final SurveyService surveys;
+    private final AppOpenCounter opens;
 
     public MeController(MeAssembler me, PasswordChangeService passwordChange, EmailChangeService emailChange,
                         PolicyAcceptanceService policy, ProfileService profile, PreferenceService preferences,
-                        CelebrationSeenService celebrations, AccountDeletionService deletion) {
+                        CelebrationSeenService celebrations, AccountDeletionService deletion, SurveyService surveys,
+                        AppOpenCounter opens) {
+        this.surveys = surveys;
+        this.opens = opens;
         this.deletion = deletion;
         this.me = me;
         this.passwordChange = passwordChange;
@@ -69,7 +76,11 @@ public class MeController implements MeApi {
 
     @Override
     public ResponseEntity<Me> getMe() {
-        return ResponseEntity.ok(me.load(current().userId()));
+        AuraAuthentication auth = current();
+        Me result = me.load(auth.userId());
+        // Апп эхлэх бүрд дуудагдана — админы нэгтгэсэн «нээлт»-ийн тоо (AC-206)
+        opens.record(auth.sessionId());
+        return ResponseEntity.ok(result);
     }
 
     @Override
@@ -154,12 +165,13 @@ public class MeController implements MeApi {
 
     @Override
     public ResponseEntity<SurveyPrompt> getSurvey() {
-        throw notYet();
+        return ResponseEntity.ok(surveys.prompt(current().userId()));
     }
 
     @Override
     public ResponseEntity<Void> answerSurvey(SurveyAnswer body) {
-        throw notYet();
+        surveys.answer(current().userId(), body.getScore());
+        return ResponseEntity.noContent().build();
     }
 
     static AuraAuthentication current() {
