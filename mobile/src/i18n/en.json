@@ -1013,9 +1013,7 @@
     "policies": "Privacy policy & terms",
     "about": "About Aura",
     "breakup": "End pairing",
-    "deleteAccount": "Delete account",
-    "policiesAccepted": "Version you accepted: {{version}}",
-    "policiesNotAccepted": "No accepted version on record."
+    "deleteAccount": "Delete account"
   },
   "lock": {
     "title": "Enter your PIN",
@@ -1492,6 +1490,26 @@
       "theirs": "Their version",
       "keepMine": "My version",
       "keepTheirs": "Their version"
+    },
+    "hub": {
+      "resonance": "Daily resonance",
+      "partnerMood": "{{name}} feels {{emoji}} {{mood}} today",
+      "partnerNoMood": "{{name}} hasn't shared today's mood yet.",
+      "myMood": "My day: {{emoji}} {{mood}}",
+      "checkIn": "Check in",
+      "letterbox": "Letterbox",
+      "unreadLetters": "Unread letters: {{count}}",
+      "noLetters": "No new letters — write your first one.",
+      "dreams": "Dreams & goals",
+      "noGoals": "No shared goals yet — set one to reach together.",
+      "footsteps": "Our footsteps",
+      "days": "Days together",
+      "memories": "Memories",
+      "dates": "Dates",
+      "cities": "Cities ({{countries}} countries)",
+      "openMap": "Open the map",
+      "privacy": "Privacy & safety",
+      "privacyBody": "Biometric lock, PIN and signed-in devices."
     }
   },
   "lists": {
@@ -1775,5 +1793,51 @@
     "high": "5 — Strongly agree",
     "scoreA11y": "Rate {{score}}",
     "skip": "Skip"
+  },
+  "checkin": {
+    "title": "Daily resonance",
+    "question": "How are you feeling today?",
+    "todayDone": "Today's mood — you can edit it until the day ends",
+    "level": {
+      "1": "Sad",
+      "2": "Meh",
+      "3": "Okay",
+      "4": "Good",
+      "5": "Great"
+    },
+    "note": "Note (optional)",
+    "notePlaceholder": "What happened today?",
+    "shareToday": "Share today's with {{name}}",
+    "sharedNote": "{{name}} will see your mood today.",
+    "privateNote": "Only you can see it.",
+    "autoShare": "Share automatically every day",
+    "autoShareNote": "When on, future check-ins are shared from the start.",
+    "pickLevel": "Pick one of the 5 moods",
+    "save": "Check in",
+    "update": "Update",
+    "saved": "Checked in — you can edit it until the day ends.",
+    "updated": "Today's check-in was updated.",
+    "queued": "You are offline — it will be sent once you are connected.",
+    "pastLocked": "Past check-ins can't be edited — only today's ({{date}}).",
+    "range": {
+      "month": "Month",
+      "quarter": "Quarter"
+    },
+    "chart": {
+      "me": "Me",
+      "legend": "{{name}} · average {{avg}}",
+      "hint": "Tap a day to see its values here. Empty days mean no check-in or not shared.",
+      "day": "{{date}} · Me: {{mine}} · {{name}}: {{partner}}",
+      "a11y": "Mood chart. My average {{mine}}, {{name}}'s average {{partner}}."
+    }
+  },
+  "policy": {
+    "accepted": "Version you accepted: {{version}}",
+    "notAccepted": "No accepted version on record.",
+    "current": "Current version: {{version}} · published {{date}}",
+    "outdated": "A new version of the policy is out. Please read and accept it.",
+    "reviewNew": "Read the new version",
+    "langMn": "Монгол",
+    "langEn": "English"
   }
 }

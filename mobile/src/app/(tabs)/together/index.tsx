@@ -4,26 +4,27 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/AppText';
 import { MilestoneHorizon } from '@/components/occasions/MilestoneHorizon';
-import { ScreenState } from '@/components/ScreenState';
 import { TabScreen } from '@/components/TabScreen';
-import { emptyStateText } from '@/content/emptyStates';
+import { DreamsCard, FootstepsCard, LetterboxCard, PrivacyCard, ResonanceCard } from '@/components/together/HubCards';
 import { useT } from '@/i18n';
-import { usePrefsStore } from '@/stores/prefsStore';
 import { useColors } from '@/theme/ThemeProvider';
 import { iconStroke, radius, spacing, touchTarget } from '@/theme/tokens';
 
 /**
- * S-60 Хамтдаа хаб: ой ба тэмдэглэлт өдрүүд (Milestone Horizon → S-61). Бусад картын
- * (захидал, check-in, жагсаалт, зорилго) агуулга дараагийн нэгжид; одоохондоо хоосон төлөв (ANIM-11).
+ * S-60 «Хамтдаа» хаб: Daily Resonance (check-in), Letterbox, Dreams & Goals, Footsteps (газрын зураг,
+ * статистик), ой ба тэмдэглэлт өдрүүд (Milestone Horizon → S-61), нууцлалын товч (S-84). Карт бүр
+ * бодит өгөгдөл эсвэл үйлдэлтэй хоосон төлөвтэй — хуурамч өгөгдөлгүй.
  */
 export default function TogetherScreen() {
   const t = useT();
   const colors = useColors();
-  const locale = usePrefsStore((s) => s.locale);
-  const empty = emptyStateText('S-60', locale);
   return (
     <TabScreen title={t('tabs.together')} testID="screen-S-60">
       <ScrollView contentContainerStyle={styles.body}>
+        <ResonanceCard />
+        <LetterboxCard />
+        <DreamsCard />
+        <FootstepsCard />
         <Pressable
           onPress={() => router.push('/together/occasions')}
           accessibilityRole="link"
@@ -41,9 +42,7 @@ export default function TogetherScreen() {
           <ChevronRight size={20} color={colors.textMuted} strokeWidth={iconStroke} />
         </Pressable>
         <MilestoneHorizon />
-        <View style={styles.placeholder}>
-          <ScreenState kind="empty" text={empty.text} actionLabel={empty.action} onAction={() => {}} />
-        </View>
+        <PrivacyCard />
       </ScrollView>
     </TabScreen>
   );
@@ -53,5 +52,4 @@ const styles = StyleSheet.create({
   body: { padding: spacing.screen, gap: spacing.md, paddingBottom: spacing.xxl, flexGrow: 1 },
   card: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, borderWidth: 1, borderRadius: radius.card, padding: spacing.md, minHeight: touchTarget },
   flex: { flex: 1 },
-  placeholder: { flex: 1, minHeight: 280 },
 });
