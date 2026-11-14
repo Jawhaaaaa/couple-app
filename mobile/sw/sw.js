@@ -1,4 +1,4 @@
-/* global self, caches, clients, fetch, URL, Response */
+/* global self, caches, fetch, URL, URLSearchParams */
 /**
  * Aura service worker (FR-19.5, FR-19.9, AC-140, AC-156, AC-191).
  *
@@ -14,6 +14,12 @@
  *  - navigation: сүлжээ → алга бол precache-ийн index.html (offline shell, «Интернэт алга» зурвастай);
  *  - API (`/api/**`, өөр origin — backend, S3), POST г.м. хэзээ ч кэшлэхгүй: өгөгдлийн кэш нь
  *    TanStack Query persist (`src/offline/persist.ts`).
+ *
+ * Web Push (FR-13.1, FR-19.3, AC-154): `push` — серверийн payload-ыг (`WebPushSender`: title, body,
+ * deepLink, type, notificationId) яг хэвээр харуулна. «Агуулга нуух» асаалттай бол сервер аль хэдийн
+ * ерөнхий бичвэр илгээдэг — SW өөрөөсөө агуулга, зураг нэмэхгүй. `notificationclick` — нээлттэй цонх
+ * байвал түүнд `NOTIFICATION_CLICK` мессеж (апп `notificationRoutes.ts`-ээр чиглүүлнэ), үгүй бол
+ * `/notification-open?type&deepLink` (мөн тэр функцээр redirect) — маршрутын хүснэгт нэг л газар.
  */
 
 const VERSION = self.__AURA_VERSION__ || 'dev';
@@ -108,4 +114,58 @@ self.addEventListener('fetch', (event) => {
   else if (strategy === 'cache-first') event.respondWith(cacheFirst(event.request));
 });
 
-self.auraSW = { strategyFor, VERSION, PRECACHE_NAME, RUNTIME_NAME };
+const DEFAULT_TITLE = 'Aura';
+const ICON = '/icons/icon-192.png';
+
+/** Push payload → `showNotification`-ийн аргумент. Буруу JSON → ерөнхий «Aura» мэдэгдэл. */
+function notificationFromPush(text) {
+  let p = {};
+  try {
+    p = text ? JSON.parse(text) : {};
+  } catch (e) {
+    p = {};
+  }
+  const str = (v) => (typeof v === 'string' && v ? v : null);
+  return {
+    title: str(p.title) || DEFAULT_TITLE,
+    options: {
+      body: str(p.body) || '',
+      icon: ICON,
+      badge: ICON,
+      tag: str(p.notificationId) || undefined,
+      data: { type: str(p.type), deepLink: str(p.deepLink) },
+    },
+  };
+}
+
+/** Цонхгүй үед нээх зам — апп `routeForNotification`-оор жинхэнэ дэлгэц рүү redirect хийнэ. */
+function openUrl(data) {
+  const q = new URLSearchParams();
+  if (data && data.type) q.set('type', data.type);
+  if (data && data.deepLink) q.set('deepLink', data.deepLink);
+  const qs = q.toString();
+  return '/notification-open' + (qs ? '?' + qs : '');
+}
+
+self.addEventListener('push', (event) => {
+  const { title, options } = notificationFromPush(event.data ? event.data.text() : '');
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const data = event.notification.data || {};
+  event.waitUntil(
+    (async () => {
+      const windows = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+      const client = windows.find((c) => new URL(c.url).origin === self.location.origin);
+      if (client) {
+        client.postMessage({ type: 'NOTIFICATION_CLICK', data: { type: data.type || null, deepLink: data.deepLink || null } });
+        return client.focus();
+      }
+      return self.clients.openWindow(openUrl(data));
+    })(),
+  );
+});
+
+self.auraSW = { strategyFor, notificationFromPush, openUrl, VERSION, PRECACHE_NAME, RUNTIME_NAME };

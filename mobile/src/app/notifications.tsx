@@ -17,6 +17,7 @@ import {
 import { AppButton } from '@/components/AppButton';
 import { AppText } from '@/components/AppText';
 import { FormMessage } from '@/components/FormMessage';
+import { PushPermissionNotice } from '@/components/PushPermissionNotice';
 import { ScreenState } from '@/components/ScreenState';
 import { TabScreen } from '@/components/TabScreen';
 import { emptyStateText } from '@/content/emptyStates';
@@ -110,6 +111,10 @@ export default function NotificationsScreen() {
   return (
     <TabScreen title={t('common.notifications')} testID="screen-S-24">
       {mutationError ? <FormMessage text={errorText(mutationError)} testID="notifications-error" /> : null}
+      {/* Зөвшөөрлийн төлөв: push унтраастай бол S-101 руу (FR-13.1) */}
+      <View style={styles.notice}>
+        <PushPermissionNotice />
+      </View>
       {body}
     </TabScreen>
   );
@@ -154,6 +159,7 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs },
   flex: { flex: 1 },
   footer: { padding: spacing.md },
+  notice: { paddingHorizontal: spacing.screen },
   row: {
     minHeight: touchTarget,
     flexDirection: 'row',

@@ -16,6 +16,7 @@ import { AppText } from '@/components/AppText';
 import { SignalReceiver } from '@/components/home/SignalReceiver';
 import { Mascot } from '@/components/Mascot';
 import { OfflineBanner } from '@/components/OfflineBanner';
+import { PwaPrompts } from '@/components/PwaPrompts';
 import { ServerUnreachable } from '@/components/ServerUnreachable';
 import { SettingsSync } from '@/components/settings/SettingsSync';
 import { SpaceStatusBanner } from '@/components/settings/SpaceStatusBanner';
@@ -97,6 +98,11 @@ function ThemedStack() {
             name="storage-full"
             options={{ presentation: 'formSheet', sheetAllowedDetents: [0.6, 1], sheetGrabberVisible: true, sheetCornerRadius: 24 }}
           />
+          {/* S-101 мэдэгдлийн зөвшөөрлийн тайлбар (FR-19.3) */}
+          <Stack.Screen
+            name="push-permission"
+            options={{ presentation: 'formSheet', sheetAllowedDetents: [0.75, 1], sheetGrabberVisible: true, sheetCornerRadius: 24 }}
+          />
           {/* S-32 дурсамж нэмэх/засах (modal), S-33 медиа үзэгч ба S-38 жилийн хураангуй (fullScreenModal) */}
           <Stack.Screen name="memory-editor" options={{ presentation: 'modal' }} />
           <Stack.Screen name="media/[id]" options={{ presentation: 'fullScreenModal', animation: 'fade' }} />
@@ -108,6 +114,8 @@ function ThemedStack() {
         <TimezonePrompt />
         {/* Хамтрагчийн зүрх/тэврэлт аль ч дэлгэц дээр (ANIM-02, AC-17) */}
         <SignalReceiver />
+        {/* Вэб: нэвтэрсний дараа S-100 суулгах / S-101 мэдэгдэл (FR-19.2, FR-19.3) */}
+        <PwaPrompts />
       </SplashGate>
     </>
   );

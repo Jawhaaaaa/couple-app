@@ -16,3 +16,9 @@ export const COMMIT_SHA = process.env.EXPO_PUBLIC_COMMIT_SHA ?? 'local';
 export const GOOGLE_SIGN_IN_ENABLED = /^(1|true)$/i.test(process.env.EXPO_PUBLIC_OAUTH_GOOGLE ?? '');
 /** Apple нэвтрэлт энэ гаргалтад идэвхгүй (AC-06, GAP-02 — native iOS build алга). */
 export const APPLE_SIGN_IN_ENABLED = false;
+
+/**
+ * Web Push-ийн VAPID **нийтийн** түлхүүр (base64url, FR-19.3). Заавал биш: хоосон бол
+ * `GET /push/vapid-public-key`-ээс авна (backend-ийн тохиргоо нэг эх).
+ */
+export const VAPID_PUBLIC_KEY = process.env.EXPO_PUBLIC_VAPID_PUBLIC_KEY ?? '';

@@ -72,3 +72,47 @@ describe('T-83 service worker (sw/sw.js)', () => {
     expect(clients.claim).toHaveBeenCalled();
   });
 });
+
+describe('T-84 service worker — Web Push', () => {
+  const pushEvent = (payload: unknown) => ({ data: { text: () => (typeof payload === 'string' ? payload : JSON.stringify(payload)) } });
+
+  it('AC-154 push — серверийн payload-ыг яг хэвээр (tag = notificationId, deepLink data-д)', async () => {
+    const { self, dispatch } = loadServiceWorker();
+    await dispatch('push', pushEvent({ title: 'Ану', body: 'Чамд зүрх илгээлээ', type: 'HEART_RECEIVED', deepLink: '/home', notificationId: 'n1' }));
+    const show = (self.registration as { showNotification: jest.Mock }).showNotification;
+    expect(show).toHaveBeenCalledWith('Ану', expect.objectContaining({ body: 'Чамд зүрх илгээлээ', tag: 'n1', data: { type: 'HEART_RECEIVED', deepLink: '/home' } }));
+  });
+
+  it('агуулга нуух — сервер ерөнхий бичвэр илгээвэл SW өөрөөсөө агуулга/зураг нэмэхгүй', async () => {
+    const { self, dispatch } = loadServiceWorker();
+    await dispatch('push', pushEvent({ title: 'Aura', body: 'Шинэ мэдэгдэл', type: 'MESSAGE_NEW', deepLink: null, notificationId: 'n2' }));
+    const [title, options] = (self.registration as { showNotification: jest.Mock }).showNotification.mock.calls[0];
+    expect(title).toBe('Aura');
+    expect(options.body).toBe('Шинэ мэдэгдэл');
+    expect(options).not.toHaveProperty('image');
+  });
+
+  it('буруу payload → ерөнхий «Aura» мэдэгдэл (push бүр мэдэгдэл харуулна — userVisibleOnly)', async () => {
+    const { self, dispatch } = loadServiceWorker();
+    await dispatch('push', pushEvent('{not json'));
+    expect((self.registration as { showNotification: jest.Mock }).showNotification).toHaveBeenCalledWith('Aura', expect.objectContaining({ body: '' }));
+  });
+
+  it('AC-50 notificationclick — нээлттэй цонхонд NOTIFICATION_CLICK мессеж + focus', async () => {
+    const { dispatch, windows, clients } = loadServiceWorker();
+    const win = { url: `${ORIGIN}/memories`, focus: jest.fn(async () => undefined), navigate: jest.fn(), postMessage: jest.fn() };
+    windows.push(win);
+    const close = jest.fn();
+    await dispatch('notificationclick', { notification: { close, data: { type: 'LETTER_DELIVERED', deepLink: '/letters/l1' } } });
+    expect(close).toHaveBeenCalled();
+    expect(win.postMessage).toHaveBeenCalledWith({ type: 'NOTIFICATION_CLICK', data: { type: 'LETTER_DELIVERED', deepLink: '/letters/l1' } });
+    expect(win.focus).toHaveBeenCalled();
+    expect(clients.openWindow).not.toHaveBeenCalled();
+  });
+
+  it('AC-50 цонхгүй үед /notification-open?type&deepLink-ийг нээнэ', async () => {
+    const { dispatch, clients } = loadServiceWorker();
+    await dispatch('notificationclick', { notification: { close: jest.fn(), data: { type: 'LETTER_DELIVERED', deepLink: '/letters/l1' } } });
+    expect(clients.openWindow).toHaveBeenCalledWith('/notification-open?type=LETTER_DELIVERED&deepLink=%2Fletters%2Fl1');
+  });
+});

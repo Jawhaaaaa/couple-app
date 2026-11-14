@@ -71,7 +71,7 @@ export function loadServiceWorker(globals: Record<string, unknown> = {}) {
     ...globals,
   };
   const source = fs.readFileSync(path.resolve(__dirname, '../sw/sw.js'), 'utf8');
-  vm.runInNewContext(source, { self, caches: caches.api, clients, fetch: fetchMock, URL, Response, console, Promise, setTimeout });
+  vm.runInNewContext(source, { self, caches: caches.api, fetch: fetchMock, URL, URLSearchParams, Response, console, Promise, setTimeout });
 
   /** ExtendableEvent/FetchEvent-ийг дуудаж `waitUntil`/`respondWith`-ийн promise-ийг хүлээнэ. */
   async function dispatch(type: string, init: Record<string, unknown> = {}) {

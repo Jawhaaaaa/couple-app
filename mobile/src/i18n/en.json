@@ -1867,5 +1867,63 @@
     "hide": "Hide",
     "doneNow": "✨ Nice! Today's task is done. A new one is waiting tomorrow.",
     "doneToday": "✨ Today's task is done. See you tomorrow!"
+  },
+  "install": {
+    "title": "Install the app",
+    "intro": "Add Aura to your home screen and it opens full screen, just like an app.",
+    "installed": "Aura is already installed — open it from your home screen.",
+    "ios": {
+      "title": "iPhone · Safari",
+      "step1": "1. Tap the Share button",
+      "hint1": "In Safari's bottom bar (the square with an up arrow)",
+      "step2": "2. Choose “Add to Home Screen”",
+      "hint2": "Scroll down the list to find it",
+      "step3": "3. Tap “Add”",
+      "hint3": "The Aura icon appears on your home screen"
+    },
+    "iosOther": {
+      "title": "Other iOS browsers",
+      "body": "This browser can't install apps — please open Aura in Safari. Copy the link and paste it into Safari.",
+      "action": "Copy link",
+      "copied": "Link copied — paste it into Safari."
+    },
+    "android": {
+      "title": "Android",
+      "body": "Your browser can install Aura directly — one tap.",
+      "action": "Install"
+    },
+    "desktop": {
+      "title": "Computer"
+    },
+    "manual": "Choose “Install app” or “Add to Home screen” from your browser menu.",
+    "accepted": "Installing — Aura will appear on your home screen shortly.",
+    "benefitsTitle": "Why install?",
+    "benefits": "Push notifications and opening without internet work once Aura is installed. On iPhone, hearts and message notifications from your partner only arrive in the installed app.",
+    "later": "Later"
+  },
+  "pushPermission": {
+    "title": "Turn on notifications?",
+    "why": "Notifications make sure you never miss the moment your partner thinks of you.",
+    "reason": {
+      "heart": "When your partner sends a heart",
+      "message": "When a new message arrives",
+      "reminder": "Anniversary and date reminders"
+    },
+    "inAppNote": "Even if you choose Later, the in-app notification list keeps working. You can change this anytime in Settings → Notifications.",
+    "allow": "Allow",
+    "later": "Later",
+    "granted": "Notifications are on.",
+    "alreadyOn": "Notifications are already on.",
+    "deniedWeb": "Notifications are blocked. Tap the lock icon in the address bar → Notifications → Allow.",
+    "deniedNative": "Notifications are blocked. Turn on notifications for Aura in your phone settings.",
+    "openSettings": "Open settings",
+    "needsInstall": "On iPhone, notifications only work in Aura added to your home screen.",
+    "howToInstall": "How to install",
+    "unsupported": "This browser doesn't support push notifications. Check the in-app notification list instead.",
+    "notConfigured": "Push notifications aren't set up on the server.",
+    "failed": "Couldn't send.",
+    "noticeOff": "Push notifications are off.",
+    "noticeDenied": "Push notifications are blocked.",
+    "noticeAction": "Turn on notifications"
   }
 }
