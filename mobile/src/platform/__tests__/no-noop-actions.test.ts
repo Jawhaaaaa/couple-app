@@ -9,11 +9,11 @@ const SRC = path.resolve(__dirname, '../..');
 const NOOP = /\bon[A-Z]\w*=\{\s*\(\)\s*=>\s*(\{\s*\}|undefined|null)\s*\}/;
 
 /**
- * Агуулга нь хараахан хийгдээгүй табын placeholder (S-40, S-50, S-60) — тухайн
+ * Агуулга нь хараахан хийгдээгүй табын placeholder (S-40, S-60) — тухайн
  * нэгж дэлгэцээ хийхэд энэ жагсаалтаас хасна. Шинэ файл энд нэмэгдэхгүй.
  */
 const PLACEHOLDERS = new Set(
-  ['chat', 'plans', 'together'].map((tab) => path.join('app', '(tabs)', tab, 'index.tsx')),
+  ['chat', 'together'].map((tab) => path.join('app', '(tabs)', tab, 'index.tsx')),
 );
 
 function walk(dir: string): string[] {

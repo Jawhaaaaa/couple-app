@@ -56,7 +56,13 @@
       ],
       "expo-video",
       "expo-sharing",
-      "expo-audio"
+      "expo-audio",
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "Aura adds the dates you plan together to your phone calendar."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

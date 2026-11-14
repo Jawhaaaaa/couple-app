@@ -1090,5 +1090,167 @@
     "exports": "Copies",
     "trash": "Trash",
     "trashNote": "Deleted memories are kept for 30 days."
+  },
+  "plans": {
+    "propose": "Propose a date",
+    "tabs": {
+      "upcoming": "Upcoming",
+      "ideas": "Ideas",
+      "calendar": "Calendar"
+    },
+    "sections": {
+      "next": "Next date",
+      "awaiting": "Awaiting reply",
+      "later": "Coming up",
+      "past": "Past dates"
+    },
+    "status": {
+      "PENDING": "Awaiting reply",
+      "COUNTER_PROPOSED": "New time suggested",
+      "CONFIRMED": "Confirmed",
+      "DECLINED": "Declined",
+      "CANCELLED": "Cancelled"
+    },
+    "category": {
+      "FOOD": "Food",
+      "TRAVEL": "Travel",
+      "HOME": "At home",
+      "SPORT": "Sport",
+      "CULTURE": "Culture",
+      "OUTDOOR": "Outdoors",
+      "OTHER": "Other"
+    },
+    "recurrence": {
+      "NONE": "Does not repeat",
+      "WEEKLY": "Every week",
+      "MONTHLY": "Every month"
+    },
+    "when": "{{date}} · {{time}}",
+    "proposedBy": "Proposed by {{name}}",
+    "detailTitle": "Date",
+    "rsvp": {
+      "title": "Reply",
+      "accept": "Accept",
+      "counter": "Another time",
+      "decline": "Decline",
+      "waiting": "Waiting for a reply",
+      "yourTurn": "Waiting for your reply",
+      "choose": "Pick one of the suggested times",
+      "chooseOption": "{{when}} — choose",
+      "confirmed": "You are both in",
+      "closed": "This date is no longer active"
+    },
+    "checklist": {
+      "title": "Prep checklist",
+      "progress": "{{done}} of {{total}} done",
+      "add": "Add",
+      "placeholder": "e.g. Bring a blanket",
+      "itemLabel": "New checklist item",
+      "doneBy": "Checked by {{name}}",
+      "remove": "Remove",
+      "empty": "The checklist is empty."
+    },
+    "budget": {
+      "title": "Budget",
+      "planned": "Planned: {{amount}}",
+      "actual": "Actual: {{amount}}",
+      "over": "{{amount}} over budget",
+      "within": "Within budget",
+      "addExpense": "Add expense",
+      "amount": "Amount (₮)",
+      "note": "Note (optional)",
+      "payer": "Paid by",
+      "paidBy": "Paid by {{name}}",
+      "invalidAmount": "Enter a positive amount",
+      "me": "Me"
+    },
+    "weather": {
+      "title": "Weather forecast",
+      "range": "{{min}}…{{max}}°C"
+    },
+    "calendarAdd": "Add to calendar",
+    "calendarAdded": "Added to your phone calendar.",
+    "icsShared": "Calendar file (.ics) is ready.",
+    "toMemory": "Turn into a memory",
+    "openMemory": "View memory",
+    "edit": "Edit",
+    "cancelPlan": "Cancel date",
+    "cancelConfirm": {
+      "title": "Cancel this date?",
+      "body": "Its reminders will be removed too.",
+      "one": "Just this one",
+      "series": "All repeats"
+    },
+    "confirmedMoment": "It is a date!",
+    "form": {
+      "newTitle": "Plan a date",
+      "editTitle": "Edit date",
+      "title": "Title",
+      "titleRequired": "Add a title",
+      "description": "Description",
+      "category": "Category",
+      "date": "Date (YYYY-MM-DD)",
+      "time": "Time (HH:MM)",
+      "dateInvalid": "Use the YYYY-MM-DD format",
+      "timeInvalid": "Use the HH:MM format",
+      "timezoneNote": "Time in {{zone}} — your partner sees it in their own time zone.",
+      "venue": "Place name",
+      "venueHint": "Pick a city for the map and weather.",
+      "placeNeedsCity": "Pick the city of the place",
+      "budget": "Planned budget (₮)",
+      "budgetInvalid": "Enter the budget as a number",
+      "reminders": "Reminders",
+      "reminderDay": "1 day before",
+      "reminderHour": "1 hour before",
+      "recurrence": "Repeat",
+      "until": "Repeat until (optional)",
+      "checklist": "Prep checklist",
+      "submit": "Propose",
+      "save": "Save",
+      "scope": "Apply changes to",
+      "scopeOne": "Just this one",
+      "scopeAll": "All repeats"
+    },
+    "counter": {
+      "title": "Suggest another time",
+      "hint": "Suggest 1–3 times — your partner picks one.",
+      "option": "Option {{n}}",
+      "add": "Add a time",
+      "remove": "Remove",
+      "submit": "Send"
+    },
+    "calendar": {
+      "title": "Calendar",
+      "month": "Month",
+      "week": "Week",
+      "prev": "Previous",
+      "next": "Next",
+      "monthTitle": "{{month}} {{year}}",
+      "none": "No dates on this day.",
+      "hasPlans": "{{date}}, has dates",
+      "months": {
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+      },
+      "weekdays": {
+        "0": "Mo",
+        "1": "Tu",
+        "2": "We",
+        "3": "Th",
+        "4": "Fr",
+        "5": "Sa",
+        "6": "Su"
+      }
+    }
   }
 }
