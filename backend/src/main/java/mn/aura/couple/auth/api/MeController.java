@@ -20,6 +20,7 @@ import mn.aura.couple.api.model.SurveyAnswer;
 import mn.aura.couple.api.model.SurveyPrompt;
 import mn.aura.couple.api.model.TaskStatusRequest;
 import mn.aura.couple.account.app.CelebrationSeenService;
+import mn.aura.couple.account.app.FirstWeekTasks;
 import mn.aura.couple.account.app.PreferenceService;
 import mn.aura.couple.account.app.ProfileService;
 import mn.aura.couple.account.app.SurveyService;
@@ -40,9 +41,9 @@ import org.springframework.web.bind.annotation.RestController;
  * Гэрээний `Me` tag — auth-тай холбоотой хэсэг (T-17…T-19): `GET /me`, нууц үг солих (AC-189),
  * имэйл солих (AC-136), бодлого зөвшөөрөх (AC-63).
  *
- * <p>Үүсгэсэн `MeApi` нэг интерфейс тул профайл, тохиргоо, эхний 7 хоног, баяр, санал асуулга,
- * устгалын операцууд одоогоор 404 `NOT_FOUND` — account домэйны нэгжүүд (T-26 `ProfileService`,
- * T-75, T-76, T-71…) энэ controller-ыг account багц руу шилжүүлж бөглөнө.
+ * <p>Үүсгэсэн `MeApi` нэг интерфейс тул профайл, тохиргоо, эхний 7 хоног (`FirstWeekTasks`), баяр,
+ * санал асуулга (`SurveyService`), устгалын операцууд ч энд — логик нь account/couple домэйны `app`
+ * давхаргад.
  */
 @RestController
 public class MeController implements MeApi {
@@ -57,11 +58,13 @@ public class MeController implements MeApi {
     private final AccountDeletionService deletion;
     private final SurveyService surveys;
     private final AppOpenCounter opens;
+    private final FirstWeekTasks firstWeek;
 
     public MeController(MeAssembler me, PasswordChangeService passwordChange, EmailChangeService emailChange,
                         PolicyAcceptanceService policy, ProfileService profile, PreferenceService preferences,
                         CelebrationSeenService celebrations, AccountDeletionService deletion, SurveyService surveys,
-                        AppOpenCounter opens) {
+                        AppOpenCounter opens, FirstWeekTasks firstWeek) {
+        this.firstWeek = firstWeek;
         this.surveys = surveys;
         this.opens = opens;
         this.deletion = deletion;
@@ -144,12 +147,12 @@ public class MeController implements MeApi {
 
     @Override
     public ResponseEntity<FirstWeekState> getFirstWeekTasks() {
-        throw notYet();
+        return ResponseEntity.ok(firstWeek.state(current().userId()));
     }
 
     @Override
     public ResponseEntity<FirstWeekState> setFirstWeekTaskStatus(String taskKey, TaskStatusRequest body) {
-        throw notYet();
+        return ResponseEntity.ok(firstWeek.setStatus(current().userId(), taskKey, body.getStatus().getValue()));
     }
 
     @Override
@@ -177,9 +180,5 @@ public class MeController implements MeApi {
     static AuraAuthentication current() {
         return AuraAuthentication.current()
                 .orElseThrow(() -> new ApiException(ErrorCode.TOKEN_INVALID, HttpStatus.UNAUTHORIZED));
-    }
-
-    private static ApiException notYet() {
-        return ApiException.notFound();
     }
 }
