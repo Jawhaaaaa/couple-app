@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 
 import { useCoupleQuery } from '@/api/queries/pairing';
+import { usePreferencesSync } from '@/api/queries/settings';
 import { usePrefsStore } from '@/stores/prefsStore';
+import { useSessionStore } from '@/stores/sessionStore';
 import { mascotColors, paletteNames } from '@/theme/tokens';
 
 /**
@@ -9,8 +11,11 @@ import { mascotColors, paletteNames } from '@/theme/tokens';
  * - хосын сэдэв `Couple.theme` → палитр (`ThemeProvider` дахин ачаалалгүй cross-fade). Хамтрагч саналыг
  *   зөвшөөрөхөд realtime `couple.updated` → `['couple']` дахин татагдана → хоёр апп ≤ 5 с-д (AC-138)
  * - миний сонгосон маскотын өнгө `Couple.myView.mascotColor` (AC-190)
+ * - `GET /me/preferences` — theme, огнооны формат, анимаци, haptic, дуу (S-88, AC-139, AC-MO-04, AC-217)
  */
 export function SettingsSync() {
+  const accessToken = useSessionStore((s) => s.accessToken);
+  usePreferencesSync(accessToken);
   const couple = useCoupleQuery().data;
   const theme = couple?.theme;
   const mascot = couple?.myView?.mascotColor;

@@ -1000,7 +1000,28 @@
     },
     "push": "Turn on push notifications"
   },
-  "settings": {},
+  "settings": {
+    "sections": {
+      "account": "Account",
+      "couple": "Couple",
+      "app": "App",
+      "about": "About",
+      "danger": "Careful"
+    },
+    "profile": "Profile",
+    "couple": "Couple — nickname, theme, mascot",
+    "notifications": "Notifications",
+    "security": "Privacy & security",
+    "data": "Data & storage",
+    "appearance": "Appearance",
+    "licenses": "Licenses & credits",
+    "policies": "Privacy policy & terms",
+    "about": "About Aura",
+    "breakup": "End pairing",
+    "deleteAccount": "Delete account",
+    "policiesAccepted": "Version you accepted: {{version}}",
+    "policiesNotAccepted": "No accepted version on record."
+  },
   "lock": {
     "title": "Enter your PIN",
     "entered_one": "{{count}} digit entered",
@@ -1603,5 +1624,152 @@
     "readOnly": "Your shared space is view-only, so these settings can't be changed.",
     "notPaired": "Once you pair up, you can set a nickname, theme and mascot here.",
     "partnerFallback": "Your partner"
+  },
+  "appearance": {
+    "title": "Appearance",
+    "language": "Language",
+    "languageNote": "Switches instantly — no reload.",
+    "theme": "Colour mode",
+    "systemNote": "\"System\" follows your phone's setting.",
+    "dateFormat": "Date format",
+    "dateExample": "Example: {{date}}",
+    "animation": "Animation",
+    "animationNote": "\"Reduce\" keeps only soft fades; \"Off\" stops animations and particles completely.",
+    "haptics": "Vibration (haptics)",
+    "hapticsNote": "A gentle buzz when you send a heart or celebrate.",
+    "sound": "Sound",
+    "soundNote": "Soft sounds (off by default). Handy in browsers without vibration.",
+    "saveError": "Saved on this device. We'll sync it once you're back online."
+  },
+  "licenses": {
+    "title": "Licenses & credits",
+    "intro": "Aura uses these works, open-source libraries and data services. Thank you to their creators.",
+    "groups": {
+      "assets": "Images, animations, sounds",
+      "libraries": "Fonts & open-source libraries",
+      "data": "Maps & weather"
+    },
+    "files": "{{count}} files",
+    "open": "Open source"
+  },
+  "about": {
+    "title": "About Aura",
+    "version": "Version",
+    "build": "Build",
+    "commit": "Commit",
+    "licenses": "Licenses & credits",
+    "policies": "Privacy policy & terms"
+  },
+  "letters": {
+    "title": "Letterbox",
+    "box": {
+      "upcoming": "Coming",
+      "inbox": "To me",
+      "sent": "From me",
+      "capsules": "Capsules"
+    },
+    "write": "Write a letter",
+    "partnerFallback": "your partner",
+    "soon": "soon",
+    "teaser": "💌 A letter is coming to you {{when}}",
+    "from": "From {{name}}",
+    "to": "To {{name}}",
+    "new": "New",
+    "status": {
+      "draft": "Draft",
+      "pending": "Pending",
+      "delivered": "Delivered",
+      "read": "Read",
+      "cancelled": "Cancelled"
+    },
+    "photoLimit": "A letter can hold up to {{max}} photos — the extra ones were not added.",
+    "photoCount": "{{count}} / {{max}} photos",
+    "addPhoto": "Add photo",
+    "removePhoto": "Remove photo",
+    "template": {
+      "PAPER_1": "White paper",
+      "PAPER_2": "Soft blush",
+      "PAPER_3": "Sunset"
+    },
+    "compose": {
+      "title": "Write a letter",
+      "editTitle": "Edit letter",
+      "template": "Template",
+      "body": "Letter",
+      "placeholder": "Write what you want to tell your love…",
+      "bodyRequired": "Write your letter",
+      "when": "When should it arrive?",
+      "now": "Now",
+      "scheduled": "Schedule",
+      "date": "Date (YYYY-MM-DD)",
+      "time": "Time (HH:MM)",
+      "zone": "Time in {{zone}}",
+      "dateInvalid": "Use the YYYY-MM-DD format",
+      "timeInvalid": "Use the HH:MM format",
+      "inPast": "Pick a time in the future",
+      "occasion": "Occasion (optional)",
+      "occasionPlaceholder": "e.g. Our 1000th day",
+      "saveDraft": "Save draft",
+      "send": "Send",
+      "schedule": "Schedule",
+      "offline": "You are offline — your writing is saved on this device. Send it once you are connected.",
+      "cancelLetter": "Cancel letter",
+      "cancelTitle": "Cancel this letter?",
+      "cancelBody": "It will not be delivered and your partner's “letter coming” badge will disappear.",
+      "delivered": "This letter has been delivered, so it can no longer be edited.",
+      "open": "View letter"
+    },
+    "read": {
+      "title": "Letter",
+      "from": "A letter from {{name}}",
+      "open": "Open",
+      "photo": "Letter photo",
+      "signed": "— {{name}}",
+      "edit": "Edit"
+    }
+  },
+  "capsule": {
+    "title": "Time capsule",
+    "create": "Create a capsule",
+    "daysLeft": "{{count}} days",
+    "state": {
+      "opened": "Opened"
+    },
+    "status": {
+      "WRITING": "Writing",
+      "SEALED": "Sealed",
+      "OPENED": "Opened"
+    },
+    "opensOn": "Opens on {{date}} · {{count}} days left",
+    "openedOn": "Opened on {{date}}",
+    "part": {
+      "me": "Me: {{state}}",
+      "partner": "{{name}}: {{state}}",
+      "notStarted": "not written yet",
+      "writing": "writing",
+      "sealed": "sealed"
+    },
+    "myPart": "My part",
+    "body": "To our future selves",
+    "save": "Save",
+    "saved": "Saved — you can edit it until you seal it.",
+    "savedHidden": "Your part is saved, but nobody (not even you) can see it until the opening day. Writing again replaces it.",
+    "seal": "Seal",
+    "sealTitle": "Seal your part?",
+    "sealBody": "You cannot edit it after sealing. Nobody can read it until {{date}}.",
+    "lockedBoth": "🔒 You both sealed it — locked until {{date}}.",
+    "waitingPartner": "Your part is sealed. Waiting for {{name}} to seal theirs.",
+    "from": "Part by {{name}}",
+    "openedMoment": "Your capsule is open! ⏳",
+    "form": {
+      "title": "Time capsule",
+      "name": "Title",
+      "openOn": "Opening day (YYYY-MM-DD)",
+      "save": "Create and invite",
+      "titleRequired": "Write a title",
+      "dateInvalid": "Use the YYYY-MM-DD format",
+      "dateFuture": "Pick a day after today",
+      "invite": "Once created, {{name}} gets an invite — you each write and seal your own part."
+    }
   }
 }

@@ -70,3 +70,14 @@ AC-AS-01). `mobile/src/assets/__tests__/assets-registry.test.ts` нь `mobile/as
 | React Native Reanimated, Gesture Handler, SVG | https://github.com/software-mansion | MIT | Хөдөлгөөн, бөөм |
 | Expo SDK 58 | https://github.com/expo/expo | MIT | Апп-ын суурь |
 | TanStack Query, Zustand, i18next | https://tanstack.com · https://github.com/pmndrs/zustand · https://www.i18next.com | MIT | Төлөв, орчуулга |
+| Leaflet (`leaflet`) | https://leafletjs.com | BSD-2-Clause | Газрын зураг (S-70) |
+
+## Газрын зураг ба цаг агаарын өгөгдөл
+
+| Нэр | Эх URL | Лиценз | Хаана |
+|---|---|---|---|
+| © OpenStreetMap contributors | https://www.openstreetmap.org/copyright | ODbL 1.0 | Газрын зургийн tile, газрын нэр (S-70, S-32) |
+| Open-Meteo | https://open-meteo.com | CC BY 4.0 | Цаг агаар ба урьдчилсан мэдээ (S-20, S-54) |
+
+S-89 «Лиценз ба талархал» нь `mobile/src/content/licenses.json`-оос харагдана. Энэ файлыг өөрчилсний
+дараа `node mobile/scripts/generate-licenses.cjs` ажиллуулна (`licenses.test.ts` зөрүүг барина).

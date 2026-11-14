@@ -1,79 +1,54 @@
-import { router } from 'expo-router';
-import { Bell, ChevronRight, CircleUser, Database, Lock } from 'lucide-react-native';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { type Href, router } from 'expo-router';
+import { Bell, CircleUser, Database, FileText, Heart, HeartCrack, Info, Lock, Palette, Scale, UserX } from 'lucide-react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
-import { AppText } from '@/components/AppText';
+import { useCoupleQuery } from '@/api/queries/pairing';
+import { SettingsRow, SettingsSection } from '@/components/settings/SettingsRow';
 import { TabScreen } from '@/components/TabScreen';
 import { useT } from '@/i18n';
-import { useColors } from '@/theme/ThemeProvider';
-import { iconStroke, radius, spacing, touchTarget } from '@/theme/tokens';
+import { spacing } from '@/theme/tokens';
 
-/** S-80 Тохиргоо — бүлгүүдийн бүтэн жагсаалт T-79-д; одоохондоо S-81 Профайл. */
+/**
+ * S-80 Тохиргоо (spec §5: Тохиргоо → S-81…S-91): акаунт (S-81 профайл, S-84 нууцлал, S-83 мэдэгдэл,
+ * S-85 өгөгдөл), хос (S-82), апп (S-88 харагдах байдал), тухай (S-90 бодлого, S-89 лиценз, S-91 тухай),
+ * анхааралтай (S-86 хосоо салгах — хостой үед, S-87 акаунт устгах).
+ */
 export default function SettingsScreen() {
   const t = useT();
-  const colors = useColors();
+  const couple = useCoupleQuery().data;
+  const paired = couple?.kind === 'COUPLE' && couple.status !== 'ORPHANED';
+  const go = (href: Href) => () => router.push(href);
   return (
     <TabScreen title={t('common.settings')} testID="screen-S-80">
-      <View style={styles.list}>
-        <Pressable
-          onPress={() => router.push('/settings/profile')}
-          accessibilityRole="button"
-          accessibilityLabel={t('common.profile')}
-          testID="settings-profile"
-          style={({ pressed }) => [styles.row, { backgroundColor: colors.surface, borderColor: colors.border, opacity: pressed ? 0.85 : 1 }]}
-        >
-          <CircleUser size={22} color={colors.primary} strokeWidth={iconStroke} />
-          <AppText style={styles.flex}>{t('common.profile')}</AppText>
-          <ChevronRight size={20} color={colors.textMuted} strokeWidth={iconStroke} />
-        </Pressable>
-        <Pressable
-          onPress={() => router.push('/settings/notifications')}
-          accessibilityRole="button"
-          accessibilityLabel={t('notificationSettings.title')}
-          testID="settings-notifications"
-          style={({ pressed }) => [styles.row, { backgroundColor: colors.surface, borderColor: colors.border, opacity: pressed ? 0.85 : 1 }]}
-        >
-          <Bell size={22} color={colors.primary} strokeWidth={iconStroke} />
-          <AppText style={styles.flex}>{t('notificationSettings.title')}</AppText>
-          <ChevronRight size={20} color={colors.textMuted} strokeWidth={iconStroke} />
-        </Pressable>
-        <Pressable
-          onPress={() => router.push('/settings/security')}
-          accessibilityRole="button"
-          accessibilityLabel={t('lock.settings.screenTitle')}
-          testID="settings-security"
-          style={({ pressed }) => [styles.row, { backgroundColor: colors.surface, borderColor: colors.border, opacity: pressed ? 0.85 : 1 }]}
-        >
-          <Lock size={22} color={colors.primary} strokeWidth={iconStroke} />
-          <AppText style={styles.flex}>{t('lock.settings.screenTitle')}</AppText>
-          <ChevronRight size={20} color={colors.textMuted} strokeWidth={iconStroke} />
-        </Pressable>
-        <Pressable
-          onPress={() => router.push('/settings/data')}
-          accessibilityRole="button"
-          accessibilityLabel={t('dataSettings.title')}
-          testID="settings-data"
-          style={({ pressed }) => [styles.row, { backgroundColor: colors.surface, borderColor: colors.border, opacity: pressed ? 0.85 : 1 }]}
-        >
-          <Database size={22} color={colors.primary} strokeWidth={iconStroke} />
-          <AppText style={styles.flex}>{t('dataSettings.title')}</AppText>
-          <ChevronRight size={20} color={colors.textMuted} strokeWidth={iconStroke} />
-        </Pressable>
-      </View>
+      <ScrollView contentContainerStyle={styles.list}>
+        <SettingsSection title={t('settings.sections.account')}>
+          <SettingsRow icon={CircleUser} label={t('settings.profile')} onPress={go('/settings/profile')} testID="settings-profile" />
+          <SettingsRow icon={Lock} label={t('settings.security')} onPress={go('/settings/security')} testID="settings-security" />
+          <SettingsRow icon={Bell} label={t('settings.notifications')} onPress={go('/settings/notifications')} testID="settings-notifications" />
+          <SettingsRow icon={Database} label={t('settings.data')} onPress={go('/settings/data')} testID="settings-data" />
+        </SettingsSection>
+        <SettingsSection title={t('settings.sections.couple')}>
+          <SettingsRow icon={Heart} label={t('settings.couple')} onPress={go('/settings/couple')} testID="settings-couple" />
+        </SettingsSection>
+        <SettingsSection title={t('settings.sections.app')}>
+          <SettingsRow icon={Palette} label={t('settings.appearance')} onPress={go('/settings/appearance')} testID="settings-appearance" />
+        </SettingsSection>
+        <SettingsSection title={t('settings.sections.about')}>
+          <SettingsRow icon={FileText} label={t('settings.policies')} onPress={go('/settings/policies')} testID="settings-policies" />
+          <SettingsRow icon={Scale} label={t('settings.licenses')} onPress={go('/settings/licenses')} testID="settings-licenses" />
+          <SettingsRow icon={Info} label={t('settings.about')} onPress={go('/settings/about')} testID="settings-about" />
+        </SettingsSection>
+        <SettingsSection title={t('settings.sections.danger')}>
+          {paired ? (
+            <SettingsRow icon={HeartCrack} label={t('settings.breakup')} onPress={go('/settings/breakup')} danger testID="settings-breakup" />
+          ) : null}
+          <SettingsRow icon={UserX} label={t('settings.deleteAccount')} onPress={go('/settings/delete-account')} danger testID="settings-delete-account" />
+        </SettingsSection>
+      </ScrollView>
     </TabScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  list: { padding: spacing.screen, gap: spacing.xs },
-  flex: { flex: 1 },
-  row: {
-    minHeight: touchTarget,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-    paddingHorizontal: spacing.md,
-    borderWidth: 1,
-    borderRadius: radius.input,
-  },
+  list: { padding: spacing.screen, gap: spacing.lg },
 });
