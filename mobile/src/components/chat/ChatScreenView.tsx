@@ -2,8 +2,8 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import * as Clipboard from 'expo-clipboard';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { CalendarHeart, Copy, FolderOpen, Handshake, Lightbulb, ListPlus, MapPin, Pin, PinOff, Search, Sparkles, Timer } from 'lucide-react-native';
-import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, AppState, FlatList, KeyboardAvoidingView, Linking, Platform, Pressable, StyleSheet, View } from 'react-native';
+import { type ComponentRef, type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ActivityIndicator, AppState, FlatList, KeyboardAvoidingView, Linking, Platform, Pressable, StyleSheet, type TextInput, View } from 'react-native';
 
 import {
   deleteMessage,
@@ -115,6 +115,7 @@ export function ChatScreenView() {
   const chat = useChatWindow();
   const pending = usePendingMessages();
   const listRef = useRef<FlatList<BubbleModel>>(null);
+  const inputRef = useRef<ComponentRef<typeof TextInput>>(null);
   const queryClient = useQueryClient();
 
   const [replyTo, setReplyTo] = useState<Message | null>(null);
@@ -480,7 +481,7 @@ export function ChatScreenView() {
   else if (inHistory && history.isError) content = <ScreenState kind="error" onRetry={() => void history.refetch()} />;
   else if (chat.isLoading && rows.length === 0) content = <ScreenState kind="loading" rows={6} />;
   else if (chat.isError && rows.length === 0) content = <ScreenState kind="error" onRetry={() => void chat.refetch()} />;
-  else if (rows.length === 0) content = <ScreenState kind="empty" text={empty.text} actionLabel={empty.action} onAction={() => void sendMessage({ kind: 'HEART' })} />;
+  else if (rows.length === 0) content = <ScreenState kind="empty" text={empty.text} actionLabel={empty.action} onAction={() => inputRef.current?.focus()} />;
   else
     content = (
       <FlatList
@@ -539,6 +540,7 @@ export function ChatScreenView() {
         {notice ? <FormMessage kind="info" text={notice} testID="chat-notice" /> : null}
         <ChatComposer
           key={editing ? `edit-${editing.id}` : 'compose'}
+          inputRef={inputRef}
           replyTo={replyTo}
           editing={editing}
           partnerName={partner}

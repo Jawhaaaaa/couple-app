@@ -18,6 +18,12 @@ import { spacing } from '@/theme/tokens';
  * асуулт руу (AC-67), эсвэл «Эхний дурсамжаа нэмье» (AC-188) ба эхэлсэн өдөр (S-11).
  * `?celebrated=1` — асуултаас буцаж ирсэн, баярыг дахин үзүүлэхгүй.
  */
+/** «Эхний дурсамжаа нэмье» (AC-188, AC-57): дурсамжийн таб дээр S-32 үүсгэх цонхыг шууд нээнэ — буцахад таб. */
+function openFirstMemory() {
+  router.replace('/memories');
+  router.push('/memory-editor');
+}
+
 export default function LinkedScreen() {
   const t = useT();
   const params = useLocalSearchParams<{ celebrated?: string }>();
@@ -39,7 +45,7 @@ export default function LinkedScreen() {
         subtitle={name ? t('pairing.linked.body', { name }) : t('pairing.linked.bodyNoName')}
         testID="screen-S-12"
       >
-        <AppButton label={t('pairing.linked.firstMemory')} onPress={() => router.replace('/memories')} testID="linked-first-memory" />
+        <AppButton label={t('pairing.linked.firstMemory')} onPress={openFirstMemory} testID="linked-first-memory" />
         {startDateOpen ? (
           <AppButton variant="secondary" label={t('pairing.linked.startDate')} onPress={() => router.push('/start-date')} testID="linked-start-date" />
         ) : null}

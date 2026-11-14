@@ -1,5 +1,5 @@
 import { FileText, Heart, Image as ImageIcon, MapPin, Mic, Paperclip, Pencil, Reply, SendHorizontal, Smile, X } from 'lucide-react-native';
-import { type ReactNode, useEffect, useRef, useState } from 'react';
+import { type ComponentRef, type ReactNode, type RefObject, useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import type { Message } from '@/api/queries/chat';
@@ -37,6 +37,8 @@ interface Props {
   voice?: VoiceControls;
   /** Бичлэгийн overlay идэвхтэй үед input-ийн оронд (микрофоны товч байрандаа үлдэнэ). */
   overlay?: ReactNode;
+  /** Эцэг input-ийг focus хийх (хоосон чатын «Мессеж бичих», AC-57). */
+  inputRef?: RefObject<ComponentRef<typeof TextInput> | null>;
 }
 
 export interface VoiceControls {
@@ -93,7 +95,7 @@ function IconButton({ label, onPress, children, disabled, testID }: { label: str
  * S-40 input (FR-6.1, FR-6.10): текст, зураг, emoji, дуу, «Хайртай» (FR-4.1-тэй ижил `POST /signals`,
  * AC-178), reply/засварын мөр. Бичих үед `/app/typing` (ANIM-08, AC-177).
  */
-export function ChatComposer({ replyTo, editing, partnerName, onCancelContext, onSend, onAttach, attaching, voice, overlay }: Props) {
+export function ChatComposer({ replyTo, editing, partnerName, onCancelContext, onSend, onAttach, attaching, voice, overlay, inputRef }: Props) {
   const t = useT();
   const colors = useColors();
   const { offline } = useNetworkStatus();
@@ -232,6 +234,7 @@ export function ChatComposer({ replyTo, editing, partnerName, onCancelContext, o
             ) : null}
             <View style={[styles.inputWrap, { backgroundColor: colors.surfaceRaised, borderColor: colors.border }]}>
               <TextInput
+                ref={inputRef}
                 value={text}
                 onChangeText={change}
                 onBlur={stopTyping}

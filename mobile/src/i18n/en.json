@@ -1850,5 +1850,22 @@
       "ready": "A new version is ready",
       "action": "Update"
     }
+  },
+  "onboarding": {
+    "skip": "Skip",
+    "next": "Next",
+    "back": "Back",
+    "start": "Get started",
+    "progress": "Slide {{current}} of {{total}}"
+  },
+  "firstWeek": {
+    "day": "First week · day {{day}} of {{total}}",
+    "start": "Do it now",
+    "sendHeart": "Send a heart 💗",
+    "markDone": "Done",
+    "skip": "Skip",
+    "hide": "Hide",
+    "doneNow": "✨ Nice! Today's task is done. A new one is waiting tomorrow.",
+    "doneToday": "✨ Today's task is done. See you tomorrow!"
   }
 }

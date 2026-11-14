@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 import { api, unwrap } from '@/api/client';
 import type { components } from '@/api/schema';
+import { useOnboardingStore } from '@/stores/onboardingStore';
 import { type PrefsState, usePrefsStore } from '@/stores/prefsStore';
 import { mascotColors, type ThemePreference } from '@/theme/tokens';
 
@@ -73,7 +74,12 @@ export function usePreferencesSync(accessToken: string | null) {
   const query = useQuery({ queryKey: PREFERENCES_KEY, queryFn: fetchPreferences, enabled: !!accessToken, staleTime: 5 * 60_000 });
   const data = query.data;
   useEffect(() => {
-    if (data) usePrefsStore.getState().set(fromServer(data));
+    if (!data) return;
+    usePrefsStore.getState().set(fromServer(data));
+    // S-02 танилцуулгын туг (AC-133): сервер ↔ төхөөрөмж — аль нэг дээр үзсэн бол дахин гаргахгүй
+    const onboarding = useOnboardingStore.getState();
+    if (data.introSeen) onboarding.markIntroSeen();
+    else if (onboarding.introSeen) void patchPreferences({ introSeen: true }).catch(() => undefined);
   }, [data]);
   return query;
 }

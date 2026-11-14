@@ -10,6 +10,7 @@ import { AppButton } from '@/components/AppButton';
 import { AppText } from '@/components/AppText';
 import { Card } from '@/components/Card';
 import { CounterOdometer } from '@/components/home/CounterOdometer';
+import { FirstWeekTasks } from '@/components/home/FirstWeekTasks';
 import { HeartButton } from '@/components/home/HeartButton';
 import {
   LettersSection,
@@ -99,6 +100,8 @@ function CoupleBody({ data, now }: { data: Dashboard; now: number }) {
   return (
     <>
       {unseen ? <UnseenSignalsCard summary={unseen} name={name} /> : null}
+      {/* Эхний 7 хоногийн өдрийн даалгавар (AC-134) — 8 дахь өдрөөс сервер нуудаг */}
+      <FirstWeekTasks partnerName={name} />
       <View style={styles.people}>
         <PersonCardView card={data.me} role="me" now={now} />
         {partner ? <PersonCardView card={partner} role="partner" now={now} /> : null}
