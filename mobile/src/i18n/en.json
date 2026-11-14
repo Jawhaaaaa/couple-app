@@ -457,11 +457,6 @@
       "incoming": "💌 A letter is coming to you {{when}}",
       "soon": "soon"
     },
-    "survey": {
-      "title": "One quick question",
-      "body": "How helpful is Aura for the two of you? Rate it from 1 to 5.",
-      "scoreA11y": "Rate {{score}}"
-    },
     "update": {
       "title": "New version available",
       "body": "Aura {{version}} is out — update to try what is new."
@@ -1771,5 +1766,14 @@
       "dateFuture": "Pick a day after today",
       "invite": "Once created, {{name}} gets an invite — you each write and seal your own part."
     }
+  },
+  "survey": {
+    "title": "One quick question",
+    "statement": "This app helps us feel close",
+    "hint": "How much do you agree? Rate from 1 to 5.",
+    "low": "1 — Strongly disagree",
+    "high": "5 — Strongly agree",
+    "scoreA11y": "Rate {{score}}",
+    "skip": "Skip"
   }
 }

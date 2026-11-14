@@ -1,4 +1,3 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Image } from 'expo-image';
 import { type Href, router } from 'expo-router';
 import { CalendarHeart, ChevronRight, Gift, Images, type LucideIcon, Mail, MessageCircle, Sparkles } from 'lucide-react-native';
@@ -6,9 +5,7 @@ import type { ReactNode } from 'react';
 import { Linking, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import {
-  answerSurvey,
   type Dashboard,
-  DASHBOARD_KEY,
   type DatePlanSummary,
   type LetterTeaser,
   type MemorySummary,
@@ -18,11 +15,9 @@ import { mediaThumb } from '@/api/queries/pairing';
 import { AppButton } from '@/components/AppButton';
 import { AppText } from '@/components/AppText';
 import { Card } from '@/components/Card';
-import { FormMessage } from '@/components/FormMessage';
 import { Mascot } from '@/components/Mascot';
 import { emptyStateText } from '@/content/emptyStates';
 import { countdownTo, formatCountdown } from '@/domain/partnerTime';
-import { useErrorText } from '@/hooks/useErrorText';
 import { formatDate, formatTime, useT } from '@/i18n';
 import { AnimatedMoment } from '@/motion/AnimatedMoment';
 import { usePrefsStore } from '@/stores/prefsStore';
@@ -271,41 +266,6 @@ export function LettersSection({ items }: { items: LetterTeaser[] }) {
   );
 }
 
-/** Нэг удаагийн санал асуулга (AC-207, GAP-17): 1–5 эсвэл «Алгасах» (`score: null`). */
-export function SurveySection({ due }: { due: boolean }) {
-  const t = useT();
-  const colors = useColors();
-  const errorText = useErrorText();
-  const queryClient = useQueryClient();
-  const answer = useMutation({
-    mutationFn: answerSurvey,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: DASHBOARD_KEY }),
-  });
-  if (!due || answer.isSuccess) return null;
-  return (
-    <Section name="survey" title={t('home.survey.title')}>
-      <AppText color="textMuted">{t('home.survey.body')}</AppText>
-      <View style={styles.scores}>
-        {[1, 2, 3, 4, 5].map((score) => (
-          <Pressable
-            key={score}
-            onPress={() => answer.mutate(score)}
-            disabled={answer.isPending}
-            accessibilityRole="button"
-            accessibilityLabel={t('home.survey.scoreA11y', { score })}
-            testID={`home-survey-${score}`}
-            style={({ pressed }) => [styles.score, { borderColor: colors.border, backgroundColor: pressed ? colors.surfaceRaised : colors.surface }]}
-          >
-            <AppText variant="bodyStrong">{String(score)}</AppText>
-          </Pressable>
-        ))}
-      </View>
-      {answer.error ? <FormMessage text={errorText(answer.error)} testID="home-survey-error" /> : null}
-      <AppButton variant="ghost" label={t('common.skip')} onPress={() => answer.mutate(null)} disabled={answer.isPending} testID="home-survey-skip" />
-    </Section>
-  );
-}
-
 /** «Шинэ хувилбар бэлэн» (AC-141): татах хуудас (DEV) эсвэл store руу. */
 export function UpdateSection({ data }: { data: Dashboard['update'] }) {
   const t = useT();
@@ -340,13 +300,4 @@ const styles = StyleSheet.create({
   memory: { width: 120, minHeight: touchTarget, gap: spacing.xxs, padding: spacing.xs, borderRadius: radius.input },
   thumb: { width: 104, height: 104, borderRadius: radius.image },
   thumbEmpty: { alignItems: 'center', justifyContent: 'center' },
-  scores: { flexDirection: 'row', gap: spacing.xs, flexWrap: 'wrap' },
-  score: {
-    width: touchTarget,
-    height: touchTarget,
-    borderRadius: radius.pill,
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
 });

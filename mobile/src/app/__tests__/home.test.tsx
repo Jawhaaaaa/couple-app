@@ -221,4 +221,24 @@ describe('S-20 нүүр', () => {
     await renderHome();
     await waitFor(() => expect(screen.getByTestId('home-signals-today')).toHaveTextContent('Өнөөдөр 2 💗 илгээсэн · 1 хүлээн авсан'));
   });
+
+  it('AC-207 `Dashboard.survey.due` үед нүүрэнд санал асуулгын карт, үгүй бол алга', async () => {
+    await renderHome();
+    await waitFor(() => expect(screen.getByTestId('home-signals-today')).toBeTruthy());
+    expect(screen.queryByTestId('survey-card')).toBeNull();
+  });
+
+  it('AC-207 хостой үед `due` бол санал асуулгын карт гарна', async () => {
+    dashboard = emptyCouple({ survey: { due: true } });
+    await renderHome();
+    await waitFor(() => expect(screen.getByTestId('survey-card')).toBeTruthy());
+  });
+
+  it('AC-207 хосгүй (SOLO) хэрэглэгчид ч санал асуулга гарна', async () => {
+    meKind = 'SOLO';
+    dashboard = emptyCouple({ partner: null, survey: { due: true } });
+    await renderHome();
+    await waitFor(() => expect(screen.getByTestId('survey-card')).toBeTruthy());
+    expect(screen.getByTestId('home-solo')).toBeTruthy();
+  });
 });

@@ -17,7 +17,6 @@ import {
   OnThisDaySection,
   RecapSection,
   RecentMemoriesSection,
-  SurveySection,
   UnreadMessagesSection,
   UpcomingSection,
   UpdateSection,
@@ -25,6 +24,7 @@ import {
 import { LongDistanceBlock } from '@/components/home/LongDistance';
 import { PersonCardView } from '@/components/home/PersonCardView';
 import { QuestionTeaser } from '@/components/home/QuestionTeaser';
+import { SurveyCard } from '@/components/home/SurveyCard';
 import { UnseenSignalsCard } from '@/components/home/UnseenSignalsCard';
 import { Mascot } from '@/components/Mascot';
 import { ScreenState } from '@/components/ScreenState';
@@ -65,6 +65,8 @@ export default function HomeScreen() {
       >
         <CounterBlock counter={data.counter} />
         {solo ? <SoloInvite name={me?.callName ?? me?.displayName ?? data.me.name} /> : <CoupleBody data={data} now={now} />}
+        {/* Хэрэглэгч тутмын санал асуулга — хосгүй үед ч (AC-207) */}
+        <SurveyCard prompt={data.survey} />
       </ScrollView>
     );
   }
@@ -124,7 +126,6 @@ function CoupleBody({ data, now }: { data: Dashboard; now: number }) {
       <OnThisDaySection data={data.onThisDay} />
       <RecapSection data={data.recap} />
       <LettersSection items={data.incomingLetters} />
-      <SurveySection due={!!data.survey?.due} />
       <UpdateSection data={data.update} />
     </>
   );
