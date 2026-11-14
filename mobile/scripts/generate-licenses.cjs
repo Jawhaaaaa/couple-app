@@ -20,6 +20,7 @@ const FAMILIES = [
   { test: (r) => /^Animated Noto Emoji/.test(r.name), name: 'Animated Noto Emoji', url: 'https://googlefonts.github.io/noto-emoji-animation/' },
   { test: (r) => /^Fluent Emoji/.test(r.name), name: 'Fluent Emoji 3D', url: 'https://github.com/microsoft/fluentui-emoji' },
   { test: (r) => r.source.includes('generate-sounds'), name: 'Aura UI sounds', url: null },
+  { test: (r) => r.source.includes('generate-pwa-icons'), name: 'Aura app icon & splash', url: null },
   { test: (r) => r.source.includes('create-expo-app'), name: 'create-expo-app template', url: 'https://github.com/expo/expo/tree/main/templates' },
 ];
 

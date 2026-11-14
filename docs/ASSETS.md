@@ -48,15 +48,10 @@ AC-AS-01). `mobile/src/assets/__tests__/assets-registry.test.ts` нь `mobile/as
 | `assets/sounds/chime.wav` | Зөөлөн хонх | `mobile/scripts/generate-sounds.mjs` | Өөрийн бүтээсэн (CC0) | ANIM-02, ANIM-19 |
 | `assets/sounds/pop.wav` | Богино «поп» | `mobile/scripts/generate-sounds.mjs` | Өөрийн бүтээсэн (CC0) | Сонголт, реакц |
 | `assets/sounds/success.wav` | Өсөх гурван нот | `mobile/scripts/generate-sounds.mjs` | Өөрийн бүтээсэн (CC0) | Баярын мөчүүд |
-| `assets/images/icon.png` | Апп-ын түр дүрс | create-expo-app SDK 58 template | MIT © 650 Industries | Апп-ын дүрс (T-88-д Aura дүрсээр солигдоно) |
-| `assets/images/android-icon-background.png` | Android adaptive icon (дэвсгэр) | create-expo-app SDK 58 template | MIT © 650 Industries | Android дүрс (T-88-д солигдоно) |
-| `assets/images/android-icon-foreground.png` | Android adaptive icon (урд) | create-expo-app SDK 58 template | MIT © 650 Industries | Android дүрс (T-88-д солигдоно) |
-| `assets/images/android-icon-monochrome.png` | Android adaptive icon (нэг өнгө) | create-expo-app SDK 58 template | MIT © 650 Industries | Android дүрс (T-88-д солигдоно) |
-| `assets/images/favicon.png` | Favicon | create-expo-app SDK 58 template | MIT © 650 Industries | Вэб (T-82-т солигдоно) |
-| `assets/images/splash-icon.png` | Splash дүрс | create-expo-app SDK 58 template | MIT © 650 Industries | Splash (T-88-д солигдоно) |
-| `assets/expo.icon/icon.json` | iOS icon composer тохиргоо | create-expo-app SDK 58 template | MIT © 650 Industries | iOS дүрс (T-88-д солигдоно) |
-| `assets/expo.icon/Assets/expo-symbol 2.svg` | iOS icon давхарга | create-expo-app SDK 58 template | MIT © 650 Industries | iOS дүрс (T-88-д солигдоно) |
-| `assets/expo.icon/Assets/grid.png` | iOS icon давхарга | create-expo-app SDK 58 template | MIT © 650 Industries | iOS дүрс (T-88-д солигдоно) |
+| `assets/images/icon.png` | Aura апп-ын дүрс (Коралл зүрх, 1024) | `mobile/scripts/generate-pwa-icons.mjs` | Өөрийн бүтээсэн (CC0) | iOS/Android апп-ын дүрс (`app.config.ts`, T-88) |
+| `assets/images/adaptive-icon.png` | Android adaptive icon-ий урд давхарга | `mobile/scripts/generate-pwa-icons.mjs` | Өөрийн бүтээсэн (CC0) | Android дүрс (`app.config.ts`) |
+| `assets/images/splash-icon.png` | Splash зүрх | `mobile/scripts/generate-pwa-icons.mjs` | Өөрийн бүтээсэн (CC0) | Native splash (`expo-splash-screen`) |
+| `assets/images/favicon.png` | Favicon | `mobile/scripts/generate-pwa-icons.mjs` | Өөрийн бүтээсэн (CC0) | Вэб |
 
 ## Фонт ба нээлттэй эхийн сан
 

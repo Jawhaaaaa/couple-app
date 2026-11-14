@@ -1,0 +1,17 @@
+{
+  "ios": {
+    "CFBundleDisplayName": "Aura",
+    "NSCameraUsageDescription": "Хамтрагчийнхаа урилгын QR кодыг уншуулах, дурсамждаа зураг, видео авахад Aura камер ашиглана.",
+    "NSPhotoLibraryUsageDescription": "Профайлын зураг сонгох, дурсамж, чат, захидалдаа зураг, видео нэмэхэд Aura зургийн санг ашиглана.",
+    "NSPhotoLibraryAddUsageDescription": "«Бидний жил»-ийн зураг зэрэг таны сонгосон зургийг Aura зургийн санд хадгална.",
+    "NSMicrophoneUsageDescription": "Дуут мессеж, дурсамжийн дуу, видео бичихэд Aura микрофон ашиглана.",
+    "NSLocationWhenInUseUsageDescription": "Чатад байршлаа илгээх, дурсамжид газар тэмдэглэх, цаг агаар харуулахыг та сонгосон үед л Aura байршил ашиглана. Хотын түвшинд хадгална.",
+    "NSFaceIDUsageDescription": "Хоёулангийнхаа орон зайг зөвхөн та нээхийн тулд Aura Face ID-аар түгжинэ.",
+    "NSCalendarsUsageDescription": "Хамтдаа төлөвлөсөн болзоогоо утасныхаа календарьт нэмэхэд Aura календарь ашиглана.",
+    "NSCalendarsFullAccessUsageDescription": "Хамтдаа төлөвлөсөн болзоогоо утасныхаа календарьт нэмэхэд Aura календарь ашиглана.",
+    "NSCalendarsWriteOnlyAccessUsageDescription": "Хамтдаа төлөвлөсөн болзоогоо утасныхаа календарьт нэмэхэд Aura календарь ашиглана."
+  },
+  "android": {
+    "app_name": "Aura"
+  }
+}

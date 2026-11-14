@@ -7,20 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "aura",
     "userInterfaceStyle": "automatic",
-    "ios": {
-      "icon": "./assets/expo.icon",
-      "bundleIdentifier": "mn.aura.couple"
-    },
-    "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
-      },
-      "predictiveBackGestureEnabled": false,
-      "package": "mn.aura.couple"
-    },
     "web": {
       "output": "single",
       "favicon": "./assets/images/favicon.png"
@@ -34,42 +20,11 @@
           }
         }
       ],
-      [
-        "expo-splash-screen",
-        {
-          "backgroundColor": "#208AEF",
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 76
-        }
-      ],
       "expo-secure-store",
       "expo-localization",
       "expo-asset",
-      [
-        "expo-camera",
-        {
-          "cameraPermission": "Aura uses the camera to scan your partner's invite QR code and to capture photos for your memories.",
-          "microphonePermission": false,
-          "recordAudioAndroid": false
-        }
-      ],
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "Aura uses your photo library so you can choose a profile photo and add photos and videos to your memories.",
-          "cameraPermission": "Aura uses the camera to scan your partner's invite QR code and to capture photos for your memories.",
-          "microphonePermission": false
-        }
-      ],
       "expo-video",
-      "expo-sharing",
-      "expo-audio",
-      [
-        "expo-calendar",
-        {
-          "calendarPermission": "Aura adds the dates you plan together to your phone calendar."
-        }
-      ]
+      "expo-sharing"
     ],
     "experiments": {
       "typedRoutes": true,

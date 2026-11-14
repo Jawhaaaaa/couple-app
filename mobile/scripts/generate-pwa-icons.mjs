@@ -4,7 +4,8 @@
  * PNG бичнэ), гуравдагч этгээдийн зураг ашиглахгүй («өөрийн бүтээсэн»). Өнгө нь `src/theme/tokens.ts`-ийн
  * бараан палитрын `bg` ба Коралл `primary` — manifest-ийн `theme_color`-той ижил эх.
  *   node scripts/generate-pwa-icons.mjs
- * Гаралт: public/icons/*.png, public/splash/*.png (commit хийнэ; `public/index.html` эдгээрийг заана).
+ * Гаралт: public/icons/*.png, public/splash/*.png (commit хийнэ; `public/index.html` эдгээрийг заана),
+ * мөн native апп-ын дүрс ба splash — assets/images/*.png (`app.config.ts` заана, T-88).
  */
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -127,7 +128,23 @@ export const SPLASH = [
   [640, 1136],
 ];
 
+/**
+ * Native апп-ын дүрс (app.config.ts). `adaptive-icon` — Android adaptive icon-ий урд давхарга: системийн
+ * маск 108 dp-ээс төвийн 66 dp-ийг л үлдээдэг тул зүрх 36%. Splash зураг `backgroundColor`-той ижил дэвсгэртэй.
+ */
+export const NATIVE = [
+  { file: 'assets/images/icon.png', size: 1024, scale: 0.56 },
+  { file: 'assets/images/adaptive-icon.png', size: 1024, scale: 0.36 },
+  { file: 'assets/images/splash-icon.png', size: 512, scale: 0.9 },
+  { file: 'assets/images/favicon.png', size: 48, scale: 0.7 },
+];
+
 const tokens = readTokens();
+for (const { file, size, scale } of NATIVE) {
+  mkdirSync(dirname(join(ROOT, file)), { recursive: true });
+  writeFileSync(join(ROOT, file), render(size, size, scale, tokens));
+  console.log(file);
+}
 mkdirSync(join(PUBLIC, 'icons'), { recursive: true });
 mkdirSync(join(PUBLIC, 'splash'), { recursive: true });
 for (const { file, size, scale } of ICONS) {

@@ -29,12 +29,12 @@
           "files": 4
         },
         {
-          "name": "create-expo-app template",
-          "license": "MIT",
-          "holder": "650 Industries",
-          "notice": "create-expo-app template © 650 Industries, MIT",
-          "url": "https://github.com/expo/expo/tree/main/templates",
-          "files": 9
+          "name": "Aura app icon & splash",
+          "license": "Өөрийн бүтээсэн (CC0)",
+          "holder": null,
+          "notice": "Aura app icon & splash — Өөрийн бүтээсэн (CC0)",
+          "url": null,
+          "files": 4
         }
       ]
     },
