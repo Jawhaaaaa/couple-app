@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import * as Clipboard from 'expo-clipboard';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
-import { CalendarHeart, Copy, FolderOpen, Handshake, Lightbulb, MapPin, Pin, PinOff, Search, Sparkles, Timer } from 'lucide-react-native';
+import { CalendarHeart, Copy, FolderOpen, Handshake, Lightbulb, ListPlus, MapPin, Pin, PinOff, Search, Sparkles, Timer } from 'lucide-react-native';
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, AppState, FlatList, KeyboardAvoidingView, Linking, Platform, Pressable, StyleSheet, View } from 'react-native';
 
@@ -42,6 +42,7 @@ import { voiceFileName } from '@/chat/voice';
 import { emptyStateText } from '@/content/emptyStates';
 import { useErrorText } from '@/hooks/useErrorText';
 import { useNow } from '@/hooks/useNow';
+import { listPrefillFrom } from '@/domain/lists';
 import { localClock } from '@/domain/partnerTime';
 import { formatDateLong, useT } from '@/i18n';
 import { pickMedia, queueAsset } from '@/memories/pickMedia';
@@ -376,6 +377,16 @@ export function ChatScreenView() {
         onPress: () => {
           close();
           router.push({ pathname: '/plans/idea-editor', params: { draft: JSON.stringify(ideaPrefillFrom(m)) } });
+        },
+      });
+      list.push({
+        key: 'list',
+        label: t('chat.actions.toList'),
+        icon: ListPlus,
+        onPress: () => {
+          close();
+          // «Жагсаалтад нэмэх» (AC-91) — S-63-ийн нэмэх талбар ноорогоор бөглөгдөнө
+          router.push({ pathname: '/together/lists', params: { kind: 'todo', draft: JSON.stringify(listPrefillFrom(m)) } });
         },
       });
     }
