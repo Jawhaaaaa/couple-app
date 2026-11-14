@@ -145,7 +145,9 @@ public class AccountDeletionService {
                 "DELETE FROM data_export WHERE user_id = ?",
                 "DELETE FROM upload_session WHERE owner_id = ?",
                 "DELETE FROM survey_response WHERE user_id = ?",
-                "DELETE FROM first_week_task WHERE user_id = ?")) {
+                "DELETE FROM first_week_task WHERE user_id = ?",
+                "DELETE FROM webauthn_challenge WHERE user_id = ?",
+                "DELETE FROM webauthn_credential WHERE user_id = ?")) {
             jdbc.update(sql, userId);
         }
         jdbc.update("""

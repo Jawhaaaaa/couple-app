@@ -105,6 +105,10 @@ aura:
     commit-sha: ${AURA_APP_COMMIT_SHA:}
     download-url: ${AURA_DOWNLOAD_URL:}
     store-url: ${AURA_APP_STORE_URL:}
+  # Вэбийн passkey (T-85, AC-157). Хоосон бол aura.web.base-url-ээс (RP ID = host, origin = base-url)
+  passkey:
+    rp-id: ${AURA_PASSKEY_RP_ID:}
+    origins: ${AURA_PASSKEY_ORIGINS:}
   policy:
     version: ${AURA_POLICY_VERSION:2026-11-07}
   # Вэб апп-ын гаднах хаяг — имэйлийн холбоос (/verify-email, /reset-password, /not-me) ба OAuth-ийн

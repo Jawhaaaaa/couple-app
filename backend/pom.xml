@@ -38,6 +38,8 @@
     <bouncycastle.version>1.81</bouncycastle.version>
     <!-- Серверийн PDF ном (DD-AURA-024, SD-05) — PDFBox 3 -->
     <openhtmltopdf.version>1.1.110</openhtmltopdf.version>
+    <!-- Passkey (T-85, DD-AURA-033, AC-157). 0.31+ нь Jackson 3 шаарддаг — Boot 3.5-ийн Jackson 2-той 0.30 -->
+    <webauthn4j.version>0.30.3.RELEASE</webauthn4j.version>
   </properties>
 
   <dependencyManagement>
@@ -177,6 +179,13 @@
       <groupId>io.github.openhtmltopdf</groupId>
       <artifactId>openhtmltopdf-pdfbox</artifactId>
       <version>${openhtmltopdf.version}</version>
+    </dependency>
+
+    <!-- Passkey: WebAuthn бүртгэл/баталгаажуулалт (T-85, Apache-2.0) -->
+    <dependency>
+      <groupId>com.webauthn4j</groupId>
+      <artifactId>webauthn4j-core</artifactId>
+      <version>${webauthn4j.version}</version>
     </dependency>
 
     <!-- Гэрээнээс үүссэн интерфейсийн хамаарал (DD-AURA-002) -->
