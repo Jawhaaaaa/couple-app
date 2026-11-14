@@ -10,6 +10,8 @@ COPY backend/pom.xml .
 RUN mvn -B -q dependency:go-offline
 COPY contracts /src/contracts
 COPY mobile/src/content /src/mobile/src/content
+# Нууцлалын бодлого ба нөхцөл — jar-ын `policy/`-д орно (T-76, `GET /policies/current`).
+COPY docs/PRIVACY.md docs/TERMS.md /src/docs/
 COPY backend/src ./src
 RUN mvn -B -q package -DskipTests
 
