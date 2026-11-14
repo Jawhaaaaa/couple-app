@@ -95,3 +95,17 @@ export function memoryPrefillFrom(m: Message, tz: string): DraftPrefill {
       : {}),
   };
 }
+
+/**
+ * «Болзооны санаа болгох» (FR-6.8, AC-91, DEC-AURA-005): мессежийн текст, байршлаар бөглөгдсөн S-53
+ * ноорог. Гарчиг — текстийн эхний мөр (≤ 60), тайлбар — бүтэн текст.
+ */
+export function ideaPrefillFrom(m: Message): { title?: string; description?: string; place?: ChatPlace } {
+  const text = m.text?.trim() ?? '';
+  const firstLine = text.split('\n')[0]?.slice(0, 60) ?? '';
+  return {
+    ...(firstLine ? { title: firstLine } : {}),
+    ...(text ? { description: text } : {}),
+    ...(m.location ? { place: m.location } : {}),
+  };
+}

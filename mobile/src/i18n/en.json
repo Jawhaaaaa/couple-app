@@ -904,7 +904,8 @@
       "copy": "Copy",
       "copied": "Copied",
       "openMap": "Open in map",
-      "toMemory": "Turn into memory"
+      "toMemory": "Turn into memory",
+      "toIdea": "Make it a date idea"
     },
     "deleteConfirm": {
       "title": "Delete this message?",
@@ -1251,6 +1252,92 @@
         "5": "Sa",
         "6": "Su"
       }
+    },
+    "ideas": {
+      "title": "Ideas",
+      "add": "Add idea",
+      "search": "Search ideas",
+      "all": "All",
+      "anyBudget": "Any budget",
+      "free": "Free",
+      "upTo": "≤ {{amount}}",
+      "toPlan": "Plan this date",
+      "tools": "Decide together",
+      "random": "Pick at random",
+      "deck": "Secret match deck",
+      "library": "Idea library",
+      "budget": "Budget overview",
+      "noMatch": "No ideas match this filter.",
+      "byAuthor": "Added by {{name}}"
+    },
+    "setting": {
+      "HOME": "At home",
+      "OUTDOOR": "Outdoors"
+    },
+    "ideaEditor": {
+      "newTitle": "New idea",
+      "editTitle": "Edit idea",
+      "title": "Title",
+      "titleRequired": "Add a title",
+      "description": "Description",
+      "category": "Category",
+      "budget": "Budget (₮)",
+      "budgetInvalid": "Enter the budget as a number",
+      "url": "Link",
+      "urlInvalid": "Use the https://… format",
+      "setting": "At home or outdoors",
+      "settingAny": "Either",
+      "save": "Save",
+      "delete": "Delete idea",
+      "deleteTitle": "Delete this idea?",
+      "fromChat": "Filled in from a chat message — check it and save."
+    },
+    "random": {
+      "title": "Pick at random",
+      "pick": "Pick",
+      "again": "Pick again",
+      "includeLibrary": "Include the idea library",
+      "noMatch": "No ideas match your filters",
+      "loosen": "Loosen filters",
+      "candidates": "Picked from {{count}} ideas",
+      "fromLibrary": "From the idea library"
+    },
+    "deck": {
+      "title": "Secret match deck",
+      "hint": "Neither of you ever sees the other's picks — it is only a match when you both say yes.",
+      "yes": "Yes",
+      "no": "No",
+      "matches": "Matches",
+      "match": "It is a match!",
+      "matchBody": "You both said yes to “{{title}}”."
+    },
+    "library": {
+      "title": "Idea library",
+      "season": {
+        "WINTER": "Winter",
+        "SPRING": "Spring",
+        "SUMMER": "Summer",
+        "AUTUMN": "Autumn"
+      },
+      "band": {
+        "FREE": "Free",
+        "UPTO_50K": "≤ 50,000₮",
+        "50K_150K": "50,000–150,000₮",
+        "OVER_150K": "Over 150,000₮"
+      },
+      "longDistance": "Long distance",
+      "adopt": "Make it our idea",
+      "adopted": "Added to your ideas.",
+      "duration": "≈ {{minutes}} min"
+    },
+    "budgetSummary": {
+      "title": "Budget overview",
+      "planned": "Planned: {{amount}}",
+      "actual": "Actual: {{amount}}",
+      "over": "{{amount}} over budget",
+      "within": "Within budget",
+      "shares": "Who paid what",
+      "plans": "Dates this month"
     }
   }
 }

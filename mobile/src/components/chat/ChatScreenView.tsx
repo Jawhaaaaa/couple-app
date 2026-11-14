@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import * as Clipboard from 'expo-clipboard';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
-import { CalendarHeart, Copy, FolderOpen, Handshake, MapPin, Pin, PinOff, Search, Sparkles, Timer } from 'lucide-react-native';
+import { CalendarHeart, Copy, FolderOpen, Handshake, Lightbulb, MapPin, Pin, PinOff, Search, Sparkles, Timer } from 'lucide-react-native';
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, AppState, FlatList, KeyboardAvoidingView, Linking, Platform, Pressable, StyleSheet, View } from 'react-native';
 
@@ -33,7 +33,7 @@ import { ConfirmSheet } from '@/components/ConfirmSheet';
 import { FormMessage } from '@/components/FormMessage';
 import { ScreenState } from '@/components/ScreenState';
 import { TabScreen } from '@/components/TabScreen';
-import { currentPlace, mapUrl, memoryPrefillFrom, pickAndUploadFile } from '@/chat/attachments';
+import { currentPlace, ideaPrefillFrom, mapUrl, memoryPrefillFrom, pickAndUploadFile } from '@/chat/attachments';
 import { type ChatWindow, lastUnreadFromPartner, startsNewDay } from '@/chat/chatCache';
 import { type NewMessage, type PendingMessage, sendMessage, usePendingMessages } from '@/chat/sendMessage';
 import { useChatWindow } from '@/chat/useChatWindow';
@@ -365,6 +365,17 @@ export function ChatScreenView() {
         onPress: () => {
           close();
           router.push({ pathname: '/memory-editor', params: { draft: JSON.stringify(memoryPrefillFrom(m, tz)) } });
+        },
+      });
+    }
+    if (m.kind === 'TEXT' || m.kind === 'LOCATION') {
+      list.push({
+        key: 'idea',
+        label: t('chat.actions.toIdea'),
+        icon: Lightbulb,
+        onPress: () => {
+          close();
+          router.push({ pathname: '/plans/idea-editor', params: { draft: JSON.stringify(ideaPrefillFrom(m)) } });
         },
       });
     }
