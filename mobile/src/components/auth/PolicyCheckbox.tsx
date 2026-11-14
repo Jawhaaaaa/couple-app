@@ -3,12 +3,15 @@ import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import type { PolicyDocument } from '@/api/queries/auth';
-import { useT } from '@/i18n';
+import { formatDate, useT } from '@/i18n';
+import { isCalendarDate } from '@/i18n/calendarDate';
+import { type DateFormat, usePrefsStore } from '@/stores/prefsStore';
 import { useColors } from '@/theme/ThemeProvider';
 import { radius, spacing, touchTarget } from '@/theme/tokens';
 
 import { AppButton } from '../AppButton';
 import { AppText } from '../AppText';
+import { MarkdownText } from '../MarkdownText';
 
 interface Props {
   checked: boolean;
@@ -59,10 +62,19 @@ export function PolicyCheckbox({ checked, onChange, policy }: Props) {
   );
 }
 
-/** Бодлого ба нөхцөлийн бичвэр (markdown-ыг энгийн бичвэрээр). */
+/** Хувилбар нь огноо (`2026-11-01`) бол хэрэглэгчийн огнооны форматаар, үгүй бол байгаагаар. */
+export function formatPolicyVersion(version: string, pattern: DateFormat): string {
+  return isCalendarDate(version) ? formatDate(version, pattern) : version;
+}
+
+/**
+ * Бодлого ба нөхцөлийн бичвэр (AC-63): хувилбар + хоёр баримтын markdown (гарчиг, догол мөр, жагсаалт).
+ * Баримт бүр өөрийн `#` гарчигтай тул тусдаа гарчиг нэмэхгүй.
+ */
 export function PolicyText({ policy, maxHeight = 280 }: { policy: PolicyDocument; maxHeight?: number }) {
   const colors = useColors();
   const t = useT();
+  const dateFormat = usePrefsStore((st) => st.dateFormat);
   return (
     <ScrollView
       style={[styles.doc, { maxHeight, borderColor: colors.border, backgroundColor: colors.surface }]}
@@ -70,13 +82,12 @@ export function PolicyText({ policy, maxHeight = 280 }: { policy: PolicyDocument
       nestedScrollEnabled
       testID="policy-text"
     >
-      <AppText variant="caption" color="textMuted">
-        {t('auth.policyUpdate.version', { version: policy.version })}
+      <AppText variant="caption" color="textMuted" testID="policy-version">
+        {t('auth.policyUpdate.version', { version: formatPolicyVersion(policy.version, dateFormat) })}
       </AppText>
-      <AppText variant="h3">{t('auth.policyUpdate.privacy')}</AppText>
-      <AppText>{policy.privacyMarkdown}</AppText>
-      <AppText variant="h3">{t('auth.policyUpdate.terms')}</AppText>
-      <AppText>{policy.termsMarkdown}</AppText>
+      <MarkdownText markdown={policy.privacyMarkdown} testID="policy-privacy" />
+      <View style={[styles.rule, { backgroundColor: colors.border }]} />
+      <MarkdownText markdown={policy.termsMarkdown} testID="policy-terms" />
     </ScrollView>
   );
 }
@@ -95,4 +106,5 @@ const styles = StyleSheet.create({
   label: { flex: 1 },
   doc: { borderWidth: 1, borderRadius: radius.input },
   docContent: { padding: spacing.md, gap: spacing.xs },
+  rule: { height: StyleSheet.hairlineWidth, marginVertical: spacing.sm },
 });
