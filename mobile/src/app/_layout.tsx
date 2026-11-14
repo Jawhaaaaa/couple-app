@@ -109,6 +109,8 @@ function ThemedStack() {
           <Stack.Screen name="media/[id]" options={{ presentation: 'fullScreenModal', animation: 'fade' }} />
           <Stack.Screen name="recap/[id]" options={{ presentation: 'fullScreenModal', animation: 'fade' }} />
           <Stack.Screen name="year/[year]" options={{ presentation: 'fullScreenModal', animation: 'fade' }} />
+          {/* S-25 ойн мэндчилгээ (ANIM-05, AC-39) */}
+          <Stack.Screen name="celebration" options={{ presentation: 'fullScreenModal', animation: 'fade' }} />
         </Stack>
         <TimezonePrompt />
         {/* Хамтрагчийн зүрх/тэврэлт аль ч дэлгэц дээр (ANIM-02, AC-17) */}

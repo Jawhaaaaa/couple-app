@@ -155,7 +155,7 @@ export function UpcomingSection({ items }: { items: OccasionSummary[] }) {
           detail={`${formatDate(o.nextOn, dateFormat)} · ${
             o.daysUntil === 0 ? t('home.upcoming.today') : t('home.upcoming.daysLeft', { count: o.daysUntil })
           }`}
-          href="/together"
+          href={{ pathname: '/together/occasions/[key]', params: { key: o.occasionKey } }}
           testID="home-upcoming-item"
         />
       ))}

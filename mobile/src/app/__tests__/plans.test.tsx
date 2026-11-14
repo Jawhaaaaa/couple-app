@@ -9,7 +9,7 @@ import CounterSheet from '@/app/(tabs)/plans/[id]/counter';
 import PlansScreen from '@/app/(tabs)/plans/index';
 import PlanFormScreen from '@/app/(tabs)/plans/new';
 import { planDay, zonedToUtc } from '@/domain/planTime';
-import { todayIn } from '@/i18n/calendarDate';
+import { addDays, todayIn } from '@/i18n/calendarDate';
 import { saveFile } from '@/media/saveFile';
 import { defaultPrefs, usePrefsStore } from '@/stores/prefsStore';
 import { useSessionStore } from '@/stores/sessionStore';
@@ -80,6 +80,7 @@ function plan(id: string, overrides: Partial<DatePlan> = {}): DatePlan {
 let lists: Record<string, DatePlanSummary[]>;
 let range: DatePlanSummary[];
 let current: DatePlan;
+let occasions: unknown[];
 const spies: jest.SpyInstance[] = [];
 
 beforeEach(() => {
@@ -90,6 +91,7 @@ beforeEach(() => {
   lists = { upcoming: [], past: [] };
   range = [];
   current = plan('p1');
+  occasions = [];
   spies.push(
     jest.spyOn(api, 'GET').mockImplementation((async (path: string, init?: { params?: { query?: { view?: string } } }) => {
       if (path === '/me') return ok({ id: ME.id, displayName: ME.displayName, callName: null, timezone: TZ, avatar: null });
@@ -99,6 +101,7 @@ beforeEach(() => {
         return ok(view ? lists[view] ?? [] : range);
       }
       if (path === '/plans/{planId}') return ok(current);
+      if (path === '/anniversaries') return ok(occasions);
       return ok({});
     }) as never),
   );
@@ -149,6 +152,16 @@ describe('S-50 Төлөвлөгөө', () => {
     expect(await screen.findByTestId('rsvp-waiting-mine')).toHaveTextContent('Хариу хүлээгдэж байна');
     await fireEvent.press(screen.getByTestId('rsvp-counter-theirs'));
     expect(router.push).toHaveBeenCalledWith({ pathname: '/plans/[id]/counter', params: { id: 'theirs' } });
+  });
+
+  it('AC-103 S-50-ийн дээд хэсэгт Milestone Horizon — «18 хоног үлдлээ», товшвол S-61', async () => {
+    lists.upcoming = [summary('p-next')];
+    const nextOn = addDays(todayIn(TZ), 18);
+    occasions = [{ occasionKey: 'auto:days:1000', source: 'AUTO_DAYS', title: '1000 хоног', kind: 'MILESTONE', date: nextOn, nextOn, daysUntil: 18, recurring: false, reminderDays: [7, 1, 0], memoryCount: 0 }];
+    await renderWithClient(<PlansScreen />);
+    expect(await screen.findByTestId('horizon-left-auto:days:1000')).toHaveTextContent('18 хоног үлдлээ');
+    await fireEvent.press(screen.getByTestId('horizon-auto:days:1000'));
+    expect(router.push).toHaveBeenCalledWith({ pathname: '/together/occasions/[key]', params: { key: 'auto:days:1000' } });
   });
 
   it('болзоо алга бол хоосон төлөв — «Болзоо төлөвлөх» S-54 руу', async () => {

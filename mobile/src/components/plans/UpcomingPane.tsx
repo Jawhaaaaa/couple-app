@@ -7,6 +7,7 @@ import { type DatePlanSummary, invalidatePlans, type PlanAction, respondToPlan, 
 import { AppButton } from '@/components/AppButton';
 import { AppText } from '@/components/AppText';
 import { FormMessage } from '@/components/FormMessage';
+import { MilestoneHorizon } from '@/components/occasions/MilestoneHorizon';
 import { ScreenState } from '@/components/ScreenState';
 import { emptyStateText } from '@/content/emptyStates';
 import { useErrorText } from '@/hooks/useErrorText';
@@ -102,6 +103,7 @@ export function UpcomingPane() {
 
   return (
     <View style={styles.root} testID="plans-upcoming">
+      <MilestoneHorizon />
       {celebrate ? <PlanConfirmedMoment me={me} partner={partner} onDone={endCelebrate} /> : null}
       {respond.error ? <FormMessage text={errorText(respond.error)} testID="plans-respond-error" /> : null}
       {next ? (

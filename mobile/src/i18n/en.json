@@ -1339,5 +1339,67 @@
       "shares": "Who paid what",
       "plans": "Dates this month"
     }
+  },
+  "occasions": {
+    "title": "Special days",
+    "add": "Add a day",
+    "horizon": "Milestone horizon",
+    "horizonAll": "See all",
+    "daysLeft_one": "{{count}} day left",
+    "daysLeft_other": "{{count}} days left",
+    "daysAgo_one": "{{count}} day ago",
+    "daysAgo_other": "{{count}} days ago",
+    "today": "Today",
+    "kind": {
+      "ANNIVERSARY": "Anniversary",
+      "BIRTHDAY": "Birthday",
+      "FIRST_MET": "First met",
+      "OTHER": "Other",
+      "MILESTONE": "Together"
+    },
+    "recurring": "Every year",
+    "once": "One time",
+    "memoryCount": "{{count}} memories",
+    "detailTitle": "Special day",
+    "note": "Note",
+    "notePlaceholder": "A few words about this day",
+    "memories": "Attached memories",
+    "memoriesEmpty": "No memories attached.",
+    "attach": "Attach memories",
+    "attachHint": "Pick the memories to attach",
+    "reminders": "Reminders",
+    "reminder": {
+      "r7": "7 days before",
+      "r1": "1 day before",
+      "r0": "On the day"
+    },
+    "save": "Save",
+    "saved": "Saved.",
+    "gifts": "Secret gift ideas",
+    "giftsHint": "Only you can see these — your partner never will.",
+    "giftPlaceholder": "e.g. A new edition of their favorite book",
+    "giftLabel": "Gift idea",
+    "addGift": "Add",
+    "removeGift": "Remove",
+    "edit": "Edit",
+    "editor": {
+      "newTitle": "Add a day",
+      "editTitle": "Edit day",
+      "title": "Name",
+      "titleRequired": "Add a name",
+      "date": "Date (YYYY-MM-DD)",
+      "dateInvalid": "Use the YYYY-MM-DD format",
+      "kind": "Type",
+      "recurring": "Repeats every year",
+      "note": "Note (optional)",
+      "save": "Save",
+      "delete": "Delete",
+      "deleteTitle": "Delete this day?"
+    },
+    "celebration": {
+      "days": "Day {{count}} together",
+      "hint": "Tap to close"
+    },
+    "hubCard": "Anniversaries and birthdays"
   }
 }
