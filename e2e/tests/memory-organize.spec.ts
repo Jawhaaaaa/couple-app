@@ -24,7 +24,8 @@ test.describe('Дурсамж — цэгцлэх', () => {
     await partnerA.page.getByTestId('group-delete').click();
     await expect(partnerA.page.getByTestId('group-delete-confirm-body')).toHaveText('Зөвхөн цомог устна — доторх 2 дурсамж хэвээр үлдэнэ.');
     await partnerA.page.getByTestId('group-delete-confirm-confirm').click();
-    await expect(partnerA.page.getByTestId('screen-S-35-detail')).toHaveCount(0);
+    // Устгасан цомгийн хуудаснаас гарна (буцах түүхээр эсвэл цомгийн жагсаалт руу)
+    await expect(partnerA.page).not.toHaveURL(new RegExp(group.id));
 
     expect((await apiAs(a, 'GET', `/memory-groups/${group.id}`)).status).toBe(404);
     expect((await getMemory(a, m1.id)).title).toBe('Төв цэнгэлдэх');
@@ -72,11 +73,12 @@ test.describe('Дурсамж — цэгцлэх', () => {
     const m1 = await createMemoryApi(a, image, { title: 'Уулын аялал', occurredOn: '2025-07-01', tags: ['аялал'], location: hustai });
     const m2 = await createMemoryApi(a, image, { title: 'Гэрийн кино', occurredOn: '2025-02-01', tags: ['гэр'] });
     const m3 = await createMemoryApi(b, image, { title: 'Нуурын аялал', occurredOn: '2025-08-01', tags: ['аялал'] });
-    await apiJson(a, 'PUT', `/memories/${m3.id}/favorite`);
+    expect((await apiAs(a, 'PUT', `/memories/${m3.id}/favorite`)).status).toBe(204);
 
     await partnerA.page.goto('/memories/search');
     await expect(partnerA.page.getByTestId('screen-S-34')).toBeVisible();
-    const cards = partnerA.page.locator('[data-testid^="memory-card-"]');
+    // S-30 нь stack-д нуугдмал байдаг тул зөвхөн S-34 доторх картууд
+    const cards = partnerA.page.getByTestId('screen-S-34').locator('[data-testid^="memory-card-"]').filter({ visible: true });
 
     await partnerA.page.getByTestId('search-tag-аялал').click();
     await expect(cards).toHaveCount(2);

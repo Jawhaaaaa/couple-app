@@ -93,7 +93,7 @@ export const MessageBubble = memo(function MessageBubble({
           <View style={styles.media}>
             {m.media ? (
               <Pressable onPress={() => onOpen?.(m)} accessibilityRole="imagebutton" accessibilityLabel={t('chat.kind.IMAGE')}>
-                <Image
+                <Image accessibilityLabel=""
                   source={{ uri: m.media.urls.md ?? m.media.urls.original }}
                   placeholder={mediaPlaceholder(m.media, 'md')}
                   style={styles.image}

@@ -33,7 +33,12 @@ export function startOutbox(): () => void {
   const onOnline = () => void outbox.flush().catch(() => {});
   const win = typeof window !== 'undefined' && typeof window.addEventListener === 'function' ? window : null;
   win?.addEventListener('online', onOnline);
+  // Апп нээгдэхэд access token refresh-ээр хожуу ирдэг — тэр мөчид дахин илгээнэ
+  const session = useSessionStore.subscribe((state, prev) => {
+    if (state.accessToken && !prev.accessToken) onOnline();
+  });
   return () => {
+    session();
     net();
     app.remove();
     win?.removeEventListener('online', onOnline);

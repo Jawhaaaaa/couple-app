@@ -55,6 +55,9 @@ export default function MemoriesScreen() {
   const [favorite, setFavorite] = useState(false);
   const [hasLocation, setHasLocation] = useState(false);
   const filters: MemoryFilters = { scope, favorite, hasLocation };
+  // Хоосон timeline-д хоосон төлөвийн товч ижил үйлдэлтэй — давхар товч (FAB) харуулахгүй, том фонтод давхцахгүй (AC-DS-05)
+  const timeline = useMemoriesInfinite(filters);
+  const timelineEmpty = view === 'timeline' && !!timeline.data && timeline.data.pages.every((p) => p.items.length === 0);
 
   const setScope = (next: MemoryScopeParam | undefined) => router.setParams({ scope: next === scope ? undefined : next });
   const clearFilters = () => {
@@ -96,7 +99,7 @@ export default function MemoriesScreen() {
         ) : null}
       </View>
       {view === 'timeline' ? <Timeline filters={filters} onClearFilters={clearFilters} /> : view === 'map' ? <PlacesList /> : <RecapList />}
-      <CaptureFab />
+      {timelineEmpty ? null : <CaptureFab />}
     </TabScreen>
   );
 }
@@ -134,7 +137,7 @@ function Shortcuts() {
           style={({ pressed }) => [styles.shortcut, { backgroundColor: colors.surfaceRaised, opacity: pressed ? 0.85 : 1 }]}
         >
           <Icon size={18} color={colors.primary} strokeWidth={iconStroke} />
-          <AppText variant="caption" numberOfLines={1}>
+          <AppText variant="caption" style={styles.shortcutLabel}>
             {label}
           </AppText>
         </Pressable>
@@ -353,6 +356,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   shortcuts: { flexDirection: 'row', gap: spacing.xs },
+  shortcutLabel: { textAlign: 'center' },
   shortcut: {
     flex: 1,
     minHeight: touchTarget + spacing.sm,

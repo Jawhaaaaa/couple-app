@@ -38,16 +38,23 @@ function TabItem({ label, Icon, focused, vertical, onPress, testID }: ItemProps)
   const scale = useSharedValue(1);
   const dot = useSharedValue(focused ? 1 : 0);
   // E2E-д ажиглах (TQ-05): идэвхтэй болсны дараах spring-ийн хугацаанд `playing`
-  const [bouncing, setBouncing] = useState(false);
+  // Идэвхтэй таб mount болох (вэбэд таб солиход bar дахин үүсч болно) ба идэвхжих үед
+  const [bouncing, setBouncing] = useState(focused);
+  const [wasFocused, setWasFocused] = useState(focused);
+  if (focused !== wasFocused) {
+    setWasFocused(focused);
+    if (focused) setBouncing(true);
+  }
+  useEffect(() => {
+    if (!bouncing) return;
+    const timer = setTimeout(() => setBouncing(false), motion.duration.long);
+    return () => clearTimeout(timer);
+  }, [bouncing]);
 
   useEffect(() => {
     // ANIM-10: идэвхтэй дүрс spring-ээр үсэрч, доогуур цэг гулсаж гарна
     if (focused && level === 'full') scale.value = withSequence(withSpring(1.18, motion.springBouncy), withSpring(1, motion.spring));
     dot.value = level === 'off' ? (focused ? 1 : 0) : withSpring(focused ? 1 : 0, motion.spring);
-    if (!focused) return;
-    setBouncing(true);
-    const timer = setTimeout(() => setBouncing(false), motion.duration.long);
-    return () => clearTimeout(timer);
   }, [dot, focused, level, scale]);
 
   const iconStyle = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));

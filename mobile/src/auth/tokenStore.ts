@@ -19,3 +19,8 @@ export async function setRefreshToken(token: string | null | undefined): Promise
 export async function clearRefreshToken(): Promise<void> {
   await SecureStore.deleteItemAsync(KEY);
 }
+
+/** Native-д refresh token-ыг SecureStore-оос шууд шалгадаг тул тэмдэг шаардлагагүй. */
+export function hasSessionHint(): boolean {
+  return true;
+}

@@ -58,7 +58,7 @@ export function CounterOdometer({ value, testID = 'counter-days' }: { value: num
     <AnimatedMoment anim="ANIM-04" playing={rolling} style={styles.row}>
       {(motion: MotionLevel) =>
         rolling ? (
-          <View style={styles.row} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+          <View style={styles.row} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" aria-hidden>
             {[...text].map((d, i) => (
               <RollingDigit key={`${i}-${text.length}`} digit={Number(d)} duration={digitDurations(text.length)[i]} />
             ))}

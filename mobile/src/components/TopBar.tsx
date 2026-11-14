@@ -24,7 +24,7 @@ export function TopBar({ title, unread: unreadProp, onBell, onAvatar }: Props) {
   const t = useT();
   return (
     <View style={styles.row}>
-      <AppText variant="h1" style={styles.title} accessibilityRole="header" numberOfLines={1}>
+      <AppText variant="h1" style={styles.title} accessibilityRole="header">
         {title}
       </AppText>
       <Pressable

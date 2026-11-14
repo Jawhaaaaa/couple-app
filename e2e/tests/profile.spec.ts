@@ -52,7 +52,8 @@ test.describe('S-81 профайл', () => {
     await partnerA.page.getByTestId('profile-city').fill('Дархан');
     const option = partnerA.page.getByTestId('profile-city-option').first();
     const unavailable = partnerA.page.getByTestId('profile-city-unavailable');
-    await expect(option.or(unavailable)).toBeVisible();
+    const empty = partnerA.page.getByTestId('profile-city-empty');
+    await expect(option.or(unavailable).or(empty)).toBeVisible();
     const cityChosen = await option.isVisible();
     if (cityChosen) await option.click();
 
@@ -64,7 +65,7 @@ test.describe('S-81 профайл', () => {
     expect(Date.now() - savedAt).toBeLessThanOrEqual(5_000 + 1_000);
     const couple = await apiJson<{ partner: { callName: string | null; city: { name: string } | null } }>(b, 'GET', '/couple');
     expect(couple.partner.callName).toBe(callName);
-    if (cityChosen) expect(couple.partner.city?.name).toContain('Дархан');
+    if (cityChosen) expect(couple.partner.city?.name).toBe('Дархан');
 
     // > 10 MB — тайлбартай татгалзал
     await pickFile(partnerA.page, { name: 'huge.jpg', mimeType: 'image/jpeg', buffer: Buffer.alloc(10 * 1024 * 1024 + 1, 1) });

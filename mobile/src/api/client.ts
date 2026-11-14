@@ -1,6 +1,6 @@
 import createClient, { type Middleware } from 'openapi-fetch';
 
-import { clearRefreshToken, getRefreshToken, setRefreshToken, usesCookieRefresh } from '@/auth/tokenStore';
+import { clearRefreshToken, getRefreshToken, hasSessionHint, setRefreshToken, usesCookieRefresh } from '@/auth/tokenStore';
 import { API_BASE } from '@/config';
 import { useSessionStore } from '@/stores/sessionStore';
 import { usePrefsStore } from '@/stores/prefsStore';
@@ -42,6 +42,8 @@ export function createApiClient({ baseUrl = API_BASE, fetch: fetchFn = globalThi
   async function doRefresh(): Promise<string | null> {
     const refreshToken = usesCookieRefresh ? null : await getRefreshToken();
     if (!usesCookieRefresh && !refreshToken) return null;
+    // Вэб: өмнө нь нэвтэрч байгаагүй бол cookie байхгүй — дэмий 401 хүсэлт гаргахгүй
+    if (usesCookieRefresh && !hasSessionHint()) return null;
     const res = await fetchFn(`${baseUrl}/auth/refresh`, {
       method: 'POST',
       credentials: 'include',

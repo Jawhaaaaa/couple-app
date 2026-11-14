@@ -75,7 +75,7 @@ export function MilestoneHorizon({ limit = 2 }: { limit?: number }) {
                   {formatDate(o.nextOn, dateFormat)}
                 </AppText>
               </View>
-              <AppText variant="bodyStrong" numberOfLines={2}>
+              <AppText variant="bodyStrong">
                 {o.title}
               </AppText>
               <AppText variant="h3" testID={`horizon-left-${o.occasionKey}`}>

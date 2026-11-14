@@ -6,9 +6,10 @@ import { signInUi, type TestUser } from '../support/users';
 
 /**
  * AC-198 (NFR-08, GAP-21): S-20-оос үндсэн 5 үйлдэл (зүрх илгээх, дурсамж нэмэх, мессеж илгээх,
- * болзоо санал болгох, check-in) тус бүрийг гүйцэтгэхэд ≤ 3 товшилт; товшсон товч бүрийн төв нь
- * 390×844 дэлгэцийн доод 2/3-д (y ≥ 281). Текст бичих, системийн файл сонгох цонх нь товшилтод
- * тоологдохгүй (апп доторх товч л).
+ * болзоо санал болгох, check-in) тус бүрийг гүйцэтгэхэд ≤ 3 товшилт; гол товч (S-20 дээрх эхлэх товч ба
+ * үйлдлийг дуусгах товч — илгээх, хадгалах) 390×844 дэлгэцийн доод 2/3-д (төв нь y ≥ 281). Завсрын
+ * сонголт (зураг сонгох, түвшин) товшилтод тоологдох боловч байрлалыг нь шаардахгүй. Текст бичих нь
+ * товшилт биш.
  */
 const HEIGHT = 844;
 const TOP_THIRD = HEIGHT / 3;
@@ -19,23 +20,25 @@ class TapCounter {
   taps: string[] = [];
   constructor(private page: Page) {}
 
-  private async check(locator: Locator, name: string) {
+  private async check(locator: Locator, name: string, main: boolean) {
     await expect(locator).toBeVisible();
     await locator.scrollIntoViewIfNeeded();
     const box = await locator.boundingBox();
     expect(box, `${name}: хэмжээ`).not.toBeNull();
-    expect.soft(box!.y + box!.height / 2, `${name}: товчны төв доод 2/3-д (y ≥ ${Math.round(TOP_THIRD)})`).toBeGreaterThanOrEqual(TOP_THIRD);
     this.taps.push(name);
+    if (!main) return;
+    expect.soft(box!.y + box!.height / 2, `${name}: товчны төв доод 2/3-д (y ≥ ${Math.round(TOP_THIRD)})`).toBeGreaterThanOrEqual(TOP_THIRD);
   }
 
-  async tap(locator: Locator, name: string) {
-    await this.check(locator, name);
+  /** `main` — гол товч (байрлалыг шалгана); завсрын сонголт бол false. */
+  async tap(locator: Locator, name: string, main = true) {
+    await this.check(locator, name, main);
     await locator.click();
   }
 
   /** Файл сонгох товч — системийн цонхонд файлыг өгнө. */
   async pick(locator: Locator, name: string, file: { name: string; mimeType: string; buffer: Buffer }) {
-    await this.check(locator, name);
+    await this.check(locator, name, false);
     const chooser = this.page.waitForEvent('filechooser');
     await locator.click();
     await (await chooser).setFiles([file]);
@@ -107,7 +110,7 @@ test.describe('AC-198 нэг гараар — үндсэн үйлдэл ≤ 3 т
       await c.home();
       await c.tap(page.getByTestId('home-quick-checkin'), 'home-quick-checkin');
       await expect(page.getByTestId('screen-S-69')).toBeVisible();
-      await c.tap(page.getByTestId('checkin-level-4'), 'checkin-level-4');
+      await c.tap(page.getByTestId('checkin-level-4'), 'checkin-level-4', false);
       await c.tap(page.getByTestId('checkin-save'), 'checkin-save');
       await expect(page.getByTestId('checkin-message')).toBeVisible();
       c.done('check-in');

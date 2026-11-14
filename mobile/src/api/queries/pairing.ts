@@ -90,7 +90,9 @@ export function useCurrentPairing({ poll = false }: { poll?: boolean } = {}) {
 
 export function useCoupleQuery({ enabled = true }: { enabled?: boolean } = {}) {
   const accessToken = useSessionStore((s) => s.accessToken);
-  return useQuery({ queryKey: ['couple'], queryFn: fetchCouple, enabled: !!accessToken && enabled });
+  // Дэлгэц нээгдэх бүрд серверээс шалгана: persist кэш (1 с throttle) дахин ачаалахад хамтрагчийн сүүлийн
+  // саналыг (эхэлсэн өдөр, сэдэв — AC-65, AC-138) алгасаж болзошгүй
+  return useQuery({ queryKey: ['couple'], queryFn: fetchCouple, enabled: !!accessToken && enabled, refetchOnMount: 'always' });
 }
 
 export function useInviteLookup(code: string | null) {

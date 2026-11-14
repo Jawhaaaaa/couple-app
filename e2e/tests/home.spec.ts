@@ -38,7 +38,7 @@ test.describe('S-20 нүүр', () => {
       await expect(page.getByTestId('anim-ANIM-04')).toBeAttached();
       // Одометр ≤ 900 мс эргэлдээд энгийн бичвэр болно
       await expect(page.getByTestId('counter-days')).toHaveText('745', { timeout: 2_000 });
-      await expect(page.getByTestId('home-counter')).toHaveAttribute('aria-label', /745 хоног хамтдаа/);
+      await expect(page.getByTestId('home-counter')).toHaveAccessibleName(/745\s*хоног хамтдаа/);
       await expect(page.getByTestId('home-counter-since')).toHaveText('2024.10.24 өдрөөс хойш');
     }
 

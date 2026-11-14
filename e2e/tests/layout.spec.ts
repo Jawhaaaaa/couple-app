@@ -1,9 +1,21 @@
 import { expect, test } from '@playwright/test';
 
+import { linkedCouple } from '../support/couple';
+import { signInUi, type TestUser } from '../support/users';
+
 /** AC-192: утас (390×844) — доод 5 таб; таблет — доод таб; вэб ≥ 1024 px — зүүн навигаци. */
 const TABS = ['Нүүр', 'Дурсамж', 'Чат', 'Төлөвлөгөө', 'Хамтдаа'];
 
 test.describe('AC-192 өргөнөөр layout', () => {
+  let a: TestUser;
+  test.beforeAll(async () => {
+    [a] = await linkedCouple('Бат', 'Ану', 'layout');
+  });
+  // Табууд нэвтэрсэн хэрэглэгчид л (сессгүй бол S-03 руу, AC-56)
+  test.beforeEach(async ({ page }) => {
+    await signInUi(page, a);
+  });
+
   test('утсанд доод навигаци 5 таб', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('/home');

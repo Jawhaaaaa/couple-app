@@ -20,7 +20,7 @@ export function UserAvatar({ uri, label, size = 72, testID }: Props) {
   return (
     <View style={[styles.frame, frame]} accessibilityRole="image" accessibilityLabel={label} testID={testID}>
       {uri ? (
-        <Image source={{ uri }} style={[styles.image, { borderRadius: radius.pill }]} contentFit="cover" accessible={false} />
+        <Image accessibilityLabel="" source={{ uri }} style={[styles.image, { borderRadius: radius.pill }]} contentFit="cover" accessible={false} />
       ) : (
         <CircleUser size={size * 0.55} color={colors.textMuted} strokeWidth={iconStroke} />
       )}

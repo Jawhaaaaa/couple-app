@@ -61,7 +61,7 @@ export function ResonanceCard() {
           : t('together.hub.partnerNoMood', { name })}
       </AppText>
       {partnerToday?.note ? (
-        <AppText variant="quote" numberOfLines={2}>
+        <AppText variant="quote">
           {partnerToday.note}
         </AppText>
       ) : null}

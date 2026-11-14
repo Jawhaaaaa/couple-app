@@ -106,7 +106,7 @@ describe('S-20 нүүр', () => {
   it('AC-13 тоолуур «745 хоног хамтдаа», эхэлсэн өдөр; товшвол S-21', async () => {
     await renderHome();
     await waitFor(() => expect(screen.getByTestId('counter-days')).toHaveTextContent('745'));
-    expect(screen.getByTestId('home-counter')).toHaveProp('accessibilityLabel', '745 хоног хамтдаа, 2024.10.24 өдрөөс хойш');
+    expect(screen.getByTestId('home-counter')).toHaveProp('accessibilityLabel', '745 хоног хамтдаа 2024.10.24 өдрөөс хойш');
     expect(screen.getByTestId('home-counter-since')).toHaveTextContent('2024.10.24 өдрөөс хойш');
     expect(getSpy).toHaveBeenCalledWith('/dashboard', expect.objectContaining({ params: expect.anything() }));
     await fireEvent.press(screen.getByTestId('home-counter'));

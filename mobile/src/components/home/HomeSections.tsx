@@ -183,7 +183,7 @@ export function RecentMemoriesSection({ items }: { items: MemorySummary[] }) {
               style={({ pressed }) => [styles.memory, { backgroundColor: colors.surfaceRaised, opacity: pressed ? 0.85 : 1 }]}
             >
               {thumb ? (
-                <Image source={{ uri: thumb }} placeholder={mediaPlaceholder(m.cover, 'sm')} style={styles.thumb} contentFit="cover" accessible={false} />
+                <Image accessibilityLabel="" source={{ uri: thumb }} placeholder={mediaPlaceholder(m.cover, 'sm')} style={styles.thumb} contentFit="cover" accessible={false} />
               ) : (
                 <View style={[styles.thumb, styles.thumbEmpty]}>
                   <Images size={28} color={colors.textMuted} strokeWidth={iconStroke} />

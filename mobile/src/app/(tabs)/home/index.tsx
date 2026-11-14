@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
 import { MessageCircleHeart } from 'lucide-react-native';
 import { type ReactNode, useState } from 'react';
-import { Pressable, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import { Platform, Pressable, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 
 import { useMeQuery } from '@/api/queries/bootstrap';
 import { usePartnerName } from '@/api/queries/couple';
@@ -156,7 +156,8 @@ function CounterBlock({ counter }: { counter: Dashboard['counter'] }) {
     <Pressable
       onPress={() => router.push('/home/counter')}
       accessibilityRole="button"
-      accessibilityLabel={t('home.counter.a11y', { count: counter.days, date: since })}
+      // Вэбэд нэр нь харагдах бичвэрээс (WCAG 2.5.3 — нэр ба бичвэр зөрөхгүй); native-д одометр эргэх үеийн нэр
+      accessibilityLabel={Platform.OS === 'web' ? undefined : t('home.counter.a11y', { count: counter.days, date: since })}
       accessibilityHint={t('home.counter.hint')}
       testID="home-counter"
       style={({ pressed }) => [styles.counter, { backgroundColor: colors.surface, borderColor: colors.border, opacity: pressed ? 0.9 : 1 }]}

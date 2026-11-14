@@ -2,7 +2,9 @@ import { expect, test } from '../fixtures/twoPartners';
 import { startOAuthIdp } from '../mocks/oauthIdp';
 import { startOpenMeteoMock } from '../mocks/openMeteo';
 import { resetServerClock, setServerClock } from '../support/clock';
+import { linkedCouple } from '../support/couple';
 import { API_BASE, API_URL, MAILPIT_URL } from '../support/env';
+import { signInUi } from '../support/users';
 
 /**
  * E2E орчны суурь (T-16): апп нээгдэх, хоёр context, backend-ийн тестийн endpoint,
@@ -10,7 +12,10 @@ import { API_BASE, API_URL, MAILPIT_URL } from '../support/env';
  */
 test.describe('E2E орчин', () => {
   test('апп-ын shell хоёр context-д тусдаа нээгдэнэ', async ({ partnerA, partnerB }) => {
-    for (const { page } of [partnerA, partnerB]) {
+    // Табууд нэвтэрсэн хэрэглэгчид л (сессгүй бол S-03 руу, AC-56)
+    const users = await linkedCouple(partnerA.name, partnerB.name, 'infra');
+    for (const [i, { page }] of [partnerA, partnerB].entries()) {
+      await signInUi(page, users[i]);
       await page.goto('/home');
       await expect(page.getByTestId('tab-home')).toBeVisible();
       await expect(page.getByTestId('screen-S-20')).toBeVisible();

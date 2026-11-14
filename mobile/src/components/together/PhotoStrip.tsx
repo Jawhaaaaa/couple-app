@@ -60,7 +60,7 @@ export function PhotoStrip({ media, onChange, disabled, testID = 'photo-strip' }
       <View style={styles.row}>
         {media.map((m) => (
           <View key={m.key} style={[styles.thumb, { borderColor: colors.border, backgroundColor: colors.surfaceRaised }]} testID={`${testID}-item`}>
-            {m.previewUri ? <Image source={{ uri: m.previewUri }} style={styles.image} contentFit="cover" accessible={false} /> : null}
+            {m.previewUri ? <Image accessibilityLabel="" source={{ uri: m.previewUri }} style={styles.image} contentFit="cover" accessible={false} /> : null}
             {!disabled ? (
               <Pressable
                 onPress={() => onChange(media.filter((x) => x.key !== m.key))}

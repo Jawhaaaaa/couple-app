@@ -139,7 +139,8 @@ const chatScenario: Scenario = {
     await A.page.getByTestId(`message-${m.clientMessageId}`).click({ delay: 600 });
     await expectAnim(A.page, 'ANIM-07', { reduced, within: 'message-actions' });
     await A.page.getByTestId('message-react-LOVE').click();
-    await expect(A.page.getByTestId(`message-${m.clientMessageId}`).getByTestId('message-reactions')).toBeVisible();
+    // Реакцын мөр нь бөмбөлгийн (testID) хажууд — мөрийн эцэг элемент дотор
+    await expect(A.page.getByTestId(`message-${m.clientMessageId}`).locator('xpath=..').getByTestId('message-reactions')).toBeVisible();
 
     // ANIM-01: чатын зүрх → B-д ANIM-02
     await clearAnims(A.page);

@@ -77,10 +77,19 @@ public class OpenMeteoClient {
         return new Forecast(current.path("temperature_2m").asDouble(), current.path("weather_code").asInt(), daily);
     }
 
+    /**
+     * Open-Meteo-гийн `language=mn` нь хотын нэрийг уламжлалт монгол бичгээр («ᠳᠠᠷᠬᠠᠨ») буцааж, кирилл
+     * («Дархан») хайлтыг олдоггүй (2026-11-14-нд шалгав). Монгол UI-д кирилл нэр хэрэгтэй тул `ru`
+     * (Дархан, Улаанбаатар, Токио — монгол кирилл бичлэгтэй ижил).
+     */
+    static String geocodingLanguage(String locale) {
+        return "en".equals(locale) ? "en" : "ru";
+    }
+
     public List<City> searchCities(String query, String locale) {
         String url = strip(properties.geocodingBaseUrl()) + "/v1/search?name="
                 + URLEncoder.encode(query, StandardCharsets.UTF_8) + "&count=10&format=json&language="
-                + ("en".equals(locale) ? "en" : "mn");
+                + geocodingLanguage(locale);
         List<City> out = new ArrayList<>();
         for (JsonNode r : get(url).path("results")) {
             if (!r.hasNonNull("latitude") || !r.hasNonNull("longitude") || !r.hasNonNull("timezone")) {

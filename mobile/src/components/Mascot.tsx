@@ -92,7 +92,7 @@ export function Mascot({ name = 'bombolog', size = 120, beltColor: beltProp, pos
       testID={testID ?? `mascot-${name}`}
     >
       <Animated.View style={[StyleSheet.absoluteFill, bodyStyle]}>
-        <Image source={BEAR} style={{ width: size, height: size }} contentFit="contain" />
+        <Image accessibilityLabel="" source={BEAR} style={{ width: size, height: size }} contentFit="contain" />
         {/* Нүд ирмэх давхарга — нүдний байрлалд зураасан зовхи */}
         <Animated.View pointerEvents="none" style={[styles.lids, { top: size * 0.4 }, lidStyle]}>
           <View style={[styles.lid, { width: eye * 1.6, height: eye * 0.45, backgroundColor: colors.onPrimary, left: size * 0.33 }]} />

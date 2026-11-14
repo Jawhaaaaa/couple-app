@@ -58,7 +58,7 @@ export function EditorMediaRow({ media, upload, index, onAltChange, onRemove }: 
       <View style={styles.row}>
         <View style={[styles.thumb, { backgroundColor: colors.surfaceRaised }]}>
           {media.previewUri ? (
-            <Image source={{ uri: media.previewUri }} style={styles.thumbImage} contentFit="cover" accessible={false} />
+            <Image accessibilityLabel="" source={{ uri: media.previewUri }} style={styles.thumbImage} contentFit="cover" accessible={false} />
           ) : (
             <Icon size={24} color={colors.textMuted} strokeWidth={iconStroke} />
           )}

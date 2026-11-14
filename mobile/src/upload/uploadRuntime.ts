@@ -5,6 +5,7 @@ import { AppState } from 'react-native';
 
 import { isOfflineState } from '@/hooks/useNetworkStatus';
 import { kvStore } from '@/offline/storage';
+import { useSessionStore } from '@/stores/sessionStore';
 
 import { blobStore } from './blobStore';
 import { type UploadItem, UploadQueue } from './uploadQueue';
@@ -30,9 +31,18 @@ export function startUploadQueue(): () => void {
   const app = AppState.addEventListener('change', (s) => {
     if (s === 'active') resume();
   });
+  // Апп нээгдэхэд access token refresh-ээр хожуу ирдэг — тэр мөчид дахин оролдоно (дахин ачаалсны дараа AC-20)
+  const session = useSessionStore.subscribe((state, prev) => {
+    if (state.accessToken && !prev.accessToken) resume();
+  });
+  // Вэб: `online` үйл явдал (FR-19.5) — NetInfo вэбэд түүн дээр заавал дуудагддаггүй
+  const win = typeof window !== 'undefined' && typeof window.addEventListener === 'function' ? window : null;
+  win?.addEventListener('online', resume);
   return () => {
     net();
     app.remove();
+    session();
+    win?.removeEventListener('online', resume);
   };
 }
 

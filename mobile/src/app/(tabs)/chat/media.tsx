@@ -44,7 +44,7 @@ export default function ChatMediaScreen() {
     if (kind === 'IMAGE') {
       return (
         <Pressable onPress={() => openContext(item)} accessibilityRole="imagebutton" accessibilityLabel={meta} testID={`media-${item.id}`}>
-          <Image
+          <Image accessibilityLabel=""
             source={{ uri: item.media?.urls.sm ?? item.media?.urls.original }}
             placeholder={item.media?.blurhash ? { blurhash: item.media.blurhash } : undefined}
             style={{ width: tile, height: tile, borderRadius: radius.input / 2 }}

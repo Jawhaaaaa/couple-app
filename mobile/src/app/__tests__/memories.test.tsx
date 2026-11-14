@@ -91,15 +91,22 @@ describe('S-30 Дурсамжийн timeline', () => {
     expect(screen.getAllByTestId('anim-ANIM-13')).toHaveLength(1);
   });
 
-  it('ANIM-11 хоосон төлөв → S-32 (Capture Moment); FAB ч мөн адил', async () => {
+  it('ANIM-11 хоосон төлөв → S-32 (Capture Moment); давхар FAB харуулахгүй (AC-DS-05)', async () => {
     pages.all = { items: [], nextCursor: null };
     await renderWithClient(<MemoriesScreen />);
     await waitFor(() => expect(screen.getByTestId('anim-ANIM-11')).toBeTruthy());
     expect(screen.getByText('Та хоёрын анхны дурсамж энд хадгалагдана.')).toBeTruthy();
     await fireEvent.press(screen.getByTestId('state-empty-action'));
     expect(router.push).toHaveBeenCalledWith('/memory-editor');
+    expect(screen.queryByTestId('memories-fab')).toBeNull();
+  });
+
+  it('дурсамжтай үед FAB → S-32', async () => {
+    pages.all = { items: [summary('old')], nextCursor: null };
+    await renderWithClient(<MemoriesScreen />);
+    await waitFor(() => expect(screen.getByTestId('memories-fab')).toBeTruthy());
     await fireEvent.press(screen.getByTestId('memories-fab'));
-    expect(router.push).toHaveBeenCalledTimes(2);
+    expect(router.push).toHaveBeenCalledWith('/memory-editor');
   });
 
   it('AC-86 «Газрын зураг» таб — газруудын жагсаалт тоотой; «Жилийн тойм» → S-38', async () => {

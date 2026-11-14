@@ -34,7 +34,7 @@ export function SegmentedTabs<K extends string>({ options, value, onChange, test
             testID={testID ? `${testID}-${o.key}` : undefined}
             style={[styles.tab, selected && { backgroundColor: colors.surface, borderColor: colors.border }]}
           >
-            <AppText variant="label" color={selected ? 'text' : 'textMuted'} numberOfLines={1}>
+            <AppText variant="label" color={selected ? 'text' : 'textMuted'} style={styles.label}>
               {o.label}
             </AppText>
           </Pressable>
@@ -45,9 +45,12 @@ export function SegmentedTabs<K extends string>({ options, value, onChange, test
 }
 
 const styles = StyleSheet.create({
-  root: { flexDirection: 'row', borderRadius: radius.pill, padding: spacing.xxs, gap: spacing.xxs },
+  // Том фонтод (AC-DS-05) нэг мөрөнд багтахгүй бол таб дараагийн мөр рүү орно — бичвэр давхцахгүй
+  root: { flexDirection: 'row', flexWrap: 'wrap', borderRadius: radius.pill, padding: spacing.xxs, gap: spacing.xxs },
   tab: {
-    flex: 1,
+    flexGrow: 1,
+    flexShrink: 0,
+    flexBasis: 'auto',
     minHeight: touchTarget,
     alignItems: 'center',
     justifyContent: 'center',
@@ -56,4 +59,6 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     paddingHorizontal: spacing.xs,
   },
+  // Мөр таслахгүй — том фонтод (AC-DS-05) хоёр мөр болно
+  label: { textAlign: 'center' },
 });
