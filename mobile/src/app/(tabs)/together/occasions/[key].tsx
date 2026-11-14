@@ -207,6 +207,7 @@ function GiftIdeas({ occasionKey }: { occasionKey: string }) {
             onPress={() => toggle.mutate({ id: g.id, done: !g.done })}
             accessibilityRole="checkbox"
             accessibilityState={{ checked: g.done }}
+            aria-checked={g.done}
             accessibilityLabel={g.text}
             style={[styles.box, { borderColor: g.done ? colors.primary : colors.border, backgroundColor: g.done ? colors.primary : 'transparent' }]}
             testID={`gift-toggle-${g.id}`}

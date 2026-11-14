@@ -24,6 +24,7 @@ import {
 import { LongDistanceBlock } from '@/components/home/LongDistance';
 import { PersonCardView } from '@/components/home/PersonCardView';
 import { QuestionTeaser } from '@/components/home/QuestionTeaser';
+import { QuickActions } from '@/components/home/QuickActions';
 import { SurveyCard } from '@/components/home/SurveyCard';
 import { UnseenSignalsCard } from '@/components/home/UnseenSignalsCard';
 import { Mascot } from '@/components/Mascot';
@@ -123,6 +124,7 @@ function CoupleBody({ data, now }: { data: Dashboard; now: number }) {
           {t('home.signalsToday', { sent: data.signalsToday.sent, received: data.signalsToday.received })}
         </AppText>
       </Card>
+      <QuickActions />
       <QuestionTeaser partnerName={name} />
       <NextDateSection plan={data.nextDate} now={now} />
       <UpcomingSection items={data.upcoming} />

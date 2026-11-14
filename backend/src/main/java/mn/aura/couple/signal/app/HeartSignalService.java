@@ -100,7 +100,7 @@ public class HeartSignalService {
         couples.partnerIn(ctx.spaceId(), ctx.userId()).ifPresent(partner -> {
             events.publishEvent(RealtimeEvent.of("signal.received", ctx.userId(), List.of(partner), dto));
             events.publishEvent(new Notify(partner, ctx.spaceId(), ctx.userId(), notificationType(kind),
-                    Map.of("partner", dto.getSender().getDisplayName()), "/home"));
+                    notifyParams(dto.getSender().getDisplayName(), clean), "/home"));
         });
         return dto;
     }
@@ -181,6 +181,11 @@ public class HeartSignalService {
         s.text(text);
         s.seenAt(seen == null ? null : OffsetDateTime.ofInstant(seen, ZoneOffset.UTC));
         return s;
+    }
+
+    /** «Чамайг бодож байна»-гийн текст мэдэгдлийн жагсаалтад харагдана (AC-77). */
+    private static Map<String, String> notifyParams(String partner, String text) {
+        return text == null ? Map.of("partner", partner) : Map.of("partner", partner, "quote", text); // NotificationTexts.QUOTE
     }
 
     private static String notificationType(SignalKind kind) {

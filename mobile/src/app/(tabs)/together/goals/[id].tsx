@@ -211,6 +211,7 @@ function GoalBody({ goal }: { goal: Goal }) {
                   disabled={busy === `step-${s.id}`}
                   accessibilityRole="checkbox"
                   accessibilityState={{ checked: s.done }}
+                  aria-checked={s.done}
                   accessibilityLabel={s.title}
                   testID={`goal-step-toggle-${s.id}`}
                   style={[styles.check, { borderColor: s.done ? colors.success : colors.border, backgroundColor: s.done ? colors.success : 'transparent' }]}

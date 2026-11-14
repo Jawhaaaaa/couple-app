@@ -24,13 +24,14 @@ test.describe('Чатын цэс, хайлт, pin', () => {
     await expect(result.getByTestId('search-highlight')).toHaveText(/Тэрэлж/i);
     await result.click();
     await expect(partnerA.page.getByTestId('chat-back-to-latest')).toBeVisible();
-    await expect(partnerA.page.getByText('Бямба гарагт Тэрэлж явах уу?')).toBeVisible();
+    // Хайлтын дэлгэц stack-д нуугдмал үлддэг тул харагдаж буй мессежийг л
+    await expect(partnerA.page.getByTestId(`message-${target.clientMessageId}`).filter({ visible: true })).toBeVisible();
 
     const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Ulaanbaatar' }).format(new Date());
     await partnerA.page.goto('/chat/search');
     await partnerA.page.getByTestId('chat-jump-input').fill(today);
     await partnerA.page.getByTestId('chat-jump').click();
-    await expect(partnerA.page.getByText('дүүргэгч 0')).toBeVisible();
+    await expect(partnerA.page.getByTestId('message-text').filter({ hasText: 'дүүргэгч 0', visible: true })).toBeVisible();
   });
 
   test('AC-90 pin толгойд, «Бүх pin» жагсаалтад; хамтрагч хасаж болно', async ({ partnerA, partnerB }) => {

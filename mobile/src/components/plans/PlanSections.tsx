@@ -129,6 +129,7 @@ function ChecklistRow({ item, by, onToggle, onRemove, busy }: { item: ChecklistI
         disabled={busy}
         accessibilityRole="checkbox"
         accessibilityState={{ checked: item.done, disabled: busy }}
+        aria-checked={item.done}
         accessibilityLabel={item.text}
         testID={`checklist-toggle-${item.id}`}
         style={[styles.box, { borderColor: item.done ? colors.primary : colors.border, backgroundColor: item.done ? colors.primary : 'transparent' }]}

@@ -24,6 +24,8 @@ import org.springframework.stereotype.Component;
 public class NotificationTexts {
 
     public static final String RESOURCE = "content/notifications.json";
+    /** Параметр: хэрэглэгчийн бичсэн богино мөр — байвал мэдэгдлийн бие нь «ишлэл» болно. */
+    public static final String QUOTE = "quote";
 
     public record Text(String title, String body) {
     }
@@ -79,7 +81,10 @@ public class NotificationTexts {
         Variant v = Optional.ofNullable(byId.get(variantId))
                 .orElseThrow(() -> new IllegalArgumentException("Мэдэгдлийн хувилбар алга: " + variantId));
         Text t = v.byLocale().getOrDefault(locale, v.byLocale().get("mn"));
-        return new Text(fill(t.title(), params), fill(t.body(), params));
+        // Хэрэглэгчийн бичсэн мөр («Чамайг бодож байна»-гийн текст, AC-77) — бие нь тэр ишлэл болно
+        String quote = params.get(QUOTE);
+        String body = quote == null || quote.isBlank() ? fill(t.body(), params) : "«" + quote + "»";
+        return new Text(fill(t.title(), params), body);
     }
 
     /**

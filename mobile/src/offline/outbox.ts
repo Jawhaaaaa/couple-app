@@ -26,6 +26,9 @@ const REJECTED_KEY = 'aura.outbox.rejected.v1';
 
 export class Outbox {
   private flushing: Promise<number> | null = null;
+  private again = false;
+  /** Хадгалалтын өөрчлөлтүүдийг дараалуулна: flush-ийн хуучин хуулбар зэрэг нэмсэн зүйлийг дарахгүй. */
+  private chain: Promise<unknown> = Promise.resolve();
   private listeners = new Set<(items: OutboxItem[]) => void>();
 
   constructor(
@@ -53,6 +56,17 @@ export class Outbox {
     this.listeners.forEach((l) => l(items));
   }
 
+  /** Одоогийн дарааллыг уншиж `fn`-ээр өөрчилнө — бүх өөрчлөлт нэг нэгээрээ (read-modify-write уралдаангүй). */
+  private update(fn: (items: OutboxItem[]) => OutboxItem[]): Promise<OutboxItem[]> {
+    const next = this.chain.then(async () => {
+      const items = fn(await this.items());
+      await this.save(items);
+      return items;
+    });
+    this.chain = next.catch(() => undefined);
+    return next;
+  }
+
   /** Дараалалд нэмнэ. `clientId` өгөөгүй бол UUIDv7 үүсгэж биед ч оруулна. */
   async enqueue(input: { method: OutboxItem['method']; path: string; body?: Record<string, unknown>; clientId?: string }): Promise<OutboxItem> {
     const clientId = input.clientId ?? (input.body?.clientId as string | undefined) ?? uuidv7();
@@ -64,8 +78,7 @@ export class Outbox {
       createdAt: new Date().toISOString(),
       attempts: 0,
     };
-    const items = await this.items();
-    if (!items.some((i) => i.clientId === clientId)) await this.save([...items, item]);
+    await this.update((items) => (items.some((i) => i.clientId === clientId) ? items : [...items, item]));
     return item;
   }
 
@@ -75,19 +88,30 @@ export class Outbox {
    * (`retry`) зогсож дарааллыг хадгална — дараалал алдагдахгүй (AC-28).
    */
   flush(): Promise<number> {
-    if (!this.flushing) {
-      this.flushing = this.run().finally(() => {
-        this.flushing = null;
-      });
+    if (this.flushing) {
+      // Явж буй flush дуусах дөхсөн байж болно — дуусмагц дахин нэг эргэлт хийнэ
+      this.again = true;
+      return this.flushing;
     }
+    this.flushing = (async () => {
+      let sent = 0;
+      do {
+        this.again = false;
+        sent += await this.run();
+      } while (this.again);
+      return sent;
+    })().finally(() => {
+      this.flushing = null;
+    });
     return this.flushing;
   }
 
   private async run(): Promise<number> {
     let sent = 0;
     for (;;) {
-      const [head, ...rest] = await this.items();
+      const [head] = await this.items();
       if (!head) return sent;
+      const others = (items: OutboxItem[]) => items.filter((i) => i.clientId !== head.clientId);
       let result: SendResult;
       try {
         result = await this.send(head);
@@ -95,7 +119,7 @@ export class Outbox {
         result = 'retry';
       }
       if (result === 'retry') {
-        await this.save([{ ...head, attempts: head.attempts + 1 }, ...rest]);
+        await this.update((items) => items.map((i) => (i.clientId === head.clientId ? { ...i, attempts: i.attempts + 1 } : i)));
         return sent;
       }
       if (result === 'rejected') {
@@ -104,7 +128,8 @@ export class Outbox {
       } else {
         sent += 1;
       }
-      await this.save(rest);
+      // Илгээх хооронд дараалалд нэмэгдсэн зүйлс хэвээр үлдэнэ
+      await this.update(others);
     }
   }
 }

@@ -212,6 +212,7 @@ function LocalePicker({ value, onChange }: { value: Locale; onChange: (locale: L
               accessibilityRole="radio"
               accessibilityLabel={o.label}
               accessibilityState={{ checked: selected }}
+              aria-checked={selected}
               testID={`settings-locale-${o.locale}`}
               style={[
                 styles.segmentItem,

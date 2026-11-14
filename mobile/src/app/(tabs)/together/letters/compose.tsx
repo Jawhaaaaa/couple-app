@@ -242,6 +242,7 @@ function TemplateCard({ template, selected, onPress }: { template: LetterTemplat
       onPress={onPress}
       accessibilityRole="radio"
       accessibilityState={{ selected }}
+      aria-checked={selected}
       accessibilityLabel={t(`letters.template.${template}`)}
       testID={`letter-template-${template}`}
       style={[styles.template, { backgroundColor: paper.bg, borderColor: selected ? paper.accent : paper.border, borderWidth: selected ? 2 : 1 }]}

@@ -17,7 +17,7 @@ test('AC-211 автомат AC бүр ID-аараа тесттэй', async ({}, 
   const acs = parseSpecAcs(readFileSync(`${REPO}docs/LAB-2/spec.md`, 'utf8'));
   expect(acs.length).toBeGreaterThan(200);
   const automated = acs.filter((a) => a.automated);
-  const files = listTestFiles(REPO, ['backend/src/test', 'mobile/src', 'e2e/tests', 'deploy/tests']);
+  const files = listTestFiles(REPO, ['backend/src/test', 'mobile/src', 'e2e/tests', 'deploy/tests', 'load']);
   const map = coverage(automated, files, REPO);
   const missing = automated.filter((a) => (map.get(a.id) ?? []).length === 0).map((a) => `${a.id} (${a.method})`);
   const report = {

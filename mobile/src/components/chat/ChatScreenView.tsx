@@ -481,7 +481,14 @@ export function ChatScreenView() {
   else if (inHistory && history.isError) content = <ScreenState kind="error" onRetry={() => void history.refetch()} />;
   else if (chat.isLoading && rows.length === 0) content = <ScreenState kind="loading" rows={6} />;
   else if (chat.isError && rows.length === 0) content = <ScreenState kind="error" onRetry={() => void chat.refetch()} />;
-  else if (rows.length === 0) content = <ScreenState kind="empty" text={empty.text} actionLabel={empty.action} onAction={() => inputRef.current?.focus()} />;
+  else if (rows.length === 0)
+    content = (
+      <>
+        <ScreenState kind="empty" text={empty.text} actionLabel={empty.action} onAction={() => inputRef.current?.focus()} />
+        {/* ANIM-08: хоосон чатад ч хамтрагч бичиж байгааг харуулна (эхний мессежийн өмнө) */}
+        {partnerTyping ? <TypingHearts name={t('chat.typing', { name: partner })} /> : null}
+      </>
+    );
   else
     content = (
       <FlatList

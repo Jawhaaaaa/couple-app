@@ -14,7 +14,11 @@ test.describe('Идэвхтэй төхөөрөмжүүд', () => {
     await expect(partnerA.page.getByTestId('screen-S-84')).toBeVisible();
     const revoke = partnerA.page.locator('[data-testid^="device-revoke-"]');
     await expect(revoke.first()).toBeVisible();
-    await revoke.first().click();
+    // createVerifiedUser-ийн API session ба B — одоогийнхоос бусдыг бүгдийг гаргана
+    for (let n = await revoke.count(); n > 0; n -= 1) {
+      await revoke.first().click();
+      await expect(revoke).toHaveCount(n - 1);
+    }
 
     await partnerB.page.reload();
     await expect(partnerB.page).toHaveURL(/login/, { timeout: 15_000 });

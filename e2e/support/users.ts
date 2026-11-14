@@ -60,6 +60,23 @@ export async function createVerifiedUser(displayName: string, prefix = 'e2e'): P
   return { id: tokens.user.id, email, password: PASSWORD, displayName, accessToken: tokens.accessToken };
 }
 
+/**
+ * Дахин нэвтэрч шинэ access token авна (серверийн цагийг 15 минутаас их урагшлуулсны дараа хуучин
+ * token хүчингүй болдог).
+ */
+export async function reloginApi(user: TestUser): Promise<TestUser> {
+  const tokens = await json<{ accessToken: string }>(
+    await fetch(`${API_BASE}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: user.email, password: user.password, device: { name: 'E2E API', platform: 'WEB' } }),
+    }),
+    'POST /auth/login',
+  );
+  user.accessToken = tokens.accessToken;
+  return user;
+}
+
 /** Хэрэглэгчийн нэрээр API дуудах (UI-гүй бэлтгэл ба шалгалт). */
 export async function apiAs(user: TestUser, method: string, path: string, body?: unknown): Promise<Response> {
   return fetch(`${API_BASE}${path}`, {

@@ -13,6 +13,35 @@ function memoryStore(): KeyValueStore {
 const textOf = (i: OutboxItem) => (i.body as { text: string }).text;
 
 describe('AC-28 offline outbox — дарааллаар, давхардалгүй', () => {
+  it('илгээх хооронд нэмсэн мессеж алдагдахгүй (offline retry ба online sent үед) — NFR-04', async () => {
+    const delivered: string[] = [];
+    let online = false;
+    let box: Outbox;
+    let injected = false;
+    const send = async (item: OutboxItem): Promise<SendResult> => {
+      // Эхний илгээлтийн дунд хэрэглэгч дахин мессеж бичнэ (enqueue + flush)
+      if (!injected) {
+        injected = true;
+        await box.enqueue({ method: 'POST', path: '/messages', body: { text: 'хоёр' } });
+        void box.flush();
+      }
+      if (!online) return 'retry';
+      delivered.push(textOf(item));
+      return 'sent';
+    };
+    box = new Outbox(memoryStore(), send);
+    await box.enqueue({ method: 'POST', path: '/messages', body: { text: 'нэг' } });
+    await box.flush();
+    expect((await box.items()).map(textOf)).toEqual(['нэг', 'хоёр']);
+
+    online = true;
+    injected = false;
+    await box.flush();
+    // Илгээх үед нэмэгдсэн «хоёр» (давхар clientId-гүй шинэ) ба дараа нь нэмсэн нь бүгд хүрнэ
+    expect(delivered).toEqual(['нэг', 'хоёр', 'хоёр']);
+    expect(await box.items()).toEqual([]);
+  });
+
   it('offline-д бичсэн 3 мессеж онлайн болоход яг 3, дарааллаар', async () => {
     const delivered: string[] = [];
     let online = false;

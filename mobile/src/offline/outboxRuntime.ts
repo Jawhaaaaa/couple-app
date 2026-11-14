@@ -28,8 +28,14 @@ export function startOutbox(): () => void {
   const app = AppState.addEventListener('change', (s) => {
     if (s === 'active') outbox.flush().catch(() => {});
   });
+  // Вэб (FR-19.5): iOS-д Background Sync байхгүй тул `online` үйл явдал дээр шууд илгээнэ. NetInfo-гийн
+  // вэб хувилбар `navigator.connection`-ий өөрчлөлтийг сонсдог ба `online` болоход заавал дуудагддаггүй.
+  const onOnline = () => void outbox.flush().catch(() => {});
+  const win = typeof window !== 'undefined' && typeof window.addEventListener === 'function' ? window : null;
+  win?.addEventListener('online', onOnline);
   return () => {
     net();
     app.remove();
+    win?.removeEventListener('online', onOnline);
   };
 }

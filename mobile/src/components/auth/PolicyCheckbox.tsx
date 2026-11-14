@@ -36,6 +36,7 @@ export function PolicyCheckbox({ checked, onChange, policy }: Props) {
         accessibilityRole="checkbox"
         accessibilityLabel={t('auth.register.policyLabel')}
         accessibilityState={{ checked, disabled }}
+        aria-checked={checked}
         style={[styles.row, { opacity: disabled ? 0.5 : 1 }]}
         testID="policy-checkbox"
       >

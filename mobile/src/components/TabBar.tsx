@@ -1,11 +1,12 @@
 import type { BottomTabBarProps } from 'expo-router/js-tabs';
 import { CalendarHeart, HeartHandshake, House, Images, type LucideIcon, MessageCircleHeart } from 'lucide-react-native';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useT } from '@/i18n';
+import { AnimatedMoment } from '@/motion/AnimatedMoment';
 import { playHaptic } from '@/motion/haptics';
 import { useMotionPreference } from '@/motion/useMotionPreference';
 import { useColors } from '@/theme/ThemeProvider';
@@ -36,11 +37,17 @@ function TabItem({ label, Icon, focused, vertical, onPress, testID }: ItemProps)
   const level = useMotionPreference();
   const scale = useSharedValue(1);
   const dot = useSharedValue(focused ? 1 : 0);
+  // E2E-д ажиглах (TQ-05): идэвхтэй болсны дараах spring-ийн хугацаанд `playing`
+  const [bouncing, setBouncing] = useState(false);
 
   useEffect(() => {
     // ANIM-10: идэвхтэй дүрс spring-ээр үсэрч, доогуур цэг гулсаж гарна
     if (focused && level === 'full') scale.value = withSequence(withSpring(1.18, motion.springBouncy), withSpring(1, motion.spring));
     dot.value = level === 'off' ? (focused ? 1 : 0) : withSpring(focused ? 1 : 0, motion.spring);
+    if (!focused) return;
+    setBouncing(true);
+    const timer = setTimeout(() => setBouncing(false), motion.duration.long);
+    return () => clearTimeout(timer);
   }, [dot, focused, level, scale]);
 
   const iconStyle = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
@@ -63,7 +70,14 @@ function TabItem({ label, Icon, focused, vertical, onPress, testID }: ItemProps)
       <AppText variant="caption" color={focused ? 'primary' : 'textMuted'} numberOfLines={1}>
         {label}
       </AppText>
-      <Animated.View style={[vertical ? styles.dotVertical : styles.dot, { backgroundColor: colors.primary }, dotStyle]} />
+      {focused ? (
+        // Босоо (вэбийн sidebar) үед байрлалыг тэмдэглэгээний View авна — цэг өөрөө хэмжээтэй л
+        <AnimatedMoment anim="ANIM-10" playing={bouncing} style={vertical ? styles.dotHostVertical : undefined}>
+          {() => <Animated.View style={[vertical ? styles.dotVerticalSize : styles.dot, { backgroundColor: colors.primary }, dotStyle]} />}
+        </AnimatedMoment>
+      ) : (
+        <Animated.View style={[vertical ? styles.dotVertical : styles.dot, { backgroundColor: colors.primary }, dotStyle]} />
+      )}
     </Pressable>
   );
 }
@@ -133,4 +147,6 @@ const styles = StyleSheet.create({
   },
   dot: { width: 16, height: 3, borderRadius: 2, marginTop: 2 },
   dotVertical: { position: 'absolute', left: 0, width: 3, height: 20, borderRadius: 2 },
+  dotHostVertical: { position: 'absolute', left: 0 },
+  dotVerticalSize: { width: 3, height: 20, borderRadius: 2 },
 });

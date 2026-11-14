@@ -34,3 +34,17 @@ export function resolveGate({
   if (me.space.kind === 'SOLO') return { pathname: '/waiting' };
   return { pathname: '/home' };
 }
+
+/**
+ * Нэвтрээгүй хэрэглэгч орж болох route-ын эхний сегмент: нэвтрэх/бүртгэл, танилцуулга, хаалга (`/`),
+ * PWA суулгах заавар, шинэчлэх, урилгын холбоос. Бусад нь сесстэй байх ёстой.
+ */
+const PUBLIC_SEGMENTS = new Set(['', '(auth)', '(onboarding)', 'install', 'update-required', 'i', 'invite', '+not-found']);
+
+/**
+ * Сесс алга (refresh 401 — алсаас гаргасан, хугацаа дууссан) үед хамгаалагдсан route дээр үлдэхгүй — S-03 руу
+ * (AC-56, AC-125). `segments` нь expo-router-ийн `useSegments()`.
+ */
+export function needsLogin(signedIn: boolean, segments: readonly string[]): boolean {
+  return !signedIn && !PUBLIC_SEGMENTS.has(segments[0] ?? '');
+}

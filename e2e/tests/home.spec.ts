@@ -81,7 +81,7 @@ test.describe('S-20 нүүр', () => {
 
     const sections: [string, RegExp][] = [
       ['next-date', /\/plans$/],
-      ['upcoming', /\/together$/],
+      // «Удахгүй» хэзээ ч хоосон биш: хоёрын төрсөн өдөр ба автомат ой (FR-8.2) үргэлж байна
       ['memories', /\/memories$/],
       ['messages', /\/chat$/],
     ];
@@ -135,7 +135,7 @@ test.describe('S-20 нүүр', () => {
       await partnerA.page.getByTestId('home-on-this-day').click();
       await expect(partnerA.page.getByTestId('screen-S-23')).toBeVisible();
       await expect(partnerA.page.getByTestId('on-this-day-year')).toContainText('2025');
-      await expect(partnerA.page.getByText('Нэг жилийн өмнө')).toBeVisible();
+      await expect(partnerA.page.getByTestId('screen-S-23').getByText('Нэг жилийн өмнө')).toBeVisible();
 
       await setServerClock('2026-11-08T04:00:00Z');
       await partnerA.page.clock.setFixedTime(new Date('2026-11-08T04:00:00Z'));

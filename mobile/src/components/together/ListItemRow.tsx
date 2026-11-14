@@ -50,6 +50,7 @@ export function ListItemRow({ item, myId, person, busy, onToggleDone, onVote, on
         disabled={busy}
         accessibilityRole="checkbox"
         accessibilityState={{ checked: done, disabled: busy }}
+        aria-checked={done}
         accessibilityLabel={item.title}
         testID={`list-done-${item.id}`}
         style={[styles.check, { borderColor: done ? colors.success : colors.border, backgroundColor: done ? colors.success : 'transparent' }]}

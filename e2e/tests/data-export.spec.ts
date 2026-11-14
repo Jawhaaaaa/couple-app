@@ -5,7 +5,7 @@ import { resetServerClock, setServerClock } from '../support/clock';
 import { linkedCouple } from '../support/couple';
 import { createMemoryApi, makeJpeg } from '../support/memories';
 import { runJob } from '../support/seed';
-import { apiAs, signInUi } from '../support/users';
+import { apiAs, signInUi, reloginApi } from '../support/users';
 
 /** Бүтэн хуулбар (T-72, FR-14.5): дараалалд орж бэлэн болоход мэдэгдэл, 7 хоногийн дараа 410 (AC-126). */
 test.describe('Өгөгдлийн экспорт', () => {
@@ -31,6 +31,8 @@ test.describe('Өгөгдлийн экспорт', () => {
 
     await setServerClock(new Date(start.getTime() + 8 * 24 * 3600_000));
     await runJob('exportExpiry').catch(() => undefined);
+    // 8 хоног урагшлахад 15 минутын access token дууссан — шинээр нэвтэрнэ
+    await reloginApi(a);
     expect((await apiAs(a, 'GET', `/exports/${full.id}/download`)).status).toBe(410);
   });
 });

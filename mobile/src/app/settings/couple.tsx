@@ -241,6 +241,7 @@ function MascotSection({ couple, locked }: { couple: Couple; locked: boolean }) 
               disabled={locked}
               accessibilityRole="radio"
               accessibilityState={{ selected, disabled: locked }}
+              aria-checked={selected}
               accessibilityLabel={t(`coupleSettings.mascotColor.${color}`)}
               testID={`couple-mascot-${color}`}
               style={[styles.swatchHit, { opacity: locked ? 0.5 : 1 }]}

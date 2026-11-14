@@ -490,6 +490,11 @@
       "title": "Hi, {{name}}!",
       "body": "Invite your person — once you are linked, your days, hearts and questions show up here.",
       "action": "Go to invite"
+    },
+    "quick": {
+      "memory": "Add memory",
+      "plan": "Suggest a date",
+      "checkin": "Check in"
     }
   },
   "signals": {

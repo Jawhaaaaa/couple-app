@@ -51,6 +51,8 @@ export function createApiClient({ baseUrl = API_BASE, fetch: fetchFn = globalThi
       },
       body: JSON.stringify(usesCookieRefresh ? {} : { refreshToken }),
     });
+    // Алдааны биеийг уншиж хаана: уншаагүй бие хүсэлтийг «дуусаагүй» төлөвт үлдээж холболтыг барина
+    if (!res.ok && typeof res.text === 'function') await res.text().catch(() => undefined);
     // 5xx — сервер түр унасан: токен хүчинтэй хэвээр байж болох тул «сесс алга» гэж үзэхгүй
     if (res.status >= 500) throw new Error(`refresh HTTP ${res.status}`);
     if (!res.ok) return null;

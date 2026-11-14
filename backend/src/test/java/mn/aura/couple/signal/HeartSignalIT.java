@@ -95,6 +95,10 @@ class HeartSignalIT extends AbstractSpaceIT {
         String id1 = ok(call(a, "POST", "/signals", body), 201).path("id").asText();
         String id2 = ok(call(a, "POST", "/signals", body), 201).path("id").asText();
         assertThat(id2).isEqualTo(id1);
+        // Текст хамтрагчийн мэдэгдлийн жагсаалтад (AC-77) — нэг л удаа (idempotent)
+        String bodies = ok(call(b, "GET", "/notifications"), 200).path("items").findValuesAsText("body").toString();
+        assertThat(bodies).contains("«" + "ж".repeat(80) + "»");
+        assertThat(bodies.split("«").length - 1).isEqualTo(1);
     }
 
     private String signal(String kind, String text) {

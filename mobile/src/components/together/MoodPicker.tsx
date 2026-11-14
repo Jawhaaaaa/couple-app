@@ -52,6 +52,7 @@ export function MoodPicker({ value, onChange, disabled }: Props) {
               disabled={disabled}
               accessibilityRole="radio"
               accessibilityState={{ selected, disabled }}
+              aria-checked={selected}
               accessibilityLabel={t(`checkin.level.${level}`)}
               testID={`checkin-level-${level}`}
               style={[styles.option, { backgroundColor: selected ? colors.surfaceRaised : 'transparent', borderColor: selected ? colors.primary : colors.border }]}

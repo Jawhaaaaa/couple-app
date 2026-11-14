@@ -1,6 +1,6 @@
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { useFonts } from 'expo-font';
-import { router, Stack } from 'expo-router';
+import { router, Stack, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { type ReactNode, useEffect, useState } from 'react';
@@ -11,6 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 // i18n-ийг бусад модулиас өмнө эхлүүлнэ (side effect)
 import { useT } from '@/i18n';
 import { useBootstrap } from '@/api/queries/bootstrap';
+import { needsLogin } from '@/auth/gate';
 import UpdateRequiredScreen from '@/app/update-required';
 import { AppText } from '@/components/AppText';
 import { SignalReceiver } from '@/components/home/SignalReceiver';
@@ -61,6 +62,13 @@ function SplashGate({ children }: { children: ReactNode }) {
       }),
     [],
   );
+
+  // Сессгүйгээр хамгаалагдсан route-ыг (дахин ачаалал, хуучин таб) нээвэл S-03 руу (AC-56, AC-125)
+  const segments = useSegments();
+  const mustLogin = boot.status === 'ready' && needsLogin(boot.signedIn, segments);
+  useEffect(() => {
+    if (mustLogin) router.replace('/login');
+  }, [mustLogin]);
 
   // S-97: minVersion > апп — бүх апп хаагдана (навигаци ч рендэрлэгдэхгүй)
   if (boot.status === 'updateRequired') return <UpdateRequiredScreen />;

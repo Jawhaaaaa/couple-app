@@ -164,12 +164,14 @@ test.describe('Нэвтрэлт ба бүртгэл', () => {
   });
 
   test('S-03 «Нууц үг мартсан» ба «Бүртгүүлэх» холбоос', async ({ page }) => {
-    await page.goto('/');
+    // `/` нь анх суулгахад S-02 танилцуулга руу (AC-133) — S-03-ийг шууд нээнэ
+    await page.goto('/login');
     await expect(page.getByTestId('screen-S-03')).toBeVisible();
     await page.getByTestId('login-forgot').click();
     await expect(page.getByTestId('screen-S-06')).toBeVisible();
     await page.getByTestId('forgot-back').click();
-    await page.getByTestId('login-register').click();
+    // forgot-back нь S-03-ийг дахин нээдэг тул stack-д нуугдмал хуулбар үлдэнэ — харагдаж буйг нь
+    await page.getByTestId('login-register').filter({ visible: true }).click();
     await expect(page.getByTestId('screen-S-04')).toBeVisible();
   });
 });

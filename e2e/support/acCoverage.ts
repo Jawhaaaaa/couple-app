@@ -23,7 +23,8 @@ export function parseSpecAcs(specMd: string): SpecAc[] {
     });
 }
 
-const TEST_FILE = /(\.test\.(ts|tsx)|\.spec\.ts|IT\.java|Test\.java)$/;
+/** Тестийн файл: jest, Playwright, JUnit, deploy-ийн shell тест (`*.test.sh`), k6-ийн ачааллын скрипт (`*.k6.js`). */
+const TEST_FILE = /(\.test\.(ts|tsx|sh)|\.spec\.ts|IT\.java|Test\.java|\.k6\.js)$/;
 const SKIP_DIRS = new Set(['node_modules', 'dist', 'target', '.git', 'playwright-report', 'test-results']);
 
 export function listTestFiles(root: string, dirs: string[]): string[] {
