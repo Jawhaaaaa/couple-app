@@ -37,6 +37,9 @@ class SignedUrlIT extends AbstractIntegrationTest {
         HttpResponse<byte[]> r = getBytes(url);
         assertThat(r.statusCode()).isEqualTo(200);
         assertThat(new String(r.body(), StandardCharsets.UTF_8)).isEqualTo("aura-media-bytes");
+        // Safari (iPhone PWA) `aws-chunked` Content-Encoding-той зургийг ачаалдаггүй (AC-219)
+        assertThat(r.headers().firstValue("Content-Encoding").orElse("")).doesNotContain("aws-chunked");
+        assertThat(r.headers().firstValue("Content-Type")).hasValue("image/jpeg");
     }
 
     @Test

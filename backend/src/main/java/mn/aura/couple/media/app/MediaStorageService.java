@@ -53,7 +53,11 @@ public class MediaStorageService implements DisposableBean {
         this.presignTtl = cfg.presignTtl();
         StaticCredentialsProvider credentials = StaticCredentialsProvider.create(
                 AwsBasicCredentials.create(cfg.accessKey(), cfg.secretKey()));
-        S3Configuration s3Config = S3Configuration.builder().pathStyleAccessEnabled(cfg.pathStyle()).build();
+        // chunkedEncodingEnabled(false): http endpoint дээр SDK `Content-Encoding: aws-chunked`-аар илгээдэг ба
+        // SeaweedFS түүнийг объектын metadata болгон хадгалж буцаадаг — Safari (iPhone PWA) ийм зургийг
+        // «bad Content-Encoding» гээд ачаалдаггүй (AC-219, T-94-д илэрсэн)
+        S3Configuration s3Config = S3Configuration.builder().pathStyleAccessEnabled(cfg.pathStyle())
+                .chunkedEncodingEnabled(false).build();
         Region region = Region.of(cfg.region());
         this.s3 = S3Client.builder()
                 .endpointOverride(URI.create(cfg.endpoint()))

@@ -78,7 +78,11 @@ test.describe('Дурсамж — цэгцлэх', () => {
     await partnerA.page.goto('/memories/search');
     await expect(partnerA.page.getByTestId('screen-S-34')).toBeVisible();
     // S-30 нь stack-д нуугдмал байдаг тул зөвхөн S-34 доторх картууд
-    const cards = partnerA.page.getByTestId('screen-S-34').locator('[data-testid^="memory-card-"]').filter({ visible: true });
+    // memory-card-favorite / -private / -uploading нь картын доторх тэмдэг — картыг л тоолно
+    const cards = partnerA.page
+      .getByTestId('screen-S-34')
+      .filter({ visible: true })
+      .locator('[data-testid^="memory-card-"]:not([data-testid="memory-card-favorite"]):not([data-testid="memory-card-private"]):not([data-testid="memory-card-uploading"])');
 
     await partnerA.page.getByTestId('search-tag-аялал').click();
     await expect(cards).toHaveCount(2);
