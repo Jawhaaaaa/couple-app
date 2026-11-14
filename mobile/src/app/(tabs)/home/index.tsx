@@ -19,7 +19,6 @@ import {
   RecentMemoriesSection,
   UnreadMessagesSection,
   UpcomingSection,
-  UpdateSection,
 } from '@/components/home/HomeSections';
 import { LongDistanceBlock } from '@/components/home/LongDistance';
 import { PersonCardView } from '@/components/home/PersonCardView';
@@ -29,6 +28,7 @@ import { UnseenSignalsCard } from '@/components/home/UnseenSignalsCard';
 import { Mascot } from '@/components/Mascot';
 import { ScreenState } from '@/components/ScreenState';
 import { TabScreen } from '@/components/TabScreen';
+import { UpdateAvailableCard } from '@/components/UpdateAvailableCard';
 import { useErrorText } from '@/hooks/useErrorText';
 import { useNow } from '@/hooks/useNow';
 import { formatDate, useT } from '@/i18n';
@@ -67,6 +67,8 @@ export default function HomeScreen() {
         {solo ? <SoloInvite name={me?.callName ?? me?.displayName ?? data.me.name} /> : <CoupleBody data={data} now={now} />}
         {/* Хэрэглэгч тутмын санал асуулга — хосгүй үед ч (AC-207) */}
         <SurveyCard prompt={data.survey} />
+        {/* «Шинэ хувилбар бэлэн» (AC-141) — `['version']`-ээс (Dashboard.update-ийг сервер бөглөдөггүй) */}
+        <UpdateAvailableCard testID="home-update" />
       </ScrollView>
     );
   }
@@ -126,7 +128,6 @@ function CoupleBody({ data, now }: { data: Dashboard; now: number }) {
       <OnThisDaySection data={data.onThisDay} />
       <RecapSection data={data.recap} />
       <LettersSection items={data.incomingLetters} />
-      <UpdateSection data={data.update} />
     </>
   );
 }

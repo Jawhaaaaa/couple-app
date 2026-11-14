@@ -7,13 +7,14 @@ import { Card } from '@/components/Card';
 import { Mascot } from '@/components/Mascot';
 import { SettingsRow } from '@/components/settings/SettingsRow';
 import { StackScreen } from '@/components/StackScreen';
+import { UpdateAvailableCard } from '@/components/UpdateAvailableCard';
 import { useT } from '@/i18n';
 import { buildInfo } from '@/platform/buildInfo';
 import { spacing } from '@/theme/tokens';
 
 /**
  * S-91 Aura-гийн тухай (FR-18.7, AC-190): semver + build + commit SHA (build-ийн бодит SHA —
- * `EXPO_PUBLIC_COMMIT_SHA`). «Шинэ хувилбар бэлэн» карт (`/version`, AC-141) нь T-81.
+ * `EXPO_PUBLIC_COMMIT_SHA`) ба «Шинэ хувилбар бэлэн» карт (`['version']`, AC-141) — товшвол татах хуудас/store.
  */
 export default function AboutScreen() {
   const t = useT();
@@ -31,6 +32,7 @@ export default function AboutScreen() {
           <InfoRow label={t('about.build')} value={info.build} testID="about-build-number" />
           <InfoRow label={t('about.commit')} value={info.commit} testID="about-commit" />
         </Card>
+        <UpdateAvailableCard testID="about-update" />
         <SettingsRow icon={FileText} label={t('about.policies')} onPress={() => router.push('/settings/policies')} testID="about-policies" />
         <SettingsRow icon={Scale} label={t('about.licenses')} onPress={() => router.push('/settings/licenses')} testID="about-licenses" />
       </ScrollView>

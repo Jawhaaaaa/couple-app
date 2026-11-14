@@ -4,14 +4,14 @@ import { router, Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { type ReactNode, useEffect, useState } from 'react';
-import { Linking, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 // i18n-ийг бусад модулиас өмнө эхлүүлнэ (side effect)
 import { useT } from '@/i18n';
 import { useBootstrap } from '@/api/queries/bootstrap';
-import { AppButton } from '@/components/AppButton';
+import UpdateRequiredScreen from '@/app/update-required';
 import { AppText } from '@/components/AppText';
 import { SignalReceiver } from '@/components/home/SignalReceiver';
 import { Mascot } from '@/components/Mascot';
@@ -58,7 +58,8 @@ function SplashGate({ children }: { children: ReactNode }) {
     [],
   );
 
-  if (boot.status === 'updateRequired') return <UpdateRequired url={boot.version?.storeUrl ?? boot.version?.downloadUrl} />;
+  // S-97: minVersion > апп — бүх апп хаагдана (навигаци ч рендэрлэгдэхгүй)
+  if (boot.status === 'updateRequired') return <UpdateRequiredScreen />;
   if (opened) return children;
   if (boot.status === 'unreachable') return <ServerUnreachable onRetry={boot.retry} />;
   return <Splash />;
@@ -70,24 +71,6 @@ function Splash() {
     <View style={styles.center} testID="screen-S-01" accessibilityLabel={t('a11y.splash')}>
       <Mascot size={120} />
       <AppText variant="display">{t('app.name')}</AppText>
-    </View>
-  );
-}
-
-function UpdateRequired({ url }: { url: string | null | undefined }) {
-  const t = useT();
-  return (
-    <View style={styles.center} testID="update-required" accessibilityRole="alert">
-      <Mascot size={110} pose="tilt" />
-      <AppText variant="h2" style={styles.text}>
-        {t('states.updateRequiredTitle')}
-      </AppText>
-      <AppText color="textMuted" style={styles.text}>
-        {t('states.updateRequiredBody')}
-      </AppText>
-      {url ? (
-        <AppButton label={t('common.update')} onPress={() => void Linking.openURL(url)} testID="update-open" />
-      ) : null}
     </View>
   );
 }
@@ -159,5 +142,4 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
   root: { flex: 1 },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: spacing.md, padding: spacing.xl },
-  text: { textAlign: 'center' },
 });

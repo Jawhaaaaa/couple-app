@@ -2,9 +2,12 @@ import { useIsRestoring, useQuery } from '@tanstack/react-query';
 import { useCallback } from 'react';
 
 import { api } from '@/api/client';
+import { isUpdateRequired } from '@/domain/versionCompare';
+import { buildInfo } from '@/platform/buildInfo';
 import { useSessionStore } from '@/stores/sessionStore';
 
-import { fetchMe, fetchVersion, type Me, type VersionInfo } from './auth';
+import { fetchMe, type Me, type VersionInfo } from './auth';
+import { versionQueryOptions } from './version';
 
 export type BootStatus = 'pending' | 'ready' | 'unreachable' | 'updateRequired';
 
@@ -33,13 +36,7 @@ export interface Bootstrap {
 export function useBootstrap(): Bootstrap {
   const isRestoring = useIsRestoring();
   const accessToken = useSessionStore((s) => s.accessToken);
-  const version = useQuery({
-    queryKey: ['version'],
-    queryFn: fetchVersion,
-    enabled: !isRestoring,
-    retry: 0,
-    staleTime: 5 * 60_000,
-  });
+  const version = useQuery({ ...versionQueryOptions, enabled: !isRestoring });
   const session = useQuery({
     queryKey: ['session-restore'],
     queryFn: () => api.restoreSession(),
@@ -61,7 +58,7 @@ export function useBootstrap(): Bootstrap {
   const signedIn = !!accessToken || offlineSession;
 
   let status: BootStatus;
-  if (version.data?.updateRequired) status = 'updateRequired';
+  if (isUpdateRequired(version.data, buildInfo().version)) status = 'updateRequired';
   else if (isRestoring || session.isPending) status = 'pending';
   else if (!accessToken) status = session.data === 'unreachable' && !me.data ? 'unreachable' : 'ready';
   else if (me.isPending) status = 'pending';

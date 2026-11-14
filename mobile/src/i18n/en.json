@@ -457,10 +457,6 @@
       "incoming": "💌 A letter is coming to you {{when}}",
       "soon": "soon"
     },
-    "update": {
-      "title": "New version available",
-      "body": "Aura {{version}} is out — update to try what is new."
-    },
     "question": {
       "title": "Today’s question",
       "answer": "Answer",
@@ -1839,5 +1835,14 @@
     "reviewNew": "Read the new version",
     "langMn": "Монгол",
     "langEn": "English"
+  },
+  "version": {
+    "availableTitle": "New version available",
+    "availableBody": "Aura {{latest}} is out (you have {{current}}). Update to try what's new.",
+    "update": "Update",
+    "requiredTitle": "Update required",
+    "requiredBody": "This version of Aura is no longer supported. Please update to continue — your data is safe.",
+    "requiredVersions": "You have {{current}} · minimum {{min}}",
+    "storeHint": "Update Aura from your app store."
   }
 }

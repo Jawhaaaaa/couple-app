@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import { type Href, router } from 'expo-router';
 import { CalendarHeart, ChevronRight, Gift, Images, type LucideIcon, Mail, MessageCircle, Sparkles } from 'lucide-react-native';
 import type { ReactNode } from 'react';
-import { Linking, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import {
   type Dashboard,
@@ -262,24 +262,6 @@ export function LettersSection({ items }: { items: LetterTeaser[] }) {
           testID="home-letter"
         />
       ))}
-    </Section>
-  );
-}
-
-/** «Шинэ хувилбар бэлэн» (AC-141): татах хуудас (DEV) эсвэл store руу. */
-export function UpdateSection({ data }: { data: Dashboard['update'] }) {
-  const t = useT();
-  const url = data?.storeUrl ?? data?.downloadUrl ?? null;
-  if (!data?.updateAvailable || !url) return null;
-  return (
-    <Section name="update" title={t('home.update.title')}>
-      <AppText color="textMuted">{t('home.update.body', { version: data.latest })}</AppText>
-      <AppButton
-        label={t('common.update')}
-        // Нээж чадаагүй бол хэрэглэгч дараа нь Тохиргооноос шинэчилнэ — нэмэлт алдаа харуулахгүй
-        onPress={() => void Linking.openURL(url).catch(() => undefined)}
-        testID="home-update-open"
-      />
     </Section>
   );
 }

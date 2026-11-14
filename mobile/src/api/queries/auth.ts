@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 import { api, unwrap } from '@/api/client';
 import type { components } from '@/api/schema';
 import { deviceInfo } from '@/auth/device';
-import { APP_VERSION } from '@/config';
+import { buildInfo } from '@/platform/buildInfo';
 import type { Locale } from '@/stores/prefsStore';
 
 type S = components['schemas'];
@@ -20,9 +20,10 @@ export type OAuthProvider = 'google' | 'apple';
  * `ApiRequestError` (код нь `errors.json`-ээр мессеж болно).
  */
 
+/** `current` — S-91-д харагдах хувилбартай ижил (`buildInfo`), сервер түүгээр updateAvailable/Required тооцно. */
 export function fetchVersion(): Promise<VersionInfo> {
   const platform = Platform.OS === 'ios' || Platform.OS === 'android' ? Platform.OS : 'web';
-  return unwrap(api.GET('/version', { params: { query: { platform, current: APP_VERSION } } }));
+  return unwrap(api.GET('/version', { params: { query: { platform, current: buildInfo().version } } }));
 }
 
 export function fetchMe(): Promise<Me> {
