@@ -86,7 +86,7 @@ export function toCandidate(asset: ImagePicker.ImagePickerAsset, index: number):
 export async function queueAsset(
   asset: ImagePicker.ImagePickerAsset,
   index: number,
-  purpose: 'MEMORY' | 'CHAT' | 'FILE' = 'MEMORY',
+  purpose: 'MEMORY' | 'CHAT' | 'FILE' | 'LETTER' = 'MEMORY',
 ): Promise<DraftMedia> {
   const kind = assetKind(asset) ?? 'image';
   let uri = asset.uri;
