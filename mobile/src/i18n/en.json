@@ -1844,5 +1844,11 @@
     "requiredBody": "This version of Aura is no longer supported. Please update to continue — your data is safe.",
     "requiredVersions": "You have {{current}} · minimum {{min}}",
     "storeHint": "Update Aura from your app store."
+  },
+  "pwa": {
+    "update": {
+      "ready": "A new version is ready",
+      "action": "Update"
+    }
   }
 }

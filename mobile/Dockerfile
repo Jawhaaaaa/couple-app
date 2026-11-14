@@ -16,12 +16,14 @@ ARG EXPO_PUBLIC_APP_VERSION=
 ARG EXPO_PUBLIC_BUILD=
 ARG EXPO_PUBLIC_COMMIT_SHA=
 ARG EXPO_PUBLIC_OAUTH_GOOGLE=
+# Export-ийн дараа service worker-ийг угсарна (dist/sw.js — precache + хувилбар, FR-19.5).
 RUN for v in EXPO_PUBLIC_API_URL EXPO_PUBLIC_WS_URL EXPO_PUBLIC_APP_VERSION EXPO_PUBLIC_BUILD \
              EXPO_PUBLIC_COMMIT_SHA EXPO_PUBLIC_OAUTH_GOOGLE; do \
       eval "[ -n \"\$$v\" ] && export $v || unset $v"; \
     done \
     && env | grep '^EXPO_PUBLIC_' | sort \
-    && npx expo export --platform web
+    && npx expo export --platform web \
+    && node scripts/build-sw.cjs
 
 FROM nginx:1.27-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf

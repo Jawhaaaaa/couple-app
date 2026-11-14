@@ -20,12 +20,14 @@ import { ServerUnreachable } from '@/components/ServerUnreachable';
 import { SettingsSync } from '@/components/settings/SettingsSync';
 import { SpaceStatusBanner } from '@/components/settings/SpaceStatusBanner';
 import { TimezonePrompt } from '@/components/TimezonePrompt';
+import { UpdateBanner } from '@/components/UpdateBanner';
 import { AppLockProvider } from '@/lock/AppLockProvider';
 import { installSoundPlayer } from '@/motion/sound';
 import { useLocalReminderSync } from '@/notifications/useLocalReminderSync';
 import { useNotificationTapRouting } from '@/notifications/useNotificationTapRouting';
 import { startOutbox } from '@/offline/outboxRuntime';
 import { persistOptions, queryClient } from '@/offline/persist';
+import { registerServiceWorker } from '@/pwa/registerSW';
 import { startRealtime } from '@/realtime';
 import { useSessionStore } from '@/stores/sessionStore';
 import { ThemeProvider, useTheme } from '@/theme/ThemeProvider';
@@ -82,6 +84,8 @@ function ThemedStack() {
       <StatusBar style={mode === 'dark' ? 'light' : 'dark'} />
       <SafeAreaView edges={['top']} style={{ backgroundColor: colors.bg }}>
         <OfflineBanner />
+        {/* Вэб: шинэ service worker бэлэн — «Шинэчлэх» (FR-19.9, AC-191) */}
+        <UpdateBanner />
         {/* Зөвхөн харах/экспорт горим — хос тасалсан эсвэл хамтрагч устгагдсан (AC-127, AC-128) */}
         <SpaceStatusBanner />
         {/* Хосын сэдэв, маскотын өнгө → локал палитр (AC-138, AC-190) */}
@@ -124,6 +128,8 @@ export default function RootLayout() {
   useEffect(() => startRealtime(queryClient), []);
   useNotificationTapRouting();
   useLocalReminderSync();
+  // Вэб: service worker — offline shell, кэш, шинэ хувилбар (FR-19.5, AC-140, AC-156)
+  useEffect(() => registerServiceWorker(), []);
 
   if (!ready) return null;
   return (
