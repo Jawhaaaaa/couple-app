@@ -1,0 +1,20 @@
+{
+  "id": "/",
+  "name": "Aura",
+  "short_name": "Aura",
+  "description": "Хоёулаа хамтдаа — дурсамж, чат, төлөвлөгөө нэг дор.",
+  "lang": "mn",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0D0C0E",
+  "background_color": "#0D0C0E",
+  "categories": ["lifestyle", "social"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
