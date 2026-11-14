@@ -1441,5 +1441,29 @@
     "breaking": "Pairing ended — download your data or restore together within {{count}} days.",
     "orphaned": "Your partner deleted their account — download your data within {{count}} days.",
     "open": "Details"
+  },
+  "deleteAccount": {
+    "title": "Delete account",
+    "step": "{{step}} / 3",
+    "warnTitle": "Before you delete your account",
+    "warnBody": "A deleted account can't be restored.",
+    "warnPersonal": "Your profile, sign-in details, settings and anything from before you paired are deleted right away.",
+    "warnPartner": "{{partner}} will be notified and can view and download your shared space for 30 days. After that, all shared data is permanently deleted.",
+    "continue": "I understand, continue",
+    "exportTitle": "Save your data first",
+    "exportBody": "You won't be able to sign in after deleting. You can prepare a copy of your memories, messages and photos now.",
+    "exportOpen": "Prepare a copy",
+    "exportSkip": "Continue",
+    "confirmTitle": "Confirm",
+    "confirmBody": "Enter your password and type \"{{phrase}}\" below.",
+    "phrase": "DELETE",
+    "phraseLabel": "Confirmation word",
+    "password": "Password",
+    "passwordHint": "If you signed up with Google/Apple, you can leave this empty.",
+    "passwordWrong": "That password is incorrect.",
+    "phraseWrong": "Type exactly \"{{phrase}}\".",
+    "confirm": "Delete my account permanently",
+    "partnerFallback": "Your partner",
+    "offline": "Deleting your account needs an internet connection."
   }
 }
