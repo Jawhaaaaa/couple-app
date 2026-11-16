@@ -21,8 +21,6 @@ export interface RealtimeClientOptions {
   onEvent: (event: RealtimeEnvelope) => void;
   /** Тасарч дахин холбогдсон бүрд (эхний холболтод биш) — query-г шинэчлэх (DD-AURA-009). */
   onReconnect?: () => void;
-  /** Эхний холболтод — өмнөх сессийн (persist) кэшийг шинэчлэх (холболтоос өмнөх үйл явдал алдагдсан). */
-  onFirstConnect?: () => void;
   onStatus?: (connected: boolean) => void;
   socketFactory?: SocketFactory;
   heartbeatMs?: number;
@@ -164,7 +162,6 @@ export class RealtimeClient {
       if (this.socket?.readyState === OPEN) this.socket.send('\n');
     }, hb);
     if (reconnect) this.opts.onReconnect?.();
-    else this.opts.onFirstConnect?.();
   }
 
   private scheduleRetry(): void {

@@ -66,7 +66,7 @@ export default function HomeScreen() {
         testID="home-scroll"
       >
         <CounterBlock counter={data.counter} />
-        {solo ? <SoloInvite name={me?.callName ?? me?.displayName ?? data.me.name} /> : <CoupleBody data={data} now={now} />}
+        {solo ? <SoloInvite name={me?.callName ?? me?.displayName ?? data.me.name} /> : <CoupleBody data={data} now={now} fresh={dashboard.isFetchedAfterMount} />}
         {/* Хэрэглэгч тутмын санал асуулга — хосгүй үед ч (AC-207) */}
         <SurveyCard prompt={data.survey} />
         {/* «Шинэ хувилбар бэлэн» (AC-141) — `['version']`-ээс (Dashboard.update-ийг сервер бөглөдөггүй) */}
@@ -82,7 +82,7 @@ export default function HomeScreen() {
   );
 }
 
-function CoupleBody({ data, now }: { data: Dashboard; now: number }) {
+function CoupleBody({ data, now, fresh }: { data: Dashboard; now: number; fresh: boolean }) {
   const t = useT();
   const colors = useColors();
   // Миний өгсөн хоч dashboard-ийн нэрийг дарна (AC-137)
@@ -92,11 +92,13 @@ function CoupleBody({ data, now }: { data: Dashboard; now: number }) {
   const liveAt = useSignalFx((s) => s.liveAt);
 
   // AC-18: нэгтгэсэн картын snapshot — дахин татахад алга болохгүй, нэг л удаа тоглоно.
-  // Realtime overlay саяхан тоглосон бол тэр дохиог дахин үзүүлэхгүй.
+  // Realtime overlay саяхан тоглосон бол тэр дохиог дахин үзүүлэхгүй. Зөвхөн энэ дэлгэц нээгдсэний
+  // дараа серверээс ирсэн хариугаар (`fresh`) — persist кэшийн хуучин `unseenSignals` нь аль хэдийн
+  // үзсэн гэж тэмдэглэгдсэн байж болох тул reload-ын дараа карт ба ANIM-02 дахин гардаг байв.
   const [unseen, setUnseen] = useState<SignalSummary | null>(null);
   const incoming = data.unseenSignals;
   const liveRecently = liveAt !== null && now - liveAt < LIVE_SUPPRESS_MS;
-  if (incoming && incoming.count > 0 && !unseen && !liveRecently) setUnseen(incoming);
+  if (fresh && incoming && incoming.count > 0 && !unseen && !liveRecently) setUnseen(incoming);
 
   return (
     <>

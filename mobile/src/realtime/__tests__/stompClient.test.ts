@@ -51,20 +51,18 @@ describe('RealtimeClient', () => {
     const sockets: FakeSocket[] = [];
     const events: unknown[] = [];
     const reconnects = jest.fn();
-    const firstConnects = jest.fn();
     const client = new RealtimeClient({
       url: 'ws://h/ws',
       getToken: () => token,
       onEvent: (e) => events.push(e),
       onReconnect: reconnects,
-      onFirstConnect: firstConnects,
       socketFactory: (url, protocols) => {
         const s = new FakeSocket(url, protocols);
         sockets.push(s);
         return s;
       },
     });
-    return { client, sockets, events, reconnects, firstConnects };
+    return { client, sockets, events, reconnects };
   }
 
   it('AC-31 CONNECT-д Bearer токен, зөвхөн /user/queue/events-д subscribe', async () => {
@@ -97,13 +95,11 @@ describe('RealtimeClient', () => {
   });
 
   it('тасрахад 1 → 2 с backoff-оор дахин холбогдож, query шинэчлэх дохио өгнө', async () => {
-    const { client, sockets, reconnects, firstConnects } = setup();
+    const { client, sockets, reconnects } = setup();
     client.start();
     await flush();
     sockets[0].open();
     sockets[0].receive(encodeFrame('CONNECTED'));
-    expect(firstConnects).toHaveBeenCalledTimes(1);
-    expect(reconnects).not.toHaveBeenCalled();
     sockets[0].close();
     expect(client.isConnected).toBe(false);
     jest.advanceTimersByTime(999);
@@ -115,7 +111,6 @@ describe('RealtimeClient', () => {
     sockets[1].open();
     sockets[1].receive(encodeFrame('CONNECTED'));
     expect(reconnects).toHaveBeenCalledTimes(1);
-    expect(firstConnects).toHaveBeenCalledTimes(1);
     client.stop();
   });
 

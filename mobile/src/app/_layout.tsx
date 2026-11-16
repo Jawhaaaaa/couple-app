@@ -29,7 +29,7 @@ import { installSoundPlayer } from '@/motion/sound';
 import { useLocalReminderSync } from '@/notifications/useLocalReminderSync';
 import { useNotificationTapRouting } from '@/notifications/useNotificationTapRouting';
 import { startOutbox } from '@/offline/outboxRuntime';
-import { persistOptions, queryClient } from '@/offline/persist';
+import { persistOptions, queryClient, refreshRestoredQueries } from '@/offline/persist';
 import { registerServiceWorker } from '@/pwa/registerSW';
 import { startRealtime } from '@/realtime';
 import { useSessionStore } from '@/stores/sessionStore';
@@ -153,7 +153,7 @@ export default function RootLayout() {
   if (!ready) return null;
   return (
     <GestureHandlerRootView style={styles.root}>
-      <PersistQueryClientProvider client={queryClient} persistOptions={persistOptions}>
+      <PersistQueryClientProvider client={queryClient} persistOptions={persistOptions} onSuccess={() => void refreshRestoredQueries(queryClient)}>
         <ThemeProvider>
           <AppLockProvider>
             <ThemedStack />

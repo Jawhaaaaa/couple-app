@@ -39,3 +39,14 @@ export const persistOptions: Omit<PersistQueryClientOptions, 'queryClient'> = {
     shouldDehydrateQuery: (q) => q.state.status === 'success' && shouldPersistQuery(q.queryKey),
   },
 };
+
+/**
+ * Persist-ээс сэргээж дууссаны дараа: сэргээсэн бүх query нь өмнөх сессийнх тул шууд харуулсан
+ * хэвээр (кэшээс нээх, AC-156) ар талд дахин татна. Үгүй бол `staleTime`-ийн дотор «шинэ» гэж
+ * тооцогдоод татагдахгүй, апп хаалттай/reload хийгдэж байх үеийн өөрчлөлт (WS үйл явдал алдагдсан)
+ * 30 с хуучин харагддаг байв — хамтрагчийн 🌙 (AC-123), үзсэн зүрхний карт (AC-18).
+ * Сэргээх үед query татагддаггүй (`isRestoring`) тул энэ үед кэшид байгаа бүхэн сэргээгдсэн.
+ */
+export function refreshRestoredQueries(client: QueryClient): Promise<void> {
+  return client.invalidateQueries();
+}

@@ -199,6 +199,28 @@ describe('S-20 нүүр', () => {
     expect(postSpy.mock.calls.filter(([p]) => p === '/signals/seen')).toHaveLength(1);
   });
 
+  it('AC-18 persist кэшийн (өмнөх сессийн) unseenSignals-аар карт гаргахгүй — зөвхөн шинээр татсан хариугаар', async () => {
+    // Кэшид өмнөх сессийн хариу (3 зүрх) — сервер одоо үзсэн гэж (null) хариулна
+    dashboard = emptyCouple();
+    const client = new QueryClient({ defaultOptions: { queries: { retry: false, gcTime: Infinity, staleTime: 30_000 } } });
+    client.setQueryData(['dashboard'], emptyCouple({ unseenSignals: { count: 3, kinds: ['HEART'], lastText: null } }));
+    render(
+      <QueryClientProvider client={client}>
+        <ThemeProvider>
+          <HomeScreen />
+        </ThemeProvider>
+      </QueryClientProvider>,
+    );
+    await waitFor(() => expect(screen.getByTestId('home-signals-today')).toBeTruthy());
+    expect(screen.queryByTestId('home-unseen-signals')).toBeNull();
+    expect(screen.queryByTestId('anim-ANIM-02')).toBeNull();
+    // Дахин татахад (сэргээлтийн дараах refreshRestoredQueries) серверийн хариу — карт гарахгүй хэвээр
+    await client.invalidateQueries();
+    await waitFor(() => expect(client.getQueryState(['dashboard'])?.isInvalidated).toBe(false));
+    expect(screen.queryByTestId('home-unseen-signals')).toBeNull();
+    expect(postSpy.mock.calls.filter(([p]) => p === '/signals/seen')).toHaveLength(0);
+  });
+
   it('AC-18 realtime overlay саяхан тоглосон бол нүүрний карт дахин үзүүлэхгүй', async () => {
     useSignalFx.setState({ liveAt: Date.now() });
     dashboard = emptyCouple({ unseenSignals: { count: 1, kinds: ['HEART'], lastText: null } });
