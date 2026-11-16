@@ -1,5 +1,6 @@
-import { expect, type Locator, type Page, test } from '@playwright/test';
+import { expect, type Locator, type Page } from '@playwright/test';
 
+import { test } from '../fixtures/twoPartners';
 import { confirmStartDate, linkedCouple } from '../support/couple';
 import { makeJpeg } from '../support/memories';
 import { signInUi, type TestUser } from '../support/users';

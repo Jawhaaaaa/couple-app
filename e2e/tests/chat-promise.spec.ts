@@ -34,6 +34,12 @@ test.describe('Хамтын амлалт', () => {
     await partnerA.page.goto('/chat/promise');
     await expect(partnerA.page.getByTestId('promise-outcome')).toBeVisible({ timeout: 10_000 });
     await partnerA.page.getByTestId('promise-kept').click();
-    await expect(partnerA.page.getByTestId('promise-kept')).toBeVisible();
+    // Хариулсан хүнд асуулт дахин гарахгүй (`GET /promises/current` — зөвхөн өөрөө хариулаагүй ENDED);
+    // хамтрагчид A-гийн хариу харагдана. Өмнө нь товч дахин харагдана гэж шалгадаг байсан нь refetch-ээс
+    // өмнөх агшинд л үнэн байсан тул WebKit-д унадаг байв (CI run 43790105841).
+    await expect(partnerA.page.getByTestId('promise-outcome')).toHaveCount(0);
+    await partnerB.page.goto('/chat/promise');
+    await expect(partnerB.page.getByTestId('promise-outcome')).toBeVisible();
+    await expect(partnerB.page.getByTestId('promise-partner-outcome')).toHaveText('Хамтрагч чинь «биелүүлсэн» гэж хариулсан 💗');
   });
 });

@@ -66,6 +66,19 @@ export function routeEvent(event: RealtimeEnvelope, queryClient: QueryClient): v
   listeners.get(event.type)?.forEach((fn) => fn(event));
 }
 
+/**
+ * Апп ачаалсны дараах эхний холболт: persist-ээс сэргээсэн (энэ сессээс өмнө татсан) query-уудыг
+ * шинэчилнэ. Тэдгээр нь `staleTime`-ийн дотор «шинэ» гэж тооцогдож дахин татагдахгүй атлаа апп
+ * хаалттай/reload хийгдэж байх үеийн WS үйл явдал (ж. `quiet.changed`) алдагдсан байж болно
+ * (AC-123 — reload-ын дараа хамтрагчийн 🌙 30 с хуучин хэвээр үлддэг байсан).
+ * Энэ сесст татсан query-д хүрэхгүй — хүйтэн эхлэлд давхар хүсэлт үүсгэхгүй.
+ */
+export function onFirstConnect(queryClient: QueryClient, sessionStartedAt: number): void {
+  void queryClient.invalidateQueries({
+    predicate: (q) => q.state.dataUpdatedAt > 0 && q.state.dataUpdatedAt < sessionStartedAt,
+  });
+}
+
 /** Дахин холбогдоход тасарсан хугацааны өөрчлөлтийг авахын тулд бүгдийг шинэчилнэ. */
 export function onReconnect(queryClient: QueryClient): void {
   void queryClient.invalidateQueries();

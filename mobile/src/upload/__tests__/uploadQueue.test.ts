@@ -58,13 +58,26 @@ function fakeServer({ chunkSize = 4 }: { chunkSize?: number } = {}) {
   const sessions = new Map<string, Session>();
   const puts: { uploadId: string; index: number; size: number }[] = [];
   const calls: string[] = [];
-  const state = { dropAfterPuts: Infinity, offline: false, createStatus: 0, createCode: '', chunkStatus: 0, chunkCode: '', counter: 0 };
+  const state = {
+    dropAfterPuts: Infinity,
+    offline: false,
+    /** offline үед алдааг шидэхээс өмнө хүлээх (гүйлт явж байх агшныг барих) */
+    offlineGate: null as Promise<void> | null,
+    createStatus: 0,
+    createCode: '',
+    chunkStatus: 0,
+    chunkCode: '',
+    counter: 0,
+  };
 
   const fetchFn = jest.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
     const req = input instanceof Request ? input : new Request(String(input), init);
     const path = req.url.replace(BASE, '');
     calls.push(`${req.method} ${path}`);
-    if (state.offline) throw new TypeError('Network request failed');
+    if (state.offline) {
+      if (state.offlineGate) await state.offlineGate;
+      throw new TypeError('Network request failed');
+    }
     if (req.method === 'POST' && path === '/uploads') {
       if (state.createStatus) return apiError(state.createStatus, state.createCode);
       const body = await req.json();
@@ -130,6 +143,26 @@ describe('AC-20 uploadQueue — тасарсан upload үргэлжилнэ', (
     ]);
     expect(progress.at(-1)).toEqual([10, 10]);
     expect(progress.map(([sent]) => sent)).toEqual([...progress.map(([sent]) => sent)].sort((a, b) => a - b));
+    expect((await queue.item(item.localId))?.status).toBe('done');
+  });
+
+  it('AC-20 гүйлт явж байхад ирсэн resume() (токен ирэх, online) алга болохгүй — дуусмагц дахин гүйнэ', async () => {
+    const server = fakeServer({ chunkSize: 4 });
+    const queue = newQueue(server, memoryStore(), memoryBlobStore());
+    let release!: () => void;
+    server.state.offline = true;
+    server.state.offlineGate = new Promise((r) => {
+      release = r;
+    });
+    const item = await queue.add(input(6));
+    // Эхний гүйлт (хуудас ачаалсны дараа, токенгүй) — хүсэлт нь унах гэж байна
+    const first = queue.resume();
+    while (server.calls.length === 0) await new Promise((r) => setImmediate(r));
+    // Тэр хооронд нөхцөл сэргэж (токен ирэх, `online`) дахин дуудагдана
+    server.state.offline = false;
+    const second = queue.resume();
+    release();
+    await Promise.all([first, second]);
     expect((await queue.item(item.localId))?.status).toBe('done');
   });
 

@@ -70,10 +70,16 @@ jobs:
           retention-days: 3
 
   e2e:
-    name: e2e — Playwright (compose)
+    name: e2e — Playwright (compose, ${{ matrix.browser }})
     needs: mobile
     runs-on: ubuntu-latest
-    timeout-minutes: 90   # e2e нэг worker-оор (playwright.config.ts) — 3 хөтөч × ~290 тест
+    # Хөтөч бүр тусдаа runner, тусдаа compose стек (тестийн цаг `PUT /test/clock` нийтлэг тул
+    # нэг стек дотор зэрэгцүүлэхгүй) — 3 хөтөч бүгд, бүх тест хэвээр
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium-pixel7, webkit-iphone14, firefox-mobile]
+    timeout-minutes: 60   # нэг хөтөч, нэг worker (playwright.config.ts) — ~100 тест
     env:
       SPRING_PROFILES_ACTIVE: dev,e2e
       # serve-dist.mjs (:8091) ба compose-ийн mobile-web (:8090)
@@ -103,15 +109,20 @@ jobs:
           npm ci
           # S-99 (download-page.spec.ts) QR-ыг render.mjs-ээр үүсгэнэ — mobile-ийн хамаарлын ижил хувилбар
           npm i --no-save --no-audit --no-fund qrcode@1.5.4
-          npx playwright install --with-deps chromium webkit firefox
-          npx playwright test
+          case "${{ matrix.browser }}" in
+            chromium-*) BROWSER=chromium ;;
+            webkit-*) BROWSER=webkit ;;
+            firefox-*) BROWSER=firefox ;;
+          esac
+          npx playwright install --with-deps "$BROWSER"
+          npx playwright test --project=${{ matrix.browser }}
       - name: Compose лог
         if: failure()
         run: docker compose logs --no-color --tail 300 > compose.log; tail -100 compose.log
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: e2e-report
+          name: e2e-report-${{ matrix.browser }}
           path: |
             e2e/playwright-report/
             e2e/test-results/
@@ -173,8 +184,9 @@ jobs:
       - run: bash deploy/tests/prod-config.test.sh
 
   eas-build:
-    name: EAS build (tag)
-    if: startsWith(github.ref, 'refs/tags/v')
+    name: EAS build (main, PR, tag)
+    # feature push дээр алгасна (эзний шийдвэр 2026-11-16); main, PR (MR_CREATE) ба хувилбарын tag дээр заавал
+    if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request' || startsWith(github.ref, 'refs/tags/v')
     needs: [backend, mobile, e2e]
     runs-on: ubuntu-latest
     timeout-minutes: 20

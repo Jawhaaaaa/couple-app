@@ -4,11 +4,13 @@ import { AppState } from 'react-native';
 import { WS_URL } from '@/config';
 import { useSessionStore } from '@/stores/sessionStore';
 
-import { onReconnect, routeEvent } from './eventRouter';
+import { onFirstConnect, onReconnect, routeEvent } from './eventRouter';
 import { SEND_DESTINATIONS } from './events';
 import { RealtimeClient } from './stompClient';
 
 let client: RealtimeClient | null = null;
+/** Апп (хуудас) ачаалагдсан агшин — үүнээс өмнөх query өгөгдөл persist-ээс сэргээгдсэн. */
+const SESSION_STARTED_AT = Date.now();
 
 /**
  * Нэвтэрсэн үед realtime холболтыг асаана; токен солигдоход шинэ токеноор дахин холбогдоно,
@@ -29,6 +31,7 @@ export function startRealtime(queryClient: QueryClient): () => void {
       }
     },
     onReconnect: () => onReconnect(queryClient),
+    onFirstConnect: () => onFirstConnect(queryClient, SESSION_STARTED_AT),
   });
   let token = useSessionStore.getState().accessToken;
   if (token) client.start();

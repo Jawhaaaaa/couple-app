@@ -292,8 +292,10 @@ const styles = StyleSheet.create({
   attachItem: { flexDirection: 'row', alignItems: 'center', gap: spacing.xxs, minHeight: touchTarget, paddingHorizontal: spacing.sm, borderRadius: radius.pill },
   note: { textAlign: 'center' },
   row: { flexDirection: 'row', alignItems: 'flex-end', gap: spacing.xxs },
-  inputWrap: { flex: 1, flexDirection: 'row', alignItems: 'flex-end', borderRadius: radius.input, borderWidth: 1, paddingLeft: spacing.sm },
-  input: { flex: 1, minHeight: touchTarget, maxHeight: 140, paddingVertical: spacing.xs },
+  // minWidth 0: вэбэд textarea-ийн intrinsic өргөн (Firefox ~207 px) flex-ийн `min-width: auto`-оор
+  // хайрцгийг тэлж Emoji товчийг микрофоны товчны доор оруулдаг байсан (axe target-size, AC-197)
+  inputWrap: { flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'flex-end', borderRadius: radius.input, borderWidth: 1, paddingLeft: spacing.sm },
+  input: { flex: 1, minWidth: 0, minHeight: touchTarget, maxHeight: 140, paddingVertical: spacing.xs },
   icon: { width: touchTarget, height: touchTarget, alignItems: 'center', justifyContent: 'center' },
   heart: { width: touchTarget, height: touchTarget, borderRadius: radius.pill, alignItems: 'center', justifyContent: 'center' },
 });

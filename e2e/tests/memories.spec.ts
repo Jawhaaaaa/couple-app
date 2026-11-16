@@ -88,6 +88,9 @@ test.describe('Дурсамж — timeline ба дэлгэрэнгүй', () => {
 
     // Удаан дарах → ANIM-07 нум, 6 реакц
     const main = partnerB.page.getByTestId('reaction-main');
+    // Сэтгэгдэл илгээсний дараа хуудас доош гүйлгэгдсэн байж болно (390×664) — viewport-оос гадуурх
+    // координатад хулганы даралт очихгүй
+    await main.scrollIntoViewIfNeeded();
     const box = await main.boundingBox();
     if (!box) throw new Error('reaction-main харагдахгүй');
     await partnerB.page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);

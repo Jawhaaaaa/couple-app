@@ -30,6 +30,9 @@ test.describe('Мэдэгдлийн тохиргоо', () => {
     await expect(partnerB.page.getByTestId('person-partner-quiet')).toBeVisible();
 
     await partnerA.page.getByTestId('notif-quiet-stop').click();
+    // Сервер унтраасныг баталсны дараа л B-г дахин ачаална (өмнө нь reload нь DELETE-ээс түрүүлж
+    // WebKit-д 🌙 хэвээр үлддэг байв — CI run 43790105841)
+    await expect(partnerA.page.getByTestId('notif-notice')).toHaveText('Тайван горим дууслаа');
     await partnerB.page.reload();
     await expect(partnerB.page.getByTestId('screen-S-20')).toBeVisible();
     await expect(partnerB.page.getByTestId('person-partner-quiet')).toHaveCount(0);

@@ -128,6 +128,8 @@ export function sentBytesOf(item: Pick<UploadItem, 'received' | 'chunkSize' | 't
 
 export class UploadQueue {
   private running: Promise<void> | null = null;
+  /** Гүйлт явж байхад ирсэн `resume()` — гүйлт дуусмагц дахин нэг удаа ажиллана. */
+  private rerun = false;
   private writes: Promise<unknown> = Promise.resolve();
   private readonly memory = new Map<string, Blob>();
   private readonly listeners = new Set<(items: UploadItem[]) => void>();
@@ -225,13 +227,24 @@ export class UploadQueue {
   /**
    * Дуусаагүй бүхнийг дарааллаар нь илгээнэ (нэг зэрэг нэг л гүйлт). Сүлжээ тасарвал
    * зогсож дараагийн `resume()`-ийг хүлээнэ — хадгалсан төлөв алдагдахгүй.
+   * Гүйлт явж байхад дахин дуудвал (жишээ нь хуудас ачаалсны дараа токен ирэх, `online`) тэр
+   * гүйлтэд нэгдээд орхихгүй — дуусмагц шинэ нөхцөлөөр дахин гүйнэ. Өмнө нь токенгүй эхний гүйлт
+   * унахад токен ирсний дараах дуудлага түүнтэй хамт алга болж upload «Илгээхээр хүлээж байна»
+   * дээр үлддэг байв (AC-20, CI run 43790105841).
    */
   resume(): Promise<void> {
-    if (!this.running) {
-      this.running = this.run().finally(() => {
-        this.running = null;
-      });
+    if (this.running) {
+      this.rerun = true;
+      return this.running;
     }
+    this.running = (async () => {
+      do {
+        this.rerun = false;
+        await this.run();
+      } while (this.rerun);
+    })().finally(() => {
+      this.running = null;
+    });
     return this.running;
   }
 
