@@ -55,10 +55,12 @@ export async function requestPersistentStorage(nav: Navigator | undefined = reso
 }
 
 /**
- * `waiting` SW-ийг дэлгүүрт тавина — зөвхөн өмнө нь SW удирдаж байсан үед (анх суулгахад биш) ба worker
- * үнэхээр хүлээж байгаа бол. WebKit `statechange`-ийг хоцроож өгдөг: анхны суулгалтын worker аль хэдийн
- * идэвхжиж (`clients.claim` → controller) дууссаны дараа «installed» ирэхэд «Шинэ хувилбар бэлэн» худлаа
- * гардаг байв — тиймээс worker-ийн одоогийн төлөвийг шалгана.
+ * `waiting` SW-ийг дэлгүүрт тавина — зөвхөн шинэчлэлт үед (анх суулгахад биш) ба worker үнэхээр хүлээж байгаа бол.
+ * WebKit `statechange`-ийг хоцроож өгдөг: анхны суулгалтын worker аль хэдийн идэвхжиж (`clients.claim` →
+ * controller) дууссаны дараа «installed» ирэхэд `worker.state` нь мөн хуучин утгаа буцаадаг тул «Шинэ хувилбар
+ * бэлэн» худлаа гардаг байв. Тиймээс (1) `updatefound`-ийн агшинд хуудас аль хэдийн SW-ийн удирдлагад байсан
+ * эсэхийг (анхны суулгалтад controller алга) барьж, (2) бүртгэлийн `waiting` талбарыг үнэн гэж үзнэ — spec-ээр
+ * «installed» үйл явдлаас өмнө тавигдаж, идэвхжмэгц цэвэрлэгддэг.
  */
 function watch(reg: ServiceWorkerRegistration, container: ServiceWorkerContainer) {
   const offer = (worker: ServiceWorker | null) => {
@@ -67,8 +69,9 @@ function watch(reg: ServiceWorkerRegistration, container: ServiceWorkerContainer
   offer(reg.waiting);
   reg.addEventListener('updatefound', () => {
     const installing = reg.installing;
+    const isUpdate = !!container.controller;
     installing?.addEventListener('statechange', () => {
-      if (installing.state === 'installed') offer(reg.waiting ?? installing);
+      if (isUpdate && installing.state === 'installed') offer(reg.waiting);
     });
   });
 }

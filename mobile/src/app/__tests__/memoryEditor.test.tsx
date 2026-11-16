@@ -182,6 +182,20 @@ describe('S-32 дурсамж нэмэх', () => {
     expect(useDraftStore.getState().drafts.new?.clientId).not.toBe(clientId);
   });
 
+  it('сонгосон файл дараалалд орж дуустал «Хадгалах» идэвхгүй (эрт дарахад чимээгүй буцахгүй)', async () => {
+    let resolvePick: (v: unknown) => void = () => undefined;
+    library.mockReturnValueOnce(new Promise((r) => (resolvePick = r)));
+    await openNew();
+    await fireEvent.changeText(screen.getByTestId('editor-title'), 'Тэрэлжийн бичлэг');
+    await fireEvent.press(screen.getByTestId('editor-pick'));
+    await waitFor(() => expect(screen.getByTestId('editor-save').props.accessibilityState.disabled).toBe(true));
+    resolvePick({ canceled: false, assets: [photo(1)] });
+    await waitFor(() => expect(screen.getByTestId('editor-media-0')).toBeTruthy());
+    await waitFor(() => expect(screen.getByTestId('editor-save').props.accessibilityState.disabled).toBe(false));
+    await fireEvent.press(screen.getByTestId('editor-save'));
+    await waitFor(() => expect(api.POST).toHaveBeenCalledWith('/memories', expect.anything()));
+  });
+
   it('сүлжээгүй бол ижил clientId-тай outbox-оор (давхар үүсэхгүй)', async () => {
     (api.POST as jest.Mock).mockImplementation(async () => {
       throw new TypeError('Network request failed');

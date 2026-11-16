@@ -535,6 +535,8 @@ function EditorForm({ draftKey, draft, memoryId }: { draftKey: string; draft: Me
         label={phase === 'uploading' ? t('memories.editor.uploading') : t('common.save')}
         onPress={() => void save()}
         loading={saving}
+        // Сонгосон файл дараалалд орж дуустал хадгалахгүй — эс бол «медиа алга» шалгалтаар чимээгүй буцна
+        disabled={picking}
         testID="editor-save"
       />
       <AppButton variant="ghost" label={t('memories.editor.discard')} onPress={() => setDiscarding(true)} disabled={saving} testID="editor-discard" />

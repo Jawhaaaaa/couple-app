@@ -86,6 +86,7 @@ describe('T-83 registerSW', () => {
     reg.installing = installing;
     reg.emit('updatefound');
     installing.state = 'installed';
+    reg.waiting = installing;
     installing.emit('statechange');
     expect(usePwaStore.getState().waiting).toBe(installing);
     doc.emit('visibilitychange');
@@ -101,6 +102,34 @@ describe('T-83 registerSW', () => {
     reg.installing = installing;
     reg.emit('updatefound');
     installing.state = 'activated';
+    installing.emit('statechange');
+    expect(usePwaStore.getState().waiting).toBeNull();
+    stop();
+  });
+
+  it('WebKit: анхны суулгалтад «installed» statechange (хуучирсан state-тэй) clients.claim-ийн дараа ирэхэд мэдэгдэл гаргахгүй', async () => {
+    const { nav, reg, container } = fakeNav({ controller: false });
+    const stop = registerServiceWorker({ platform: 'web', nav, dev: false, doc });
+    await flush();
+    const installing = fakeWorker('installing');
+    reg.installing = installing;
+    reg.emit('updatefound');
+    // Worker идэвхжиж хуудсыг claim хийсэн, гэвч WebKit хоцорсон «installed» үйл явдлыг одоо л өгч байна
+    container.controller = {};
+    installing.state = 'installed';
+    installing.emit('statechange');
+    expect(usePwaStore.getState().waiting).toBeNull();
+    stop();
+  });
+
+  it('шинэчлэлт: «installed» ирсэн ч бүртгэлд waiting алга (аль хэдийн идэвхжсэн) бол мэдэгдэл гаргахгүй', async () => {
+    const { nav, reg } = fakeNav();
+    const stop = registerServiceWorker({ platform: 'web', nav, dev: false, doc });
+    await flush();
+    const installing = fakeWorker('installing');
+    reg.installing = installing;
+    reg.emit('updatefound');
+    installing.state = 'installed';
     installing.emit('statechange');
     expect(usePwaStore.getState().waiting).toBeNull();
     stop();
