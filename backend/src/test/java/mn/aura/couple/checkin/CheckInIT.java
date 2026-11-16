@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.time.Instant;
 import mn.aura.couple.AbstractSpaceIT;
+import mn.aura.couple.realtime.StompTestClient;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -34,6 +35,37 @@ class CheckInIT extends AbstractSpaceIT {
         // A тухайн өдрийнхийг хуваалцвал B харна
         ok(call(a, "PATCH", "/checkins/2026-11-07", body("level", 3, "shared", true)), 200);
         assertThat(ok(call(b, "GET", "/checkins"), 200).path("partner").get(0).path("level").asInt()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("AC-115 хуваалцсан check-in хамтрагчид checkin.shared үйл явдал (зөвхөн огноо); хуваалцаагүйд үйл явдал 0")
+    void sharedCheckinNotifiesPartner() throws Exception {
+        clock.set(Instant.parse("2026-11-07T04:00:00Z"));
+        TestUser a = user("cis-a");
+        TestUser b = user("cis-b");
+        pair(a, b);
+        try (StompTestClient bClient = StompTestClient.connect(port, b.token()).events();
+             StompTestClient aClient = StompTestClient.connect(port, a.token()).events()) {
+            Thread.sleep(300);
+            // Хуваалцаагүй — хамтрагчид юу ч явахгүй
+            ok(call(a, "PUT", "/checkins/today", body("level", 2, "note", "Нууц тэмдэглэл")), 200);
+            assertThat(bClient.next("checkin.shared", 1500)).isNull();
+
+            // Хуваалцахад B-д огноотой үйл явдал; түвшин, тэмдэглэл WS-ээр явахгүй
+            ok(call(a, "PATCH", "/checkins/2026-11-07", body("level", 4, "shared", true)), 200);
+            JsonNode shared = bClient.next("checkin.shared", 5000);
+            assertThat(shared).isNotNull();
+            assertThat(shared.path("payload").path("localDate").asText()).isEqualTo("2026-11-07");
+            assertThat(shared.path("actorId").asText()).isEqualTo(a.id().toString());
+            assertThat(shared.toString()).doesNotContain("Нууц тэмдэглэл");
+            // Үйлдэл хийсэн хүнд өөрт нь илгээхгүй
+            assertThat(aClient.next("checkin.shared", 1000)).isNull();
+
+            // Хуваалцахаа болиход ч B-гийн график шинэчлэгдэнэ
+            ok(call(a, "PATCH", "/checkins/2026-11-07", body("level", 4, "shared", false)), 200);
+            assertThat(bClient.next("checkin.shared", 5000)).isNotNull();
+            assertThat(ok(call(b, "GET", "/checkins"), 200).path("partner").size()).isZero();
+        }
     }
 
     @Test

@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import mn.aura.couple.account.app.PreferenceService;
@@ -13,11 +14,13 @@ import mn.aura.couple.api.model.CheckInInput;
 import mn.aura.couple.api.model.CheckInSeries;
 import mn.aura.couple.common.ApiException;
 import mn.aura.couple.common.ErrorCode;
+import mn.aura.couple.common.event.RealtimeEvent;
 import mn.aura.couple.common.id.Ids;
 import mn.aura.couple.common.space.SpaceContext;
 import mn.aura.couple.common.time.TimeProvider;
 import mn.aura.couple.couple.app.CoupleMembers;
 import mn.aura.couple.couple.app.UserRefs;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -31,6 +34,9 @@ import org.springframework.transaction.annotation.Transactional;
  *   <li>Хуваалцах анхдагчаар унтраастай; `shared` өгөөгүй бол `checkinAutoShare` тохиргоо (AC-183)</li>
  *   <li>Өнгөрсөн өдрийнхийг засахгүй — 403 `CHECKIN_PAST_DAY` (AC-114)</li>
  *   <li>Хамтрагчид зөвхөн хуваалцсан, одоогийн хосын space-д хийгдсэн check-in (AC-46, INV-04)</li>
+ *   <li>Хуваалцсан check-in үүсэх, засагдах эсвэл хуваалцахаа болиход хамтрагчид `checkin.shared`
+ *       (`contracts/asyncapi.yaml`) — график нь бодит цагаар шинэчлэгдэнэ (AC-115). Payload нь зөвхөн
+ *       огноо: түвшин, тэмдэглэл WS-ээр явахгүй, хамтрагч `GET /checkins`-ээр (хуваалцсан бол л) татна</li>
  * </ul>
  */
 @Service
@@ -44,14 +50,16 @@ public class CheckInService {
     private final CoupleMembers couples;
     private final UserRefs users;
     private final TimeProvider time;
+    private final ApplicationEventPublisher events;
 
     public CheckInService(NamedParameterJdbcTemplate jdbc, PreferenceService preferences, CoupleMembers couples,
-                          UserRefs users, TimeProvider time) {
+                          UserRefs users, TimeProvider time, ApplicationEventPublisher events) {
         this.jdbc = jdbc;
         this.preferences = preferences;
         this.couples = couples;
         this.users = users;
         this.time = time;
+        this.events = events;
     }
 
     /** Хэрэглэгчийн өөрийн бүсийн өнөөдөр. */
@@ -133,6 +141,11 @@ public class CheckInService {
                 ON CONFLICT (user_id, local_date) DO UPDATE SET level = EXCLUDED.level, note = EXCLUDED.note,
                     shared = EXCLUDED.shared, space_id = EXCLUDED.space_id, updated_at = EXCLUDED.updated_at
                 """, p);
+        boolean wasShared = !existing.isEmpty() && Boolean.TRUE.equals(existing.get(0));
+        if (shared || wasShared) {
+            couples.partnerIn(ctx.spaceId(), ctx.userId()).ifPresent(partner -> events.publishEvent(
+                    RealtimeEvent.of("checkin.shared", ctx.userId(), List.of(partner), Map.of("localDate", day.toString()))));
+        }
         return map(Date.valueOf(day), level, note, shared);
     }
 
