@@ -57,7 +57,7 @@ export function MoodPicker({ value, onChange, disabled }: Props) {
               testID={`checkin-level-${level}`}
               style={[styles.option, { backgroundColor: selected ? colors.surfaceRaised : 'transparent', borderColor: selected ? colors.primary : colors.border }]}
             >
-              {selected ? <SizedLottie source={MOOD_LOTTIE[level]} size={44} fallback={emoji} onFinish={() => setPlaying(false)} /> : <View style={styles.box}>{emoji}</View>}
+              {selected ? <SizedLottie source={MOOD_LOTTIE[level]} size={44} fallback={emoji} onFinish={() => setPlaying(false)} testID={`checkin-lottie-${level}`} /> : <View style={styles.box}>{emoji}</View>}
               <AppText variant="caption" color={selected ? 'text' : 'textMuted'} numberOfLines={1}>
                 {t(`checkin.level.${level}`)}
               </AppText>

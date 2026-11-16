@@ -3,7 +3,7 @@ import { ShieldAlert } from 'lucide-react-native';
 import { Pressable, StyleSheet } from 'react-native';
 
 import { daysLeft, readOnlyDeadline } from '@/api/queries/couple';
-import { useCoupleQuery } from '@/api/queries/pairing';
+import { type Couple, useCoupleQuery } from '@/api/queries/pairing';
 import { AppText } from '@/components/AppText';
 import { useNow } from '@/hooks/useNow';
 import { useT } from '@/i18n';
@@ -16,11 +16,17 @@ import { iconStroke, spacing, touchTarget } from '@/theme/tokens';
  * (`ORPHANED`, AC-128/GAP-14 — S-85 экспорт руу). Үлдсэн хоногийг харуулна.
  */
 export function SpaceStatusBanner() {
+  const couple = useCoupleQuery().data;
+  if (couple?.status !== 'BREAKING' && couple?.status !== 'ORPHANED') return null;
+  // Төлөв солигдох үед шинээр mount хийгдэж `useNow` тэр агшнаас эхэлнэ — апп нээгдэх үеийн хуучин цагаар
+  // тоолбол тасалсны дараах эхний минутад «15 хоног» гарч S-86-ийн «14»-тэй зөрдөг байв (AC-185).
+  return <ReadOnlyBar key={`${couple.status}:${readOnlyDeadline(couple) ?? ''}`} couple={couple} />;
+}
+
+function ReadOnlyBar({ couple }: { couple: Couple }) {
   const t = useT();
   const colors = useColors();
   const now = useNow();
-  const couple = useCoupleQuery().data;
-  if (couple?.status !== 'BREAKING' && couple?.status !== 'ORPHANED') return null;
   const orphaned = couple.status === 'ORPHANED';
   const count = daysLeft(readOnlyDeadline(couple), now);
   const text = t(orphaned ? 'spaceBanner.orphaned' : 'spaceBanner.breaking', { count });

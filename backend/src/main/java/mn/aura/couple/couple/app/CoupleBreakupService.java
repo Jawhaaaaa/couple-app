@@ -74,9 +74,10 @@ public class CoupleBreakupService {
         jdbc.update("UPDATE space_member SET breakup_confirmed_at = CASE WHEN user_id = ? THEN ?::timestamptz ELSE NULL END, "
                 + "restore_confirmed_at = NULL WHERE space_id = ?", ctx.userId(), Timestamp.from(now), ctx.spaceId());
         List<UUID> members = couples.members(ctx.spaceId());
+        // Бичвэрийн `{days}` (notifications.json) ба S-86 — үлдсэн хоног, «Сэргээх», экспорт тэнд (AC-185)
         couples.partnerIn(ctx.spaceId(), ctx.userId()).ifPresent(partner -> events.publishEvent(new Notify(partner,
-                ctx.spaceId(), ctx.userId(), "BREAKUP_STARTED", Map.of("partner", users.ref(ctx.userId()).getDisplayName()),
-                "/settings/couple")));
+                ctx.spaceId(), ctx.userId(), "BREAKUP_STARTED", Map.of("partner", users.ref(ctx.userId()).getDisplayName(),
+                        "days", String.valueOf(RESTORE_WINDOW.toDays())), "/settings/breakup")));
         events.publishEvent(RealtimeEvent.of("couple.updated", ctx.userId(), members, Map.of("coupleId", ctx.spaceId())));
         return state(ctx);
     }

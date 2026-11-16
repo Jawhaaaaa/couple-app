@@ -649,7 +649,7 @@ Mobile build хувьсагч: `EXPO_PUBLIC_API_URL`, `EXPO_PUBLIC_WS_URL`, `EXP
 | T-08 | `useMotionPreference`, `haptics.ts` (`ANIM_HAPTICS`), `SizedLottie`, `ParticleBurst`, `Confetti`, `CelebrationOverlay`, **`AnimatedMoment`** | `motion-off.test.tsx` (AC-MO-03), `haptics.test.ts` (AC-MO-04, AC-215, AC-217), `e2e/tests/lottie-size.spec.ts` (AC-MO-05) |
 | T-09 | `scripts/fetch-assets.mjs`, `Mascot`, `docs/ASSETS.md` | `assets-registry.test.ts` (AC-AS-01, AC-217) |
 | T-10 | `src/app/_layout.tsx`, `src/app/(tabs)/_layout.tsx`, `useWideLayout`, `ScreenState`, `ServerUnreachable` | `e2e/tests/layout.spec.ts` (AC-192), `e2e/tests/screen-states.spec.ts` (AC-213) |
-| T-11 | `src/api/client.ts`, `src/api/schema.d.ts`, `src/offline/outbox.ts`, `src/offline/persist.ts` | `client-refresh.test.ts` (AC-168), `outbox.test.ts` (AC-28), `api-schema-fresh.test.ts`, `e2e/tests/offline.spec.ts` (AC-156) |
+| T-11 | `src/api/client.ts`, `src/api/schema.d.ts`, `src/offline/outbox.ts`, `src/offline/persist.ts` | `client-refresh.test.ts` (AC-168), `outbox.test.ts` (AC-28), `api-schema-fresh.test.ts`, `e2e/tests/pwa-offline.spec.ts` (AC-156) |
 | T-12 | `content.schema.json`, `stoplist.mn.txt`, `stoplist.en.txt`, `questions.json` | `content.test.ts` (AC-145…147) |
 | T-13 | `date-ideas.json` | `content.test.ts` (AC-145…147) |
 | T-14 | `notifications.json`, `greetings.json`, `empty-states.json`, `first-week.json`, `onboarding.json`, `errors.json` | `content.test.ts`, `error-codes-coverage.test.ts` (ApiError `code` enum бүрд мессеж) |
@@ -682,12 +682,12 @@ Mobile build хувьсагч: `EXPO_PUBLIC_API_URL`, `EXPO_PUBLIC_WS_URL`, `EXP
 | T-41 | `MemoryRecapJob`, `src/app/recap/[id].tsx` | `MemoryRecapIT` (AC-84) |
 | T-42 | `MemoryBookPdfService`, `MemoryAlbumZipService`, `src/app/(tabs)/memories/export.tsx` | `MemoryBookPdfIT` (AC-26), `AlbumZipIT` (AC-85) |
 | T-43 | `ChatMessageService` | `ChatMessageIT` (AC-29, AC-30, AC-87, AC-88, AC-176, AC-177), `e2e/tests/chat.spec.ts` (AC-27) |
-| T-44 | `ChatSearchService`, `PinService` | `ChatSearchIT`, `e2e/tests/chat-search.spec.ts` (AC-89, AC-90) |
+| T-44 | `ChatSearchService`, `PinService` | `ChatSearchIT`, `e2e/tests/chat-actions.spec.ts` (AC-89, AC-90) |
 | T-45 | `DisappearingMessageJob`, `ScreenProtection`, `src/app/(tabs)/chat/disappearing.tsx` | `DisappearingMessageIT` (AC-30, AC-92), `e2e/tests/chat-disappearing.spec.ts` |
-| T-46 | `VoiceRecorder`, `VoiceRecorderOverlay`, `AudioTranscodeJob` | `AudioTranscodeIT`, `e2e/tests/voice.spec.ts` (AC-32, AC-158) |
+| T-46 | `VoiceRecorder`, `VoiceRecorderOverlay`, `AudioTranscodeJob` | `AudioTranscodeIT`, `e2e/tests/chat-voice.spec.ts` (AC-32, AC-158) |
 | T-47 | `src/app/(tabs)/chat/index.tsx`, `MessageBubble`, `ChatComposer` | `e2e/tests/chat.spec.ts` (AC-27, AC-28, AC-29, AC-88, AC-176, AC-177, AC-178) |
 | T-48 | `message-menu.tsx`, `pins.tsx`, `search.tsx`, `media.tsx`, `LocationMessage` | `e2e/tests/chat-actions.spec.ts` (AC-87, AC-89, AC-90, AC-91) |
-| T-49 | `SharedPromiseService`, `src/app/(tabs)/chat/promise.tsx` | `SharedPromiseIT`, `e2e/tests/promise.spec.ts` (AC-93) |
+| T-49 | `SharedPromiseService`, `src/app/(tabs)/chat/promise.tsx` | `SharedPromiseIT`, `e2e/tests/chat-promise.spec.ts` (AC-93) |
 | T-50 | `DateIdeaService`, `IdeaLibraryService`, `RandomIdeaPicker` | `RandomIdeaPickerTest` (AC-98), `IdeaLibraryIT` (AC-99), `DateIdeaIT` (AC-179) |
 | T-51 | `DatePlanService`, `ReminderRegistry` | `DatePlanIT` (AC-33, AC-95, AC-96, AC-131), `ReminderRegistryTest` (AC-35), `planTime.test.ts` (AC-34) |
 | T-52 | `DateRecurrence`, `BudgetSummaryService` | `DateRecurrenceTest` (AC-37), `budget.test.ts` + `BudgetSummaryTest` (AC-97) |
@@ -826,14 +826,14 @@ Mobile build хувьсагч: `EXPO_PUBLIC_API_URL`, `EXPO_PUBLIC_WS_URL`, `EXP
 | AC-29 | `POST /messages/read` → WS `chat.receipt` | E2E `chat.spec.ts` |
 | AC-30 | INV-05: `deleted_at`/`expires_at` → агуулга NULL; хайлт, экспорт, push-ээс хасах | IT `ChatMessageIT`, `DisappearingMessageIT`, `DataExportIT` |
 | AC-31 | DD-AURA-008 `CoupleChannelInterceptor` | IT `RealtimeIsolationIT`, `CoupleIsolationIT` |
-| AC-32 | `AudioTranscodeJob` + waveform, ANIM-23 | E2E `voice.spec.ts`; ГАР iPhone |
+| AC-32 | `AudioTranscodeJob` + waveform, ANIM-23 | E2E `chat-voice.spec.ts`; ГАР iPhone |
 | AC-87 | `UploadCreate purpose=FILE ≤ 50 MB`, `MediaInspector` хориотой төрөл, `kind=LOCATION` | IT `ChatMessageIT`; E2E `chat-actions.spec.ts` |
 | AC-88 | `replyToId`, `PATCH /messages/{id}` (`editedAt`), 403 | E2E `chat.spec.ts`; IT `ChatMessageIT` |
-| AC-89 | `GET /messages/search` (highlights), `GET /messages/jump` | E2E `chat-search.spec.ts` |
-| AC-90 | `PUT/DELETE /messages/{id}/pin` (хоёулаа) | E2E `chat-search.spec.ts` |
+| AC-89 | `GET /messages/search` (highlights), `GET /messages/jump` | E2E `chat-actions.spec.ts` |
+| AC-90 | `PUT/DELETE /messages/{id}/pin` (хоёулаа) | E2E `chat-actions.spec.ts` |
 | AC-91 | S-41 → `draftStore` → S-32/S-53/S-63 (DEC-AURA-005) | E2E `chat-actions.spec.ts`, `ideas.spec.ts`, `lists.spec.ts` |
 | AC-92 | `DisappearingMessageJob` (2 с), `expires_at = read_at + seconds`; GAP-12 бичвэр | IT `DisappearingMessageIT`; E2E `chat-disappearing.spec.ts`; ГАР Android |
-| AC-93 | `SharedPromiseService` | E2E `promise.spec.ts` |
+| AC-93 | `SharedPromiseService` | E2E `chat-promise.spec.ts` |
 | AC-176 | `Message.status` SENT→DELIVERED→READ, `deleted` | E2E `chat.spec.ts`; IT `ChatMessageIT` |
 | AC-177 | `typing_visible` тэгш, `/app/typing` | IT `ChatMessageIT`; E2E `chat.spec.ts` |
 | AC-178 | `ChatComposer` «Хайртай» → `POST /signals` | E2E `chat.spec.ts` |
@@ -933,7 +933,7 @@ Mobile build хувьсагч: `EXPO_PUBLIC_API_URL`, `EXPO_PUBLIC_WS_URL`, `EXP
 | AC-155 | `ReminderScheduler` Web Push | IT `ReminderSchedulerIT` |
 | AC-156 | Persist кэш + SW shell + outbox, `navigator.storage.persist()` | E2E `pwa-offline.spec.ts` |
 | AC-157 | `PasskeyService` (`webauthn4j`), S-102 | E2E `passkey.spec.ts` (virtual authenticator) |
-| AC-158 | `webFallbacks.ts`, `MediaRecorder`, `GET /plans/{id}/ics`, Leaflet | E2E `web-fallbacks.spec.ts`, `voice.spec.ts`; ГАР Safari |
+| AC-158 | `webFallbacks.ts`, `MediaRecorder`, `GET /plans/{id}/ics`, Leaflet | E2E `web-fallbacks.spec.ts`, `chat-voice.spec.ts`; ГАР Safari |
 | AC-159 | Prod HTTPS PWA push | ГАР |
 | AC-160 | Lazy маршрут, Lottie динамик import | E2E `perf.spec.ts` |
 | AC-191 | `UpdateBanner` → `draftStore` → `skipWaiting` | E2E `pwa-offline.spec.ts` |

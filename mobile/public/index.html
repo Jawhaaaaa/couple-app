@@ -47,11 +47,31 @@
         height: 100%;
         flex: 1;
       }
+      /* S-01 static splash: JS ачаалагдаж, React эхний рендэрээ хийтэл (createRoot нь #root-ыг цэвэрлэнэ) */
+      #aura-splash {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        color: #F5EDEA;
+        font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+        font-style: italic;
+        font-size: 40px;
+        line-height: 44px;
+      }
+      #aura-splash img {
+        width: 224px;
+        height: 224px;
+        border-radius: 48px;
+      }
     </style>
   </head>
 
   <body>
     <noscript>Aura-г ашиглахын тулд JavaScript-ийг асаана уу. · Please enable JavaScript to use Aura.</noscript>
-    <div id="root"></div>
+    <!-- S-01 (FR-19.10): эхний будалт JS-ийг хүлээхгүй — LCP нь энэ splash; апп рендэрлэхэд солигдоно -->
+    <div id="root"><div id="aura-splash" role="img" aria-label="Aura"><img src="/icons/icon-512.png" alt="" width="224" height="224" fetchpriority="high" /><span aria-hidden="true">Aura</span></div></div>
   </body>
 </html>

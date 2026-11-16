@@ -46,6 +46,8 @@ export interface UploadItem {
   status: UploadStatus;
   failure?: UploadFailure;
   media?: MediaRef;
+  /** `POST /uploads`-ийн `quotaWarning` — хосын хадгалах сан ≥ 80% (AC-200, editor-т анхааруулга). */
+  quotaWarning?: boolean;
   createdAt: string;
 }
 
@@ -365,6 +367,7 @@ export class UploadQueue {
       uploadId: session.id,
       chunkSize: session.chunkSize,
       received: [...(session.receivedChunks ?? [])],
+      quotaWarning: session.quotaWarning === true,
     });
   }
 

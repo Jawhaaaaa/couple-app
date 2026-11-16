@@ -3560,6 +3560,11 @@ export interface components {
             avatar?: components["schemas"]["NullableMediaRef"];
             emailVerified: boolean;
             policyVersionAccepted: string | null;
+            /**
+             * Format: date-time
+             * @description Бодлогын зөвшөөрсөн хувилбарыг хүлээн зөвшөөрсөн агшин (S-81, AC-130)
+             */
+            policyAcceptedAt?: string | null;
             policyUpdateRequired: boolean;
             onlineVisible: boolean;
             typingVisible: boolean;

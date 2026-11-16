@@ -62,7 +62,10 @@ jobs:
       - run: npx tsc --noEmit
       - run: npx expo lint
       - run: npx jest --ci
+      # E2E-д S-03 «Google-ээр нэвтрэх» товч (AC-06) — backend-ийн тестийн IdP-тэй (GAP-18); нууц биш
       - run: npx expo export --platform web && node scripts/build-sw.cjs
+        env:
+          EXPO_PUBLIC_OAUTH_GOOGLE: 'true'
       - uses: actions/upload-artifact@v4
         with:
           name: web-dist
@@ -99,6 +102,18 @@ jobs:
           # Зөвхөн CI-ийн түр DB — нууц биш, runner дуусахад устна
           sed -i "s|^POSTGRES_PASSWORD=.*|POSTGRES_PASSWORD=ci-$(openssl rand -hex 8)|" .env
           sed -i "s|^AURA_JWT_SECRET=.*|AURA_JWT_SECRET=$(openssl rand -base64 48 | tr -d '\n')|" .env
+          # E2E-ийн stub-ууд (хост дээр, `host.docker.internal`): Google IdP :8097 (AC-06, GAP-18),
+          # Open-Meteo :8098 (AC-71); Web Push-ийн түр VAPID түлхүүр (AC-154) — ажиллалт бүрд шинэ
+          sed -i '/^AURA_GOOGLE_/d; /^AURA_VAPID_PUBLIC_KEY=/d; /^AURA_VAPID_PRIVATE_KEY=/d' .env
+          node e2e/scripts/vapid-keys.mjs >> .env
+          {
+            echo "AURA_GOOGLE_CLIENT_ID=e2e-google-client"
+            echo "AURA_GOOGLE_CLIENT_SECRET=e2e-google-secret"
+            echo "AURA_GOOGLE_ISSUER=http://host.docker.internal:8097"
+            echo "AURA_GOOGLE_ID_TOKEN_ALG=HS256"
+            echo "AURA_WEATHER_BASE_URL=http://host.docker.internal:8098"
+            echo "AURA_GEOCODING_BASE_URL=http://host.docker.internal:8098"
+          } >> .env
           docker compose up -d --build --wait --wait-timeout 300 postgres seaweedfs mailpit backend
       - uses: actions/setup-node@v4
         with:

@@ -29,11 +29,13 @@ export async function startOAuthIdp({ port = 0, clientSecret = 'e2e-google-secre
   const codes = new Map<string, IdpUser>();
   let issuer = '';
 
-  const idToken = (u: IdpUser, aud: string) => {
+  // `iss` нь backend-ийн харсан хаяг (Host): контейнер доторх backend stub-д `host.docker.internal`-оор
+  // хүрдэг тул `aura.oauth.google.issuer` нь тэр хаяг — `localhost` биш (oauth.spec.ts).
+  const idToken = (u: IdpUser, aud: string, iss: string) => {
     const header = b64url(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
     const now = Math.floor(Date.now() / 1000);
     const payload = b64url(
-      JSON.stringify({ iss: issuer, aud, sub: u.sub, email: u.email, email_verified: u.emailVerified ?? true, name: u.name, iat: now, exp: now + 600 }),
+      JSON.stringify({ iss, aud, sub: u.sub, email: u.email, email_verified: u.emailVerified ?? true, name: u.name, iat: now, exp: now + 600 }),
     );
     const sig = b64url(createHmac('sha256', clientSecret).update(`${header}.${payload}`).digest());
     return `${header}.${payload}.${sig}`;
@@ -62,7 +64,7 @@ export async function startOAuthIdp({ port = 0, clientSecret = 'e2e-google-secre
         return res.end('{"error":"invalid_grant"}');
       }
       codes.delete(form.get('code') ?? '');
-      return res.end(JSON.stringify({ access_token: `at-${u.sub}`, token_type: 'Bearer', expires_in: 600, id_token: idToken(u, form.get('client_id') ?? '') }));
+      return res.end(JSON.stringify({ access_token: `at-${u.sub}`, token_type: 'Bearer', expires_in: 600, id_token: idToken(u, form.get('client_id') ?? '', req.headers.host ? `http://${req.headers.host}` : issuer) }));
     }
     if (url.pathname === '/userinfo') {
       res.setHeader('Content-Type', 'application/json');

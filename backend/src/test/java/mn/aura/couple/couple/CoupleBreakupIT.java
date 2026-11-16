@@ -57,6 +57,13 @@ class CoupleBreakupIT extends AbstractSpaceIT {
                 .isBetween(Instant.parse("2026-11-21T04:00:00Z"), Instant.parse("2026-11-21T04:01:00Z"));
         assertThat(jdbc.queryForObject("SELECT count(*) FROM notification WHERE user_id = ? AND type = 'BREAKUP_STARTED'",
                 Integer.class, b.id())).isEqualTo(1);
+        // Мэдэгдэл S-86 руу (үлдсэн хоног, сэргээх, экспорт); бичвэрт `{days}` орлогдсон
+        JsonNode notice = ok(call(b, "GET", "/notifications"), 200).path("items").get(0);
+        assertThat(notice.path("type").asText()).isEqualTo("BREAKUP_STARTED");
+        assertThat(notice.path("deepLink").asText()).isEqualTo("/settings/breakup");
+        assertThat(notice.path("body").asText()).doesNotContain("{");
+        assertThat(jdbc.queryForObject("SELECT params->>'days' FROM notification WHERE user_id = ? AND type = 'BREAKUP_STARTED'",
+                String.class, b.id())).isEqualTo("14");
         assertThat(ok(call(b, "GET", "/couple"), 200).path("breakup").path("status").asText()).isEqualTo("BREAKING");
 
         // (в) зөвхөн харах/экспорт

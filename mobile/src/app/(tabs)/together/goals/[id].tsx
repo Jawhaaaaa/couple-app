@@ -76,6 +76,9 @@ function GoalBody({ goal }: { goal: Goal }) {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
   const [editingTitle, setEditingTitle] = useState<string | null>(null);
+  // Засвар эхэлсэн үеийн хувилбар: хамтрагчийн `goal.updated` кэшийг шинэчилсэн ч түүгээр хадгалбал
+  // 409 гарч сонголт харагдана — шинэ `goal.version`-оор хадгалбал чимээгүй дарна (AC-131, INV-07)
+  const [editingVersion, setEditingVersion] = useState(goal.version);
   const [conflict, setConflict] = useState<{ current: Goal; updatedBy: string | null; title: string } | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [celebrate, setCelebrate] = useState(false);
@@ -152,7 +155,7 @@ function GoalBody({ goal }: { goal: Goal }) {
               <AppButton variant="secondary" label={t('common.cancel')} onPress={() => setEditingTitle(null)} testID="goal-title-cancel" />
               <AppButton
                 label={t('common.save')}
-                onPress={() => void saveTitle(editingTitle.trim(), goal.version)}
+                onPress={() => void saveTitle(editingTitle.trim(), editingVersion)}
                 disabled={!editingTitle.trim()}
                 loading={busy === 'title'}
                 testID="goal-title-save"
@@ -164,7 +167,14 @@ function GoalBody({ goal }: { goal: Goal }) {
             <AppText variant="h2" style={styles.flex} testID="goal-title">
               {goal.title}
             </AppText>
-            <IconButton label={t('goals.editTitle')} onPress={() => setEditingTitle(goal.title)} testID="goal-title-edit">
+            <IconButton
+              label={t('goals.editTitle')}
+              onPress={() => {
+                setEditingVersion(goal.version);
+                setEditingTitle(goal.title);
+              }}
+              testID="goal-title-edit"
+            >
               <Pencil size={18} color={colors.textMuted} strokeWidth={iconStroke} />
             </IconButton>
           </View>

@@ -124,9 +124,22 @@ export function fetchMemory(id: string): Promise<Memory> {
   return unwrap(api.GET('/memories/{memoryId}', { params: { path: { memoryId: id } } }));
 }
 
+/** Медиа хөрвүүлэлт (видео, AC-24) дуусаагүй эсэх — дуусах хүртэл S-31 дахин татна. */
+export function hasProcessingMedia(memory: Pick<Memory, 'media'> | undefined): boolean {
+  return !!memory?.media.some((m) => m.media.status === 'PENDING' || m.media.status === 'PROCESSING');
+}
+
+/** Хөрвүүлэлт дуусахад сервер realtime үйл явдал илгээдэггүй тул энэ давтамжаар шалгана. */
+export const MEDIA_PROCESSING_POLL_MS = 3_000;
+
 export function useMemory(id: string | undefined) {
   const accessToken = useSessionStore((s) => s.accessToken);
-  return useQuery({ queryKey: memoryKey(id ?? ''), queryFn: () => fetchMemory(id ?? ''), enabled: !!accessToken && !!id });
+  return useQuery({
+    queryKey: memoryKey(id ?? ''),
+    queryFn: () => fetchMemory(id ?? ''),
+    enabled: !!accessToken && !!id,
+    refetchInterval: (query) => (hasProcessingMedia(query.state.data) ? MEDIA_PROCESSING_POLL_MS : false),
+  });
 }
 
 export function createMemory(body: MemoryCreate): Promise<Memory> {

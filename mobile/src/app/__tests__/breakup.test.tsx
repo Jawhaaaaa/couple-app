@@ -174,6 +174,22 @@ describe('Зөвхөн харах горимын зурвас', () => {
     expect(router.push).toHaveBeenCalledWith('/settings/breakup');
   });
 
+  it('AC-185 апп нээлттэй байхад тасарвал зурвас тэр агшнаас тоолно — «14 хоног» (апп нээсэн цагаар 15 биш)', async () => {
+    jest.useFakeTimers({ now: Date.parse('2026-11-07T04:00:00Z'), doNotFake: ['nextTick', 'setImmediate', 'queueMicrotask'] });
+    try {
+      const { client } = await renderWithClient(<SpaceStatusBanner />);
+      await waitFor(() => expect(api.GET).toHaveBeenCalled());
+      // 30 с-ийн дараа (useNow-ийн минутын tick-ээс өмнө) хос тасарч яг 14 хоногийн хугацаа эхэлнэ
+      jest.setSystemTime(Date.parse('2026-11-07T04:00:30Z'));
+      const until = new Date(Date.now() + 14 * DAY).toISOString();
+      current = couple({ status: 'BREAKING', readOnlyUntil: until, breakup: { status: 'BREAKING', restoreDeadline: until, myRestoreConfirmed: false, partnerRestoreConfirmed: false } });
+      await client.invalidateQueries({ queryKey: ['couple'] });
+      expect(await screen.findByTestId('space-banner-breaking')).toHaveTextContent(/14 хоногийн дотор/);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
   it('ACTIVE үед зурвас алга', async () => {
     await renderWithClient(<SpaceStatusBanner />);
     await waitFor(() => expect(api.GET).toHaveBeenCalled());

@@ -49,9 +49,13 @@ export default function OccasionDetailScreen() {
   const params = useLocalSearchParams<{ key?: string }>();
   const key = first(params.key);
   const detail = useOccasion(key);
+  // Хадгалсны дараа шинэ `version`-оор body дахин mount болдог (маягт серверийн утгаар шинэчлэгдэнэ) —
+  // «Хадгалагдлаа» нь mutation-ий төлөвтэй хамт алга болохгүйн тулд хадгалсан хувилбарыг энд барина
+  const [savedVersion, setSavedVersion] = useState<number | null>(null);
   let body;
-  if (detail.data) body = <OccasionBody key={detail.data.version} detail={detail.data} />;
-  else if (detail.isError) body = <ScreenState kind="error" message={errorText(detail.error)} onRetry={() => void detail.refetch()} />;
+  if (detail.data) {
+    body = <OccasionBody key={detail.data.version} detail={detail.data} saved={savedVersion === detail.data.version} onSaved={setSavedVersion} />;
+  } else if (detail.isError) body = <ScreenState kind="error" message={errorText(detail.error)} onRetry={() => void detail.refetch()} />;
   else body = <ScreenState kind="loading" rows={4} />;
   return (
     <StackScreen title={detail.data?.occasion.title ?? t('occasions.detailTitle')} testID="screen-S-61-detail">
@@ -60,7 +64,7 @@ export default function OccasionDetailScreen() {
   );
 }
 
-function OccasionBody({ detail }: { detail: OccasionDetail }) {
+function OccasionBody({ detail, saved, onSaved }: { detail: OccasionDetail; saved: boolean; onSaved: (version: number) => void }) {
   const t = useT();
   const colors = useColors();
   const errorText = useErrorText();
@@ -79,6 +83,7 @@ function OccasionBody({ detail }: { detail: OccasionDetail }) {
   const save = useMutation({
     mutationFn: () => putOccasionNote(o.occasionKey, { note: note.trim() || null, memoryIds, reminderDays, version: detail.version }),
     onSuccess: async (next) => {
+      onSaved(next.version);
       queryClient.setQueryData(['occasion', o.occasionKey], next);
       setPicking(false);
       await invalidateOccasions(queryClient);
@@ -161,7 +166,7 @@ function OccasionBody({ detail }: { detail: OccasionDetail }) {
           ))}
         </ChipRow>
         {save.error ? <FormMessage text={errorText(save.error)} testID="occasion-save-error" /> : null}
-        {save.isSuccess ? <FormMessage kind="success" text={t('occasions.saved')} testID="occasion-saved" /> : null}
+        {save.isSuccess || saved ? <FormMessage kind="success" text={t('occasions.saved')} testID="occasion-saved" /> : null}
         <AppButton label={t('occasions.save')} onPress={() => save.mutate()} loading={save.isPending} disabled={offline} testID="occasion-save" />
       </Card>
 

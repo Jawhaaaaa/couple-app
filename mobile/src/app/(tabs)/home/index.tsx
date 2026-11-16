@@ -34,6 +34,7 @@ import { UpdateAvailableCard } from '@/components/UpdateAvailableCard';
 import { useErrorText } from '@/hooks/useErrorText';
 import { useNow } from '@/hooks/useNow';
 import { formatDate, useT } from '@/i18n';
+import { HeartRefresh, HIDDEN_REFRESH_SPINNER, usePullRefresh } from '@/motion/HeartRefresh';
 import { LIVE_SUPPRESS_MS, useSignalFx } from '@/signals/sendSignal';
 import { usePrefsStore } from '@/stores/prefsStore';
 import { useColors } from '@/theme/ThemeProvider';
@@ -49,6 +50,7 @@ export default function HomeScreen() {
   const t = useT();
   const errorText = useErrorText();
   const dashboard = useDashboard();
+  const pull = usePullRefresh(dashboard.refetch);
   const me = useMeQuery().data;
   const now = useNow(30_000);
   const data = dashboard.data;
@@ -62,9 +64,16 @@ export default function HomeScreen() {
     body = (
       <ScrollView
         contentContainerStyle={styles.scroll}
-        refreshControl={<RefreshControl refreshing={dashboard.isRefetching} onRefresh={() => void dashboard.refetch()} />}
+        refreshControl={
+          <RefreshControl
+            {...HIDDEN_REFRESH_SPINNER}
+            refreshing={pull.refreshing}
+            onRefresh={pull.onRefresh}
+          />
+        }
         testID="home-scroll"
       >
+        <HeartRefresh refreshing={pull.refreshing} />
         <CounterBlock counter={data.counter} />
         {solo ? <SoloInvite name={me?.callName ?? me?.displayName ?? data.me.name} /> : <CoupleBody data={data} now={now} fresh={dashboard.isFetchedAfterMount} />}
         {/* Хэрэглэгч тутмын санал асуулга — хосгүй үед ч (AC-207) */}

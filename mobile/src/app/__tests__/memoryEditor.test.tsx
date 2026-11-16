@@ -228,6 +228,19 @@ describe('S-32 дурсамж нэмэх', () => {
     expect(screen.queryByTestId('editor-location-notice')).toBeNull();
   });
 
+  it('AC-95 болзооноос үүссэн дурсамжийг хадгалахад болзоо (S-54) руу л буцна — шинэ дурсамж руу push хийхгүй', async () => {
+    mockParams = { draft: JSON.stringify({ title: 'Зайсангийн орой', occurredOn: '2026-11-14', datePlanId: 'p1' }) };
+    library.mockResolvedValueOnce({ canceled: false, assets: [photo(1)] });
+    await renderWithClient(<MemoryEditorScreen />);
+    await waitFor(() => expect(screen.getByTestId('editor-title').props.value).toBe('Зайсангийн орой'));
+    await fireEvent.press(screen.getByTestId('editor-pick'));
+    await waitFor(() => expect(screen.getByTestId('editor-media-0-alt')).toBeTruthy());
+    await fireEvent.press(screen.getByTestId('editor-save'));
+    await waitFor(() => expect(api.POST).toHaveBeenCalledWith('/memories', expect.objectContaining({ body: expect.objectContaining({ datePlanId: 'p1' }) })));
+    await waitFor(() => expect(router.back).toHaveBeenCalled());
+    expect(router.push).not.toHaveBeenCalled();
+  });
+
   it('?draft= (чат/болзоо) гарчиг, огноо, газар, тайлбараар бөглөнө', async () => {
     mockParams = { draft: JSON.stringify({ title: 'Кино үзсэн', occurredOn: '2026-10-03', place: 'Өргөө', description: 'Шөнийн кино' }) };
     await renderWithClient(<MemoryEditorScreen />);

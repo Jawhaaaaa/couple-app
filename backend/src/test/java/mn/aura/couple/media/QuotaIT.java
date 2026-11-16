@@ -55,6 +55,26 @@ class QuotaIT extends AbstractSpaceIT {
         assertThat(call(a, "GET", "/uploads/" + id2).statusCode()).isEqualTo(410);
     }
 
+    @Test
+    @DisplayName("AC-200 E2E seed STORAGE_USAGE: хосын хэрэглээг 8 GB болгоход /storage/usage warning=true; буруу параметр 400")
+    void storageUsageSeed() {
+        TestUser a = user("qs-a");
+        TestUser b = user("qs-b");
+        UUID couple = pair(a, b);
+        long eightGb = (long) (GB10 * 0.8);
+        HttpResponse<String> seeded = mn.aura.couple.HttpTestClient.send("POST", url("/api/v1/test/seed"),
+                "{\"scenario\":\"STORAGE_USAGE\",\"params\":{\"userId\":\"" + a.id() + "\",\"usedBytes\":" + eightGb + "}}");
+        assertThat(ok(seeded, 200).path("spaceIds").path(0).asText()).isEqualTo(couple.toString());
+        assertThat(used(couple)).isEqualTo(eightGb);
+        JsonNode usage = ok(call(b, "GET", "/storage/usage"), 200);
+        assertThat(usage.path("usedBytes").asLong()).isEqualTo(eightGb);
+        assertThat(usage.path("warning").asBoolean()).isTrue();
+
+        HttpResponse<String> bad = mn.aura.couple.HttpTestClient.send("POST", url("/api/v1/test/seed"),
+                "{\"scenario\":\"STORAGE_USAGE\",\"params\":{\"userId\":\"" + a.id() + "\",\"usedBytes\":-1}}");
+        assertThat(bad.statusCode()).isEqualTo(400);
+    }
+
     private long used(UUID space) {
         return jdbc.queryForObject("SELECT storage_bytes FROM space WHERE id = ?", Long.class, space);
     }

@@ -1,4 +1,4 @@
-import { configure, fireEvent, screen, waitFor, within } from '@testing-library/react-native';
+import { act, configure, fireEvent, screen, waitFor, within } from '@testing-library/react-native';
 import * as Calendar from 'expo-calendar/legacy';
 import { router } from 'expo-router';
 
@@ -17,10 +17,20 @@ import { useSessionStore } from '@/stores/sessionStore';
 import { ME, ok, PARTNER, renderWithClient } from '../../../test/memoryFixtures';
 
 let mockParams: Record<string, string> = {};
-jest.mock('expo-router', () => ({
-  router: { push: jest.fn(), replace: jest.fn(), back: jest.fn(), canGoBack: jest.fn(() => true) },
-  useLocalSearchParams: () => mockParams,
-}));
+/** Дэлгэц focus авсан (буцаж ирсэн) мэт дахин дуудах `useFocusEffect`-ийн сүүлийн callback. */
+let mockFocus: (() => void) | null = null;
+jest.mock('expo-router', () => {
+  const { useEffect } = jest.requireActual<typeof import('react')>('react');
+  return {
+    router: { push: jest.fn(), replace: jest.fn(), back: jest.fn(), canGoBack: jest.fn(() => true) },
+    useLocalSearchParams: () => mockParams,
+    useFocusEffect: (cb: () => void) =>
+      useEffect(() => {
+        mockFocus = cb;
+        cb();
+      }, [cb]),
+  };
+});
 jest.mock('@/auth/tokenStore', () => ({
   usesCookieRefresh: false,
   getRefreshToken: jest.fn(async () => null),
@@ -154,6 +164,18 @@ describe('S-50 Төлөвлөгөө', () => {
     expect(router.push).toHaveBeenCalledWith({ pathname: '/plans/[id]/counter', params: { id: 'theirs' } });
   });
 
+  it('AC-33 «Өөр цаг» санал болгосны дараа — надад «Хариу хүлээгдэж байна», санал болгогчид «сонгох»', async () => {
+    lists.upcoming = [
+      summary('countered', { status: 'COUNTER_PROPOSED', proposer: PARTNER }),
+      summary('to-choose', { status: 'COUNTER_PROPOSED', proposer: ME }),
+    ];
+    await renderWithClient(<PlansScreen />);
+    expect(await screen.findByTestId('rsvp-waiting-countered')).toHaveTextContent('Хариу хүлээгдэж байна');
+    expect(screen.queryByTestId('rsvp-choose-countered')).toBeNull();
+    expect(screen.getByTestId('rsvp-choose-to-choose')).toBeTruthy();
+    expect(screen.queryByTestId('rsvp-waiting-to-choose')).toBeNull();
+  });
+
   it('AC-103 S-50-ийн дээд хэсэгт Milestone Horizon — «18 хоног үлдлээ», товшвол S-61', async () => {
     lists.upcoming = [summary('p-next')];
     const nextOn = addDays(todayIn(TZ), 18);
@@ -253,6 +275,16 @@ describe('S-54 болзооны дэлгэрэнгүй', () => {
       place: current.place,
       datePlanId: 'p1',
     });
+  });
+
+  it('AC-95 S-32-оос буцаж ирэхэд (focus) холбогдсон дурсамж «Дурсамжийг үзэх» болж шинэчлэгдэнэ', async () => {
+    current = plan('p1', { startsAt: inDays(-3) });
+    await renderWithClient(<PlanDetailScreen />);
+    expect(await screen.findByTestId('plan-to-memory')).toBeTruthy();
+    current = plan('p1', { startsAt: inDays(-3), memoryId: 'm7' });
+    await act(async () => mockFocus?.());
+    expect(await screen.findByTestId('plan-open-memory')).toBeTruthy();
+    expect(screen.queryByTestId('plan-to-memory')).toBeNull();
   });
 
   it('AC-95 холбогдсон дурсамжтай бол «Дурсамжийг үзэх»', async () => {

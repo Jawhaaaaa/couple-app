@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { ChevronRight, Download, FolderHeart, Heart, MapPin, Plus, Search, Sparkles, Trash2 } from 'lucide-react-native';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { ActivityIndicator, FlatList, Pressable, RefreshControl, SectionList, StyleSheet, View } from 'react-native';
 
 import {
@@ -25,7 +25,7 @@ import { emptyStateText } from '@/content/emptyStates';
 import { useErrorText } from '@/hooks/useErrorText';
 import { formatDateLong, useT } from '@/i18n';
 import { monthLabel, groupByMonth } from '@/memories/timeline';
-import { playHaptic } from '@/motion/haptics';
+import { HeartRefresh, HIDDEN_REFRESH_SPINNER, usePullRefresh } from '@/motion/HeartRefresh';
 import { usePrefsStore } from '@/stores/prefsStore';
 import { useColors } from '@/theme/ThemeProvider';
 import { iconStroke, radius, spacing, touchTarget } from '@/theme/tokens';
@@ -153,6 +153,10 @@ function Timeline({ filters, onClearFilters }: { filters: MemoryFilters; onClear
   const locale = usePrefsStore((s) => s.locale);
   const list = useMemoriesInfinite(filters);
   const months = useMemoryMonths(filters.scope);
+  const { refetch: refetchList } = list;
+  const { refetch: refetchMonths } = months;
+  const refreshAll = useCallback(() => Promise.all([refetchList(), refetchMonths()]), [refetchList, refetchMonths]);
+  const pull = usePullRefresh(refreshAll);
   const data = list.data;
   const sections = useMemo(() => groupByMonth(data?.pages.flatMap((p) => p.items) ?? [], months.data), [data, months.data]);
 
@@ -176,14 +180,12 @@ function Timeline({ filters, onClearFilters }: { filters: MemoryFilters; onClear
       testID="memories-timeline"
       refreshControl={
         <RefreshControl
-          refreshing={list.isRefetching && !list.isFetchingNextPage}
-          onRefresh={() => {
-            playHaptic('ANIM-09');
-            void list.refetch();
-            void months.refetch();
-          }}
+          {...HIDDEN_REFRESH_SPINNER}
+          refreshing={pull.refreshing}
+          onRefresh={pull.onRefresh}
         />
       }
+      ListHeaderComponent={<HeartRefresh refreshing={pull.refreshing} />}
       renderSectionHeader={({ section }) => (
         <View style={[styles.monthHeader, { backgroundColor: colors.bg }]} testID={`month-${section.key}`}>
           <AppText variant="label" color="textMuted" accessibilityRole="header">

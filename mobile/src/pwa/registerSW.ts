@@ -20,6 +20,7 @@ export interface SwEnv {
   dev?: boolean;
   nav?: Navigator;
   doc?: Pick<Document, 'visibilityState' | 'addEventListener' | 'removeEventListener'>;
+  perf?: Pick<Performance, 'getEntriesByType'>;
 }
 
 function resolve(env: SwEnv) {
@@ -28,6 +29,7 @@ function resolve(env: SwEnv) {
     dev: env.dev ?? (typeof __DEV__ !== 'undefined' && __DEV__),
     nav: env.nav ?? (typeof navigator !== 'undefined' ? navigator : undefined),
     doc: env.doc ?? (typeof document !== 'undefined' ? document : undefined),
+    perf: env.perf ?? (typeof performance !== 'undefined' && typeof performance.getEntriesByType === 'function' ? performance : undefined),
   };
 }
 
@@ -52,10 +54,15 @@ export async function requestPersistentStorage(nav: Navigator | undefined = reso
   }
 }
 
-/** `waiting` SW-ийг дэлгүүрт тавина — зөвхөн өмнө нь SW удирдаж байсан үед (анх суулгахад биш). */
+/**
+ * `waiting` SW-ийг дэлгүүрт тавина — зөвхөн өмнө нь SW удирдаж байсан үед (анх суулгахад биш) ба worker
+ * үнэхээр хүлээж байгаа бол. WebKit `statechange`-ийг хоцроож өгдөг: анхны суулгалтын worker аль хэдийн
+ * идэвхжиж (`clients.claim` → controller) дууссаны дараа «installed» ирэхэд «Шинэ хувилбар бэлэн» худлаа
+ * гардаг байв — тиймээс worker-ийн одоогийн төлөвийг шалгана.
+ */
 function watch(reg: ServiceWorkerRegistration, container: ServiceWorkerContainer) {
   const offer = (worker: ServiceWorker | null) => {
-    if (worker && container.controller) usePwaStore.getState().setWaiting(worker);
+    if (worker && container.controller && worker.state === 'installed' && worker !== reg.active) usePwaStore.getState().setWaiting(worker);
   };
   offer(reg.waiting);
   reg.addEventListener('updatefound', () => {
@@ -66,9 +73,44 @@ function watch(reg: ServiceWorkerRegistration, container: ServiceWorkerContainer
   });
 }
 
+/** Нэг мессежээр илгээх URL-ийн дээд тоо (runtime кэшийн хязгаараас бага). */
+export const WARM_MAX_URLS = 200;
+
+/**
+ * Анхны айлчлалд хуудас SW-ийн удирдлагад орохоос (`clients.claim`) өмнө татсан static файлууд
+ * (layout, нүүрний lazy chunk, фонт) runtime кэшэд ордоггүй — тэгвэл offline reload-д shell
+ * дутуу ачаалагдаж хоосон дэлгэц гарна (AC-140, AC-156). SW идэвхжмэгц ачаалсан resource-уудын
+ * жагсаалтыг илгээж (`CACHE_URLS`) кэшэд нөхүүлнэ; SW өөрөө журмаар шүүж, кэштэйг алгасна.
+ * Идэвхжих ба `clients.claim` хоорондын агшинд татсаныг барихын тулд анхны `controllerchange`-д дахин.
+ */
+export function warmRuntimeCache(container: ServiceWorkerContainer, perf: Pick<Performance, 'getEntriesByType'> | undefined) {
+  if (!perf || !container.ready) return;
+  const send = () =>
+    void container.ready
+      .then((reg) => {
+        const urls = perf
+          .getEntriesByType('resource')
+          .map((e) => e.name)
+          .filter((u) => typeof u === 'string' && u.length > 0);
+        if (urls.length > 0) reg.active?.postMessage({ type: 'CACHE_URLS', urls: [...new Set(urls)].slice(0, WARM_MAX_URLS) });
+      })
+      .catch(() => undefined);
+  send();
+  if (!container.controller) {
+    let claimed = false;
+    const onClaim = () => {
+      if (claimed) return;
+      claimed = true;
+      container.removeEventListener('controllerchange', onClaim);
+      send();
+    };
+    container.addEventListener('controllerchange', onClaim);
+  }
+}
+
 /** SW-ийг бүртгэнэ; цэвэрлэх функц буцаана. Native, dev, дэмжихгүй хөтөчид юу ч хийхгүй. */
 export function registerServiceWorker(env: SwEnv = {}): () => void {
-  const { dev, nav, doc } = resolve(env);
+  const { dev, nav, doc, perf } = resolve(env);
   if (!supportsServiceWorker(env) || dev || !nav) return () => {};
   void requestPersistentStorage(nav);
   const container = nav.serviceWorker;
@@ -82,6 +124,7 @@ export function registerServiceWorker(env: SwEnv = {}): () => void {
     .then((r) => {
       reg = r;
       watch(r, container);
+      warmRuntimeCache(container, perf);
     })
     .catch(() => undefined);
   const timer = setInterval(check, UPDATE_CHECK_MS);

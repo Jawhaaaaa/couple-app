@@ -3,8 +3,8 @@ import { useFonts } from 'expo-font';
 import { router, Stack, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { type ReactNode, useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { lazy, type ReactNode, startTransition, Suspense, useEffect, useState } from 'react';
+import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -12,33 +12,42 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useT } from '@/i18n';
 import { useBootstrap } from '@/api/queries/bootstrap';
 import { needsLogin } from '@/auth/gate';
-import UpdateRequiredScreen from '@/app/update-required';
 import { AppText } from '@/components/AppText';
-import { SignalReceiver } from '@/components/home/SignalReceiver';
 import { Mascot } from '@/components/Mascot';
 import { OfflineBanner } from '@/components/OfflineBanner';
-import { PwaPrompts } from '@/components/PwaPrompts';
 import { ServerUnreachable } from '@/components/ServerUnreachable';
 import { SettingsSync } from '@/components/settings/SettingsSync';
 import { SpaceStatusBanner } from '@/components/settings/SpaceStatusBanner';
-import { TimezonePrompt } from '@/components/TimezonePrompt';
 import { UpdateBanner } from '@/components/UpdateBanner';
 import { AppLockProvider } from '@/lock/AppLockProvider';
-import { HapticFlash } from '@/motion/HapticFlash';
 import { installSoundPlayer } from '@/motion/sound';
 import { useLocalReminderSync } from '@/notifications/useLocalReminderSync';
 import { useNotificationTapRouting } from '@/notifications/useNotificationTapRouting';
 import { startOutbox } from '@/offline/outboxRuntime';
 import { persistOptions, queryClient, refreshRestoredQueries } from '@/offline/persist';
+import { captureInstallPrompt } from '@/pwa/pwaStore';
 import { registerServiceWorker } from '@/pwa/registerSW';
 import { startRealtime } from '@/realtime';
 import { useSessionStore } from '@/stores/sessionStore';
 import { ThemeProvider, useTheme } from '@/theme/ThemeProvider';
-import { spacing } from '@/theme/tokens';
+import { basePalette, spacing } from '@/theme/tokens';
 import { fontAssets } from '@/theme/typography';
 import { startUploadQueue } from '@/upload/uploadRuntime';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
+// `beforeinstallprompt` ачаалсны дараахан ирдэг — PwaPrompts lazy тул энд (модуль ачаалагдах үед) барина
+if (Platform.OS === 'web') captureInstallPrompt();
+
+/*
+ * Эхний дэлгэцэд шаардлагагүй бүрэлдэхүүнүүд тусдаа chunk-аар (FR-19.10 «маршрут бүр lazy»): root
+ * layout-ын модуль ачаалах нэг урт task-ийг (TBT, AC-152) багасгана. Бүгд дэлгэцгүй эсвэл үйл явдлаар
+ * гарч ирдэг тул хэдэн зуун мс хожуу ачаалагдах нь хэрэглэгчид мэдэгдэхгүй.
+ */
+const UpdateRequiredScreen = lazy(() => import('@/app/update-required'));
+const SignalReceiver = lazy(() => import('@/components/home/SignalReceiver').then((m) => ({ default: m.SignalReceiver })));
+const PwaPrompts = lazy(() => import('@/components/PwaPrompts').then((m) => ({ default: m.PwaPrompts })));
+const TimezonePrompt = lazy(() => import('@/components/TimezonePrompt').then((m) => ({ default: m.TimezonePrompt })));
+const HapticFlash = lazy(() => import('@/motion/HapticFlash').then((m) => ({ default: m.HapticFlash })));
 installSoundPlayer();
 
 /**
@@ -71,7 +80,13 @@ function SplashGate({ children }: { children: ReactNode }) {
   }, [mustLogin]);
 
   // S-97: minVersion > апп — бүх апп хаагдана (навигаци ч рендэрлэгдэхгүй)
-  if (boot.status === 'updateRequired') return <UpdateRequiredScreen />;
+  if (boot.status === 'updateRequired') {
+    return (
+      <Suspense fallback={<Splash />}>
+        <UpdateRequiredScreen />
+      </Suspense>
+    );
+  }
   if (opened) return children;
   if (boot.status === 'unreachable') return <ServerUnreachable onRetry={boot.retry} />;
   return <Splash />;
@@ -120,21 +135,27 @@ function ThemedStack() {
           {/* S-25 ойн мэндчилгээ (ANIM-05, AC-39) */}
           <Stack.Screen name="celebration" options={{ presentation: 'fullScreenModal', animation: 'fade' }} />
         </Stack>
-        <TimezonePrompt />
-        {/* Хамтрагчийн зүрх/тэврэлт аль ч дэлгэц дээр (ANIM-02, AC-17) */}
-        <SignalReceiver />
-        {/* Вэб: нэвтэрсний дараа S-100 суулгах / S-101 мэдэгдэл (FR-19.2, FR-19.3) */}
-        <PwaPrompts />
+        <Suspense fallback={null}>
+          <TimezonePrompt />
+          {/* Хамтрагчийн зүрх/тэврэлт аль ч дэлгэц дээр (ANIM-02, AC-17) */}
+          <SignalReceiver />
+          {/* Вэб: нэвтэрсний дараа S-100 суулгах / S-101 мэдэгдэл (FR-19.2, FR-19.3) */}
+          <PwaPrompts />
+        </Suspense>
       </SplashGate>
       {/* Вэб (iOS Safari): haptic-ийн оронд тод дүрслэл (FR-19.7, AC-217 (б)) */}
-      <HapticFlash />
+      <Suspense fallback={null}>
+        <HapticFlash />
+      </Suspense>
     </>
   );
 }
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts(fontAssets);
-  const ready = fontsLoaded || fontError != null;
+  // Вэбэд фонт татагдахыг хүлээхгүй (FR-19.10, AC-160 LCP): `@font-face` солигдох хүртэл системийн
+  // фонтоор; native-д splash дэлгэц фонтыг хүлээнэ (текст үсрэхгүй)
+  const ready = Platform.OS === 'web' || fontsLoaded || fontError != null;
 
   useEffect(() => {
     if (ready) SplashScreen.hideAsync().catch(() => {});
@@ -150,7 +171,16 @@ export default function RootLayout() {
   // Вэб: service worker — offline shell, кэш, шинэ хувилбар (FR-19.5, AC-140, AC-156)
   useEffect(() => registerServiceWorker(), []);
 
+  // Вэб: апп-ын модны эхний рендэрийг transition-оор (React хэсэгчлэн, 5 мс тутам main thread-ийг
+  // чөлөөлнө) — нэг урт task болж TBT-г (AC-152) өсгөдөг байв. Тэр хооронд index.html-ийн S-01 splash-тай
+  // ижил дүр (createRoot static splash-ийг цэвэрлэнэ).
+  const [mounted, setMounted] = useState(Platform.OS !== 'web');
+  useEffect(() => {
+    if (!mounted) startTransition(() => setMounted(true));
+  }, [mounted]);
+
   if (!ready) return null;
+  if (!mounted) return <WebBootSplash />;
   return (
     <GestureHandlerRootView style={styles.root}>
       <PersistQueryClientProvider client={queryClient} persistOptions={persistOptions} onSuccess={() => void refreshRestoredQueries(queryClient)}>
@@ -164,7 +194,21 @@ export default function RootLayout() {
   );
 }
 
+/** `public/index.html`-ийн `#aura-splash`-тай ижил (зураг 224, «Aura») — шилжилт харагдахгүй. */
+function WebBootSplash() {
+  const t = useT();
+  return (
+    <View style={styles.boot} testID="boot-splash">
+      <Image source={{ uri: '/icons/icon-512.png' }} style={styles.bootIcon} accessibilityIgnoresInvertColors />
+      <Text style={styles.bootText}>{t('app.name')}</Text>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   root: { flex: 1 },
+  boot: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: spacing.md, backgroundColor: basePalette.dark.bg },
+  bootIcon: { width: 224, height: 224, borderRadius: 48 },
+  bootText: { color: basePalette.dark.text, fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: 40, lineHeight: 44 },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: spacing.md, padding: spacing.xl },
 });

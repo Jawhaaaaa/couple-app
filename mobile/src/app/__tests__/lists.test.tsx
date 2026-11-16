@@ -259,6 +259,24 @@ describe('S-64 зорилго', () => {
     expect(await screen.findByTestId('goal-title')).toHaveTextContent('Япон, Солонгос');
   });
 
+  it('AC-131 засварын үеэр хамтрагчийн goal.updated ирсэн ч засвар эхэлсэн хувилбараар PATCH — чимээгүй дарахгүй', async () => {
+    mockParams = { id: 'g1' };
+    const patch = jest.spyOn(api, 'PATCH').mockImplementation((async () => fail(409, 'VERSION_CONFLICT', { current: goal({ title: 'Япон, Солонгос', version: 3 }), updatedBy: PARTNER.id })) as never);
+    spies.push(patch);
+    const { client } = await renderWithClient(<GoalDetailScreen />);
+    await fireEvent.press(await screen.findByTestId('goal-title-edit'));
+    await fireEvent.changeText(screen.getByTestId('goal-title-input'), 'Япон 2027');
+    // Хамтрагч гарчгийг хадгалсан — WS `goal.updated` кэшийг шинэ хувилбараар солино
+    await act(async () => {
+      client.setQueryData(['goal', 'g1'], goal({ title: 'Япон, Солонгос', version: 3 }));
+    });
+    await fireEvent.press(screen.getByTestId('goal-title-save'));
+    await waitFor(() => expect(patch).toHaveBeenCalledWith('/goals/{goalId}', { params: { path: { goalId: 'g1' } }, body: { title: 'Япон 2027', version: 2 } }));
+    expect(await screen.findByTestId('conflict-sheet')).toBeTruthy();
+    expect(screen.getByTestId('conflict-mine-title')).toHaveTextContent('Япон 2027');
+    expect(screen.getByTestId('conflict-theirs-title')).toHaveTextContent('Япон, Солонгос');
+  });
+
   it('шинэ зорилго: алхмууд ба мөнгөн зорилттой POST; буруу дүнд алдаа', async () => {
     const post = jest.spyOn(api, 'POST').mockImplementation((async () => ok(goal({ id: 'g9' }), 201)) as never);
     spies.push(post);

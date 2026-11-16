@@ -67,6 +67,7 @@ function fakeServer({ chunkSize = 4 }: { chunkSize?: number } = {}) {
     createCode: '',
     chunkStatus: 0,
     chunkCode: '',
+    quotaWarning: false,
     counter: 0,
   };
 
@@ -85,7 +86,7 @@ function fakeServer({ chunkSize = 4 }: { chunkSize?: number } = {}) {
       const id = `0192f3a4-0000-7000-8000-00000000000${state.counter}`;
       const session = { id, chunkSize, totalChunks: Math.ceil(body.totalBytes / chunkSize), received: new Set<number>() };
       sessions.set(id, session);
-      return json(201, { id, chunkSize, totalChunks: session.totalChunks, receivedChunks: [] });
+      return json(201, { id, chunkSize, totalChunks: session.totalChunks, receivedChunks: [], quotaWarning: state.quotaWarning });
     }
     const m = /^\/uploads\/([^/]+)(\/chunks\/(\d+)|\/complete)?$/.exec(path);
     const session = m ? sessions.get(m[1]) : undefined;
@@ -268,6 +269,20 @@ describe('AC-20 uploadQueue — тасарсан upload үргэлжилнэ', (
     expect(error).toBeInstanceOf(UploadError);
     expect((error as UploadError).reason).toBe('STORAGE_QUOTA_EXCEEDED');
     expect(onQuota).toHaveBeenCalledWith(expect.objectContaining({ localId: item.localId, status: 'failed' }));
+  });
+
+  it('AC-200 80%-д сервер quotaWarning буцаавал item-д тэмдэглэнэ (editor анхааруулга), upload үргэлжилнэ', async () => {
+    const server = fakeServer();
+    const queue = newQueue(server, memoryStore(), memoryBlobStore());
+    server.state.quotaWarning = true;
+    const item = await queue.add(input(3));
+    await queue.wait(item.localId);
+    expect(await queue.item(item.localId)).toMatchObject({ status: 'done', quotaWarning: true });
+
+    server.state.quotaWarning = false;
+    const next = await queue.add(input(3));
+    await queue.wait(next.localId);
+    expect((await queue.item(next.localId))?.quotaWarning).toBe(false);
   });
 
   it('sentBytesOf — сүүлийн chunk богино', () => {

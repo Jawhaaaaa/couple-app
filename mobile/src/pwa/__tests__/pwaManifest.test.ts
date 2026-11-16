@@ -78,7 +78,9 @@ describe('AC-152 HTML толгой (public/index.html)', () => {
   it('Expo-гийн загварын орлуулга (%LANG_ISO_CODE%, %WEB_TITLE%) ба #root хадгалагдсан', () => {
     expect(template).toContain('%LANG_ISO_CODE%');
     expect(template).toContain('%WEB_TITLE%');
-    expect(template).toContain('<div id="root"></div>');
+    expect(template).toContain('<div id="root">');
+    // S-01 static splash (AC-160 LCP): JS-ийг хүлээхгүй эхний будалт — апп рендэрлэхэд солигдоно
+    expect(template).toMatch(/<div id="root"><div id="aura-splash"[^>]*><img src="\/icons\/icon-512\.png"[^>]*width="224" height="224"/);
   });
 
   it('app.json web.output = single (SPA — static горимд Lottie SSR унадаг)', () => {

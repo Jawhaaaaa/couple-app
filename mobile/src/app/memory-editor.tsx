@@ -128,6 +128,8 @@ function EditorForm({ draftKey, draft, memoryId }: { draftKey: string; draft: Me
   const clear = useDraftStore((s) => s.clear);
   const uploads = useUploads();
   const byLocal = useMemo(() => new Map<string, UploadItem>(uploads.map((u) => [u.localId, u])), [uploads]);
+  // AC-200: хосын хадгалах сан ≥ 80% бол сервер upload-ын хариунд тэмдэглэнэ
+  const quotaWarning = draft.media.some((m) => !!m.localId && byLocal.get(m.localId)?.quotaWarning === true);
   const groups = useMemoryGroups();
   const tagSuggestions = useMemoryTags();
 
@@ -218,8 +220,11 @@ function EditorForm({ draftKey, draft, memoryId }: { draftKey: string; draft: Me
     if (saved) queryClient.setQueryData(memoryKey(saved.id), saved);
     invalidateMemoryLists(queryClient);
     dropUploads(latest().media);
+    // Болзооноос (AC-95) үүссэн бол S-54 руу л буцна — тэнд «Дурсамжийг үзэх» холбоос гарна. Вэбэд
+    // `back()` нь history-ээр асинхрон тул араас нь `push()` хийвэл уралдаж, S-54 inert үлддэг байв.
+    const fromPlan = !!latest().datePlanId;
     clear(draftKey);
-    leaveTo(saved && !memoryId ? saved.id : null);
+    leaveTo(saved && !memoryId && !fromPlan ? saved.id : null);
   };
 
   const save = async () => {
@@ -522,6 +527,7 @@ function EditorForm({ draftKey, draft, memoryId }: { draftKey: string; draft: Me
         <IconHint icon={FolderPlus} text={t('memories.editor.groupsHint')} />
       </Section>
 
+      {quotaWarning ? <FormMessage kind="info" text={t('dataSettings.warning')} testID="editor-quota-warning" /> : null}
       {offline ? <FormMessage kind="info" text={t('memories.editor.offline')} testID="editor-offline" /> : null}
       {queued ? <FormMessage kind="info" text={t('memories.editor.queued')} testID="editor-queued" /> : null}
       {saveError ? <FormMessage text={saveError} testID="editor-save-error" /> : null}

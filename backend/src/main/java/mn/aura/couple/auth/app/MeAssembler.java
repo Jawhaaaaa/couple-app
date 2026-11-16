@@ -3,6 +3,8 @@ package mn.aura.couple.auth.app;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.UUID;
 import mn.aura.couple.api.model.CityRef;
@@ -25,7 +27,7 @@ public class MeAssembler {
 
     private static final String SQL = """
             SELECT u.id, u.email, u.display_name, u.call_name, u.birth_date, u.timezone, u.locale,
-                   u.city_name, u.city_lat, u.city_lon, u.country_code, u.email_verified_at, u.policy_version,
+                   u.city_name, u.city_lat, u.city_lon, u.country_code, u.email_verified_at, u.policy_version, u.policy_accepted_at,
                    u.online_visible, u.typing_visible, u.avatar_media_id, sp.id AS space_id, sp.kind AS space_kind, sp.status AS space_status
               FROM users u
               LEFT JOIN LATERAL (
@@ -70,6 +72,8 @@ public class MeAssembler {
                     rs.getBoolean("typing_visible"),
                     space);
             me.callName(rs.getString("call_name"));
+            Timestamp accepted = rs.getTimestamp("policy_accepted_at");
+            me.policyAcceptedAt(accepted == null ? null : OffsetDateTime.ofInstant(accepted.toInstant(), ZoneOffset.UTC));
             me.avatar(media.nullable(rs.getObject("avatar_media_id", UUID.class)));
             String cityName = rs.getString("city_name");
             if (cityName != null) {

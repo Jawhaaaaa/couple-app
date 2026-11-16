@@ -7010,6 +7010,10 @@ components:
         emailVerified: {type: boolean}
         policyVersionAccepted:
           type: [string, 'null']
+        policyAcceptedAt:
+          description: Бодлогын зөвшөөрсөн хувилбарыг хүлээн зөвшөөрсөн агшин (S-81, AC-130)
+          type: [string, 'null']
+          format: date-time
         policyUpdateRequired: {type: boolean}
         onlineVisible: {type: boolean}
         typingVisible: {type: boolean}

@@ -98,6 +98,7 @@ export function SignalReceiver() {
           source={current.kind === 'HUG' ? hugLottie : heartLottie}
           size={140}
           fallback={<AppText style={styles.emoji}>{current.kind === 'HUG' ? '🤗' : '💗'}</AppText>}
+          testID="signal-lottie"
         />
       )}
       <AppText variant="h3" style={styles.centerText} testID="signal-overlay-text">

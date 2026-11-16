@@ -51,7 +51,7 @@ class PolicyIT extends AbstractSpaceIT {
     }
 
     @Test
-    @DisplayName("AC-63 бүртгэлд зөвшөөрсөн хувилбар хадгалагдана; шинэ хувилбар гарвал policyUpdateRequired, одоогийнхыг зөвшөөрөхөд арилна")
+    @DisplayName("AC-63 AC-130 бүртгэлд зөвшөөрсөн хувилбар, огноо хадгалагдаж /me-д буцна; шинэ хувилбар гарвал policyUpdateRequired, одоогийнхыг зөвшөөрөхөд арилна")
     void acceptance() {
         String version = policy("").path("version").asText();
         var old = register(email("pol-old"), PASSWORD, "1995-05-14", "2020-01-01");
@@ -64,6 +64,10 @@ class PolicyIT extends AbstractSpaceIT {
         assertThat(me.path("policyUpdateRequired").asBoolean()).isFalse();
         assertThat(jdbc.queryForObject("SELECT policy_accepted_at IS NOT NULL FROM users WHERE id = ?", Boolean.class, u.id()))
                 .isTrue();
+        // AC-130: зөвшөөрсөн огноо профайлд (S-81)
+        OffsetDateTime acceptedAt = OffsetDateTime.parse(me.path("policyAcceptedAt").asText());
+        assertThat(acceptedAt.toInstant()).isEqualTo(jdbc.queryForObject(
+                "SELECT policy_accepted_at FROM users WHERE id = ?", java.sql.Timestamp.class, u.id()).toInstant());
 
         // Серверт шинэ хувилбар нийтлэгдсэн мэт: хэрэглэгчийн зөвшөөрсөн хувилбар хуучирсан
         jdbc.update("UPDATE users SET policy_version = '2020-01-01' WHERE id = ?", u.id());
@@ -76,5 +80,6 @@ class PolicyIT extends AbstractSpaceIT {
         me = ok(call(u, "GET", "/me"), 200);
         assertThat(me.path("policyUpdateRequired").asBoolean()).isFalse();
         assertThat(me.path("policyVersionAccepted").asText()).isEqualTo(version);
+        assertThat(OffsetDateTime.parse(me.path("policyAcceptedAt").asText())).isAfterOrEqualTo(acceptedAt);
     }
 }

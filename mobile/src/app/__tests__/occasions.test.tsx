@@ -113,6 +113,8 @@ describe('S-61 тэмдэглэлт өдрүүд', () => {
     );
     expect(await screen.findByTestId('occasion-memory-m1')).toHaveTextContent(/Нуур/);
     expect(screen.getByTestId('occasion-memory-m2')).toHaveTextContent(/Уул/);
+    // Шинэ хувилбараар дахин mount болсон ч «Хадгалагдлаа» харагдана
+    expect(await screen.findByTestId('occasion-saved')).toHaveTextContent('Хадгалагдлаа.');
   });
 
   it('AC-40 нууц бэлгийн санаа — зөвхөн өөрийнх, нэмэхэд POST', async () => {

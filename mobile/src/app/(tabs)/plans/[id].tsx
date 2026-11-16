@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { router, useLocalSearchParams } from 'expo-router';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { CalendarClock, MapPin, Repeat, Sparkles } from 'lucide-react-native';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -42,6 +42,16 @@ export default function PlanDetailScreen() {
   const id = first(params.id);
   const occurrenceOn = first(params.occurrenceOn) ?? null;
   const plan = usePlan(id, occurrenceOn);
+  // Буцаж ирэхэд (S-32-оос «Дурсамж болгох»-ын дараа) холбоосыг шинэчилнэ (AC-95): дурсамж үүсэхэд
+  // `plan.updated` ирдэггүй тул stack-д үлдсэн дэлгэц «Дурсамж болгох»-ыг харуулсаар байсан.
+  const refetchPlan = plan.refetch;
+  const focusedOnce = useRef(false);
+  useFocusEffect(
+    useCallback(() => {
+      if (focusedOnce.current) void refetchPlan();
+      focusedOnce.current = true;
+    }, [refetchPlan]),
+  );
   let body;
   if (plan.data) body = <PlanDetail plan={plan.data} />;
   else if (plan.isError) body = <ScreenState kind="error" message={errorText(plan.error)} onRetry={() => void plan.refetch()} />;

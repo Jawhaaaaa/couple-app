@@ -89,6 +89,33 @@ async function cacheFirst(request, event) {
   return res;
 }
 
+/**
+ * Хуудас SW-ийн удирдлагад орохоос өмнө татсан static файлуудыг runtime кэшэд нөхнө (`CACHE_URLS`,
+ * `registerSW.ts` → `warmRuntimeCache`). Анхны айлчлалын layout/нүүрний chunk кэшэд ороогүй бол
+ * offline reload-д shell дутуу ачаалагдана (AC-140, AC-156). Зөвхөн `cache-first` журамтай, өөрийн
+ * origin-ийн, кэшэд байхгүй URL; нэг нь унасан ч бусдыг үргэлжлүүлнэ.
+ */
+async function cacheUrls(urls) {
+  const origin = self.location.origin;
+  const wanted = urls
+    .filter((u) => typeof u === 'string')
+    .slice(0, RUNTIME_MAX_ENTRIES)
+    .map((u) => new URL(u, origin).href)
+    .filter((href) => strategyFor({ method: 'GET', url: href }, origin) === 'cache-first');
+  if (wanted.length === 0) return;
+  const cache = await caches.open(RUNTIME_NAME);
+  for (const href of wanted) {
+    try {
+      if (await caches.match(href, { ignoreVary: true })) continue;
+      const res = await fetch(href);
+      if (res && res.ok && res.type !== 'opaque') await cache.put(href, res);
+    } catch (e) {
+      // offline, квот — дараагийн хүсэлт cache-first-ээр дахин оролдоно
+    }
+  }
+  await trimRuntime(cache);
+}
+
 async function navigate(request) {
   try {
     return await fetch(request);
@@ -116,6 +143,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
+  else if (event.data && event.data.type === 'CACHE_URLS' && Array.isArray(event.data.urls)) event.waitUntil(cacheUrls(event.data.urls));
 });
 
 self.addEventListener('fetch', (event) => {
@@ -178,4 +206,4 @@ self.addEventListener('notificationclick', (event) => {
   );
 });
 
-self.auraSW = { strategyFor, notificationFromPush, openUrl, VERSION, PRECACHE_NAME, RUNTIME_NAME };
+self.auraSW = { strategyFor, cacheUrls, notificationFromPush, openUrl, VERSION, PRECACHE_NAME, RUNTIME_NAME };

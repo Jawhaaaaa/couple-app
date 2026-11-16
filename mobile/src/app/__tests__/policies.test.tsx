@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { api } from '@/api/client';
 import PolicyUpdateScreen from '@/app/(auth)/policy-update';
 import PoliciesScreen from '@/app/settings/policies';
+import ProfileSettingsScreen from '@/app/settings/profile';
 import { defaultPrefs, usePrefsStore } from '@/stores/prefsStore';
 import { useSessionStore } from '@/stores/sessionStore';
 
@@ -123,5 +124,37 @@ describe('S-90 шинэ хувилбарын хаалга', () => {
     await waitFor(() => expect(router.replace).toHaveBeenCalledWith('/'));
     expect(postSpy).toHaveBeenCalledWith('/me/policy-acceptance', { body: { version: '2026-11-14' } });
     expect(client.getQueryData<ReturnType<typeof me>>(['me'])).toMatchObject({ policyUpdateRequired: false, policyVersionAccepted: '2026-11-14' });
+  });
+});
+
+describe('S-81 профайл — зөвшөөрсөн бодлого', () => {
+  const profile = (accepted: string | null, acceptedAt: string | null) => ({
+    ...me(accepted),
+    birthDate: '1998-05-14',
+    timezone: 'Asia/Ulaanbaatar',
+    locale: 'mn',
+    callName: null,
+    city: null,
+    avatar: null,
+    onlineVisible: true,
+    typingVisible: true,
+    policyAcceptedAt: acceptedAt,
+  });
+
+  it('AC-130 зөвшөөрсөн хувилбар ба огноо (хэрэглэгчийн бүсээр), S-90 руу холбоос', async () => {
+    // UTC 2026-11-15 20:30 = Улаанбаатарт 2026-11-16 04:30
+    meData = profile('2026-11-14', '2026-11-15T20:30:00Z') as never;
+    await renderWithClient(<ProfileSettingsScreen />);
+    await waitFor(() => expect(screen.getByTestId('settings-policy-version')).toHaveTextContent('Зөвшөөрсөн хувилбар: 2026.11.14'));
+    expect(screen.getByTestId('settings-policy-accepted-at')).toHaveTextContent('Зөвшөөрсөн огноо: 2026.11.16');
+    await fireEvent.press(screen.getByTestId('settings-policy-open'));
+    expect(router.push).toHaveBeenCalledWith('/settings/policies');
+  });
+
+  it('зөвшөөрсөн хувилбаргүй бол тэр тухай, огноогүй', async () => {
+    meData = profile(null, null) as never;
+    await renderWithClient(<ProfileSettingsScreen />);
+    await waitFor(() => expect(screen.getByTestId('settings-policy-none')).toHaveTextContent('Зөвшөөрсөн хувилбар бүртгэгдээгүй байна.'));
+    expect(screen.queryByTestId('settings-policy-accepted-at')).toBeNull();
   });
 });

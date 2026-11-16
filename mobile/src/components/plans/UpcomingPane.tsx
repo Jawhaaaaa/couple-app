@@ -32,7 +32,11 @@ function Section({ title, children, testID }: { title: string; children: ReactNo
   );
 }
 
-/** Хариу хүлээж буй болзооны товч (AC-33): миний ээлж бол Зөвшөөрөх / Өөр цаг / Татгалзах. */
+/**
+ * Хариу хүлээж буй болзооны товч (AC-33): миний ээлж бол Зөвшөөрөх / Өөр цаг / Татгалзах.
+ * «Өөр цаг»-ийг зөвхөн санал болгогч биш нь өгдөг тул (`DatePlanService.respond`) сонгох ээлж
+ * санал болгогчийнх; цаг санал болгосон хамтрагчид «Хариу хүлээгдэж байна».
+ */
 function RsvpFooter({ plan, onRespond, busy }: { plan: DatePlanSummary; onRespond: (a: PlanAction) => void; busy: boolean }) {
   const t = useT();
   const myId = useSessionStore((s) => s.userId);
@@ -53,7 +57,7 @@ function RsvpFooter({ plan, onRespond, busy }: { plan: DatePlanSummary; onRespon
       </View>
     );
   }
-  if (plan.status === 'COUNTER_PROPOSED') {
+  if (plan.status === 'COUNTER_PROPOSED' && mine) {
     return <AppButton variant="secondary" label={t('plans.rsvp.choose')} onPress={() => router.push(planHref(plan))} testID={`rsvp-choose-${plan.id}`} />;
   }
   return (

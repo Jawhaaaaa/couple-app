@@ -12,16 +12,18 @@ import { deviceTimezone } from '@/auth/device';
 import { AppButton } from '@/components/AppButton';
 import { AppText } from '@/components/AppText';
 import { AuthScreen } from '@/components/AuthScreen';
+import { formatPolicyVersion } from '@/components/auth/PolicyCheckbox';
 import { AvatarCropper } from '@/components/AvatarCropper';
+import { Card } from '@/components/Card';
 import { CityPicker } from '@/components/CityPicker';
 import { FormMessage } from '@/components/FormMessage';
 import { ScreenState } from '@/components/ScreenState';
 import { TextField } from '@/components/TextField';
 import { useErrorText } from '@/hooks/useErrorText';
 import { useOnlineOnly } from '@/hooks/useOnlineOnly';
-import { todayIn, useT } from '@/i18n';
+import { formatDate, todayIn, useT } from '@/i18n';
 import { draftFromMe, draftIssues, type ProfileDraft, profilePatch } from '@/profile/profileForm';
-import type { Locale } from '@/stores/prefsStore';
+import { type Locale, usePrefsStore } from '@/stores/prefsStore';
 import { useColors } from '@/theme/ThemeProvider';
 import { radius, spacing, touchTarget } from '@/theme/tokens';
 
@@ -32,7 +34,8 @@ const toMasked = (date: string | null) => (date ? date.replace(/-/g, '.') : '');
  * S-81 Профайл тохиргоо (FR-1.4, AC-62): нэр, дуудах нэр, төрсөн огноо, цагийн бүс,
  * мэдэгдлийн хэл, хот (`GET /geo/cities`, 503-д тайлбар), онлайн/бичиж буйг харуулах,
  * профайл зураг (дугуй тайралт, ≤ 10 MB). `PATCH /me` зөвхөн өөрчлөгдсөн талбарыг
- * илгээнэ; хамтрагчид `profile.updated` realtime-аар ≤ 5 с-д хүрнэ.
+ * илгээнэ; хамтрагчид `profile.updated` realtime-аар ≤ 5 с-д хүрнэ. Бодлогын зөвшөөрсөн хувилбар ба огноо
+ * (`Me.policyVersionAccepted`, `Me.policyAcceptedAt` — FR-14.9, AC-130), бүтэн текст нь S-90.
  */
 export default function ProfileSettingsScreen() {
   const t = useT();
@@ -175,6 +178,8 @@ function ProfileForm({ me }: { me: Me }) {
         testID="settings-typing-visible"
       />
 
+      <PolicyConsent me={me} />
+
       {save.error ? <FormMessage text={errorText(save.error)} testID="settings-profile-error" /> : null}
       {message === 'saved' ? <FormMessage kind="success" text={t('profileSettings.saved')} testID="settings-profile-saved" /> : null}
       {message === 'noChanges' ? <FormMessage kind="info" text={t('profileSettings.noChanges')} testID="settings-profile-unchanged" /> : null}
@@ -187,6 +192,34 @@ function ProfileForm({ me }: { me: Me }) {
       />
       <AppButton variant="ghost" label={t('common.back')} onPress={() => (router.canGoBack() ? router.back() : router.replace('/settings'))} testID="settings-profile-back" />
     </AuthScreen>
+  );
+}
+
+/** Зөвшөөрсөн бодлогын хувилбар ба огноо (хэрэглэгчийн цагийн бүсээр), S-90 руу холбоос. */
+function PolicyConsent({ me }: { me: Me }) {
+  const t = useT();
+  const dateFormat = usePrefsStore((s) => s.dateFormat);
+  const version = me.policyVersionAccepted;
+  const acceptedAt = me.policyAcceptedAt;
+  return (
+    <Card testID="settings-policy">
+      <AppText variant="h3" accessibilityRole="header">
+        {t('profileSettings.policyTitle')}
+      </AppText>
+      {version ? (
+        <AppText testID="settings-policy-version">{t('profileSettings.policyVersion', { version: formatPolicyVersion(version, dateFormat) })}</AppText>
+      ) : (
+        <AppText color="textMuted" testID="settings-policy-none">
+          {t('profileSettings.policyNone')}
+        </AppText>
+      )}
+      {version && acceptedAt ? (
+        <AppText color="textMuted" testID="settings-policy-accepted-at">
+          {t('profileSettings.policyAcceptedAt', { date: formatDate(new Date(acceptedAt), dateFormat, me.timezone) })}
+        </AppText>
+      ) : null}
+      <AppButton variant="secondary" label={t('profileSettings.policyOpen')} onPress={() => router.push('/settings/policies')} testID="settings-policy-open" />
+    </Card>
   );
 }
 

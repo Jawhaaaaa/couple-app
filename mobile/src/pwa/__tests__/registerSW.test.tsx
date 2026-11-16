@@ -93,6 +93,19 @@ describe('T-83 registerSW', () => {
     stop();
   });
 
+  it('WebKit: «installed» statechange хоцорч ирэхэд worker аль хэдийн идэвхтэй бол мэдэгдэл гаргахгүй', async () => {
+    const { nav, reg } = fakeNav();
+    const stop = registerServiceWorker({ platform: 'web', nav, dev: false, doc });
+    await flush();
+    const installing = fakeWorker('installing');
+    reg.installing = installing;
+    reg.emit('updatefound');
+    installing.state = 'activated';
+    installing.emit('statechange');
+    expect(usePwaStore.getState().waiting).toBeNull();
+    stop();
+  });
+
   it('AC-191 «Шинэчлэх» — ноорог хадгалагдсаны дараа SKIP_WAITING, controllerchange-д reload', async () => {
     const waiting = fakeWorker();
     const { nav, container } = fakeNav();
@@ -109,6 +122,24 @@ describe('T-83 registerSW', () => {
     container.emit('controllerchange');
     expect(reload).toHaveBeenCalledTimes(1);
     await waitFor(() => expect(savedAtReload).toContain('Тэрэлжийн од'));
+  });
+
+  it('AC-156 SW идэвхжмэгц ачаалсан resource-уудыг CACHE_URLS-ээр илгээнэ; анхны claim-д дахин', async () => {
+    const active = fakeWorker('activated');
+    const { nav, container } = fakeNav({ controller: false });
+    Object.assign(container, { ready: Promise.resolve({ active }) });
+    const urls = ['https://aura.test/_expo/static/js/web/_layout-1.js', 'https://aura.test/_expo/static/js/web/_layout-1.js', 'https://api.aura.test/api/v1/me'];
+    const perf = { getEntriesByType: jest.fn(() => urls.map((name) => ({ name }))) } as unknown as Pick<Performance, 'getEntriesByType'>;
+    const stop = registerServiceWorker({ platform: 'web', nav, dev: false, doc, perf });
+    await flush();
+    await flush();
+    expect(perf.getEntriesByType).toHaveBeenCalledWith('resource');
+    expect(active.postMessage).toHaveBeenCalledWith({ type: 'CACHE_URLS', urls: [urls[0], urls[2]] });
+    container.emit('controllerchange');
+    container.emit('controllerchange');
+    await flush();
+    expect(active.postMessage).toHaveBeenCalledTimes(2);
+    stop();
   });
 
   it('waiting SW алга бол юу ч хийхгүй', async () => {

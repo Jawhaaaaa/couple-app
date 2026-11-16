@@ -73,6 +73,38 @@ describe('T-83 service worker (sw/sw.js)', () => {
     expect(await response!.text()).toBe('chunk');
   });
 
+  it('AC-140 AC-156 CACHE_URLS — SW-ийн удирдлагаас өмнө татсан static-ийг runtime кэшэд нөхнө (API, өөр origin, кэштэйг алгасна)', async () => {
+    const { fetchMock, dispatch, caches, sw } = loadServiceWorker();
+    fetchMock.mockImplementation(async (req: unknown) => new Response(`body:${String(req)}`));
+    const runtime = await caches.api.open(sw.RUNTIME_NAME);
+    await runtime.put(`${ORIGIN}/_expo/static/js/web/cached-1.js`, new Response('old'));
+    await dispatch('message', {
+      data: {
+        type: 'CACHE_URLS',
+        urls: [
+          `${ORIGIN}/_expo/static/js/web/_layout-1.js`,
+          `${ORIGIN}/_expo/static/js/web/cached-1.js`,
+          `${ORIGIN}/api/v1/me`,
+          'https://s3.test/photo.jpg',
+          '/assets/fonts/Nunito.ttf',
+          42,
+        ],
+      },
+    });
+    expect(fetchMock.mock.calls.map((c) => c[0])).toEqual([`${ORIGIN}/_expo/static/js/web/_layout-1.js`, `${ORIGIN}/assets/fonts/Nunito.ttf`]);
+    expect([...caches.store.get(sw.RUNTIME_NAME)!.keys()].sort()).toEqual([
+      `${ORIGIN}/_expo/static/js/web/_layout-1.js`,
+      `${ORIGIN}/_expo/static/js/web/cached-1.js`,
+      `${ORIGIN}/assets/fonts/Nunito.ttf`,
+    ]);
+    // offline — нэг нь унасан ч бусад нь (кэштэй) хэвээр, алдаа шидэхгүй
+    fetchMock.mockImplementation(async () => {
+      throw new TypeError('offline');
+    });
+    await dispatch('message', { data: { type: 'CACHE_URLS', urls: [`${ORIGIN}/_expo/static/js/web/other-2.js`] } });
+    expect(caches.store.get(sw.RUNTIME_NAME)!.size).toBe(3);
+  });
+
   it('AC-191 SKIP_WAITING мессежээр л идэвхжинэ; activate хуучин precache-ийг устгана', async () => {
     const { self, clients, dispatch, caches, sw } = loadServiceWorker({ __AURA_VERSION__: 'new' });
     await caches.api.open('aura-precache-old');

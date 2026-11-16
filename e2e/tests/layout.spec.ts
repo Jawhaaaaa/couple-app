@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from '../fixtures/twoPartners';
 
 import { linkedCouple } from '../support/couple';
 import { signInUi, type TestUser } from '../support/users';

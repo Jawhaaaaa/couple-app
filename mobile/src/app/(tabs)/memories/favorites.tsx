@@ -9,7 +9,7 @@ import { StackScreen } from '@/components/StackScreen';
 import { emptyStateText } from '@/content/emptyStates';
 import { useErrorText } from '@/hooks/useErrorText';
 import { useT } from '@/i18n';
-import { playHaptic } from '@/motion/haptics';
+import { HeartRefresh, HIDDEN_REFRESH_SPINNER, usePullRefresh } from '@/motion/HeartRefresh';
 import { usePrefsStore } from '@/stores/prefsStore';
 import { spacing } from '@/theme/tokens';
 
@@ -28,6 +28,7 @@ export default function FavoritesScreen() {
   const [width, setWidth] = useState(0);
   const size = width > 0 ? Math.floor((width - spacing.screen * 2 - spacing.xs * (COLUMNS - 1)) / COLUMNS) : 0;
   const items = list.data?.pages.flatMap((p) => p.items) ?? [];
+  const pull = usePullRefresh(list.refetch);
 
   let body;
   if (list.isPending) body = <ScreenState kind="loading" rows={3} />;
@@ -46,13 +47,12 @@ export default function FavoritesScreen() {
         testID="favorites-grid"
         refreshControl={
           <RefreshControl
-            refreshing={list.isRefetching && !list.isFetchingNextPage}
-            onRefresh={() => {
-              playHaptic('ANIM-09');
-              void list.refetch();
-            }}
+            {...HIDDEN_REFRESH_SPINNER}
+            refreshing={pull.refreshing}
+            onRefresh={pull.onRefresh}
           />
         }
+        ListHeaderComponent={<HeartRefresh refreshing={pull.refreshing} />}
         renderItem={({ item }) => <MemoryTile memory={item} size={size} />}
         onEndReached={() => {
           if (list.hasNextPage && !list.isFetchingNextPage) void list.fetchNextPage();

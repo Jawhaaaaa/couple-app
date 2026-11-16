@@ -14,7 +14,12 @@ export function useNetworkStatus(): { offline: boolean } {
   useEffect(() => {
     const win = typeof window !== 'undefined' && typeof window.addEventListener === 'function' ? window : null;
     if (!win || typeof navigator === 'undefined' || typeof navigator.onLine !== 'boolean') return;
-    const update = () => setBrowserOffline(!navigator.onLine);
+    const update = () => {
+      setBrowserOffline(!navigator.onLine);
+      // Апп offline-д нээгдсэн бол NetInfo-гийн эхний төлөв (`isConnected: false`) `online` дээр
+      // шинэчлэгддэггүй — «Интернэт алга» үлдэж хоцорно (AC-156). Хөтөч online гэвэл дахин уншуулна.
+      if (navigator.onLine) void NetInfo.refresh?.()?.catch?.(() => undefined);
+    };
     win.addEventListener('online', update);
     win.addEventListener('offline', update);
     return () => {
