@@ -14,7 +14,10 @@ export default defineConfig({
   timeout: 60_000,
   expect: { timeout: 10_000 },
   fullyParallel: false,
-  workers: process.env.CI ? 2 : 1,
+  // Нэг worker: backend-ийн тестийн цаг (`PUT /test/clock`) бүх хүсэлтэд нийтлэг. CI-д 2 worker
+  // зэрэг ажиллахад нэг тест цагийг шилжүүлж нөгөөгийн токеныг TOKEN_EXPIRED болгож, WS/upload-ын
+  // хүлээлтийг гацааж байсан (анхны бодит runner-ийн run 43786712212 — 25 уналт).
+  workers: 1,
   retries: process.env.CI ? 1 : 0,
   reporter: [['list'], ['html', { open: 'never', outputFolder: 'playwright-report' }]],
   use: {

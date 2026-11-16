@@ -73,7 +73,7 @@ jobs:
     name: e2e — Playwright (compose)
     needs: mobile
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90   # e2e нэг worker-оор (playwright.config.ts) — 3 хөтөч × ~290 тест
     env:
       SPRING_PROFILES_ACTIVE: dev,e2e
       # serve-dist.mjs (:8091) ба compose-ийн mobile-web (:8090)
