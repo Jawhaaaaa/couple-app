@@ -85,6 +85,8 @@ jobs:
       # serve-dist.mjs (:8091) ба compose-ийн mobile-web (:8090)
       AURA_CORS_ALLOWED_ORIGINS: http://localhost:8091,http://localhost:8090
       AURA_WEB_BASE_URL: http://localhost:8091
+      # AC-211: spec-ийн шалгах арга бүр (UT · IT · E2E) өөрийн тестэд AC ID-аараа байх ёстой — дутуу бол унана
+      AC_COVERAGE_STRICT: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
@@ -116,6 +118,11 @@ jobs:
           esac
           npx playwright install --with-deps "$BROWSER"
           npx playwright test --project=${{ matrix.browser }}
+      - name: AC-209 compose стекийн health (mobile-web-ийг оруулаад)
+        if: matrix.browser == 'chromium-pixel7'
+        run: |
+          docker compose up -d --build --wait --wait-timeout 600 mobile-web
+          bash deploy/tests/compose-health.test.sh
       - name: Compose лог
         if: failure()
         run: docker compose logs --no-color --tail 300 > compose.log; tail -100 compose.log
