@@ -82,7 +82,8 @@ describe('S-70 газрын зураг', () => {
   it('AC-116 газрын зураг OSM attribution-тай; WebView-ийн товшилтоор тухайн газрын дурсамж руу', async () => {
     await renderWithClient(<MapScreen />);
     expect(await screen.findByTestId('screen-S-70')).toBeTruthy();
-    expect(screen.getByTestId('map-attribution')).toHaveTextContent(/OpenStreetMap/);
+    // screen-S-70 skeleton үед ч гардаг — газрын зураг өгөгдөл ирсний дараа л рендэрлэгдэнэ.
+    expect(await screen.findByTestId('map-attribution')).toHaveTextContent(/OpenStreetMap/);
     const webview = screen.getByTestId('webview');
     const ids = placesToPoints([{ lat: TERELJ.lat, lon: TERELJ.lon, placeName: 'Тэрэлж', memoryIds: [], count: 2 }]).map((p) => p.id);
     await act(async () => webview.props.onMessage({ nativeEvent: { data: JSON.stringify({ ids }) } }));

@@ -96,7 +96,9 @@ else
     case "$img" in aura-*) continue ;; esac   # өөрийн build — доор ARM64_BUILD
     ok=0
     for _ in 1 2 3; do   # registry-ийн түр алдаанд дахин оролдоно
-      docker buildx imagetools inspect "$img" 2>/dev/null | grep -qE 'Platform:\s+linux/arm64' && { ok=1; break; }
+      # Гаралтыг эхлээд авна: pipefail дор `| grep -q` эрт гарвал олон платформтой
+      # manifest-ийн (caddy, postgres) inspect SIGPIPE-ээр унаж худал FAIL өгдөг.
+      out=$(docker buildx imagetools inspect "$img" 2>/dev/null) && grep -qE 'Platform:\s+linux/arm64' <<<"$out" && { ok=1; break; }
       sleep 3
     done
     if [ "$ok" = 1 ]; then
