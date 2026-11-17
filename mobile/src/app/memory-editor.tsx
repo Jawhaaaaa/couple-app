@@ -112,11 +112,17 @@ function toPreview(v: { title: string; occurredOn: string; description?: string 
   return { title: v.title, occurredOn: v.occurredOn, description: v.description ?? null, placeName: v.location?.name ?? null };
 }
 
-/** Хадгалсны дараа: modal-ыг хааж (засвар) эсвэл шинэ дурсамж руу (S-31). */
+/**
+ * Хадгалсны дараа: шинэ дурсамж руу (S-31) эсвэл modal-ыг хааж (засвар, болзооноос) буцна.
+ * Навигаци бүр НЭГ үйлдэл (AC-198): `back()` + `push()` дараалан дуудахад вэбэд `back()` нь
+ * `history.go(-1)`-ийн асинхрон `popstate`-ээр дуусдаг тул push-ийг дарж (Firefox, 4-өөс 1) S-31-ийн
+ * оронд Нүүр рүү буцдаг байсан. `dismissTo` нь modal-ыг хааж S-31-ийг нэг POP_TO-оор нээнэ —
+ * түүх дотор байхгүй бол одоогийн дэлгэцийг солино.
+ */
 function leaveTo(memoryIdToOpen: string | null) {
-  if (router.canGoBack()) router.back();
-  if (memoryIdToOpen) router.push(`/memories/${memoryIdToOpen}`);
-  else if (!router.canGoBack()) router.replace('/memories');
+  if (memoryIdToOpen) router.dismissTo(`/memories/${memoryIdToOpen}`);
+  else if (router.canGoBack()) router.back();
+  else router.replace('/memories');
 }
 
 function EditorForm({ draftKey, draft, memoryId }: { draftKey: string; draft: MemoryDraft; memoryId: string | undefined }) {

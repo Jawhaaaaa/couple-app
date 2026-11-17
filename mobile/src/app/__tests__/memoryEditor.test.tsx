@@ -17,7 +17,7 @@ import { fail, memory, ok, renderWithClient } from '../../../test/memoryFixtures
 let mockParams: Record<string, string> = {};
 
 jest.mock('expo-router', () => ({
-  router: { push: jest.fn(), replace: jest.fn(), back: jest.fn(), setParams: jest.fn(), canGoBack: jest.fn(() => true) },
+  router: { push: jest.fn(), replace: jest.fn(), back: jest.fn(), dismissTo: jest.fn(), setParams: jest.fn(), canGoBack: jest.fn(() => true) },
   useLocalSearchParams: () => mockParams,
 }));
 
@@ -178,7 +178,12 @@ describe('S-32 дурсамж нэмэх', () => {
       }),
     );
     expect(uploadQueue.wait).toHaveBeenCalledWith('local-1');
-    await waitFor(() => expect(router.push).toHaveBeenCalledWith('/memories/new-1'));
+    // AC-198: S-31 руу НЭГ навигацийн үйлдлээр — back()+push() хоёр вэбэд history.go(-1)-ийн
+    // асинхрон popstate-тэй уралдаж (Firefox) S-31-ийн оронд Нүүр рүү буцаадаг байсан
+    await waitFor(() => expect(router.dismissTo).toHaveBeenCalledWith('/memories/new-1'));
+    expect(router.dismissTo).toHaveBeenCalledTimes(1);
+    expect(router.back).not.toHaveBeenCalled();
+    expect(router.push).not.toHaveBeenCalled();
     expect(useDraftStore.getState().drafts.new?.clientId).not.toBe(clientId);
   });
 
@@ -253,6 +258,7 @@ describe('S-32 дурсамж нэмэх', () => {
     await waitFor(() => expect(api.POST).toHaveBeenCalledWith('/memories', expect.objectContaining({ body: expect.objectContaining({ datePlanId: 'p1' }) })));
     await waitFor(() => expect(router.back).toHaveBeenCalled());
     expect(router.push).not.toHaveBeenCalled();
+    expect(router.dismissTo).not.toHaveBeenCalled();
   });
 
   it('?draft= (чат/болзоо) гарчиг, огноо, газар, тайлбараар бөглөнө', async () => {
