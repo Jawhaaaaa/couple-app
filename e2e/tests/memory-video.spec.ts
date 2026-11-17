@@ -86,9 +86,15 @@ test.describe('S-31 видео дурсамж', () => {
     await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.readyState), { timeout: 20_000 }).toBeGreaterThanOrEqual(1);
     expect(await video.evaluate((v: HTMLVideoElement) => v.videoHeight)).toBe(720);
 
-    // Хэрэглэгч тоглуулна (системийн удирдлага — гарны Space; хөтөч бүрийн удирдлагын байрлал өөр)
-    await video.focus();
-    await page.keyboard.press('Space');
+    // Хэрэглэгч тоглуулна (системийн удирдлага; хөтөч бүрийн удирдлагын байрлал өөр). WebKit-ийн native
+    // controls нь фокустай <video> дээрх Space/Enter-ийг тоглуулалт болгодоггүй, харин видеог товшиход
+    // тоглуулна (2026-11-17-нд mcr.microsoft.com/playwright:v1.65.0-noble-д шалгав) — iPhone Safari-д ч товшилт.
+    if (browserName === 'webkit') {
+      await video.click();
+    } else {
+      await video.focus();
+      await page.keyboard.press('Space');
+    }
     await expect
       .poll(() => video.evaluate((v: HTMLVideoElement) => !v.paused && v.currentTime > 0), { message: 'видео тоглосонгүй', timeout: 15_000 })
       .toBe(true);
