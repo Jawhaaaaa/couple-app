@@ -34,7 +34,9 @@ spring:
     username: ${SPRING_MAIL_USERNAME:}
     password: ${SPRING_MAIL_PASSWORD:}
   jackson:
-    default-property-inclusion: non_null
+    # Гэрээний required + nullable талбар `null` утгатай ч хариунд байна; required биш талбарыг
+    # ContractJsonInclusion `null` үед хасна (contracts/openapi.yaml, DEV_TEST согог 1)
+    default-property-inclusion: always
     serialization:
       write-dates-as-timestamps: false
   mvc:

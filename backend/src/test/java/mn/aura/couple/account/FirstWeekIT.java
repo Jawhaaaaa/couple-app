@@ -33,7 +33,8 @@ class FirstWeekIT extends AbstractSpaceIT {
         s = ok(call(a, "PUT", "/me/first-week-tasks/fw-1", body("status", "DONE")), 200);
         assertThat(s.path("today").path("status").asText()).isEqualTo("DONE");
         // Хамтрагч тус тусдаа
-        assertThat(ok(call(b, "GET", "/me/first-week-tasks"), 200).path("today").path("status").isMissingNode()).isTrue();
+        // `status` нь гэрээнд required + nullable — хийгээгүй бол `null` (хариунаас хасагдахгүй)
+        assertThat(ok(call(b, "GET", "/me/first-week-tasks"), 200).path("today").path("status").isNull()).isTrue();
         assertThat(call(a, "PUT", "/me/first-week-tasks/fw-2", body("status", "DONE")).statusCode()).isEqualTo(404);
         assertThat(call(a, "PUT", "/me/first-week-tasks/unknown", body("status", "DONE")).statusCode()).isEqualTo(404);
         assertThat(call(a, "PUT", "/me/first-week-tasks/fw-1", body("status", "HIDDEN")).statusCode()).isEqualTo(400);
