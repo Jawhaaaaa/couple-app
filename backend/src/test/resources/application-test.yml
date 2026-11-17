@@ -40,6 +40,10 @@ aura:
     environment: test
   # Зөвхөн тестийн VAPID түлхүүр (бодит нууц биш); push sink нь localhost дээр http-ээр
   push:
+    # Дээрх jobs-ийн адил: 30 с тутмын push outbox job өөр context-ийн ирээдүйн цагаар бусад тестийн
+    # «Бүү саад бол»-оор хойшилсон push-ийг эрт илгээж NotificationPreferenceIT.dndInRecipientZone унасан.
+    # Push IT-ууд даруй илгээлт (PushDue) эсвэл /test/jobs/pushOutbox/run (runOnce)-оор ажилладаг.
+    outbox-interval: PT24H
     vapid-public-key: BPcxbBp3veDT3vGfCAVyjFueUxHcyTU7SLrdNtwqPx_4uYges92uzVAYfRNK7uJDJa8Rs_7I_UIY_8bRGsLShj0
     vapid-private-key: G2HWTcsIENb1FCQ_rBMi3GKji-JgtSVjM2I2uSvS5gI
     endpoint-hosts: localhost
