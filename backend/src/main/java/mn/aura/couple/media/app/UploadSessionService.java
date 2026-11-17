@@ -72,7 +72,7 @@ public class UploadSessionService implements TestRunnableJob {
     private record Row(UUID id, UUID ownerId, UUID spaceId, UUID mediaId, String purpose, String fileName,
                        String declaredMime, String detectedMime, String kind, long totalBytes, Long durationMs,
                        int chunkSize, int totalChunks, List<Integer> received, Map<Integer, String> etags, String s3Key,
-                       String s3UploadId, String status, Instant expiresAt) {
+                       String s3UploadId, String status, Instant expiresAt, String abortReason) {
     }
 
     private final JdbcTemplate jdbc;
@@ -166,11 +166,11 @@ public class UploadSessionService implements TestRunnableJob {
             try {
                 inspection = inspector.inspect(bytes, row.fileName(), row.declaredMime());
             } catch (ApiException e) {
-                abort(row);
+                abort(row, e.code());
                 throw e;
             }
             if (!LIMITS.get(row.purpose()).kinds().contains(inspection.kind())) {
-                abort(row);
+                abort(row, ErrorCode.MEDIA_TYPE_FORBIDDEN);
                 throw new ApiException(ErrorCode.MEDIA_TYPE_FORBIDDEN, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
             }
             detectedMime = inspection.mime();
@@ -245,7 +245,7 @@ public class UploadSessionService implements TestRunnableJob {
     public void cancel(UUID ownerId, UUID uploadId) {
         Row row = load(ownerId, uploadId, true);
         if ("OPEN".equals(row.status())) {
-            abort(row);
+            abort(row, null);
         }
     }
 
@@ -266,19 +266,20 @@ public class UploadSessionService implements TestRunnableJob {
     public int runOnce() {
         List<Row> expired = jdbc.query("SELECT * FROM upload_session WHERE status = 'OPEN' AND expires_at <= ? FOR UPDATE SKIP LOCKED",
                 (rs, i) -> map(rs), Timestamp.from(time.now()));
-        expired.forEach(this::abort);
+        expired.forEach(row -> abort(row, null));
         return expired.size();
     }
 
-    private void abort(Row row) {
+    /** @param reason агуулгаас болж татгалзсан бол алдааны код; цуцалсан/хугацаа дууссан бол {@code null}. */
+    private void abort(Row row, ErrorCode reason) {
         try {
             storage.abortMultipart(row.s3Key(), row.s3UploadId());
         } catch (software.amazon.awssdk.core.exception.SdkException e) {
             // S3 талд аль хэдийн цэвэрлэгдсэн — мөрийг ABORTED болгож квотыг буцаах нь чухал
         }
         quota.release(row.spaceId(), row.totalBytes());
-        jdbc.update("UPDATE upload_session SET status = 'ABORTED', updated_at = ? WHERE id = ?",
-                Timestamp.from(time.now()), row.id());
+        jdbc.update("UPDATE upload_session SET status = 'ABORTED', abort_reason = ?, updated_at = ? WHERE id = ?",
+                reason == null ? null : reason.name(), Timestamp.from(time.now()), row.id());
     }
 
     private void insertMedia(Row row, String kind, String mime, long size, String variants, String blurhash, Integer width,
@@ -291,13 +292,18 @@ public class UploadSessionService implements TestRunnableJob {
                 blurhash, width, height, row.durationMs(), status, Timestamp.from(now), Timestamp.from(now));
     }
 
+    /**
+     * Chunk илгээх ба дуусгах үйлдэлд нээлттэй session. Гэрээнд эдгээр operation-д 410 зарлагдаагүй
+     * (`contracts/openapi.yaml` — 404 `NOT_FOUND`, 415 `MEDIA_TYPE_FORBIDDEN`): агуулгаас болж татгалзсан
+     * session → 415, цуцлагдсан эсвэл хугацаа дууссан → 404.
+     */
     private Row open(UUID ownerId, UUID uploadId) {
         Row row = load(ownerId, uploadId, false);
-        if (!"OPEN".equals(row.status())) {
-            throw new ApiException(ErrorCode.NOT_FOUND, HttpStatus.GONE);
+        if ("ABORTED".equals(row.status()) && ErrorCode.MEDIA_TYPE_FORBIDDEN.name().equals(row.abortReason())) {
+            throw new ApiException(ErrorCode.MEDIA_TYPE_FORBIDDEN, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
         }
-        if (!row.expiresAt().isAfter(time.now())) {
-            throw new ApiException(ErrorCode.NOT_FOUND, HttpStatus.GONE);
+        if (!"OPEN".equals(row.status()) || !row.expiresAt().isAfter(time.now())) {
+            throw ApiException.notFound();
         }
         return row;
     }
@@ -324,7 +330,8 @@ public class UploadSessionService implements TestRunnableJob {
                 rs.getString("file_name"), rs.getString("declared_mime"), rs.getString("detected_mime"),
                 rs.getString("kind"), rs.getLong("total_bytes"), duration == null ? null : ((Number) duration).longValue(),
                 rs.getInt("chunk_size"), rs.getInt("total_chunks"), received, etags, rs.getString("s3_key"),
-                rs.getString("s3_upload_id"), rs.getString("status"), rs.getTimestamp("expires_at").toInstant());
+                rs.getString("s3_upload_id"), rs.getString("status"), rs.getTimestamp("expires_at").toInstant(),
+                rs.getString("abort_reason"));
     }
 
     private UploadSession toDto(Row row) {

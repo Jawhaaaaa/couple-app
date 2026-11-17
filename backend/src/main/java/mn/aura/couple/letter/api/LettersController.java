@@ -17,11 +17,14 @@ import mn.aura.couple.letter.app.LetterService;
 import mn.aura.couple.letter.app.TimeCapsuleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /** Гэрээний `Letters` ба `Capsules` tag (T-61, FR-10.1…10.5). Бүгд хос шаардана. */
 @RestController
 public class LettersController implements LettersApi, CapsulesApi {
+
+    static final String DEFAULT_BOX = "inbox";
 
     private final SpaceAccessGuard guard;
     private final LetterService letters;
@@ -33,8 +36,14 @@ public class LettersController implements LettersApi, CapsulesApi {
         this.capsules = capsules;
     }
 
+    /**
+     * Гэрээнд `box` нь `required` боловч operation-д 400 зарлагдаагүй ба default заагаагүй (DEV_TEST согог 2b).
+     * Параметргүй дуудлагыг 400 болгохгүйн тулд S-65-ын анхдагч таб болох `inbox`-оор хариулна.
+     * Энэ параметрийн аннотаци интерфейсийнхийг дарна (Spring MVC-д хэрэгжүүлэлтийн `@RequestParam` давамгай).
+     */
     @Override
-    public ResponseEntity<List<ListLetters200ResponseInner>> listLetters(String box) {
+    public ResponseEntity<List<ListLetters200ResponseInner>> listLetters(
+            @RequestParam(value = "box", required = false, defaultValue = DEFAULT_BOX) String box) {
         return ResponseEntity.ok(letters.list(guard.requireCouple(), box));
     }
 

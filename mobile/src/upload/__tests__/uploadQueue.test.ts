@@ -67,6 +67,8 @@ function fakeServer({ chunkSize = 4 }: { chunkSize?: number } = {}) {
     createCode: '',
     chunkStatus: 0,
     chunkCode: '',
+    /** тэр тооны PUT-ийн дараа (нэг удаа) session-ий хугацаа дуусна (chunk/complete → 404, GET → 410 — гэрээгээр) */
+    expireAfterPuts: Infinity,
     quotaWarning: false,
     counter: 0,
   };
@@ -91,7 +93,12 @@ function fakeServer({ chunkSize = 4 }: { chunkSize?: number } = {}) {
     const m = /^\/uploads\/([^/]+)(\/chunks\/(\d+)|\/complete)?$/.exec(path);
     const session = m ? sessions.get(m[1]) : undefined;
     if (!m || !session) return apiError(404, 'NOT_FOUND');
-    if (session.gone) return apiError(410, 'NOT_FOUND');
+    if (req.method === 'PUT' && puts.length >= state.expireAfterPuts) {
+      session.gone = true; // нэг л удаа — дараагийн session хэвийн
+      state.expireAfterPuts = Infinity;
+    }
+    // Гэрээ: 410 зөвхөн `GET /uploads/{id}`-д; chunk/complete-д дууссан session → 404 NOT_FOUND
+    if (session.gone) return req.method === 'GET' && !m[2] ? apiError(410, 'NOT_FOUND') : apiError(404, 'NOT_FOUND');
     const view = () => ({ id: session.id, chunkSize, totalChunks: session.totalChunks, receivedChunks: [...session.received] });
     if (req.method === 'GET' && !m[2]) return json(200, view());
     if (req.method === 'PUT' && m[3]) {
@@ -243,6 +250,19 @@ describe('AC-20 uploadQueue — тасарсан upload үргэлжилнэ', (
     const done = await queue.item(item.localId);
     expect(done?.status).toBe('done');
     expect(done?.uploadId).not.toBe(old);
+    expect(server.puts.filter((p) => p.uploadId === done?.uploadId).map((p) => p.index)).toEqual([0, 1]);
+  });
+
+  it('chunk илгээж байхад session дуусвал (PUT → 404) шинэ session-оос эхэлнэ', async () => {
+    const server = fakeServer({ chunkSize: 4 });
+    const queue = newQueue(server, memoryStore(), memoryBlobStore());
+    server.state.expireAfterPuts = 1;
+    const item = await queue.add(input(8));
+    const media = await queue.wait(item.localId);
+    expect(media).toBeTruthy();
+    const done = await queue.item(item.localId);
+    expect(done?.status).toBe('done');
+    expect(server.sessions.size).toBe(2);
     expect(server.puts.filter((p) => p.uploadId === done?.uploadId).map((p) => p.index)).toEqual([0, 1]);
   });
 

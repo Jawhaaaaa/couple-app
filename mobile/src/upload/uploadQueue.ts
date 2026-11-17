@@ -11,7 +11,8 @@ import { blobFromUri, chunkOf, type MediaRef, putChunk, type UploadPurpose, type
  * `KeyValueStore`-д (native — AsyncStorage, вэб — IndexedDB) хадгалагдана: апп хаагдаж
  * нээгдэх, сүлжээ сэргэх үед `resume()` нь серверээс `GET /uploads/{id}`-аар хүлээн
  * авсан chunk-ийг асууж, ДУТУУ chunk-ийг л илгээнэ — серверт байгаа байтыг дахин
- * илгээхгүй. 410 (24 цаг өнгөрсөн) бол шинэ session-оос эхэлнэ; 415 бол шалтгаантай
+ * илгээхгүй. 410 (`GET` — 24 цаг өнгөрсөн) эсвэл chunk/complete-ийн 404 (гэрээгээр дууссан,
+ * цуцлагдсан session) бол шинэ session-оос эхэлнэ; 415 бол шалтгаантай
  * бүтэлгүйтнэ; 507 `STORAGE_QUOTA_EXCEEDED` бол S-98 руу (`onQuotaExceeded`).
  */
 
@@ -313,7 +314,7 @@ export class UploadQueue {
         for (let index = 0; index < totalChunks; index += 1) {
           if (item.received.includes(index)) continue;
           const res = await call(putChunk(this.client, uploadId, index, chunkOf(data, index, chunkSize)));
-          if (!res.ok) this.raise(res);
+          if (!res.ok) this.raiseSession(res);
           item = await this.update(item.localId, { received: [...item.received, index] });
           this.emitProgress(item);
         }
@@ -321,7 +322,7 @@ export class UploadQueue {
         if (!done.ok) {
           // UPLOAD_INCOMPLETE — серверийн жагсаалтаар дахин тулгана
           if (done.status === 409 && done.code === 'UPLOAD_INCOMPLETE') throw new Restart('incomplete');
-          this.raise(done);
+          this.raiseSession(done);
         }
         if (done.ok) return this.finish(item, done.data);
       } catch (e) {
@@ -369,6 +370,15 @@ export class UploadQueue {
       received: [...(session.receivedChunks ?? [])],
       quotaWarning: session.quotaWarning === true,
     });
+  }
+
+  /**
+   * Session-ий chunk/complete хариу: гэрээнд эдгээрт 410 байхгүй — дууссан эсвэл цуцлагдсан session-д
+   * сервер 404 `NOT_FOUND` буцаана. Тэгвэл `sync()` шинэ session нээнэ (MAX_RESTARTS-аар хязгаартай).
+   */
+  private raiseSession(res: { status: number; code: string | undefined }): never {
+    if (res.status === 404) throw new Restart('gone');
+    this.raise(res);
   }
 
   /** Алдааны хариуг ангилна: 410 → дахин эхлэх, түр зуурын → дараа, бусад → бүтэлгүйтэл. */

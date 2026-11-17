@@ -87,10 +87,39 @@ class UploadResumeIT extends AbstractSpaceIT {
         assertThat(r.statusCode()).isEqualTo(415);
         assertThat(code(r)).isEqualTo("MEDIA_TYPE_FORBIDDEN");
         assertThat(call(a, "GET", "/uploads/" + id).statusCode()).isEqualTo(410);
+        // DEV_TEST согог 2a: complete-д гэрээнд 410 зарлагдаагүй — татгалзсан шалтгаан 415 MEDIA_TYPE_FORBIDDEN
+        HttpResponse<String> complete = call(a, "POST", "/uploads/" + id + "/complete");
+        assertThat(complete.statusCode()).isEqualTo(415);
+        assertThat(code(complete)).isEqualTo("MEDIA_TYPE_FORBIDDEN");
+        assertThat(chunk(a, id, 0, html).statusCode()).isEqualTo(415);
         assertThat(call(a, "POST", "/uploads", body("purpose", "AVATAR", "fileName", "a.m4a", "mime", "audio/mp4",
                 "totalBytes", 1000)).statusCode()).isEqualTo(415);
         assertThat(call(a, "POST", "/uploads", body("purpose", "CHAT", "fileName", "x.apk",
                 "mime", "application/vnd.android.package-archive", "totalBytes", 1000)).statusCode()).isEqualTo(415);
+    }
+
+    @Test
+    @DisplayName("Цуцлагдсан/хугацаа дууссан upload: chunk ба complete → гэрээний 404 NOT_FOUND (410 биш), GET → 410")
+    void closedSessionUsesContractStatuses() {
+        TestUser a = user("upc-a");
+        byte[] file = pdf(2000);
+        String cancelled = ok(call(a, "POST", "/uploads", body("purpose", "FILE", "fileName", "a.pdf",
+                "mime", "application/pdf", "totalBytes", file.length)), 201).path("id").asText();
+        ok(chunk(a, cancelled, 0, file), 200);
+        ok(call(a, "DELETE", "/uploads/" + cancelled), 204);
+        HttpResponse<String> complete = call(a, "POST", "/uploads/" + cancelled + "/complete");
+        assertThat(complete.statusCode()).isEqualTo(404);
+        assertThat(code(complete)).isEqualTo("NOT_FOUND");
+        assertThat(chunk(a, cancelled, 0, file).statusCode()).isEqualTo(404);
+
+        String expired = ok(call(a, "POST", "/uploads", body("purpose", "FILE", "fileName", "b.pdf",
+                "mime", "application/pdf", "totalBytes", file.length)), 201).path("id").asText();
+        ok(chunk(a, expired, 0, file), 200);
+        clock.set(clock.instant().plus(java.time.Duration.ofHours(25)));
+        a = fresh(a);
+        assertThat(call(a, "GET", "/uploads/" + expired).statusCode()).isEqualTo(410);
+        assertThat(call(a, "POST", "/uploads/" + expired + "/complete").statusCode()).isEqualTo(404);
+        assertThat(chunk(a, expired, 0, file).statusCode()).isEqualTo(404);
     }
 
     @Test

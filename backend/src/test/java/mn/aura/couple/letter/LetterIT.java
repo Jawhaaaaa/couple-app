@@ -47,6 +47,8 @@ class LetterIT extends AbstractSpaceIT {
         assertThat(upcoming.get(0).path("occasionLabel").asText()).isEqualTo("1000 дахь өдөр");
         assertThat(upcoming.toString()).doesNotContain(SECRET).doesNotContain("PAPER_2").doesNotContain(img.toString());
         assertThat(ok(call(b, "GET", "/letters?box=inbox"), 200).size()).isZero();
+        // DEV_TEST согог 2b: `box`-гүй дуудлагад гэрээнд 400 байхгүй — анхдагч `inbox`
+        assertThat(ok(call(b, "GET", "/letters"), 200).size()).isZero();
         JsonNode dash = ok(call(b, "GET", "/dashboard"), 200);
         assertThat(dash.path("incomingLetters").size()).isEqualTo(1);
         assertThat(dash.toString()).doesNotContain(SECRET);
