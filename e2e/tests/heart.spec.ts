@@ -81,10 +81,15 @@ test.describe('Зүрх', () => {
     await expect(partnerA.page.getByTestId('anim-HUG')).toBeAttached();
     await expect(partnerA.page.getByTestId('heart-sent')).toHaveText('🤗 Тэврэлт чинь очлоо');
 
-    await expect(partnerB.page.getByTestId('signal-overlay-HUG')).toBeAttached({ timeout: 2_000 });
-    await expect(partnerB.page.getByTestId('anim-HUG-received')).toBeAttached();
-    await expect(partnerB.page.getByTestId('anim-ANIM-02')).toHaveCount(0);
-    await expect(partnerB.page.getByTestId('signal-overlay-text')).toHaveText(`${partnerA.name} чамайг чанга тэврэлээ`);
+    // Overlay нь RECEIVE_MS.HUG = 1.6 с л харагдана: анимаци, бичвэр, ANIM-02 байхгүйг дараалсан
+    // шалгалтаар биш, НЭГ locator-оор (нэг DOM агшинд) шалгана — WebKit-д дараалсан шалгалтын явцад overlay
+    // алга болж бичвэр олдохгүй байсан (DEV_TEST согог 4)
+    const hugOverlay = partnerB.page.getByTestId('signal-overlay-HUG').filter({
+      has: partnerB.page.getByTestId('anim-HUG-received'),
+      hasNot: partnerB.page.getByTestId('anim-ANIM-02'),
+      hasText: `${partnerA.name} чамайг чанга тэврэлээ`,
+    });
+    await expect(hugOverlay).toBeAttached({ timeout: 2_000 });
   });
 
   test('AC-77 S-26: 81 дэх тэмдэгт орохгүй (сервер ч 400); 80 тэмдэгт B-д ANIM-03 ба S-24-т', async ({ partnerA, partnerB }) => {
