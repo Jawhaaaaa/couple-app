@@ -1,3 +1,5 @@
+# DEV орчин (LLD §4.5): postgres, seaweedfs (S3), mailpit (SMTP), backend, mobile-web.
+# `docker compose up -d --build` — бүх үйлчилгээ healthy болно (AC-209).
 services:
   postgres:
     image: postgres:16-alpine
@@ -13,25 +15,102 @@ services:
       timeout: 3s
       retries: 10
 
+  # S3-нийцтэй медиа сан. Identity нь deploy/dev/seaweedfs-s3.json-д (sigv4 presigned URL).
+  seaweedfs:
+    image: chrislusf/seaweedfs:3.97
+    command: ["server", "-s3", "-s3.config=/etc/seaweedfs/s3.json", "-dir=/data", "-ip=seaweedfs", "-ip.bind=0.0.0.0"]
+    ports:
+      - "${S3_HOST_PORT:-8333}:8333"
+    volumes:
+      - ./deploy/dev/seaweedfs-s3.json:/etc/seaweedfs/s3.json:ro
+      - seaweed:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:9333/cluster/status >/dev/null && wget -qO- http://127.0.0.1:8333/status >/dev/null"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+
+  # DEV SMTP: 1025 — SMTP, 8025 — вэб UI (имэйлийн кодыг эндээс харна).
+  mailpit:
+    image: axllent/mailpit:v1.27
+    ports:
+      - "${MAILPIT_UI_PORT:-8025}:8025"
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: "1"
+      MP_SMTP_AUTH_ALLOW_INSECURE: "1"
+    healthcheck:
+      test: ["CMD", "/mailpit", "readyz"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
   backend:
     build: .
     ports:
       - "${HOST_PORT:-8080}:8080"
+    # E2E-ийн stub (Google IdP, Open-Meteo mock) хост дээр ажиллана — Linux-д ч `host.docker.internal` шийдэгдэнэ
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-dev}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-aura}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-aura}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      AURA_JWT_SECRET: ${AURA_JWT_SECRET:?AURA_JWT_SECRET .env-д тавина}
+      AURA_S3_ENDPOINT: http://seaweedfs:8333
+      AURA_S3_PUBLIC_ENDPOINT: ${AURA_S3_PUBLIC_ENDPOINT:-http://localhost:8333}
+      AURA_S3_REGION: ${AURA_S3_REGION:-us-east-1}
+      AURA_S3_BUCKET: ${AURA_S3_BUCKET:-aura-media}
+      AURA_S3_ACCESS_KEY: ${AURA_S3_ACCESS_KEY:-aura-dev-access}
+      AURA_S3_SECRET_KEY: ${AURA_S3_SECRET_KEY:-aura-dev-secret-change-me}
+      AURA_S3_PATH_STYLE: "true"
+      SPRING_MAIL_HOST: ${SPRING_MAIL_HOST:-mailpit}
+      SPRING_MAIL_PORT: ${SPRING_MAIL_PORT:-1025}
+      SPRING_MAIL_USERNAME: ${SPRING_MAIL_USERNAME:-}
+      SPRING_MAIL_PASSWORD: ${SPRING_MAIL_PASSWORD:-}
+      AURA_MAIL_FROM: ${AURA_MAIL_FROM:-Aura <no-reply@aura.local>}
+      AURA_VAPID_PUBLIC_KEY: ${AURA_VAPID_PUBLIC_KEY:-}
+      AURA_VAPID_PRIVATE_KEY: ${AURA_VAPID_PRIVATE_KEY:-}
+      AURA_VAPID_SUBJECT: ${AURA_VAPID_SUBJECT:-}
+      AURA_EXPO_PUSH_ACCESS_TOKEN: ${AURA_EXPO_PUSH_ACCESS_TOKEN:-}
+      AURA_GOOGLE_CLIENT_ID: ${AURA_GOOGLE_CLIENT_ID:-}
+      AURA_GOOGLE_CLIENT_SECRET: ${AURA_GOOGLE_CLIENT_SECRET:-}
+      AURA_OAUTH_REDIRECT_BASE: ${AURA_OAUTH_REDIRECT_BASE:-http://localhost:8080}
+      AURA_GOOGLE_ISSUER: ${AURA_GOOGLE_ISSUER:-https://accounts.google.com}
+      AURA_GOOGLE_ID_TOKEN_ALG: ${AURA_GOOGLE_ID_TOKEN_ALG:-RS256}
+      AURA_WEB_BASE_URL: ${AURA_WEB_BASE_URL:-http://localhost:8090}
+      AURA_ADMIN_EMAILS: ${AURA_ADMIN_EMAILS:-}
+      AURA_CORS_ALLOWED_ORIGINS: ${AURA_CORS_ALLOWED_ORIGINS:-http://localhost:8090}
+      AURA_COOKIE_SECURE: ${AURA_COOKIE_SECURE:-false}
+      AURA_SENTRY_DSN: ${AURA_SENTRY_DSN:-}
+      AURA_WEATHER_BASE_URL: ${AURA_WEATHER_BASE_URL:-https://api.open-meteo.com}
+      AURA_GEOCODING_BASE_URL: ${AURA_GEOCODING_BASE_URL:-https://geocoding-api.open-meteo.com}
     depends_on:
       postgres:
+        condition: service_healthy
+      seaweedfs:
+        condition: service_healthy
+      mailpit:
         condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/actuator/health | grep -q UP"]
       interval: 10s
       timeout: 5s
-      retries: 10
-      start_period: 30s
+      retries: 12
+      start_period: 40s
 
   mobile-web:
     build:
       context: ./mobile
       args:
         EXPO_PUBLIC_API_URL: ${EXPO_PUBLIC_API_URL:-http://localhost:8080}
+        EXPO_PUBLIC_WS_URL: ${EXPO_PUBLIC_WS_URL:-}
+        EXPO_PUBLIC_APP_VERSION: ${EXPO_PUBLIC_APP_VERSION:-}
+        EXPO_PUBLIC_BUILD: ${EXPO_PUBLIC_BUILD:-}
+        EXPO_PUBLIC_COMMIT_SHA: ${EXPO_PUBLIC_COMMIT_SHA:-}
+        # Backend-д AURA_GOOGLE_CLIENT_ID тохируулсан бол true (нууц биш — товч харуулах эсэх)
+        EXPO_PUBLIC_OAUTH_GOOGLE: ${EXPO_PUBLIC_OAUTH_GOOGLE:-}
     ports:
       - "${MOBILE_HOST_PORT:-8090}:80"
     healthcheck:
@@ -40,5 +119,56 @@ services:
       timeout: 3s
       retries: 5
 
+  # --- DEV build (T-89, profile `devbuild` — анхдагч `up`-д орохгүй). Заавар: DEPLOYED.md ---------
+  # Metro (Expo Go: exp://<LAN_IP>:8081) ба APK build. node_modules — контейнерийн volume (хостын
+  # Windows/macOS binary-тай холилдохгүй; нэртэй тул `run --rm` бүрд npm ci давтагдахгүй). APK-ийн
+  # prebuild нь контейнерийн /build/mobile-д — android/ хост руу бичигдэхгүй.
+  expo-dev:
+    profiles: ["devbuild"]
+    build:
+      context: ./deploy/dev
+      dockerfile: Dockerfile.expo
+    platform: linux/amd64
+    command: ["metro"]
+    environment:
+      LAN_IP: ${LAN_IP:-}
+      HOST_PORT: ${HOST_PORT:-8080}
+      MOBILE_HOST_PORT: ${MOBILE_HOST_PORT:-8090}
+      DOWNLOAD_PORT: ${DOWNLOAD_PORT:-8099}
+      # Хостын 8081 эзлэгдсэн бол .env-д METRO_PORT (контейнер дотор ч ижил порт — exp:// URL-д орно)
+      METRO_PORT: ${METRO_PORT:-8081}
+      EXPO_PUBLIC_BUILD: ${EXPO_PUBLIC_BUILD:-dev}
+      EXPO_PUBLIC_COMMIT_SHA: ${EXPO_PUBLIC_COMMIT_SHA:-}
+      EXPO_PUBLIC_OAUTH_GOOGLE: ${EXPO_PUBLIC_OAUTH_GOOGLE:-}
+    ports:
+      - "${METRO_PORT:-8081}:${METRO_PORT:-8081}"
+    volumes:
+      - ./mobile:/app/mobile
+      - expo-node-modules:/app/mobile/node_modules
+      - expo-node-modules:/build/mobile/node_modules
+      - /app/mobile/.expo
+      - ./deploy/dev/download:/app/deploy/dev/download:ro
+      - devbuild-out:/out
+      - gradle-cache:/opt/gradle-home
+
+  # S-99 татах хуудас ба APK (AC-58): http://<LAN_IP>:${DOWNLOAD_PORT:-8099}
+  download:
+    profiles: ["devbuild"]
+    image: nginx:1.27-alpine
+    ports:
+      - "${DOWNLOAD_PORT:-8099}:80"
+    volumes:
+      - devbuild-out:/usr/share/nginx/html:ro
+      - ./deploy/dev/download/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/version.json >/dev/null"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
 volumes:
   pgdata:
+  seaweed:
+  devbuild-out:
+  gradle-cache:
+  expo-node-modules:

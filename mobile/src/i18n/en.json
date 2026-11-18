@@ -1,0 +1,1969 @@
+{
+  "app": {
+    "name": "Aura",
+    "tagline": "A warm little space for the two of you"
+  },
+  "common": {
+    "retry": "Try again",
+    "cancel": "Cancel",
+    "save": "Save",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "skip": "Skip",
+    "done": "Done",
+    "ok": "OK",
+    "loading": "Loading…",
+    "refreshing": "Refreshing…",
+    "stillLoading": "Bubble and Bumble are waiting with you…",
+    "openSettings": "Open settings",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "settings": "Settings",
+    "update": "Update"
+  },
+  "tabs": {
+    "home": "Home",
+    "memories": "Memories",
+    "chat": "Chat",
+    "plans": "Plans",
+    "together": "Together"
+  },
+  "states": {
+    "offline": "You're offline — showing what's saved. Anything you write will be sent once you reconnect.",
+    "errorTitle": "Couldn't load this",
+    "errorBody": "Something went wrong. Please try again.",
+    "serverUnreachableTitle": "Can't reach the server",
+    "serverUnreachableBody": "Check your connection and try again. Your data is safe.",
+    "permissionTitle": "Permission needed",
+    "permission": {
+      "camera": "Camera access is needed to take a photo.",
+      "photos": "Photo library access is needed to pick photos.",
+      "location": "Location access is needed to tag a place.",
+      "microphone": "Microphone access is needed to record a voice message.",
+      "notifications": "Notifications let you know when a heart or message arrives.",
+      "calendar": "Calendar access is needed to add the date to your calendar."
+    },
+    "updateRequiredTitle": "Update required",
+    "storageFullTitle": "Storage is full",
+    "updateRequiredBody": "A new version of Aura is out. Update to keep going."
+  },
+  "theme": {
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System",
+    "palette": {
+      "CORAL": "Coral",
+      "LAVENDER": "Lavender",
+      "FOREST": "Forest",
+      "OCEAN": "Ocean"
+    }
+  },
+  "animation": {
+    "ALL": "All",
+    "REDUCED": "Reduced",
+    "OFF": "Off"
+  },
+  "dateFormat": {
+    "YMD_DOT": "2026.11.07",
+    "DMY_SLASH": "07/11/2026",
+    "MDY_SLASH": "11/07/2026"
+  },
+  "language": {
+    "mn": "Монгол",
+    "en": "English"
+  },
+  "a11y": {
+    "notificationsBell": "Notifications",
+    "unreadCount_one": "{{count}} unread",
+    "unreadCount_other": "{{count}} unread",
+    "avatar": "Profile and settings",
+    "mascot": "Mascots Bubble and Bumble",
+    "splash": "Aura is loading"
+  },
+  "auth": {
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "newPassword": "New password",
+      "name": "Name",
+      "birthDate": "Date of birth",
+      "birthDatePlaceholder": "YYYY.MM.DD",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password"
+    },
+    "validation": {
+      "emailInvalid": "Enter a valid email address.",
+      "nameRequired": "Tell us your name.",
+      "passwordRequired": "Enter your password.",
+      "birthDateIncomplete": "Enter your full date of birth.",
+      "birthDateInvalid": "That date doesn't look right. Please check it.",
+      "ageRestricted": "Aura is for people aged 18+."
+    },
+    "password": {
+      "tooShort": "Use at least 8 characters.",
+      "tooLong": "Use no more than 128 characters.",
+      "common": "This password is too common. Pick another one.",
+      "sameAsEmail": "Your password can't be the same as your email.",
+      "meter": "Password strength: {{level}}",
+      "level0": "Empty",
+      "level1": "Weak",
+      "level2": "Fair",
+      "level3": "Good",
+      "level4": "Strong"
+    },
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your cozy space for two.",
+      "submit": "Sign in",
+      "forgot": "Forgot password",
+      "register": "Create an account",
+      "or": "or",
+      "google": "Continue with Google",
+      "apple": "Continue with Apple",
+      "rateLimited": "Too many attempts. Try again in {{minutes}} min.",
+      "offline": "You can sign in once you're back online."
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "A cozy space for the two of you to start together.",
+      "submit": "Sign up",
+      "haveAccount": "Already have an account? Sign in",
+      "policyLabel": "I've read and agree to the Privacy Policy and Terms of Service",
+      "policyRead": "Read the policy and terms",
+      "policyHide": "Hide",
+      "policyError": "Couldn't load the policy. Please try again.",
+      "offline": "You can sign up once you're back online."
+    },
+    "verify": {
+      "title": "Verify your email",
+      "subtitle": "We sent a 6-digit code to {{email}}.",
+      "codeLabel": "6-digit code",
+      "submit": "Verify",
+      "resend": "Resend code",
+      "resendIn": "You can resend in {{seconds}} s",
+      "resent": "We sent a new code. Check your inbox.",
+      "editEmail": "Change email",
+      "attemptsLeft_one": "Wrong code. {{count}} attempt left.",
+      "attemptsLeft_other": "Wrong code. {{count}} attempts left.",
+      "locked": "Too many wrong tries. Locked for {{minutes}} min.",
+      "checkingLink": "Checking your link…",
+      "missingEmail": "We lost your email address. Sign in or sign up again."
+    },
+    "forgot": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we'll send you a reset link.",
+      "submit": "Send link",
+      "sent": "If that address has an account, a reset link is on its way. Check your inbox.",
+      "backToLogin": "Back to sign in"
+    },
+    "reset": {
+      "title": "Set a new password",
+      "subtitle": "Choose a new password. You'll be signed out on other devices.",
+      "submit": "Save password",
+      "done": "Your password is updated. Sign in with your new one.",
+      "missingToken": "This link is incomplete. Open the link from your email again.",
+      "requestNew": "Get a new link"
+    },
+    "notMe": {
+      "title": "Wasn't you?",
+      "body": "We'll sign you out everywhere and ask for your password next time.",
+      "confirm": "Sign out everywhere",
+      "done": "You've been signed out everywhere. Reset your password and sign in again.",
+      "missingToken": "This link is incomplete. Open the link from your email again."
+    },
+    "oauth": {
+      "signingIn": "Signing you in…",
+      "failed": "Couldn't sign in with Google. Please try again.",
+      "linkTitle": "Link your account",
+      "linkBody": "An account with this email already exists. Enter its password to link them.",
+      "linkSubmit": "Link account"
+    },
+    "policyUpdate": {
+      "title": "We've updated our policy",
+      "subtitle": "Please read and accept the new version to continue.",
+      "version": "Version {{version}}",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "accept": "Accept and continue"
+    }
+  },
+  "setup": {
+    "profile": {
+      "title": "Tell us about you",
+      "subtitle": "Choose how your person will see you.",
+      "avatar": "Profile photo",
+      "avatarLater": "You can add a photo later in Settings.",
+      "callName": "Nickname",
+      "callNameHint": "What your person calls you.",
+      "timezone": "Time zone: {{zone}}",
+      "city": "City",
+      "cityPlaceholder": "Type your city",
+      "cityUnavailable": "City search isn't available right now. You can add it later in Settings.",
+      "cityEmpty": "No matching cities.",
+      "citySelected": "Selected city: {{city}}",
+      "cityClear": "Clear city",
+      "save": "Save and continue",
+      "later": "Later"
+    }
+  },
+  "timezone": {
+    "prompt": "Switch your time zone to {{zone}}?",
+    "body": "This device is in a different zone from your profile ({{current}}).",
+    "accept": "Yes, switch",
+    "decline": "No, keep it",
+    "failed": "Couldn't change your time zone. You can change it later in Settings."
+  },
+  "pairing": {
+    "create": {
+      "title": "Invite your person",
+      "subtitle": "Send this code to your person. They enter it in Aura to join you.",
+      "codeLabel": "Invite code",
+      "qrLabel": "Invite QR code",
+      "valid": "Valid for 7 days",
+      "remaining": "{{days}} days {{hours}} hours left",
+      "remainingShort": "{{hours}} hours {{minutes}} minutes left",
+      "expired": "This invite has expired. Create a new one.",
+      "share": "Send invite",
+      "shareMessage": "Join me on Aura! Invite code: {{code}}",
+      "copy": "Copy code",
+      "copied": "Code copied.",
+      "linkCopied": "Invite link copied — paste it wherever you like to send it.",
+      "cancel": "Cancel invite",
+      "cancelled": "Invite cancelled. This code won't work anymore.",
+      "createNew": "Create a new invite",
+      "cooldown": "You can start a new pairing after {{date}}. Take a little breather.",
+      "toHome": "Go home",
+      "verifyEmail": "Verify your email",
+      "requested": "{{name}} wants to join!",
+      "viewRequest": "View"
+    },
+    "enter": {
+      "title": "Enter your invite code",
+      "subtitle": "Type the code your person sent you, like AURA-7K3M. The last 4 characters are enough.",
+      "codeLabel": "Invite code",
+      "invalid": "Codes look like AURA-7K3M — they never contain 0, O, 1 or I.",
+      "submit": "Continue",
+      "scan": "Scan QR",
+      "scanHint": "Hold the invite QR code inside the frame.",
+      "scannerLabel": "QR scanner camera",
+      "scannedInvalid": "That QR isn't an Aura invite. Try typing the code instead.",
+      "cameraDenied": "Without camera access we can't scan the QR. Type the code below, or allow the camera in Settings.",
+      "cameraAllow": "Allow camera",
+      "typeInstead": "Type it instead",
+      "placeholder": "AURA-7K3M"
+    },
+    "link": {
+      "title": "You're invited to Aura",
+      "body": "Open the Aura app and enter this code. Don't have the app yet? Sign up first.",
+      "signIn": "Sign in",
+      "register": "Sign up"
+    },
+    "join": {
+      "title": "Invite",
+      "inviter": "{{name}} is inviting you",
+      "avatarLabel": "Photo of {{name}}",
+      "joinBody": "Once you join and {{name}} confirms, your shared space opens.",
+      "join": "Join",
+      "decline": "Decline",
+      "waitingTitle": "Waiting for {{name}} to confirm",
+      "waitingBody": "This screen moves on by itself as soon as {{name}} confirms.",
+      "cancelRequest": "Cancel request",
+      "requestTitle": "{{name}} wants to join",
+      "requestBody": "Confirm and the two of you will be connected in your shared space.",
+      "confirm": "Confirm",
+      "notFound": "No pending request. The invite may have been cancelled or you're already connected.",
+      "back": "Back"
+    },
+    "startDate": {
+      "title": "Since when have you been together?",
+      "subtitle": "Both of you enter the day it all started and confirm.",
+      "label": "Start date",
+      "invalid": "That date isn't valid.",
+      "future": "The date can't be in the future.",
+      "submit": "Suggest",
+      "confirmed": "Start date: {{date}}",
+      "confirmedBody": "You both confirmed it. The counter starts from this day.",
+      "waitingPartner": "Your suggestion: {{date}}. Waiting for {{name}} to confirm.",
+      "partnerProposed": "{{name}} suggested {{date}}.",
+      "acceptPartner": "Confirm {{date}}",
+      "mismatchTitle": "Your dates don't match",
+      "mismatchBody": "You each entered a different day — pick one or edit it.",
+      "mine": "My suggestion",
+      "partners": "{{name}}'s suggestion",
+      "pick": "Choose this",
+      "pickA11y": "Choose {{date}}",
+      "edit": "Enter a different date",
+      "continue": "Continue",
+      "later": "Later",
+      "partnerFallback": "Your partner"
+    },
+    "linked": {
+      "title": "You're connected!",
+      "body": "Your shared space with {{name}} is ready.",
+      "bodyNoName": "Your shared space is ready.",
+      "firstMemory": "Add your first memory",
+      "startDate": "Set your start date"
+    },
+    "soloShare": {
+      "title_one": "Share the {{count}} item you added earlier with {{name}}?",
+      "title_other": "Share the {{count}} items you added earlier with {{name}}?",
+      "body": "You can move what you added on your own into your shared space. If you say no, it stays just for you under «Private».",
+      "yes": "Yes, share",
+      "no": "No, keep it to myself"
+    },
+    "waiting": {
+      "title": "Waiting for your person",
+      "greeting": "Hi, {{name}}!",
+      "inviteActive": "Active invite: {{code}}",
+      "viewInvite": "View invite",
+      "createInvite": "Create invite",
+      "noInvite": "Invite your person to open your shared space.",
+      "haveCode": "Did your person send you an invite?",
+      "enterCode": "Enter code",
+      "pendingInviter": "{{name}} wants to join!",
+      "pendingJoiner": "Waiting for {{name}} to confirm",
+      "view": "View",
+      "soloTitle": "While you wait",
+      "soloBody": "You can already add memories and plans — once connected, you decide whether to share them.",
+      "soloMemories": "Add a memory",
+      "soloPlans": "Make a plan",
+      "soloTogether": "Explore Together"
+    }
+  },
+  "notifications": {
+    "unread_one": "{{count}} unread",
+    "unread_other": "{{count}} unread",
+    "readAll": "Mark all as read",
+    "unreadA11y": "Unread",
+    "loadingMore": "Loading more…"
+  },
+  "profileSettings": {
+    "title": "Profile",
+    "displayName": "Name",
+    "displayNameRequired": "Enter your name.",
+    "birthDate": "Date of birth",
+    "timezone": "Time zone",
+    "timezoneHint": "For example Asia/Ulaanbaatar",
+    "timezoneInvalid": "We don't recognise that time zone.",
+    "useDeviceZone": "Use this device's zone ({{zone}})",
+    "locale": "Language for notifications and email",
+    "localeMn": "Монгол",
+    "localeEn": "English",
+    "onlineVisible": "Show my partner when I'm online",
+    "typingVisible": "Show my partner when I'm typing",
+    "policyTitle": "Privacy policy and terms",
+    "policyVersion": "Accepted version: {{version}}",
+    "policyAcceptedAt": "Accepted on: {{date}}",
+    "policyNone": "No accepted version on record.",
+    "policyOpen": "Read the policy and terms",
+    "save": "Save",
+    "saved": "Saved.",
+    "noChanges": "Nothing changed.",
+    "avatar": {
+      "current": "Current profile photo",
+      "pick": "Choose photo",
+      "preview": "Round preview of the new photo",
+      "save": "Save photo",
+      "discard": "Discard",
+      "tooLarge": "That photo is over 10 MB. Choose one up to 10 MB.",
+      "saved": "New photo saved.",
+      "uploading": "Uploading photo… {{percent}}%",
+      "permission": "To choose a photo we need access to your photo library. Allow it in Settings."
+    }
+  },
+  "home": {
+    "partnerFallback": "Your person",
+    "signalsToday": "Today: {{sent}} 💗 sent · {{received}} received",
+    "offset": {
+      "same": "same time",
+      "hours": "{{sign}}{{hours}} h",
+      "minutes": "{{sign}}{{minutes}} min",
+      "hoursMinutes": "{{sign}}{{hours}} h {{minutes}} min"
+    },
+    "countdown": {
+      "daysHours": "{{days}} d {{hours}} h",
+      "hoursMinutes": "{{hours}} h {{minutes}} min",
+      "minutes": "{{minutes}} min"
+    },
+    "weather": {
+      "a11y": "Weather {{temp}}",
+      "forecastA11y": "Forecast: {{min}} to {{max}}",
+      "range": "{{min}} / {{max}}"
+    },
+    "heart": {
+      "a11y": "Send a heart",
+      "hint": "Press and hold to send a hug",
+      "hugA11y": "Send a hug",
+      "cooldown": "Your heart is catching its breath… {{seconds}} s",
+      "cooldownA11y": "Heart is resting, you can send again in {{seconds}} seconds",
+      "queued": "Will be sent as soon as you are back online 💌",
+      "sent": "💗 Heart delivered",
+      "hugSent": "🤗 Hug delivered"
+    },
+    "person": {
+      "me": "Me",
+      "online": "Online",
+      "offline": "Offline for now",
+      "timeA11y": "{{name}}: time {{time}}",
+      "quiet": "🌙 taking some quiet time"
+    },
+    "distance": {
+      "km": "≈ {{km}} km",
+      "meetupIn": "{{when}} until you meet",
+      "noMeetup": "Mark your next meetup and count down together.",
+      "setMeetup": "Set a meetup",
+      "editMeetup": "Edit meetup"
+    },
+    "meetup": {
+      "title": "Next meetup",
+      "current": "Currently set: {{date}} {{time}}",
+      "date": "Date",
+      "time": "Time",
+      "timePlaceholder": "HH:MM",
+      "invalid": "Please enter a future date and time.",
+      "clear": "Clear meetup"
+    },
+    "unseen": {
+      "title_one": "{{name}} sent you {{count}} {{emoji}}",
+      "title_other": "{{name}} sent you {{count}} {{emoji}}"
+    },
+    "nextDate": {
+      "title": "Next date",
+      "in": "{{when}} to go"
+    },
+    "upcoming": {
+      "title": "Coming up",
+      "today": "Today",
+      "daysLeft_one": "{{count}} day left",
+      "daysLeft_other": "{{count}} days left"
+    },
+    "memories": {
+      "title": "Recent memories"
+    },
+    "messages": {
+      "title": "Messages",
+      "emptyText": "No new messages. Say what is on your mind.",
+      "open": "Open chat",
+      "unread_one": "{{count}} unread message",
+      "unread_other": "{{count}} unread messages"
+    },
+    "onThisDay": {
+      "title": "On this day",
+      "count_one": "{{count}} memory",
+      "count_other": "{{count}} memories",
+      "year": "{{year}}"
+    },
+    "recap": {
+      "title": "Our year",
+      "label": "{{year}} — look back together"
+    },
+    "letters": {
+      "title": "Letters",
+      "incoming": "💌 A letter is coming to you {{when}}",
+      "soon": "soon"
+    },
+    "question": {
+      "title": "Today’s question",
+      "answer": "Answer",
+      "view": "View",
+      "revealed": "You both answered — take a look!",
+      "waiting": "Waiting for {{name}} to answer…",
+      "partnerAnswered": "{{name}} already answered. Answer to see it."
+    },
+    "thinking": {
+      "open": "Thinking of you"
+    },
+    "counter": {
+      "unit": "days together",
+      "since": "since {{date}}",
+      "hint": "Show details",
+      "a11y_one": "{{count}} day together since {{date}}",
+      "a11y_other": "{{count}} days together since {{date}}",
+      "confirmTitle": "Confirm your start date",
+      "confirmBody": "Once you both confirm the day you started, your days together are counted here.",
+      "confirm": "Enter start date",
+      "sheetTitle": "Our days",
+      "breakdown": "{{years}} years {{months}} months {{days}} days",
+      "startedOn": "Started on {{date}}",
+      "nextTitle": "Next milestones",
+      "nextDays_one": "{{count}} day",
+      "nextDays_other": "{{count}} days",
+      "nextYears_one": "{{count}} year anniversary",
+      "nextYears_other": "{{count}} year anniversary"
+    },
+    "solo": {
+      "title": "Hi, {{name}}!",
+      "body": "Invite your person — once you are linked, your days, hearts and questions show up here.",
+      "action": "Go to invite"
+    },
+    "quick": {
+      "memory": "Add memory",
+      "plan": "Suggest a date",
+      "checkin": "Check in"
+    }
+  },
+  "signals": {
+    "heartFrom": "{{name}} sent you a heart",
+    "hugFrom": "{{name}} sent you a big hug",
+    "thinkingFrom": "{{name}} is thinking of you",
+    "quote": "“{{text}}”"
+  },
+  "thinking": {
+    "title": "Thinking of you",
+    "body": "Write one line — or nothing at all, the feeling still arrives.",
+    "label": "Your words",
+    "placeholder": "e.g. Morning coffee is not the same without you",
+    "counter": "{{length}}/{{max}}",
+    "counterA11y": "{{length}} of {{max}} characters",
+    "tooLong": "Please keep it to 80 characters.",
+    "cooldown": "Take a short breather and send again ({{seconds}} s).",
+    "send": "Send",
+    "sent": "💭 Delivered"
+  },
+  "question": {
+    "title": "Today’s question",
+    "today": "Today",
+    "label": "Your answer",
+    "placeholder": "Write from the heart…",
+    "counter": "{{length}}/{{max}}",
+    "submit": "Send answer",
+    "mine": "My answer",
+    "partners": "{{name}}",
+    "waiting": "Waiting for {{name}} to answer…",
+    "answerToSee": "{{name}} has answered — answer to see it.",
+    "alreadyAnswered": "You have already answered this question.",
+    "history": "Past questions",
+    "noAnswer": "No answer",
+    "soloBody": "Daily questions open once you are linked with your person."
+  },
+  "storage": {
+    "usage": "{{used}} / {{quota}} GB",
+    "usageA11y": "{{used}} GB of {{quota}} GB used",
+    "body": "Your shared storage is full, so new photos and videos cannot be saved right now.",
+    "hint": "Empty the trash or delete videos you no longer need to free up space.",
+    "trash": "Go to trash"
+  },
+  "memories": {
+    "capture": "Capture a moment",
+    "count_one": "{{count}} memory",
+    "count_other": "{{count}} memories",
+    "counter": "{{length}} / {{max}}",
+    "views": {
+      "timeline": "Timeline",
+      "map": "Map",
+      "recap": "Recap"
+    },
+    "filters": {
+      "shared": "Shared",
+      "private": "Private",
+      "favorite": "Favorites",
+      "hasLocation": "With a place"
+    },
+    "timeline": {
+      "month_one": "{{month}} {{year}} · {{count}} memory",
+      "month_other": "{{month}} {{year}} · {{count}} memories"
+    },
+    "card": {
+      "by": "Added by {{name}}",
+      "private": "Private",
+      "uploading": "Uploading…",
+      "favorite": "Favorite",
+      "comments_one": "{{count}} comment",
+      "comments_other": "{{count}} comments"
+    },
+    "places": {
+      "title": "Places list",
+      "note": "The map is coming soon — for now, here are the places you've been, with how many memories each.",
+      "empty": "No memories with a place yet. Add a place when you save your next memory.",
+      "emptyAction": "Add a memory"
+    },
+    "recaps": {
+      "empty": "On your anniversary we'll put together a recap of that year's memories for you two.",
+      "emptyAction": "Add a memory"
+    },
+    "detail": {
+      "title": "Memory",
+      "privateNote": "Only you can see this — a private memory you haven't shared.",
+      "favorite": "Add to favorites",
+      "unfavorite": "Remove from favorites",
+      "edit": "Edit",
+      "delete": "Delete",
+      "tagA11y": "Search for {{tag}}",
+      "groupA11y": "Open the {{name}} album"
+    },
+    "media": {
+      "processing": "Processing…",
+      "failed": "We couldn't process this file.",
+      "alt": "{{title}} — {{index}} of {{total}}",
+      "position": "{{index}} / {{total}}",
+      "fullscreen": "View full screen",
+      "openHint": "Tap to zoom in",
+      "save": "Save",
+      "saved": "The save sheet is open."
+    },
+    "perspective": {
+      "title": "Two perspectives",
+      "mine": "My perspective",
+      "partners": "{{name}}'s perspective",
+      "mineEmpty": "Write down how you remember this moment.",
+      "partnerEmpty": "{{name}} hasn't written their side yet.",
+      "placeholder": "How do you remember this moment?",
+      "write": "Write my side",
+      "edit": "Edit my side",
+      "remove": "Remove"
+    },
+    "reactions": {
+      "LOVE": "Love",
+      "ADORE": "Adore",
+      "HEART_EYES": "Heart eyes",
+      "KISS": "Kiss",
+      "HUG": "Hug",
+      "SPARKLE": "Sparkle",
+      "add": "Leave a heart",
+      "remove": "Remove my reaction",
+      "more": "Choose another reaction",
+      "hint": "Long-press to pick from 6 reactions",
+      "count_one": "{{reaction}}: {{count}}",
+      "count_other": "{{reaction}}: {{count}}"
+    },
+    "comments": {
+      "title": "Comments",
+      "empty": "Be the first to leave a comment.",
+      "label": "Write a comment",
+      "placeholder": "What does this moment bring back?",
+      "send": "Send",
+      "pending": "Sending…",
+      "edit": "Edit",
+      "editLabel": "Edit your comment",
+      "edited": "edited",
+      "delete": "Delete",
+      "deleteTitle": "Delete your comment?"
+    },
+    "delete": {
+      "title": "Delete this memory?",
+      "body": "It stays in the trash for 30 days — you can restore it until then.",
+      "partnerComments_one": "{{owner}} {{count}} comment will be deleted too",
+      "partnerComments_other": "{{owner}} {{count}} comments will be deleted too",
+      "confirm": "Delete"
+    },
+    "conflict": {
+      "title": "This memory was just changed somewhere else",
+      "titleBy": "{{name}} just changed this memory",
+      "body": "Choose which version to keep — the one you pick is saved.",
+      "mine": "My version",
+      "theirs": "Their version",
+      "keepMine": "My version",
+      "keepTheirs": "Their version"
+    },
+    "editor": {
+      "newTitle": "New memory",
+      "editTitle": "Edit memory",
+      "mediaTitle": "Photos & videos",
+      "limits": "Up to {{max}} photos and videos per memory. Videos up to 60 seconds and 200 MB. Photos are resized and their location data removed before upload.",
+      "count": "{{count}} / {{max}} files",
+      "pick": "Choose photos & videos",
+      "camera": "Take a photo",
+      "photo": "Photo {{index}}",
+      "video": "Video {{index}}",
+      "uploaded": "Uploaded",
+      "waiting": "Waiting to upload",
+      "progress": "Uploading… {{percent}}%",
+      "progressA11y": "{{name}}: {{percent}}% uploaded",
+      "uploadFailed": "This file didn't upload. Remove it and try adding it again.",
+      "sourceMissing": "We couldn't find this file. Please choose it again.",
+      "someFailed": "Some files didn't upload — remove them and save again.",
+      "removeMedia": "Remove {{name}}",
+      "altLabel": "Photo description (for screen readers)",
+      "altPlaceholder": "For example: The two of us laughing by the lake",
+      "needMedia": "Add at least one photo or video.",
+      "reject": {
+        "TOO_MANY": "{{name}} wasn't added — a memory holds up to {{max}} files.",
+        "VIDEO_TOO_LONG": "{{name}}: the video is longer than 60 seconds. Pick a shorter clip.",
+        "VIDEO_TOO_LARGE": "{{name}}: the video is larger than 200 MB.",
+        "TYPE": "{{name}}: that's not a photo or video."
+      },
+      "detailsTitle": "Details",
+      "title": "Title",
+      "titlePlaceholder": "For example: Our first trip",
+      "titleRequired": "Give this moment a name.",
+      "date": "Date",
+      "datePlaceholder": "YYYY-MM-DD",
+      "dateInvalid": "Write the date like 2026-11-07.",
+      "fromPhoto": "From the photo",
+      "description": "Description",
+      "descriptionPlaceholder": "What happened that day?",
+      "locationTitle": "Place",
+      "placeName": "Place name",
+      "placePlaceholder": "For example: Hustai National Park",
+      "lat": "Latitude",
+      "lon": "Longitude",
+      "locationHint": "If the photo has a location, it fills in by itself. Otherwise enter a place name, latitude and longitude.",
+      "locationInvalid": "A place needs a name and a valid latitude (−90…90) and longitude (−180…180).",
+      "clearLocation": "Clear place",
+      "useMyLocation": "Use my current location",
+      "locationDenied": "Location access is off. You can still type the place and coordinates.",
+      "locationFailed": "Couldn't get your location. Try again or enter it by hand.",
+      "tagsTitle": "Tags",
+      "tag": "Tag",
+      "tagPlaceholder": "For example: trip",
+      "addTag": "Add",
+      "addTagA11y": "Add the {{tag}} tag",
+      "removeTag": "Remove the {{tag}} tag",
+      "groupsTitle": "Albums",
+      "groupsHint": "A memory can be in more than one album.",
+      "uploading": "Uploading files…",
+      "offline": "You're offline. What you wrote is saved as a draft — files upload once you're back online.",
+      "queued": "Your memory will be saved once you're back online.",
+      "discard": "Discard draft",
+      "discardTitle": "Discard this draft?",
+      "discardBody": "What you wrote and the files you chose will be removed.",
+      "draftNote": "Even if you leave this page, what you wrote stays in your draft."
+    },
+    "search": {
+      "title": "Search",
+      "open": "Search memories",
+      "placeholder": "Search memories…",
+      "q": "Search words",
+      "from": "From",
+      "to": "To",
+      "place": "Place",
+      "author": "Added by",
+      "anyone": "Both of us",
+      "me": "Me",
+      "tag": "Tag",
+      "group": "Album",
+      "clear": "Clear filters",
+      "hint": "Type a word or pick a filter and matching memories will show up here.",
+      "offline": "Search needs the internet. Try again once you're online."
+    },
+    "groups": {
+      "title": "Albums",
+      "new": "New album",
+      "newLabel": "Album name",
+      "newPlaceholder": "For example: Our first trip",
+      "create": "Create",
+      "rename": "Rename",
+      "delete": "Delete album",
+      "deleteTitle": "Delete the “{{name}}” album?",
+      "deleteBody_one": "Only the album is deleted — the {{count}} memory in it stays.",
+      "deleteBody_other": "Only the album is deleted — the {{count}} memories in it stay.",
+      "emptyGroup": "No memories in this album yet. Pick it when you add or edit a memory.",
+      "takeOut": "Remove from album",
+      "offline": "Creating an album needs the internet."
+    },
+    "favorites": {
+      "title": "Favorites"
+    },
+    "trash": {
+      "title": "Trash",
+      "note": "Deleted memories stay here for 30 days, then they're gone for good.",
+      "daysLeft_one": "Deleted for good in {{count}} day",
+      "daysLeft_other": "Deleted for good in {{count}} days",
+      "today": "Deleted for good today",
+      "restore": "Restore",
+      "restored": "“{{title}}” is back.",
+      "purge": "Delete for good",
+      "purgeTitle": "Delete for good?",
+      "purgeBody": "“{{title}}”, its photos and comments can't be brought back."
+    },
+    "export": {
+      "title": "Export",
+      "kind": "What should we prepare?",
+      "kinds": {
+        "BOOK_PDF": "PDF book",
+        "ALBUM_ZIP": "Photo album (ZIP)",
+        "FULL": "All data"
+      },
+      "pdfNote": "A book with a page for each month and every photo with its description.",
+      "zipNote": "An archive of the original photos and videos, named by date and title.",
+      "scope": "What to include",
+      "scopes": {
+        "all": "All memories",
+        "group": "An album",
+        "range": "Between dates"
+      },
+      "noGroups": "No albums yet. Create one first.",
+      "start": "Start preparing",
+      "started": "We've started. You'll get a notification when it's ready.",
+      "busy": "One export is being prepared. Start the next one when it's done.",
+      "history": "Previous exports",
+      "none": "No exports yet.",
+      "status": {
+        "QUEUED": "Queued",
+        "RUNNING": "Preparing…",
+        "READY": "Ready",
+        "FAILED": "Failed",
+        "EXPIRED": "Expired"
+      },
+      "expires": "Available to download until {{date}}",
+      "download": "Download",
+      "failedHint": "We couldn't prepare it. Try starting it again.",
+      "offline": "Export needs the internet. Try again once you're online."
+    },
+    "recap": {
+      "position": "Slide {{index}} of {{total}}",
+      "pause": "Pause",
+      "play": "Resume",
+      "prev": "Previous slide",
+      "next": "Next slide",
+      "openMemory": "Open this memory",
+      "done": "Finish",
+      "thanks": "Thank you for every day you've made together."
+    }
+  },
+  "chat": {
+    "disappearing": {
+      "title": "Disappearing messages",
+      "body": "Once your partner reads a message, it is removed from both phones and the server after the chosen time. Messages already sent are not affected.",
+      "option": {
+        "off": "Off",
+        "minute": "1 minute",
+        "hour": "1 hour",
+        "day": "1 day"
+      },
+      "saved": "Saved — applies to your next messages.",
+      "offline": "You can change this once you're back online.",
+      "protectionNative": "Screenshots are blocked on Android. On iPhone, your partner is notified if you take one.",
+      "protectionWeb": "Screenshot protection doesn't work in the web version — browsers can't block or detect screenshots.",
+      "remaining": "{{time}} left",
+      "waiting": "Timer starts once it's read"
+    },
+    "partnerFallback": "Partner",
+    "me": "Me",
+    "localTime": "{{time}} there",
+    "online": "Online",
+    "nextDate": "Next date: {{title}} · {{date}}",
+    "promise": {
+      "proposed": "Promise proposed",
+      "active": "This week's promise",
+      "title": "Shared promise",
+      "intro": "One small promise for the two of you this week — like “a phone-free evening every Sunday”. Once your partner agrees, it shows at the top of your chat.",
+      "label": "Promise",
+      "placeholder": "This week we will…",
+      "propose": "Propose",
+      "status": {
+        "PROPOSED": "Waiting for a reply",
+        "ACTIVE": "This week's promise",
+        "ENDED": "The week is over",
+        "DECLINED": "Declined"
+      },
+      "by": "Proposed by {{name}}",
+      "waiting": "Waiting for your partner to reply.",
+      "accept": "Agree",
+      "decline": "Not this time",
+      "keptQuestion": "Did you keep your promise?",
+      "kept": "Yes",
+      "notKept": "Next time",
+      "partnerKept": "Your partner said they kept it 💗",
+      "partnerNotKept": "Your partner said “next time”"
+    },
+    "typing": "{{name}} is typing",
+    "placeholder": "Message {{name}}…",
+    "inputLabel": "Message",
+    "emoji": "Emoji",
+    "send": "Send",
+    "saveEdit": "Save edit",
+    "heart": "Love — send a heart",
+    "heartCooldown": "Hearts are resting — {{seconds}} s",
+    "heartFailed": "Couldn't send the heart. Please try again.",
+    "editing": "Editing message",
+    "replyingTo": "Replying to {{name}}",
+    "voice": {
+      "record": "Record a voice message",
+      "slideToCancel": "Slide to cancel · push up to lock",
+      "cancel": "Cancel recording",
+      "send": "Send voice message",
+      "elapsedA11y": "Recorded {{time}}",
+      "play": "Play voice message, {{time}}",
+      "pause": "Pause",
+      "processing": "Processing…",
+      "denied": "Microphone access is off, so recording isn't possible. Allow it in your phone settings.",
+      "unsupported": "This browser can't record audio. Try Safari or Chrome."
+    },
+    "deleted": "Message deleted",
+    "edited": "edited",
+    "longPressHint": "Long-press to react, reply or edit",
+    "quoteA11y": "Quote: {{text}}. Tap to jump to the original",
+    "status": {
+      "SENDING": "Sending",
+      "SENT": "Sent",
+      "DELIVERED": "Delivered",
+      "READ": "Read"
+    },
+    "kind": {
+      "TEXT": "Message",
+      "IMAGE": "Photo",
+      "VOICE": "Voice message",
+      "FILE": "File",
+      "LOCATION": "Location",
+      "HEART": "Heart"
+    },
+    "actions": {
+      "title": "Message",
+      "reply": "Reply",
+      "edit": "Edit",
+      "delete": "Delete",
+      "pin": "Pin",
+      "unpin": "Unpin",
+      "copy": "Copy",
+      "copied": "Copied",
+      "openMap": "Open in map",
+      "toMemory": "Turn into memory",
+      "toIdea": "Make it a date idea",
+      "toList": "Add to a list"
+    },
+    "deleteConfirm": {
+      "title": "Delete this message?",
+      "body": "Both of you will see “Message deleted”. This can't be undone."
+    },
+    "search": {
+      "title": "Search chat",
+      "label": "Search for",
+      "placeholder": "e.g. Terelj",
+      "offline": "Search needs an internet connection.",
+      "jumpLabel": "Jump to date",
+      "jump": "Jump"
+    },
+    "media": {
+      "title": "Media & files",
+      "images": "Photos",
+      "files": "Files",
+      "voice": "Voice",
+      "links": "Links",
+      "longPressHint": "Long-press to see it in the chat"
+    },
+    "pins": {
+      "title": "Pinned messages",
+      "openHint": "Tap to see it in the chat",
+      "bannerA11y_one": "{{count}} pinned message — see all",
+      "bannerA11y_other": "{{count}} pinned messages — see all"
+    },
+    "backToLatest": "Back to latest messages",
+    "attach": {
+      "title": "Attach",
+      "image": "Photo",
+      "file": "File",
+      "location": "Location",
+      "tooLarge": "The file is larger than 50 MB. Please choose a smaller one.",
+      "forbidden": "This type of file can't be sent (apps, scripts).",
+      "myLocation": "My location",
+      "locationDenied": "Location access is off. Allow it in settings.",
+      "locationFailed": "Couldn't get your location. Please try again."
+    }
+  },
+  "map": {
+    "title": "Places we've been",
+    "subtitle_one": "{{count}} place — tap a pin to see its memories",
+    "subtitle_other": "{{count}} places — tap a pin to see their memories",
+    "attribution": "Map: {{osm}}",
+    "openMemories": "See memories"
+  },
+  "notificationSettings": {
+    "title": "Notifications",
+    "timeInvalid": "Use HH:MM, e.g. 23:00",
+    "types": {
+      "title": "What to notify you about",
+      "note": "Turned-off types won't be pushed, but they still appear in your in-app notification list.",
+      "messages": "Messages",
+      "signals": "Hearts, hugs and “thinking of you”",
+      "memories": "Memories and comments",
+      "plans": "Date and promise requests",
+      "reminders": "Date and anniversary reminders",
+      "letters": "Letters and capsules",
+      "question": "Daily question answered",
+      "nudges": "Gentle nudge after a quiet week"
+    },
+    "dnd": {
+      "title": "Do not disturb",
+      "note": "No pushes during this time; you'll get one combined notification afterwards. Times are in your zone.",
+      "start": "Start",
+      "end": "End"
+    },
+    "hideContent": {
+      "label": "Hide content",
+      "hint": "The lock screen only shows generic text like “New message”."
+    },
+    "greetings": {
+      "title": "Morning and evening greetings",
+      "morning": "“Good morning”",
+      "evening": "“Sleep well”",
+      "morningAt": "Morning time",
+      "eveningAt": "Evening time"
+    },
+    "quiet": {
+      "title": "Quiet time",
+      "note": "Notifications pause for a while. Your partner only sees “🌙 taking a quiet moment”.",
+      "option": {
+        "60": "1 hour",
+        "1440": "1 day",
+        "10080": "7 days"
+      },
+      "stop": "End quiet time",
+      "on": "Quiet time is on 🌙",
+      "off": "Quiet time ended"
+    },
+    "push": "Turn on push notifications"
+  },
+  "settings": {
+    "sections": {
+      "account": "Account",
+      "couple": "Couple",
+      "app": "App",
+      "about": "About",
+      "danger": "Careful"
+    },
+    "profile": "Profile",
+    "couple": "Couple — nickname, theme, mascot",
+    "notifications": "Notifications",
+    "security": "Privacy & security",
+    "data": "Data & storage",
+    "appearance": "Appearance",
+    "licenses": "Licenses & credits",
+    "policies": "Privacy policy & terms",
+    "about": "About Aura",
+    "breakup": "End pairing",
+    "deleteAccount": "Delete account"
+  },
+  "lock": {
+    "title": "Enter your PIN",
+    "entered_one": "{{count}} digit entered",
+    "entered_other": "{{count}} digits entered",
+    "wrong": "Wrong PIN. Please try again.",
+    "wait": "Too many wrong attempts — please wait a moment.",
+    "waitCountdown": "Try again in {{seconds}} seconds.",
+    "untilSignOut_one": "{{left}} more wrong attempt and you'll need to sign in with your password.",
+    "untilSignOut_other": "{{left}} more wrong attempts and you'll need to sign in with your password.",
+    "delete": "Delete last digit",
+    "biometric": "Unlock with Face ID / fingerprint",
+    "biometricPrompt": "Unlock Aura",
+    "biometricFailed": "Couldn't recognise you. Please enter your PIN.",
+    "settings": {
+      "screenTitle": "Privacy & security",
+      "title": "App lock",
+      "note": "Aura asks for your PIN (or Face ID / fingerprint) when it opens. The PIN never leaves this device.",
+      "enable": "Set a PIN",
+      "pin": "New PIN (4–6 digits)",
+      "newPin": "New PIN (4–6 digits)",
+      "confirmPin": "Enter the PIN again",
+      "currentPin": "Current PIN",
+      "pinRule": "The PIN must be 4–6 digits.",
+      "mismatch": "The PINs didn't match. Please try again.",
+      "saved": "App lock is on 🔒",
+      "disabled": "App lock is off",
+      "timeout": "Lock after",
+      "after": {
+        "0": "Immediately",
+        "60": "1 min",
+        "300": "5 min",
+        "900": "15 min"
+      },
+      "biometric": "Use Face ID / fingerprint",
+      "change": "Change PIN",
+      "lockNow": "Lock now",
+      "disable": "Turn off app lock"
+    }
+  },
+  "stats": {
+    "title": "Our numbers",
+    "daysTogether": "days together",
+    "memories": "memories",
+    "photos": "photos",
+    "videos": "videos",
+    "dates": "dates",
+    "goalsCompleted": "goals reached",
+    "letters": "letters",
+    "heartsSent": "hearts sent",
+    "footsteps": "Places we've been",
+    "cities_one": "{{count}} city",
+    "cities_other": "{{count}} cities",
+    "countries_one": "{{count}} country",
+    "countries_other": "{{count}} countries",
+    "distance": "≈ {{km}} km travelled",
+    "openMap": "See on the map",
+    "yearReview": "Our year {{year}}",
+    "yearTitle": "Our year {{year}}",
+    "topPlace": "Most visited: {{place}}",
+    "note": "Only the two of you see these numbers. Not a score — just memories counted.",
+    "saveImage": "Save as image",
+    "save": {
+      "saved": "Image saved",
+      "denied": "Photo library access is off.",
+      "failed": "Couldn't save. Please try again."
+    },
+    "badYear": "No review found for this year."
+  },
+  "devices": {
+    "title": "Active devices",
+    "thisDevice": "this device",
+    "lastUsed": "Last used {{date}} {{time}}",
+    "signOut": "Sign out",
+    "signOutDevice": "Sign out {{name}}",
+    "signOutAll": "Sign out everywhere",
+    "confirmTitle": "Sign out of all devices?",
+    "confirmBody": "Every session, including this one, will be closed. The fastest protection if your phone is lost.",
+    "requirePassword": "Require password to sign in again (remote lock)"
+  },
+  "dataSettings": {
+    "title": "Data & storage",
+    "usage": "Using {{used}} / {{quota}} GB",
+    "warning": "Storage is over 80% full. You can delete files you no longer need or empty the trash.",
+    "exportTitle": "Copy of all your data",
+    "exportNote": "JSON + every photo, video and voice note + an easy-to-read HTML page. We'll notify you when it's ready; the link works for 7 days. Your partner's private items (gift ideas, unshared moods) are not included.",
+    "exportStart": "Prepare a copy",
+    "exportStarted": "Started — we'll let you know when it's ready.",
+    "exportBusy": "A copy is already being prepared. Try again once it finishes.",
+    "exports": "Copies",
+    "trash": "Trash",
+    "trashNote": "Deleted memories are kept for 30 days."
+  },
+  "plans": {
+    "propose": "Propose a date",
+    "tabs": {
+      "upcoming": "Upcoming",
+      "ideas": "Ideas",
+      "calendar": "Calendar"
+    },
+    "sections": {
+      "next": "Next date",
+      "awaiting": "Awaiting reply",
+      "later": "Coming up",
+      "past": "Past dates"
+    },
+    "status": {
+      "PENDING": "Awaiting reply",
+      "COUNTER_PROPOSED": "New time suggested",
+      "CONFIRMED": "Confirmed",
+      "DECLINED": "Declined",
+      "CANCELLED": "Cancelled"
+    },
+    "category": {
+      "FOOD": "Food",
+      "TRAVEL": "Travel",
+      "HOME": "At home",
+      "SPORT": "Sport",
+      "CULTURE": "Culture",
+      "OUTDOOR": "Outdoors",
+      "OTHER": "Other"
+    },
+    "recurrence": {
+      "NONE": "Does not repeat",
+      "WEEKLY": "Every week",
+      "MONTHLY": "Every month"
+    },
+    "when": "{{date}} · {{time}}",
+    "proposedBy": "Proposed by {{name}}",
+    "detailTitle": "Date",
+    "rsvp": {
+      "title": "Reply",
+      "accept": "Accept",
+      "counter": "Another time",
+      "decline": "Decline",
+      "waiting": "Waiting for a reply",
+      "yourTurn": "Waiting for your reply",
+      "choose": "Pick one of the suggested times",
+      "chooseOption": "{{when}} — choose",
+      "confirmed": "You are both in",
+      "closed": "This date is no longer active"
+    },
+    "checklist": {
+      "title": "Prep checklist",
+      "progress": "{{done}} of {{total}} done",
+      "add": "Add",
+      "placeholder": "e.g. Bring a blanket",
+      "itemLabel": "New checklist item",
+      "doneBy": "Checked by {{name}}",
+      "remove": "Remove",
+      "empty": "The checklist is empty."
+    },
+    "budget": {
+      "title": "Budget",
+      "planned": "Planned: {{amount}}",
+      "actual": "Actual: {{amount}}",
+      "over": "{{amount}} over budget",
+      "within": "Within budget",
+      "addExpense": "Add expense",
+      "amount": "Amount (₮)",
+      "note": "Note (optional)",
+      "payer": "Paid by",
+      "paidBy": "Paid by {{name}}",
+      "invalidAmount": "Enter a positive amount",
+      "me": "Me"
+    },
+    "weather": {
+      "title": "Weather forecast",
+      "range": "{{min}}…{{max}}°C"
+    },
+    "calendarAdd": "Add to calendar",
+    "calendarAdded": "Added to your phone calendar.",
+    "icsShared": "Calendar file (.ics) is ready.",
+    "toMemory": "Turn into a memory",
+    "openMemory": "View memory",
+    "edit": "Edit",
+    "cancelPlan": "Cancel date",
+    "cancelConfirm": {
+      "title": "Cancel this date?",
+      "body": "Its reminders will be removed too.",
+      "one": "Just this one",
+      "series": "All repeats"
+    },
+    "confirmedMoment": "It is a date!",
+    "form": {
+      "newTitle": "Plan a date",
+      "editTitle": "Edit date",
+      "title": "Title",
+      "titleRequired": "Add a title",
+      "description": "Description",
+      "category": "Category",
+      "date": "Date (YYYY-MM-DD)",
+      "time": "Time (HH:MM)",
+      "dateInvalid": "Use the YYYY-MM-DD format",
+      "timeInvalid": "Use the HH:MM format",
+      "timezoneNote": "Time in {{zone}} — your partner sees it in their own time zone.",
+      "venue": "Place name",
+      "venueHint": "Pick a city for the map and weather.",
+      "placeNeedsCity": "Pick the city of the place",
+      "budget": "Planned budget (₮)",
+      "budgetInvalid": "Enter the budget as a number",
+      "reminders": "Reminders",
+      "reminderDay": "1 day before",
+      "reminderHour": "1 hour before",
+      "recurrence": "Repeat",
+      "until": "Repeat until (optional)",
+      "checklist": "Prep checklist",
+      "submit": "Propose",
+      "save": "Save",
+      "scope": "Apply changes to",
+      "scopeOne": "Just this one",
+      "scopeAll": "All repeats"
+    },
+    "counter": {
+      "title": "Suggest another time",
+      "hint": "Suggest 1–3 times — your partner picks one.",
+      "option": "Option {{n}}",
+      "add": "Add a time",
+      "remove": "Remove",
+      "submit": "Send"
+    },
+    "calendar": {
+      "title": "Calendar",
+      "month": "Month",
+      "week": "Week",
+      "prev": "Previous",
+      "next": "Next",
+      "monthTitle": "{{month}} {{year}}",
+      "none": "No dates on this day.",
+      "hasPlans": "{{date}}, has dates",
+      "months": {
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+      },
+      "weekdays": {
+        "0": "Mo",
+        "1": "Tu",
+        "2": "We",
+        "3": "Th",
+        "4": "Fr",
+        "5": "Sa",
+        "6": "Su"
+      }
+    },
+    "ideas": {
+      "title": "Ideas",
+      "add": "Add idea",
+      "search": "Search ideas",
+      "all": "All",
+      "anyBudget": "Any budget",
+      "free": "Free",
+      "upTo": "≤ {{amount}}",
+      "toPlan": "Plan this date",
+      "tools": "Decide together",
+      "random": "Pick at random",
+      "deck": "Secret match deck",
+      "library": "Idea library",
+      "budget": "Budget overview",
+      "noMatch": "No ideas match this filter.",
+      "byAuthor": "Added by {{name}}"
+    },
+    "setting": {
+      "HOME": "At home",
+      "OUTDOOR": "Outdoors"
+    },
+    "ideaEditor": {
+      "newTitle": "New idea",
+      "editTitle": "Edit idea",
+      "title": "Title",
+      "titleRequired": "Add a title",
+      "description": "Description",
+      "category": "Category",
+      "budget": "Budget (₮)",
+      "budgetInvalid": "Enter the budget as a number",
+      "url": "Link",
+      "urlInvalid": "Use the https://… format",
+      "setting": "At home or outdoors",
+      "settingAny": "Either",
+      "save": "Save",
+      "delete": "Delete idea",
+      "deleteTitle": "Delete this idea?",
+      "fromChat": "Filled in from a chat message — check it and save."
+    },
+    "random": {
+      "title": "Pick at random",
+      "pick": "Pick",
+      "again": "Pick again",
+      "includeLibrary": "Include the idea library",
+      "noMatch": "No ideas match your filters",
+      "loosen": "Loosen filters",
+      "candidates": "Picked from {{count}} ideas",
+      "fromLibrary": "From the idea library"
+    },
+    "deck": {
+      "title": "Secret match deck",
+      "hint": "Neither of you ever sees the other's picks — it is only a match when you both say yes.",
+      "yes": "Yes",
+      "no": "No",
+      "matches": "Matches",
+      "match": "It is a match!",
+      "matchBody": "You both said yes to “{{title}}”."
+    },
+    "library": {
+      "title": "Idea library",
+      "season": {
+        "WINTER": "Winter",
+        "SPRING": "Spring",
+        "SUMMER": "Summer",
+        "AUTUMN": "Autumn"
+      },
+      "band": {
+        "FREE": "Free",
+        "UPTO_50K": "≤ 50,000₮",
+        "50K_150K": "50,000–150,000₮",
+        "OVER_150K": "Over 150,000₮"
+      },
+      "longDistance": "Long distance",
+      "adopt": "Make it our idea",
+      "adopted": "Added to your ideas.",
+      "duration": "≈ {{minutes}} min"
+    },
+    "budgetSummary": {
+      "title": "Budget overview",
+      "planned": "Planned: {{amount}}",
+      "actual": "Actual: {{amount}}",
+      "over": "{{amount}} over budget",
+      "within": "Within budget",
+      "shares": "Who paid what",
+      "plans": "Dates this month"
+    }
+  },
+  "occasions": {
+    "title": "Special days",
+    "add": "Add a day",
+    "horizon": "Milestone horizon",
+    "horizonAll": "See all",
+    "daysLeft_one": "{{count}} day left",
+    "daysLeft_other": "{{count}} days left",
+    "daysAgo_one": "{{count}} day ago",
+    "daysAgo_other": "{{count}} days ago",
+    "today": "Today",
+    "kind": {
+      "ANNIVERSARY": "Anniversary",
+      "BIRTHDAY": "Birthday",
+      "FIRST_MET": "First met",
+      "OTHER": "Other",
+      "MILESTONE": "Together"
+    },
+    "recurring": "Every year",
+    "once": "One time",
+    "memoryCount": "{{count}} memories",
+    "detailTitle": "Special day",
+    "note": "Note",
+    "notePlaceholder": "A few words about this day",
+    "memories": "Attached memories",
+    "memoriesEmpty": "No memories attached.",
+    "attach": "Attach memories",
+    "attachHint": "Pick the memories to attach",
+    "reminders": "Reminders",
+    "reminder": {
+      "r7": "7 days before",
+      "r1": "1 day before",
+      "r0": "On the day"
+    },
+    "save": "Save",
+    "saved": "Saved.",
+    "gifts": "Secret gift ideas",
+    "giftsHint": "Only you can see these — your partner never will.",
+    "giftPlaceholder": "e.g. A new edition of their favorite book",
+    "giftLabel": "Gift idea",
+    "addGift": "Add",
+    "removeGift": "Remove",
+    "edit": "Edit",
+    "editor": {
+      "newTitle": "Add a day",
+      "editTitle": "Edit day",
+      "title": "Name",
+      "titleRequired": "Add a name",
+      "date": "Date (YYYY-MM-DD)",
+      "dateInvalid": "Use the YYYY-MM-DD format",
+      "kind": "Type",
+      "recurring": "Repeats every year",
+      "note": "Note (optional)",
+      "save": "Save",
+      "delete": "Delete",
+      "deleteTitle": "Delete this day?"
+    },
+    "celebration": {
+      "days": "Day {{count}} together",
+      "hint": "Tap to close"
+    },
+    "hubCard": "Anniversaries and birthdays"
+  },
+  "breakup": {
+    "title": "End pairing",
+    "step": "{{step}} / 3",
+    "warnTitle": "Before you end the pairing",
+    "warnBody": "Once you end the pairing, your shared space becomes view-and-download only for 14 days. You can't add or edit memories or messages during that time.",
+    "warnRestore": "If you both tap \"Restore\" within 14 days, everything comes back as it was.",
+    "warnPurge": "After 14 days, all shared data (memories, messages, photos) is permanently deleted from the server.",
+    "warnPartner": "{{partner}} will be notified.",
+    "continue": "I understand, continue",
+    "confirmTitle": "Final confirmation",
+    "confirmBody": "Enter your password and tap \"End pairing\". Within 14 days, only the two of you together can undo this.",
+    "password": "Password",
+    "passwordHint": "If you signed up with Google/Apple, you can leave this empty.",
+    "passwordWrong": "That password is incorrect.",
+    "confirm": "End pairing",
+    "exportTitle": "Save your data",
+    "exportBody": "The pairing has ended. For the next 14 days you can download a copy of all your shared memories, messages and photos.",
+    "exportOpen": "Download a copy",
+    "exportLater": "Later",
+    "stateTitle": "Pairing ended",
+    "daysLeft": "{{count}} days until deletion",
+    "daysLeft_one": "{{count}} day until deletion",
+    "daysLeft_other": "{{count}} days until deletion",
+    "readOnly": "You can view and download for now — adding or editing is turned off.",
+    "restoreTitle": "Restore",
+    "restoreBody": "If you both tap \"Restore\", all your data comes back as it was.",
+    "restore": "Restore",
+    "restoreMine": "You've confirmed. The pairing comes back as soon as {{partner}} confirms too.",
+    "restorePartner": "{{partner}} wants to restore. Confirm to bring it back.",
+    "restored": "Pairing restored — everything is as it was.",
+    "partnerFallback": "Your partner",
+    "notPaired": "You're not paired with anyone right now.",
+    "orphaned": "Your partner deleted their account, so your shared space is view-and-download only.",
+    "offline": "Ending or restoring a pairing needs an internet connection."
+  },
+  "spaceBanner": {
+    "breaking": "Pairing ended — download your data or restore together within {{count}} days.",
+    "orphaned": "Your partner deleted their account — download your data within {{count}} days.",
+    "open": "Details"
+  },
+  "deleteAccount": {
+    "title": "Delete account",
+    "step": "{{step}} / 3",
+    "warnTitle": "Before you delete your account",
+    "warnBody": "A deleted account can't be restored.",
+    "warnPersonal": "Your profile, sign-in details, settings and anything from before you paired are deleted right away.",
+    "warnPartner": "{{partner}} will be notified and can view and download your shared space for 30 days. After that, all shared data is permanently deleted.",
+    "continue": "I understand, continue",
+    "exportTitle": "Save your data first",
+    "exportBody": "You won't be able to sign in after deleting. You can prepare a copy of your memories, messages and photos now.",
+    "exportOpen": "Prepare a copy",
+    "exportSkip": "Continue",
+    "confirmTitle": "Confirm",
+    "confirmBody": "Enter your password and type \"{{phrase}}\" below.",
+    "phrase": "DELETE",
+    "phraseLabel": "Confirmation word",
+    "password": "Password",
+    "passwordHint": "If you signed up with Google/Apple, you can leave this empty.",
+    "passwordWrong": "That password is incorrect.",
+    "phraseWrong": "Type exactly \"{{phrase}}\".",
+    "confirm": "Delete my account permanently",
+    "partnerFallback": "Your partner",
+    "offline": "Deleting your account needs an internet connection."
+  },
+  "together": {
+    "conflict": {
+      "titleBy": "{{name}} just changed this",
+      "partner": "Your partner",
+      "body": "Choose which version to keep — the one you pick will be saved.",
+      "mine": "My version",
+      "theirs": "Their version",
+      "keepMine": "My version",
+      "keepTheirs": "Their version"
+    },
+    "hub": {
+      "resonance": "Daily resonance",
+      "partnerMood": "{{name}} feels {{emoji}} {{mood}} today",
+      "partnerNoMood": "{{name}} hasn't shared today's mood yet.",
+      "myMood": "My day: {{emoji}} {{mood}}",
+      "checkIn": "Check in",
+      "letterbox": "Letterbox",
+      "unreadLetters": "Unread letters: {{count}}",
+      "noLetters": "No new letters — write your first one.",
+      "dreams": "Dreams & goals",
+      "noGoals": "No shared goals yet — set one to reach together.",
+      "footsteps": "Our footsteps",
+      "days": "Days together",
+      "memories": "Memories",
+      "dates": "Dates",
+      "cities": "Cities ({{countries}} countries)",
+      "openMap": "Open the map",
+      "privacy": "Privacy & safety",
+      "privacyBody": "Biometric lock, PIN and signed-in devices."
+    }
+  },
+  "lists": {
+    "title": "Lists",
+    "kind": {
+      "bucket": "Bucket",
+      "todo": "To-do",
+      "shopping": "Shopping",
+      "wishlist": "Wishlist"
+    },
+    "wishType": {
+      "MOVIE": "Movie",
+      "BOOK": "Book",
+      "PLACE": "Place",
+      "OTHER": "Other"
+    },
+    "placeholder": {
+      "bucket": "e.g. Camp by Lake Khuvsgul",
+      "todo": "e.g. Pay the rent",
+      "shopping": "e.g. Milk, bread",
+      "wishlist": "e.g. Watch “Interstellar”"
+    },
+    "newItem": "New item",
+    "description": "Description",
+    "add": "Add",
+    "titleRequired": "Write what to add",
+    "titleLabel": "Title",
+    "fromChat": "Filled in from a chat message — check it and tap “Add”.",
+    "pending": "Waiting to send",
+    "bothWant": "You both want this 💗",
+    "vote": "I want this",
+    "unvote": "Take back my vote",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "makePlan": "Make it a date",
+    "edit": "Edit",
+    "delete": "Delete",
+    "doneBy": "{{name}} · {{when}}",
+    "someone": "Someone",
+    "stateDone": "Done",
+    "stateOpen": "Not done",
+    "doneSection": "Done ({{count}})",
+    "clearDone": "Clear done",
+    "reorderConflict": "The list changed elsewhere, so we refreshed it — please reorder again.",
+    "bucketDoneTitle": "You did it! 🎉",
+    "bucketDoneBody": "Turn “{{title}}” into a memory?",
+    "toMemory": "Make it a memory",
+    "notNow": "No"
+  },
+  "goals": {
+    "title": "Dreams & goals",
+    "add": "Add a goal",
+    "moneyTarget": "Target {{amount}}",
+    "stepsProgress": "{{fraction}} steps",
+    "until": "by {{date}}",
+    "steps": "Steps",
+    "noSteps": "No steps yet — add the first one.",
+    "newStep": "New step",
+    "addStep": "Add step",
+    "removeStep": "Remove step",
+    "stepDoneBy": "Done by {{name}}",
+    "editTitle": "Edit title",
+    "raised": "{{raised}} / {{target}} saved",
+    "whoGave": "Who gave what",
+    "noContributions": "No contributions yet.",
+    "contribution": "Contribution (₮)",
+    "contribute": "Contribute",
+    "myContribution": "My contribution {{amount}} · {{date}}",
+    "removeContribution": "Remove contribution",
+    "completed": "Goal reached!",
+    "delete": "Delete goal",
+    "deleteTitle": "Delete this goal?",
+    "deleteBody": "Its steps and contributions will be deleted too. This can't be undone.",
+    "form": {
+      "title": "Set a goal",
+      "name": "Goal",
+      "amount": "Money target (₮, optional)",
+      "amountHint": "If set, progress is counted by contributions.",
+      "date": "Deadline (YYYY-MM-DD, optional)",
+      "titleRequired": "Write your goal",
+      "amountInvalid": "Enter a positive whole number",
+      "dateInvalid": "Use the YYYY-MM-DD format",
+      "save": "Set goal"
+    }
+  },
+  "coupleSettings": {
+    "title": "Couple",
+    "privateNote": "Only you see the nickname and photo — your partner won't.",
+    "partnerTitle": "Partner",
+    "nickname": "Nickname",
+    "nicknameHint": "Shown instead of their name in the app. Leave empty to use their real name.",
+    "nicknameSave": "Save nickname",
+    "nicknameSaved": "Saved.",
+    "avatarLabel": "Partner's photo",
+    "avatarPick": "Change photo",
+    "avatarSaved": "Photo saved.",
+    "avatarTooLarge": "The photo must be 10 MB or smaller.",
+    "themeTitle": "Theme",
+    "themeNote": "The theme changes on both phones once you both agree.",
+    "themeCurrent": "Current theme: {{theme}}",
+    "themePropose": "Suggest \"{{theme}}\"",
+    "themePendingMine": "You suggested \"{{theme}}\" — waiting for {{partner}} to agree.",
+    "themePendingPartner": "{{partner}} suggested the \"{{theme}}\" theme.",
+    "themeAccept": "Accept",
+    "themeDecline": "Decline",
+    "themeProposed": "Suggestion sent.",
+    "themeBusy": "There's already a suggestion waiting. Try again once it's answered.",
+    "mascotTitle": "Mascot belt",
+    "mascotNote": "Belt colour for Bombolog and Bombii — only in your app.",
+    "mascotColor": {
+      "coral": "Coral",
+      "honey": "Honey",
+      "peach": "Peach",
+      "lavender": "Lavender",
+      "mint": "Mint",
+      "sky": "Sky"
+    },
+    "startTitle": "Start date",
+    "startPending": "Not confirmed",
+    "startEdit": "Change",
+    "breakupTitle": "End pairing",
+    "breakupNote": "You can both restore it within 14 days.",
+    "breakupOpen": "End pairing",
+    "breakupState": "Pairing ended — details",
+    "readOnly": "Your shared space is view-only, so these settings can't be changed.",
+    "notPaired": "Once you pair up, you can set a nickname, theme and mascot here.",
+    "partnerFallback": "Your partner"
+  },
+  "appearance": {
+    "title": "Appearance",
+    "language": "Language",
+    "languageNote": "Switches instantly — no reload.",
+    "theme": "Colour mode",
+    "systemNote": "\"System\" follows your phone's setting.",
+    "dateFormat": "Date format",
+    "dateExample": "Example: {{date}}",
+    "animation": "Animation",
+    "animationNote": "\"Reduce\" keeps only soft fades; \"Off\" stops animations and particles completely.",
+    "haptics": "Vibration (haptics)",
+    "hapticsNote": "A gentle buzz when you send a heart or celebrate.",
+    "sound": "Sound",
+    "soundNote": "Soft sounds (off by default). Handy in browsers without vibration.",
+    "saveError": "Saved on this device. We'll sync it once you're back online."
+  },
+  "licenses": {
+    "title": "Licenses & credits",
+    "intro": "Aura uses these works, open-source libraries and data services. Thank you to their creators.",
+    "groups": {
+      "assets": "Images, animations, sounds",
+      "libraries": "Fonts & open-source libraries",
+      "data": "Maps & weather"
+    },
+    "files": "{{count}} files",
+    "open": "Open source"
+  },
+  "about": {
+    "title": "About Aura",
+    "version": "Version",
+    "build": "Build",
+    "commit": "Commit",
+    "licenses": "Licenses & credits",
+    "policies": "Privacy policy & terms"
+  },
+  "letters": {
+    "title": "Letterbox",
+    "box": {
+      "upcoming": "Coming",
+      "inbox": "To me",
+      "sent": "From me",
+      "capsules": "Capsules"
+    },
+    "write": "Write a letter",
+    "partnerFallback": "your partner",
+    "soon": "soon",
+    "teaser": "💌 A letter is coming to you {{when}}",
+    "from": "From {{name}}",
+    "to": "To {{name}}",
+    "new": "New",
+    "status": {
+      "draft": "Draft",
+      "pending": "Pending",
+      "delivered": "Delivered",
+      "read": "Read",
+      "cancelled": "Cancelled"
+    },
+    "photoLimit": "A letter can hold up to {{max}} photos — the extra ones were not added.",
+    "photoCount": "{{count}} / {{max}} photos",
+    "addPhoto": "Add photo",
+    "removePhoto": "Remove photo",
+    "template": {
+      "PAPER_1": "White paper",
+      "PAPER_2": "Soft blush",
+      "PAPER_3": "Sunset"
+    },
+    "compose": {
+      "title": "Write a letter",
+      "editTitle": "Edit letter",
+      "template": "Template",
+      "body": "Letter",
+      "placeholder": "Write what you want to tell your love…",
+      "bodyRequired": "Write your letter",
+      "when": "When should it arrive?",
+      "now": "Now",
+      "scheduled": "Schedule",
+      "date": "Date (YYYY-MM-DD)",
+      "time": "Time (HH:MM)",
+      "zone": "Time in {{zone}}",
+      "dateInvalid": "Use the YYYY-MM-DD format",
+      "timeInvalid": "Use the HH:MM format",
+      "inPast": "Pick a time in the future",
+      "occasion": "Occasion (optional)",
+      "occasionPlaceholder": "e.g. Our 1000th day",
+      "saveDraft": "Save draft",
+      "send": "Send",
+      "schedule": "Schedule",
+      "offline": "You are offline — your writing is saved on this device. Send it once you are connected.",
+      "cancelLetter": "Cancel letter",
+      "cancelTitle": "Cancel this letter?",
+      "cancelBody": "It will not be delivered and your partner's “letter coming” badge will disappear.",
+      "delivered": "This letter has been delivered, so it can no longer be edited.",
+      "open": "View letter"
+    },
+    "read": {
+      "title": "Letter",
+      "from": "A letter from {{name}}",
+      "open": "Open",
+      "photo": "Letter photo",
+      "signed": "— {{name}}",
+      "edit": "Edit"
+    }
+  },
+  "capsule": {
+    "title": "Time capsule",
+    "create": "Create a capsule",
+    "daysLeft": "{{count}} days",
+    "state": {
+      "opened": "Opened"
+    },
+    "status": {
+      "WRITING": "Writing",
+      "SEALED": "Sealed",
+      "OPENED": "Opened"
+    },
+    "opensOn": "Opens on {{date}} · {{count}} days left",
+    "openedOn": "Opened on {{date}}",
+    "part": {
+      "me": "Me: {{state}}",
+      "partner": "{{name}}: {{state}}",
+      "notStarted": "not written yet",
+      "writing": "writing",
+      "sealed": "sealed"
+    },
+    "myPart": "My part",
+    "body": "To our future selves",
+    "save": "Save",
+    "saved": "Saved — you can edit it until you seal it.",
+    "savedHidden": "Your part is saved, but nobody (not even you) can see it until the opening day. Writing again replaces it.",
+    "seal": "Seal",
+    "sealTitle": "Seal your part?",
+    "sealBody": "You cannot edit it after sealing. Nobody can read it until {{date}}.",
+    "lockedBoth": "🔒 You both sealed it — locked until {{date}}.",
+    "waitingPartner": "Your part is sealed. Waiting for {{name}} to seal theirs.",
+    "from": "Part by {{name}}",
+    "openedMoment": "Your capsule is open! ⏳",
+    "form": {
+      "title": "Time capsule",
+      "name": "Title",
+      "openOn": "Opening day (YYYY-MM-DD)",
+      "save": "Create and invite",
+      "titleRequired": "Write a title",
+      "dateInvalid": "Use the YYYY-MM-DD format",
+      "dateFuture": "Pick a day after today",
+      "invite": "Once created, {{name}} gets an invite — you each write and seal your own part."
+    }
+  },
+  "survey": {
+    "title": "One quick question",
+    "statement": "This app helps us feel close",
+    "hint": "How much do you agree? Rate from 1 to 5.",
+    "low": "1 — Strongly disagree",
+    "high": "5 — Strongly agree",
+    "scoreA11y": "Rate {{score}}",
+    "skip": "Skip"
+  },
+  "checkin": {
+    "title": "Daily resonance",
+    "question": "How are you feeling today?",
+    "todayDone": "Today's mood — you can edit it until the day ends",
+    "level": {
+      "1": "Sad",
+      "2": "Meh",
+      "3": "Okay",
+      "4": "Good",
+      "5": "Great"
+    },
+    "note": "Note (optional)",
+    "notePlaceholder": "What happened today?",
+    "shareToday": "Share today's with {{name}}",
+    "sharedNote": "{{name}} will see your mood today.",
+    "privateNote": "Only you can see it.",
+    "autoShare": "Share automatically every day",
+    "autoShareNote": "When on, future check-ins are shared from the start.",
+    "pickLevel": "Pick one of the 5 moods",
+    "save": "Check in",
+    "update": "Update",
+    "saved": "Checked in — you can edit it until the day ends.",
+    "updated": "Today's check-in was updated.",
+    "queued": "You are offline — it will be sent once you are connected.",
+    "pastLocked": "Past check-ins can't be edited — only today's ({{date}}).",
+    "range": {
+      "month": "Month",
+      "quarter": "Quarter"
+    },
+    "chart": {
+      "me": "Me",
+      "legend": "{{name}} · average {{avg}}",
+      "hint": "Tap a day to see its values here. Empty days mean no check-in or not shared.",
+      "day": "{{date}} · Me: {{mine}} · {{name}}: {{partner}}",
+      "a11y": "Mood chart. My average {{mine}}, {{name}}'s average {{partner}}."
+    }
+  },
+  "policy": {
+    "accepted": "Version you accepted: {{version}}",
+    "notAccepted": "No accepted version on record.",
+    "current": "Current version: {{version}} · published {{date}}",
+    "outdated": "A new version of the policy is out. Please read and accept it.",
+    "reviewNew": "Read the new version",
+    "langMn": "Монгол",
+    "langEn": "English"
+  },
+  "version": {
+    "availableTitle": "New version available",
+    "availableBody": "Aura {{latest}} is out (you have {{current}}). Update to try what's new.",
+    "update": "Update",
+    "requiredTitle": "Update required",
+    "requiredBody": "This version of Aura is no longer supported. Please update to continue — your data is safe.",
+    "requiredVersions": "You have {{current}} · minimum {{min}}",
+    "storeHint": "Update Aura from your app store."
+  },
+  "pwa": {
+    "update": {
+      "ready": "A new version is ready",
+      "action": "Update"
+    }
+  },
+  "onboarding": {
+    "skip": "Skip",
+    "next": "Next",
+    "back": "Back",
+    "start": "Get started",
+    "progress": "Slide {{current}} of {{total}}"
+  },
+  "firstWeek": {
+    "day": "First week · day {{day}} of {{total}}",
+    "start": "Do it now",
+    "sendHeart": "Send a heart 💗",
+    "markDone": "Done",
+    "skip": "Skip",
+    "hide": "Hide",
+    "doneNow": "✨ Nice! Today's task is done. A new one is waiting tomorrow.",
+    "doneToday": "✨ Today's task is done. See you tomorrow!"
+  },
+  "install": {
+    "title": "Install the app",
+    "intro": "Add Aura to your home screen and it opens full screen, just like an app.",
+    "installed": "Aura is already installed — open it from your home screen.",
+    "ios": {
+      "title": "iPhone · Safari",
+      "step1": "1. Tap the Share button",
+      "hint1": "In Safari's bottom bar (the square with an up arrow)",
+      "step2": "2. Choose “Add to Home Screen”",
+      "hint2": "Scroll down the list to find it",
+      "step3": "3. Tap “Add”",
+      "hint3": "The Aura icon appears on your home screen"
+    },
+    "iosOther": {
+      "title": "Other iOS browsers",
+      "body": "This browser can't install apps — please open Aura in Safari. Copy the link and paste it into Safari.",
+      "action": "Copy link",
+      "copied": "Link copied — paste it into Safari."
+    },
+    "android": {
+      "title": "Android",
+      "body": "Your browser can install Aura directly — one tap.",
+      "action": "Install"
+    },
+    "desktop": {
+      "title": "Computer"
+    },
+    "manual": "Choose “Install app” or “Add to Home screen” from your browser menu.",
+    "accepted": "Installing — Aura will appear on your home screen shortly.",
+    "benefitsTitle": "Why install?",
+    "benefits": "Push notifications and opening without internet work once Aura is installed. On iPhone, hearts and message notifications from your partner only arrive in the installed app.",
+    "later": "Later"
+  },
+  "pushPermission": {
+    "title": "Turn on notifications?",
+    "why": "Notifications make sure you never miss the moment your partner thinks of you.",
+    "reason": {
+      "heart": "When your partner sends a heart",
+      "message": "When a new message arrives",
+      "reminder": "Anniversary and date reminders"
+    },
+    "inAppNote": "Even if you choose Later, the in-app notification list keeps working. You can change this anytime in Settings → Notifications.",
+    "allow": "Allow",
+    "later": "Later",
+    "granted": "Notifications are on.",
+    "alreadyOn": "Notifications are already on.",
+    "deniedWeb": "Notifications are blocked. Tap the lock icon in the address bar → Notifications → Allow.",
+    "deniedNative": "Notifications are blocked. Turn on notifications for Aura in your phone settings.",
+    "openSettings": "Open settings",
+    "needsInstall": "On iPhone, notifications only work in Aura added to your home screen.",
+    "howToInstall": "How to install",
+    "unsupported": "This browser doesn't support push notifications. Check the in-app notification list instead.",
+    "notConfigured": "Push notifications aren't set up on the server.",
+    "failed": "Couldn't send.",
+    "noticeOff": "Push notifications are off.",
+    "noticeDenied": "Push notifications are blocked.",
+    "noticeAction": "Turn on notifications"
+  },
+  "passkey": {
+    "title": "Passkey lock",
+    "open": "Passkey lock (Face ID / Touch ID)",
+    "heading": "Lock with Face ID / Touch ID",
+    "intro": "On the web, Aura opens with a passkey. If biometrics don't work, use your PIN.",
+    "pinBackup": "PIN backup",
+    "pinSet": "Set ✓",
+    "pinNotSet": "Not set",
+    "setPinFirst": "Set a PIN first",
+    "setup": "Set up passkey",
+    "saved": "Passkey is set. Next time Aura locks, it will ask for Face ID / Touch ID.",
+    "enabled": "Passkey is on",
+    "test": "Test now",
+    "verified": "Your passkey works.",
+    "notVerified": "Not verified — please use your PIN.",
+    "remove": "Remove passkey",
+    "removeTitle": "Remove passkey?",
+    "removeBody": "After removing it, the lock opens with your PIN only.",
+    "removed": "Passkey removed. The lock opens with your PIN.",
+    "unsupported": "This browser or device doesn't support passkeys — the lock opens with your PIN.",
+    "offline": "Setting up or testing a passkey needs internet. Offline, unlock with your PIN.",
+    "failedTitle": "Passkey wasn't registered",
+    "failedBody": "The device declined biometric verification or couldn't reach the server.",
+    "native": "In the phone app, turn on Face ID / fingerprint in Privacy & security.",
+    "toSecurity": "Privacy & security"
+  }
+}

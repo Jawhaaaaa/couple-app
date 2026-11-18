@@ -1,0 +1,77 @@
+# PROD reverse proxy (T-90, LLD §4.5). Автомат HTTPS (Let's Encrypt) — домэйн нь DuckDNS.
+# Хувьсагч (.env.prod → compose → контейнерын орчин): AURA_DOMAIN, ACME_EMAIL, AURA_S3_BUCKET.
+# Шалгах (AC-162):
+#   docker run --rm -e AURA_DOMAIN=aura-example.duckdns.org -e ACME_EMAIL=ops@example.com \
+#     -v "$PWD/deploy:/etc/caddy:ro" caddy:2 caddy validate --config /etc/caddy/Caddyfile
+{
+	email {$ACME_EMAIL}
+	# Prometheus metric (caddy_http_request_duration_seconds г.м.) — зөвхөн контейнер дотор :2019/metrics
+	metrics
+}
+
+{$AURA_DOMAIN} {
+	encode zstd gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "DENY"
+		-Server
+	}
+
+	# JSON access log stdout руу — deploy/monitor/alerts.sh-ийн 5xx, p95 дүрэм үүнийг уншина.
+	# Authorization, Cookie header-ийг Caddy анхдагчаар далдална; presigned URL-ийн гарын үсгийг энд.
+	log {
+		output stdout
+		format filter {
+			wrap json
+			fields {
+				request>uri query {
+					replace X-Amz-Signature REDACTED
+					replace X-Amz-Credential REDACTED
+				}
+			}
+		}
+	}
+
+	# Гаднаас хаагдах зам: Actuator (LLD §4.5 Health), тестийн endpoint (e2e profile prod-д идэвхгүй,
+	# давхар хамгаалалт — INV-10)
+	@internal path /actuator /actuator/* /api/v1/test /api/v1/test/*
+	handle @internal {
+		respond 404
+	}
+
+	# REST API
+	handle /api/* {
+		reverse_proxy backend:8080
+	}
+
+	# STOMP over WebSocket (DD-AURA-008). Caddy WebSocket upgrade-ийг өөрөө дамжуулна.
+	handle /ws {
+		reverse_proxy backend:8080 {
+			flush_interval -1
+		}
+	}
+
+	# Медиа: backend-ийн presigned URL (path-style, sigv4, 15 мин). Host header өөрчлөгдөхгүй тул
+	# гарын үсэг таарна. Bucket private — гарын үсэггүй хүсэлтийг SeaweedFS 403-аар буцаана.
+	handle /{$AURA_S3_BUCKET:aura-media}/* {
+		reverse_proxy seaweedfs:8333
+	}
+
+	# SPA (Expo web export, `web.output: "single"`) — үл мэдэгдэх зам бүр index.html
+	handle {
+		root * /srv/web
+
+		# Нэрэндээ hash-тай bundle — үүрд кэш; бусад (index.html, sw.js, manifest, SPA зам) — ETag-аар
+		# дахин шалгана, шинэ хувилбар шууд хүрнэ
+		@hashed path /_expo/static/*
+		header @hashed Cache-Control "public, max-age=31536000, immutable"
+		@revalidate not path /_expo/static/*
+		header @revalidate Cache-Control "no-cache"
+
+		try_files {path} /index.html
+		file_server
+	}
+}

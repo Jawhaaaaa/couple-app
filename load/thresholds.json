@@ -1,0 +1,7 @@
+{
+  "http_req_duration{scenario:api}": ["p(95)<300"],
+  "http_req_failed{scenario:api}": ["rate<0.001"],
+  "ws_stomp_connected": ["rate>0.99"],
+  "ws_connecting{scenario:ws}": ["p(95)<1000"],
+  "checks{scenario:api}": ["rate>0.999"]
+}

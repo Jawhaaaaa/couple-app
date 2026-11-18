@@ -1,0 +1,14 @@
+# E2E (`SPRING_PROFILES_ACTIVE=dev,e2e`). `MutableClock` ба `/api/v1/test/**` зөвхөн энэ profile-д
+# идэвхжинэ (DD-AURA-011, INV-10). Prod-д хэзээ ч бүү нэм.
+aura:
+  sentry:
+    dsn: ""
+  # GAP-18: Google-ийн оронд тестийн IdP (e2e/mocks/oauthIdp.ts) — AURA_GOOGLE_ISSUER=http://<stub>,
+  # id_token нь HS256 (client secret-ээр). Бодит Google (RS256, JWKS) — ГАР.
+  oauth:
+    google:
+      id-token-alg: ${AURA_GOOGLE_ID_TOKEN_ALG:HS256}
+  # DD-AURA-027: E2E-ийн push sink (/api/v1/test/push-sink/**) нь backend өөрөө — http, localhost/backend хост
+  push:
+    endpoint-hosts: ${AURA_PUSH_ENDPOINT_HOSTS:localhost,backend}
+    allow-http-endpoints: true

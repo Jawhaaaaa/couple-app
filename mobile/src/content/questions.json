@@ -1,0 +1,2595 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "q-001",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бид хоёрын анх уулзсан өдрөөс юуг нь хамгийн тод санаж байна?",
+      "en": "What do you remember most clearly about the day we first met?"
+    },
+    {
+      "id": "q-002",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чамайг юу хамгийн их инээлгэдэг вэ?",
+      "en": "What makes you laugh the most?"
+    },
+    {
+      "id": "q-003",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Ирэх амралтын өдөр хамтдаа юу хиймээр байна?",
+      "en": "What would you love for us to do next weekend?"
+    },
+    {
+      "id": "q-004",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Хэрэв бид хоёр хүүхэлдэйн киноны баатар байсан бол хэн хэн байх вэ?",
+      "en": "If we were cartoon characters, who would we be?"
+    },
+    {
+      "id": "q-005",
+      "category": "DEEP",
+      "depth": 1,
+      "mn": "Өнөөдөр юунд талархаж байна?",
+      "en": "What are you grateful for today?"
+    },
+    {
+      "id": "q-006",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Чи надад анх юу гэж хэлсэн бэ?",
+      "en": "What were the very first words you said to me?"
+    },
+    {
+      "id": "q-007",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чиний төгс өглөө ямар байдаг вэ?",
+      "en": "What does your perfect morning look like?"
+    },
+    {
+      "id": "q-008",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа хаашаа аялахыг хамгийн их хүсч байна?",
+      "en": "Where would you most like us to travel together?"
+    },
+    {
+      "id": "q-009",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Чамд ид шидийн нэг чадвар өгвөл аль нь вэ?",
+      "en": "If you could have one superpower, what would it be?"
+    },
+    {
+      "id": "q-010",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бидний анхны болзооны хамгийн хөгжилтэй мөч юу байсан бэ?",
+      "en": "What was the funniest moment of our first date?"
+    },
+    {
+      "id": "q-011",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Ядарсан өдрийн дараа юу чамайг хамгийн хурдан сэргээдэг вэ?",
+      "en": "After a long day, what helps you recharge fastest?"
+    },
+    {
+      "id": "q-012",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Энэ зун бид хоёр ямар шинэ зүйл туршиж үзэх вэ?",
+      "en": "What new thing should we try this summer?"
+    },
+    {
+      "id": "q-013",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Нэг өдөр амьтан болж хувирах бол аль амьтан болох вэ?",
+      "en": "If you turned into an animal for a day, which one would you be?"
+    },
+    {
+      "id": "q-014",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа идсэн хоолноос аль нь хамгийн их санаанд үлдсэн бэ?",
+      "en": "Which meal we've shared has stayed with you the most?"
+    },
+    {
+      "id": "q-015",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Одоо чиний хамгийн дуртай дуу аль нь вэ?",
+      "en": "What song are you loving right now?"
+    },
+    {
+      "id": "q-016",
+      "category": "DEEP",
+      "depth": 1,
+      "mn": "Миний аль зан чанарт чи хамгийн их талархдаг вэ?",
+      "en": "What about me are you most thankful for?"
+    },
+    {
+      "id": "q-017",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Ирэх жил хамтдаа юу сурмаар байна?",
+      "en": "What would you like us to learn together next year?"
+    },
+    {
+      "id": "q-018",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Бид хоёрын тухай кино хийвэл нэр нь юу байх вэ?",
+      "en": "If someone made a movie about us, what would it be called?"
+    },
+    {
+      "id": "q-019",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа хийсэн хамгийн анхны аялал маань ямар байсан бэ?",
+      "en": "How do you remember our very first trip together?"
+    },
+    {
+      "id": "q-020",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Аль улирал чамд хамгийн их таалагддаг вэ, яагаад?",
+      "en": "Which season do you like best, and why?"
+    },
+    {
+      "id": "q-021",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Чи намайг анх хараад юу гэж бодсон бэ?",
+      "en": "What went through your mind when you first saw me?"
+    },
+    {
+      "id": "q-022",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Ямар хоол чамд гэрийн дулааныг санагдуулдаг вэ?",
+      "en": "What food tastes like home to you?"
+    },
+    {
+      "id": "q-023",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Бидний мөрөөдлийн амралт ямар байх вэ?",
+      "en": "What would our dream vacation look like?"
+    },
+    {
+      "id": "q-024",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Бидний тухай дуу бичвэл ямар хэмнэлтэй байх вэ?",
+      "en": "If someone wrote a song about us, what would it sound like?"
+    },
+    {
+      "id": "q-025",
+      "category": "DEEP",
+      "depth": 1,
+      "mn": "Сүүлийн үед миний хийсэн ямар жижиг зүйл чамд их нөлөөлсөн бэ?",
+      "en": "What small thing I did lately meant a lot to you?"
+    },
+    {
+      "id": "q-026",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бид хоёрын хамгийн их инээлдсэн үе хэзээ байсан бэ?",
+      "en": "When did the two of us laugh the hardest?"
+    },
+    {
+      "id": "q-027",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Амралтын өдрөө ганцаараа өнгөрүүлэх байсан бол юу хийх вэ?",
+      "en": "If you had a whole weekend to yourself, how would you spend it?"
+    },
+    {
+      "id": "q-028",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа ямар гэрийн тэжээвэр амьтан тэжээмээр байна?",
+      "en": "What kind of pet would you like us to have?"
+    },
+    {
+      "id": "q-029",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Цаг хугацаагаар аялж чадвал аль үе рүү очих вэ?",
+      "en": "If you could time-travel, which era would you visit?"
+    },
+    {
+      "id": "q-030",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Надаас авсан бэлгүүдээс аль нь чамд хамгийн их таалагдсан бэ?",
+      "en": "Of all the gifts I've given you, which one did you love most?"
+    },
+    {
+      "id": "q-031",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чамд ямар үнэр хамгийн их таалагддаг вэ?",
+      "en": "What's a smell you absolutely love?"
+    },
+    {
+      "id": "q-032",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Арван жилийн дараа бидний энгийн нэг өдөр ямар байгаасай гэж хүсдэг вэ?",
+      "en": "What do you hope an ordinary day looks like for us ten years from now?"
+    },
+    {
+      "id": "q-033",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Нэг өдөр хэн ч болж болдог бол хэн болох вэ?",
+      "en": "If you could be anyone for a day, who would you be?"
+    },
+    {
+      "id": "q-034",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа үзсэн кинонуудаас аль нь хамгийн их сэтгэлд үлдсэн бэ?",
+      "en": "Which movie we watched together stuck with you the most?"
+    },
+    {
+      "id": "q-035",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Цай уу, кофе юу — тэгээд яг яаж уух дуртай вэ?",
+      "en": "Tea or coffee — and exactly how do you take it?"
+    },
+    {
+      "id": "q-036",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Ямар үед чамд би хамгийн их хэрэгтэй байдаг вэ?",
+      "en": "When do you need me the most?"
+    },
+    {
+      "id": "q-037",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Ирэх өвөл хамтдаа ямар сайхан уламжлал эхлүүлэх вэ?",
+      "en": "What cozy tradition could we start this coming winter?"
+    },
+    {
+      "id": "q-038",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Нууцхан дуртай хачин хоолны хослол чинь юу вэ?",
+      "en": "What's the weirdest food combo you secretly enjoy?"
+    },
+    {
+      "id": "q-039",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Анх гар барилцсан мөчөө санахад юу бодогддог вэ?",
+      "en": "What comes to mind when you think back to the first time we held hands?"
+    },
+    {
+      "id": "q-040",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чиний хамгийн дуртай өнгө юу вэ, түүнд ямар учир бий вэ?",
+      "en": "What's your favorite color, and what's the story behind it?"
+    },
+    {
+      "id": "q-041",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Бидний харилцаанд эргэлтийн цэг болсон өдөр аль нь гэж боддог вэ?",
+      "en": "Which day do you think was a turning point for us?"
+    },
+    {
+      "id": "q-042",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Ямар жижиг зүйл чиний өдрийг гэрэлтүүлж чаддаг вэ?",
+      "en": "What small thing can instantly brighten your day?"
+    },
+    {
+      "id": "q-043",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Монголын аль аймагт хамтдаа очиж үзмээр байна?",
+      "en": "Which province of Mongolia would you like us to explore together?"
+    },
+    {
+      "id": "q-044",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Зомби дайрвал бид хоёрын аврагдах төлөвлөгөө ямар байх вэ?",
+      "en": "If zombies attacked, what would our survival plan be?"
+    },
+    {
+      "id": "q-045",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Хайр гэдгийг чи өөрийнхөөрөө яаж тайлбарлах вэ?",
+      "en": "How would you describe love in your own words?"
+    },
+    {
+      "id": "q-046",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа сонссон дуунаас аль нь бид хоёрыг санагдуулдаг вэ?",
+      "en": "Which song always brings the two of us to mind?"
+    },
+    {
+      "id": "q-047",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Чи стресстэй үедээ надаас юу хүсдэг вэ?",
+      "en": "When you're stressed, what do you most need from me?"
+    },
+    {
+      "id": "q-048",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Мөрөөдлийн гэрээ төсөөл дөө — тэнд юу заавал байх ёстой вэ?",
+      "en": "Picture our dream home — what absolutely has to be there?"
+    },
+    {
+      "id": "q-049",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Чамд хамгийн инээдтэй санагддаг үг юу вэ?",
+      "en": "What word always cracks you up?"
+    },
+    {
+      "id": "q-050",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бидний хамгийн анхны хамтын зураг хаана авагдсан бэ?",
+      "en": "Where was our very first photo together taken?"
+    },
+    {
+      "id": "q-051",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Ямар үед чи өөрийгөө хамгийн их хайрлагдсан гэж мэдэрдэг вэ?",
+      "en": "When do you feel most loved?"
+    },
+    {
+      "id": "q-052",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Энэ сард хамтдаа хийх нэг жижиг зорилго юу байж болох вэ?",
+      "en": "What's one small goal we could take on together this month?"
+    },
+    {
+      "id": "q-053",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Гэрийн тэжээвэр амьтан ярьдаг болвол бидний тухай юу гэх бол?",
+      "en": "If pets could talk, what would they say about us?"
+    },
+    {
+      "id": "q-054",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Намайг анх хэзээ үнэхээр ойр хүн гэж мэдэрсэн бэ?",
+      "en": "When did I first start to feel truly close to you?"
+    },
+    {
+      "id": "q-055",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чиний дуртай ном, эсвэл түүх юу вэ?",
+      "en": "What's a book or story you love?"
+    },
+    {
+      "id": "q-056",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Бидний харилцаанд чи юуг хамгийн их үнэлдэг вэ?",
+      "en": "What do you value most in what we have?"
+    },
+    {
+      "id": "q-057",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Ирэх таван жилд чи юунд хамгийн их хүрэхийг хүсч байна?",
+      "en": "What do you most want to achieve in the next five years?"
+    },
+    {
+      "id": "q-058",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Нэг өдөр амьдралаа сольчихвол чи хамгийн түрүүнд юу хийх вэ?",
+      "en": "If we swapped lives for a day, what's the first thing you'd do?"
+    },
+    {
+      "id": "q-059",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа өнгөрүүлсэн хамгийн сайхан амралтын өдөр ямар байсан бэ?",
+      "en": "What was the best weekend we've ever spent together?"
+    },
+    {
+      "id": "q-060",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Насан туршдаа ганцхан хоол идэх байсан бол аль нь вэ?",
+      "en": "If you could eat only one dish forever, what would it be?"
+    },
+    {
+      "id": "q-061",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бид хоёрын хамгийн инээдтэй андуурал юу байсан бэ?",
+      "en": "What's the funniest mix-up we've ever had?"
+    },
+    {
+      "id": "q-062",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чи өглөө, орой хоёрын алинд нь илүү эрч хүчтэй байдаг вэ?",
+      "en": "When are you most full of energy — mornings or evenings?"
+    },
+    {
+      "id": "q-063",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа ямар хоол хийж сурмаар байна?",
+      "en": "What dish should we learn to cook together?"
+    },
+    {
+      "id": "q-064",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Бид хоёр хамтлаг байгуулбал нэр нь юу байх вэ?",
+      "en": "If we started a band, what would we call it?"
+    },
+    {
+      "id": "q-065",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа анх хоол хийсэн өдрийг санахад юу инээд хүргэдэг вэ?",
+      "en": "What makes you smile about the first time we cooked together?"
+    },
+    {
+      "id": "q-066",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Хүмүүсийн аль зан чанар чамд хамгийн их таалагддаг вэ?",
+      "en": "What quality do you admire most in people?"
+    },
+    {
+      "id": "q-067",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Би чамайг илүү сайн дэмжихийн тулд юу хийж болох вэ?",
+      "en": "How can I support you better?"
+    },
+    {
+      "id": "q-068",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа ямар спортоор хичээллэх вэ?",
+      "en": "What sport could we take up together?"
+    },
+    {
+      "id": "q-069",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Чи мессеждээ ямар дүрс хамгийн их ашигладаг вэ?",
+      "en": "Which emoji do you use the most?"
+    },
+    {
+      "id": "q-070",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Хэцүү үед чинь миний хийсэн юм чамд хамгийн их тус болсон бэ?",
+      "en": "When things were hard, what did I do that helped you the most?"
+    },
+    {
+      "id": "q-071",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чиний нууц авьяас юу вэ?",
+      "en": "What's a hidden talent of yours?"
+    },
+    {
+      "id": "q-072",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Хөгшрөөд бид хоёр ямар хос болохыг хүсч байна?",
+      "en": "What kind of couple do you hope we'll be when we're old?"
+    },
+    {
+      "id": "q-073",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Гэрт маань нууц өрөө байсан бол тэнд юу байх вэ?",
+      "en": "If our home had a secret room, what would be inside?"
+    },
+    {
+      "id": "q-074",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа очсон газруудаас аль нь хамгийн их санагддаг вэ?",
+      "en": "Which place we've been to together do you miss the most?"
+    },
+    {
+      "id": "q-075",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чи юу хийж байхдаа цагаа мартчихдаг вэ?",
+      "en": "What do you do that makes you lose track of time?"
+    },
+    {
+      "id": "q-076",
+      "category": "DEEP",
+      "depth": 3,
+      "mn": "Амьдрал чамд заасан хамгийн чухал сургамж юу вэ?",
+      "en": "What's the most important lesson life has taught you?"
+    },
+    {
+      "id": "q-077",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хаана ч хамаагүй нэг жил амьдрах боломж гарвал бид хаашаа явах вэ?",
+      "en": "If we could live anywhere for a year, where would we go?"
+    },
+    {
+      "id": "q-078",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Миний бичсэн мессежүүдээс аль нь санаанд чинь үлдсэн бэ?",
+      "en": "Which message from me has stayed in your memory?"
+    },
+    {
+      "id": "q-079",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Чамд хамгийн их урам өгдөг хүн хэн бэ?",
+      "en": "Who inspires you the most?"
+    },
+    {
+      "id": "q-080",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Ганцхан хоолтой зоог барих газар нээвэл юу хийх вэ?",
+      "en": "If you opened a restaurant with just one dish, what would it serve?"
+    },
+    {
+      "id": "q-081",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бид хоёр анхны баяраа хамтдаа яаж тэмдэглэсэн бэ?",
+      "en": "How did we celebrate our first holiday together?"
+    },
+    {
+      "id": "q-082",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Хамгийн дуртай кино чинь аль нь вэ, хэдэн удаа үзсэн бэ?",
+      "en": "What's your all-time favorite film, and how many times have you seen it?"
+    },
+    {
+      "id": "q-083",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Ирэх ойгоо хэрхэн тэмдэглэмээр байна?",
+      "en": "How would you like to celebrate our next anniversary?"
+    },
+    {
+      "id": "q-084",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Чамд хошин шагнал өгвөл юуны төлөө өгөх бол?",
+      "en": "If you won a silly award, what would it be for?"
+    },
+    {
+      "id": "q-085",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Цагаан сараар хамт байсан хамгийн дурсамжтай мөч юу вэ?",
+      "en": "What's your favorite Tsagaan Sar moment we've shared?"
+    },
+    {
+      "id": "q-086",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Бороотой өдөр чи юу хийх дуртай вэ?",
+      "en": "What do you love doing on a rainy day?"
+    },
+    {
+      "id": "q-087",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Хэцүү үед чамайг юу хамгийн их хүчтэй байлгадаг вэ?",
+      "en": "What keeps you strong through hard times?"
+    },
+    {
+      "id": "q-088",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа хийх зүйлсийн жагсаалтдаа юу нэмэх вэ?",
+      "en": "What should we add to our together bucket list?"
+    },
+    {
+      "id": "q-089",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Маргааш ямар ч хязгааргүй өдөр байвал юу хийх вэ?",
+      "en": "If tomorrow had no limits at all, what would you do?"
+    },
+    {
+      "id": "q-090",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Наадмын үеэр хамтдаа хийсэн юмнаас юу нь хамгийн их санагддаг вэ?",
+      "en": "What do you remember most fondly from Naadam with me?"
+    },
+    {
+      "id": "q-091",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Чамд тайван байдлыг юу өгдөг вэ?",
+      "en": "What brings you a sense of calm?"
+    },
+    {
+      "id": "q-092",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа ямар ном унших вэ?",
+      "en": "What book should we read together?"
+    },
+    {
+      "id": "q-093",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Гал тогоондоо бүжиглэхэд ямар дуу хамгийн тохирох вэ?",
+      "en": "What song would be perfect for a kitchen dance party?"
+    },
+    {
+      "id": "q-094",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бид хоёр хамгийн удаан ярилцсан шөнө юуны тухай ярьсан бэ?",
+      "en": "What did we talk about on the night we stayed up talking the longest?"
+    },
+    {
+      "id": "q-095",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Ямар амьтанд хамгийн их хайртай вэ?",
+      "en": "Which animal do you adore most?"
+    },
+    {
+      "id": "q-096",
+      "category": "DEEP",
+      "depth": 1,
+      "mn": "Энэ долоо хоногт хэнд талархал илэрхийлмээр байна?",
+      "en": "Who would you like to thank this week?"
+    },
+    {
+      "id": "q-097",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Чиний мөрөөдлийн ажил ямар байх вэ?",
+      "en": "What would your dream job look like?"
+    },
+    {
+      "id": "q-098",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Бид хоёр хамтдаа анх ямар бэрхшээлийг даван туулсан бэ?",
+      "en": "What was the first challenge we got through together?"
+    },
+    {
+      "id": "q-099",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чиний хамгийн дуртай амттан юу вэ?",
+      "en": "What's your favorite dessert?"
+    },
+    {
+      "id": "q-100",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Сансарт аялах боломж гарвал юу авч явах вэ?",
+      "en": "If you got a ticket to space, what would you bring along?"
+    },
+    {
+      "id": "q-101",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа хийсэн хамгийн гэнэтийн зүйл юу байсан бэ?",
+      "en": "What's the most spontaneous thing we've ever done together?"
+    },
+    {
+      "id": "q-102",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Чамайг юу хамгийн их санаа зовоодог вэ, би яаж тусалж болох вэ?",
+      "en": "What tends to worry you most, and how can I help?"
+    },
+    {
+      "id": "q-103",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Ямар ур чадвар эзэмшвэл амьдрал чинь илүү сайхан болох вэ?",
+      "en": "What skill would make your life better if you learned it?"
+    },
+    {
+      "id": "q-104",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Чиний амьдралын тухай кинонд хэн тоглох вэ?",
+      "en": "Who would play you in a movie about your life?"
+    },
+    {
+      "id": "q-105",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Утсан дээрх бидний зургуудаас аль нь чамд хамгийн их таалагддаг вэ?",
+      "en": "Which photo of us on your phone do you like best?"
+    },
+    {
+      "id": "q-106",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чи ямар хөгжмөөр өдрөө эхлэх дуртай вэ?",
+      "en": "What music do you like to start your day with?"
+    },
+    {
+      "id": "q-107",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Миний юу гэж хэлэхийг чи хамгийн их хүсдэг вэ?",
+      "en": "What's something you'd love to hear me say more often?"
+    },
+    {
+      "id": "q-108",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа хаана нар мандахыг үзмээр байна?",
+      "en": "Where would you love to watch a sunrise with me?"
+    },
+    {
+      "id": "q-109",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Зүүдэлсэн хамгийн инээдтэй зүүд чинь юу вэ?",
+      "en": "What's the funniest dream you've ever had?"
+    },
+    {
+      "id": "q-110",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Анх надтай утсаар ярихдаа юу мэдэрсэн бэ?",
+      "en": "How did you feel during our first phone call?"
+    },
+    {
+      "id": "q-111",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Ямар магтаал чамд хамгийн их таалагддаг вэ?",
+      "en": "What kind of compliment means the most to you?"
+    },
+    {
+      "id": "q-112",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Гэр бүлийнхээ ямар уламжлалыг бид хоёр үргэлжлүүлмээр байна?",
+      "en": "What family traditions would you like us to keep?"
+    },
+    {
+      "id": "q-113",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Хэрэв чи цаг агаар байсан бол ямар цаг агаар байх вэ?",
+      "en": "If you were a kind of weather, what would you be?"
+    },
+    {
+      "id": "q-114",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Бидний хамгийн чимээгүй боловч сайхан мөч аль нь вэ?",
+      "en": "What's a quiet moment of ours that you treasure?"
+    },
+    {
+      "id": "q-115",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Ямар хобби шинээр туршиж үзмээр байна?",
+      "en": "What hobby would you love to try?"
+    },
+    {
+      "id": "q-116",
+      "category": "DEEP",
+      "depth": 3,
+      "mn": "Өөрийнхөө аль хэсгийг илүү хүлээн зөвшөөрч сурмаар байна?",
+      "en": "What part of yourself would you like to accept more fully?"
+    },
+    {
+      "id": "q-117",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа алхсан замуудаас аль нь хамгийн их таалагдсан бэ?",
+      "en": "Which walk we've taken together did you enjoy the most?"
+    },
+    {
+      "id": "q-118",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Чи уурласан үедээ юу хийвэл хурдан тайвширдаг вэ?",
+      "en": "When you're upset, what helps you calm down?"
+    },
+    {
+      "id": "q-119",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Ирэх төрсөн өдрөөрөө юу хиймээр байна?",
+      "en": "What would you love to do on your next birthday?"
+    },
+    {
+      "id": "q-120",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Чамайг үргэлж инээлгэдэг кино аль нь вэ?",
+      "en": "What movie never fails to make you laugh?"
+    },
+    {
+      "id": "q-121",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Цас, бороонд хамт байсан ямар өдөр санаанд чинь үлдсэн бэ?",
+      "en": "Which rainy or snowy day with me has stuck with you?"
+    },
+    {
+      "id": "q-122",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чиний дуртай цаг агаар ямар вэ?",
+      "en": "What's your favorite kind of weather?"
+    },
+    {
+      "id": "q-123",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Ирээдүйд бидний гэр ямар уур амьсгалтай байгаасай гэж хүсдэг вэ?",
+      "en": "What kind of atmosphere do you want our home to have?"
+    },
+    {
+      "id": "q-124",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Гурван хүсэл чинь биелдэг бол юу хүсэх вэ?",
+      "en": "If you had three wishes, what would they be?"
+    },
+    {
+      "id": "q-125",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Чамайг гайхшруулах гэж миний хийсэн хамгийн сайхан зүйл юу байсан бэ?",
+      "en": "What's the nicest surprise I've ever planned for you?"
+    },
+    {
+      "id": "q-126",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чамд хамгийн их таалагддаг уламжлалт хоол юу вэ?",
+      "en": "Which traditional Mongolian dish do you love most?"
+    },
+    {
+      "id": "q-127",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа аль хотыг хамгийн түрүүнд үзэх вэ?",
+      "en": "Which city should we visit first together?"
+    },
+    {
+      "id": "q-128",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Хүмүүс чамайг ямар хачин зуршлаар чинь шоглодог вэ?",
+      "en": "What quirky habit do people tease you about?"
+    },
+    {
+      "id": "q-129",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Чамд аз жаргал гэж юу вэ?",
+      "en": "What does happiness mean to you?"
+    },
+    {
+      "id": "q-130",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Хамтдаа байхдаа өөрийгөө хамгийн их аз жаргалтай мэдэрсэн мөч хэзээ байсан бэ?",
+      "en": "When have you felt happiest since we've been together?"
+    },
+    {
+      "id": "q-131",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Чи өөрийнхөө аль зан чанараар хамгийн их бахархдаг вэ?",
+      "en": "Which trait of yours are you proudest of?"
+    },
+    {
+      "id": "q-132",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Нэг жилийн дараа бид хоёр юугаараа өсөж хөгжсөн байгаасай гэж хүсдэг вэ?",
+      "en": "How do you hope we'll have grown a year from now?"
+    },
+    {
+      "id": "q-133",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Бид хоёрыг нэг хоол гэж бодвол ямар хоол байх вэ?",
+      "en": "If we were a dish, what would we be?"
+    },
+    {
+      "id": "q-134",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Анхны болзоондоо юу өмсөхөө яаж сонгосон бэ?",
+      "en": "How did you decide what to wear on our first date?"
+    },
+    {
+      "id": "q-135",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Найзууд чинь чамайг ямар хочоор дууддаг вэ, тэр нь хаанаас гарсан бэ?",
+      "en": "What do your friends call you, and where did that nickname come from?"
+    },
+    {
+      "id": "q-136",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Бид хоёр бие биенээсээ юу сурсан гэж боддог вэ?",
+      "en": "What have we learned from each other?"
+    },
+    {
+      "id": "q-137",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа хамгийн их баярласан мэдээ юу байсан бэ?",
+      "en": "What's the best news we've celebrated together?"
+    },
+    {
+      "id": "q-138",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чиний хамгийн дуртай спорт, эсвэл хөдөлгөөн юу вэ?",
+      "en": "Which sport or way of moving do you enjoy most?"
+    },
+    {
+      "id": "q-139",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Цэцэрлэг, тавилга, эсвэл өөр юм — хамтдаа юу бүтээмээр байна?",
+      "en": "What would you like us to make together — a garden, furniture, something else?"
+    },
+    {
+      "id": "q-140",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Шинэ үг зохиовол ямар утгатай үг байх вэ?",
+      "en": "If you could invent a new word, what would it mean?"
+    },
+    {
+      "id": "q-141",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хүүхэд насныхаа хамгийн дуртай тоглоом юу байсан бэ?",
+      "en": "What was your favorite game as a kid?"
+    },
+    {
+      "id": "q-142",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Шинэ хүмүүстэй танилцахдаа чи ямар байдаг вэ?",
+      "en": "What are you like when you meet new people?"
+    },
+    {
+      "id": "q-143",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Ирээдүйд өөрийнхөө юуг өөрчилмөөр байна?",
+      "en": "What would you like to change about yourself in the future?"
+    },
+    {
+      "id": "q-144",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Ямар ч хэлээр шууд ярьдаг болвол аль хэлийг сонгох вэ?",
+      "en": "If you could instantly speak any language, which would you pick?"
+    },
+    {
+      "id": "q-145",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бага байхдаа зуны амралтаа хаана өнгөрүүлдэг байсан бэ?",
+      "en": "Where did you spend your summer holidays growing up?"
+    },
+    {
+      "id": "q-146",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Бэлэг, хамт өнгөрүүлэх цаг, дулаан үг — аль нь чамайг хамгийн их баярлуулдаг вэ?",
+      "en": "What makes you happiest: gifts, time together, or kind words?"
+    },
+    {
+      "id": "q-147",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Тэтгэвэрт гараад юу хиймээр байна?",
+      "en": "What do you want to do once you retire?"
+    },
+    {
+      "id": "q-148",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Аль хүүхэлдэйн киноны ертөнцөд амьдармаар байна?",
+      "en": "Which cartoon world would you love to live in?"
+    },
+    {
+      "id": "q-149",
+      "category": "DEEP",
+      "depth": 3,
+      "mn": "Чиний хамгийн том мөрөөдлийг би яаж дэмжиж болох вэ?",
+      "en": "How can I help your biggest dream come true?"
+    },
+    {
+      "id": "q-150",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Сургуульд байхдаа ямар хичээлд хамгийн их дуртай байсан бэ, яагаад?",
+      "en": "Which school subject did you love most, and why?"
+    },
+    {
+      "id": "q-151",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Хүнд үед чи хэнтэй хамгийн түрүүнд ярьдаг вэ?",
+      "en": "Who do you turn to first when things get hard?"
+    },
+    {
+      "id": "q-152",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Ирэх жил бидний харилцааг юу илүү баялаг болгох вэ?",
+      "en": "What could make our relationship even richer next year?"
+    },
+    {
+      "id": "q-153",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Гэр маань дугуйтай байсан бол хамгийн түрүүнд хаашаа явах вэ?",
+      "en": "If our home had wheels, where would we drive it first?"
+    },
+    {
+      "id": "q-154",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бага насны чинь хамгийн сайн найз ямар хүн байсан бэ?",
+      "en": "What was your best childhood friend like?"
+    },
+    {
+      "id": "q-155",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чамд хамгийн их хэрэгтэй өдөр тутмын жижиг зуршил юу вэ?",
+      "en": "What small daily habit can't you live without?"
+    },
+    {
+      "id": "q-156",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Хүүхэд байхдаа том болоод хэн болно гэж мөрөөддөг байсан бэ?",
+      "en": "As a kid, what did you dream of becoming?"
+    },
+    {
+      "id": "q-157",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Унтахын өмнө чи юу хийх дуртай вэ?",
+      "en": "What do you like to do right before bed?"
+    },
+    {
+      "id": "q-158",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа ямар гадаад хэл сурах вэ?",
+      "en": "Which language could we learn together?"
+    },
+    {
+      "id": "q-159",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Бүтэн өдөр ганц өнгийн хувцас өмсөх бол аль өнгийг сонгох вэ?",
+      "en": "If you had to wear one color all day, which would you pick?"
+    },
+    {
+      "id": "q-160",
+      "category": "DEEP",
+      "depth": 1,
+      "mn": "Өнөөдөр чамайг баярлуулсан нэг жижиг зүйл юу вэ?",
+      "en": "What's one small thing that made you happy today?"
+    },
+    {
+      "id": "q-161",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бага байхдаа хамгийн их дуртай байсан хоол юу вэ?",
+      "en": "Which dish did you love most as a child?"
+    },
+    {
+      "id": "q-162",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Юу хийж байхдаа чи өөртөө хамгийн их итгэлтэй байдаг вэ?",
+      "en": "What are you doing when you feel most confident?"
+    },
+    {
+      "id": "q-163",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Говьд хоёулаа од ширтэж хонох шөнө юу хиймээр байна?",
+      "en": "On a night under the Gobi stars, what would you want us to do?"
+    },
+    {
+      "id": "q-164",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Бид хоёрын нэрийг нийлүүлбэл ямар нэр гарах вэ?",
+      "en": "If we blended our names into one, what would it be?"
+    },
+    {
+      "id": "q-165",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хүүхэд насны чинь хамгийн сайхан зун ямар байсан бэ?",
+      "en": "What was the best summer of your childhood like?"
+    },
+    {
+      "id": "q-166",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Хотын аль газар чамд хамгийн их таалагддаг вэ?",
+      "en": "What's your favorite spot in the city?"
+    },
+    {
+      "id": "q-167",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хоёулаа хамтдаа ямар нэг ажил эхлүүлэх байсан бол юу байх вэ?",
+      "en": "If we started a little project together, what would it be?"
+    },
+    {
+      "id": "q-168",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Ямар амьтны бичлэг чамайг хамгийн их инээлгэдэг вэ?",
+      "en": "What kind of animal videos make you laugh the most?"
+    },
+    {
+      "id": "q-169",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Анх унадаг дугуй унаж сурснаа санахад юу бодогддог вэ?",
+      "en": "What do you remember about learning to ride a bike?"
+    },
+    {
+      "id": "q-170",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Ямар нэвтрүүлгийг дахин дахин үздэг вэ?",
+      "en": "What show do you rewatch again and again?"
+    },
+    {
+      "id": "q-171",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Чи хэнд хамгийн их талархдаг вэ, яагаад?",
+      "en": "Who are you most grateful to, and why?"
+    },
+    {
+      "id": "q-172",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Ирээдүйн бидэнд одоогийн бид юу хэлмээр байна?",
+      "en": "What would we want to tell our future selves?"
+    },
+    {
+      "id": "q-173",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Хамгийн их инээлгэдэг хошин шогийн жүжигчин чинь хэн бэ?",
+      "en": "Which comedian always makes you laugh?"
+    },
+    {
+      "id": "q-174",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Чиний анхны ажлын өдөр ямар өнгөрсөн бэ?",
+      "en": "How did your first day at your first job go?"
+    },
+    {
+      "id": "q-175",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Ганцаараа байх цаг чамд хэр их хэрэгтэй вэ, тэр үедээ юу хийдэг вэ?",
+      "en": "How much alone time do you need, and what do you do with it?"
+    },
+    {
+      "id": "q-176",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Өсвөр насандаа хамгийн их бахархаж байсан зүйл чинь юу вэ?",
+      "en": "What were you proudest of as a teenager?"
+    },
+    {
+      "id": "q-177",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чиний дуртай хувцас аль нь вэ, яагаад?",
+      "en": "What's your favorite piece of clothing, and why?"
+    },
+    {
+      "id": "q-178",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Ирэх сард хамтдаа ямар газар шинээр очих вэ?",
+      "en": "Where's somewhere new we could go next month?"
+    },
+    {
+      "id": "q-179",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Хамтдаа дуулах хамгийн тохиромжтой дуу аль нь вэ?",
+      "en": "What's the perfect duet for the two of us?"
+    },
+    {
+      "id": "q-180",
+      "category": "DEEP",
+      "depth": 3,
+      "mn": "Ирээдүйн талаар юу чамайг хамгийн их түгшээдэг вэ, түүнийг хамтдаа яаж давах вэ?",
+      "en": "What about the future worries you most, and how could we face it together?"
+    },
+    {
+      "id": "q-181",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бага байхдаа хийж байсан хамгийн шалиг зүйл чинь юу вэ?",
+      "en": "What's the most mischievous thing you did as a kid?"
+    },
+    {
+      "id": "q-182",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Ямар бэлэг авбал чи хамгийн их баярлах вэ?",
+      "en": "What kind of gift would delight you most?"
+    },
+    {
+      "id": "q-183",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Хойч үедээ үлдээмээр нэг үнэт зүйл юу вэ?",
+      "en": "What's one value you'd love us to pass on someday?"
+    },
+    {
+      "id": "q-184",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Нэг өдөр хүүхэд болж хувирвал юу хийх вэ?",
+      "en": "If you were a kid again for one day, what would you do?"
+    },
+    {
+      "id": "q-185",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хүүхэд байхдаа ямар хүүхэлдэйн кинонд дуртай байсан бэ?",
+      "en": "Which cartoons did you love growing up?"
+    },
+    {
+      "id": "q-186",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Ямар үг чамайг гомдоодог, ямар үг тайвшруулдаг вэ?",
+      "en": "What words hurt you, and what words soothe you?"
+    },
+    {
+      "id": "q-187",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа ямар баяр наадамд оролцмоор байна?",
+      "en": "Which festival would you love us to go to together?"
+    },
+    {
+      "id": "q-188",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Аль хүүхэлдэйн киноны дууг одоо ч цээжээр мэддэг вэ?",
+      "en": "Which cartoon theme song do you still know by heart?"
+    },
+    {
+      "id": "q-189",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Ээж, аавынхаа хэлсэн үгнээс аль нь өнөөдрийг хүртэл санаанд чинь байдаг вэ?",
+      "en": "What's something your parents told you that you still carry with you?"
+    },
+    {
+      "id": "q-190",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Аль хөгжмийн зэмсгийн аялгуу чамд хамгийн их таалагддаг вэ?",
+      "en": "Which musical instrument do you love the sound of?"
+    },
+    {
+      "id": "q-191",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Надтай байхдаа өөрийнхөөрөө байхад чамд юу тусалдаг вэ?",
+      "en": "What helps you feel fully yourself with me?"
+    },
+    {
+      "id": "q-192",
+      "category": "FUTURE",
+      "depth": 3,
+      "mn": "Бидний хамгийн том хамтын мөрөөдөл юу гэж чи боддог вэ?",
+      "en": "What do you think is the biggest dream we share?"
+    },
+    {
+      "id": "q-193",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Бидний зураг музейд өлгөгдвөл ямар нэртэй байх вэ?",
+      "en": "If a photo of us hung in a museum, what would it be titled?"
+    },
+    {
+      "id": "q-194",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Эмээ, өвөөгийнхөө тухай хамгийн дулаан дурсамж чинь юу вэ?",
+      "en": "What's your warmest memory of your grandparents?"
+    },
+    {
+      "id": "q-195",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чи ямар төрлийн кинонд хамгийн их дуртай вэ?",
+      "en": "What kind of movies do you enjoy most?"
+    },
+    {
+      "id": "q-196",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Чиний өссөн гэр ямар байсан бэ?",
+      "en": "What was the home you grew up in like?"
+    },
+    {
+      "id": "q-197",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Халуун, хүйтэн хоёрын алийг нь чи илүү амар тэсдэг вэ?",
+      "en": "Which is easier for you to handle: heat or cold?"
+    },
+    {
+      "id": "q-198",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Ирэх хавар хамтдаа юу тарих вэ?",
+      "en": "What should we plant together next spring?"
+    },
+    {
+      "id": "q-199",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Гэрийн нэг ажлыг ид шидээр хийлгэх бол аль ажлыг сонгох вэ?",
+      "en": "If magic could do one chore forever, which would you choose?"
+    },
+    {
+      "id": "q-200",
+      "category": "DEEP",
+      "depth": 1,
+      "mn": "Энэ сард чи өөртөө юугаар талархаж байна?",
+      "en": "What are you thankful to yourself for this month?"
+    },
+    {
+      "id": "q-201",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамгийн анх хийсэн аялал чинь хаашаа байсан бэ?",
+      "en": "Where did you go on your very first trip?"
+    },
+    {
+      "id": "q-202",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чиний өдрийн хамгийн дуртай цаг аль нь вэ?",
+      "en": "What's your favorite time of day?"
+    },
+    {
+      "id": "q-203",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Таван жилийн дараа чи хаана амьдарч байгаасай гэж хүсдэг вэ?",
+      "en": "Where do you hope you'll be living in five years?"
+    },
+    {
+      "id": "q-204",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Нэг өдөр цирк удирдвал бид хоёр ямар үүрэгтэй байх вэ?",
+      "en": "If we ran a circus for a day, what would each of our roles be?"
+    },
+    {
+      "id": "q-205",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Сургуулийн аль үйл явдал чамд одоо ч инээд хүргэдэг вэ?",
+      "en": "Which school moment still makes you laugh?"
+    },
+    {
+      "id": "q-206",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Хүнд шийдвэр гаргахдаа чи юунд хамгийн их найддаг вэ?",
+      "en": "When making a tough decision, what do you rely on most?"
+    },
+    {
+      "id": "q-207",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Бид хоёр хамтдаа ямар гэрэл зургийн цуврал хийх вэ?",
+      "en": "What photo project could we do together?"
+    },
+    {
+      "id": "q-208",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Миний зан ямар амьтантай төстэй гэж боддог вэ?",
+      "en": "Which animal matches my personality, in your view?"
+    },
+    {
+      "id": "q-209",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Багш нараас чинь хэн нь чамд хамгийн их нөлөөлсөн бэ?",
+      "en": "Which teacher shaped you the most?"
+    },
+    {
+      "id": "q-210",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чиний хамгийн дуртай хамтлаг, дуучин хэн бэ?",
+      "en": "Who's your favorite band or singer?"
+    },
+    {
+      "id": "q-211",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Уучлал гэж чиний хувьд юу вэ?",
+      "en": "How do you think about forgiveness?"
+    },
+    {
+      "id": "q-212",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Амьдралдаа заавал хийх зүйлсийн жагсаалтад чинь юу байдаг вэ?",
+      "en": "What's on your personal bucket list?"
+    },
+    {
+      "id": "q-213",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Бид хоёр шинэ баяр зохиовол юуг тэмдэглэх вэ?",
+      "en": "If we invented a holiday, what would we celebrate?"
+    },
+    {
+      "id": "q-214",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бага байхдаа хамгийн их хүлээдэг баяр чинь аль нь байсан бэ?",
+      "en": "Which holiday did you look forward to most as a kid?"
+    },
+    {
+      "id": "q-215",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Чи хайраа ямар аргаар илэрхийлэх дуртай вэ?",
+      "en": "How do you most like to show love?"
+    },
+    {
+      "id": "q-216",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Анх цуглуулж байсан зүйл чинь юу байсан бэ?",
+      "en": "What was the first thing you ever collected?"
+    },
+    {
+      "id": "q-217",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Миний хэлдэг үгнээс аль нь чамд хамгийн их таалагддаг вэ?",
+      "en": "What do I say that you love hearing most?"
+    },
+    {
+      "id": "q-218",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Ирэх баяраар бид хэнийг урьж дайлах вэ?",
+      "en": "Who should we host for the next holiday?"
+    },
+    {
+      "id": "q-219",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Ямар хоолыг чи огт идэж чаддаггүй вэ?",
+      "en": "What food can you absolutely not stand?"
+    },
+    {
+      "id": "q-220",
+      "category": "DEEP",
+      "depth": 3,
+      "mn": "Чамайг үнэхээр ойлгогдсон гэж юу мэдрүүлдэг вэ?",
+      "en": "What makes you feel truly understood?"
+    },
+    {
+      "id": "q-221",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хүүхэд байхдаа нуугдаж тоглодог дуртай газар чинь хаана байсан бэ?",
+      "en": "Where was your favorite hiding spot as a kid?"
+    },
+    {
+      "id": "q-222",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Хөзөр, шатар, эсвэл өөр — чи ямар тоглоом тоглох дуртай вэ?",
+      "en": "What's your favorite game to play — cards, chess, or something else?"
+    },
+    {
+      "id": "q-223",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Ирээдүйд хамтдаа ямар сайн үйл хийх вэ?",
+      "en": "What good deed or cause could we take on together?"
+    },
+    {
+      "id": "q-224",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Машин, дугуйдаа нэр өгвөл юу гэж нэрлэх вэ?",
+      "en": "If you named your car or bike, what would you call it?"
+    },
+    {
+      "id": "q-225",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Амьдралдаа хамгийн их зориг гаргасан мөч чинь юу байсан бэ?",
+      "en": "When did you feel the bravest in your life?"
+    },
+    {
+      "id": "q-226",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чи юунд илүү их цаг гаргамаар байна?",
+      "en": "What do you wish you had more time for?"
+    },
+    {
+      "id": "q-227",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа морь унаад хаашаа явмаар байна?",
+      "en": "Where would you like us to go horseback riding?"
+    },
+    {
+      "id": "q-228",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Бидний тухай комикийн эхний хуудсанд юу зурагдах вэ?",
+      "en": "What would be on the first page of a comic about us?"
+    },
+    {
+      "id": "q-229",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бидний хамтдаа өнгөрүүлсэн анхны өвөл ямар байсан бэ?",
+      "en": "How do you remember our first winter together?"
+    },
+    {
+      "id": "q-230",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Чамд хамгийн их ач холбогдолтой гурван зүйл юу вэ?",
+      "en": "What three things matter most to you?"
+    },
+    {
+      "id": "q-231",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Бидний харилцаа чамайг юугаараа илүү сайн хүн болгосон бэ?",
+      "en": "How has being together made you a better person?"
+    },
+    {
+      "id": "q-232",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Ирэх намар хамтдаа юу хийх вэ?",
+      "en": "What should we do together this autumn?"
+    },
+    {
+      "id": "q-233",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Өөртөө шинэ нэр сонгох бол ямар нэр авах вэ?",
+      "en": "If you could pick a new name for yourself, what would it be?"
+    },
+    {
+      "id": "q-234",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа хотоос гарч анх хаашаа явсан бэ?",
+      "en": "Where did we go the first time we left the city together?"
+    },
+    {
+      "id": "q-235",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чамайг ямар жижиг зүйл хамгийн их залхаадаг вэ?",
+      "en": "What's a tiny pet peeve of yours?"
+    },
+    {
+      "id": "q-236",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Миний инээдтэй зуршлаас аль нь анх чиний анхаарлыг татсан бэ?",
+      "en": "Which of my quirky habits did you notice first?"
+    },
+    {
+      "id": "q-237",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чи хоол хийхдээ ямар орцонд хамгийн их дуртай вэ?",
+      "en": "What ingredient do you love cooking with?"
+    },
+    {
+      "id": "q-238",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Ажлынхаа хувьд ирэх жил ямар алхам хиймээр байна?",
+      "en": "What step would you like to take in your work next year?"
+    },
+    {
+      "id": "q-239",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Бидний өнөөдрийг ганцхан үгээр тодорхойлвол юу вэ?",
+      "en": "What one word sums up our day today?"
+    },
+    {
+      "id": "q-240",
+      "category": "DEEP",
+      "depth": 1,
+      "mn": "Өнөөдрийн хамгийн дулаахан мөч чинь юу байсан бэ?",
+      "en": "What was the warmest moment of your day?"
+    },
+    {
+      "id": "q-241",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бидний дуртай дотоод хошигнол хаанаас эхэлсэн бэ?",
+      "en": "How did our favorite inside joke start?"
+    },
+    {
+      "id": "q-242",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Чи өөрийгөө гурван үгээр яаж тодорхойлох вэ?",
+      "en": "How would you describe yourself in three words?"
+    },
+    {
+      "id": "q-243",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа ямар тоглолт үзэхээр очмоор байна?",
+      "en": "Which concert would you love us to go to?"
+    },
+    {
+      "id": "q-244",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Нэг өдөр тагнуул болбол бид ямар нууц нэртэй байх вэ?",
+      "en": "If we were spies for a day, what would our code names be?"
+    },
+    {
+      "id": "q-245",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Надтай байхдаа хамгийн их тайвширсан мөч чинь хэзээ байсан бэ?",
+      "en": "When have you felt most at peace with me?"
+    },
+    {
+      "id": "q-246",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Найзууд чинь чамайг юугаар нь хамгийн их үнэлдэг вэ?",
+      "en": "What do your friends value most about you?"
+    },
+    {
+      "id": "q-247",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Хоёулаа нэг сар чөлөөтэй байвал юу хийх вэ?",
+      "en": "If we both had a month off, what would we do?"
+    },
+    {
+      "id": "q-248",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Бидний гэрийн сүлд дуу аль нь байх вэ?",
+      "en": "What would our home's theme song be?"
+    },
+    {
+      "id": "q-249",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бид хоёр хамтдаа хамгийн анх юу шинээр сурсан бэ?",
+      "en": "What's the first new thing we learned together?"
+    },
+    {
+      "id": "q-250",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чамд хамгийн их таалагддаг монгол дуу аль нь вэ?",
+      "en": "Which Mongolian song do you love most?"
+    },
+    {
+      "id": "q-251",
+      "category": "DEEP",
+      "depth": 3,
+      "mn": "Хэнд ч хэлж байгаагүй мөрөөдөл чинь юу вэ?",
+      "en": "What's a dream you've never told anyone?"
+    },
+    {
+      "id": "q-252",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Гэрээ илүү дулаахан болгохын тулд юу нэмж болох вэ?",
+      "en": "What could we add to our place to make it cozier?"
+    },
+    {
+      "id": "q-253",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Хүүхдийн аль тоглоомыг одоо ч баяртайгаар тоглох вэ?",
+      "en": "What kids' game would you still happily play today?"
+    },
+    {
+      "id": "q-254",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа үзсэн тоглолт, тэмцээнүүдээс аль нь мартагдашгүй вэ?",
+      "en": "Which concert or game we went to together was unforgettable?"
+    },
+    {
+      "id": "q-255",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чи ажил дээрээ юунд хамгийн их дуртай вэ?",
+      "en": "What do you enjoy most about your work?"
+    },
+    {
+      "id": "q-256",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Миний чамд хийж өгсөн хоолноос аль нь хамгийн амттай байсан бэ?",
+      "en": "Which dish I've made for you was the tastiest?"
+    },
+    {
+      "id": "q-257",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Одоо ажлын чинь хамгийн хэцүү тал юу вэ?",
+      "en": "What's the hardest part of your work right now?"
+    },
+    {
+      "id": "q-258",
+      "category": "FUTURE",
+      "depth": 3,
+      "mn": "Хамтдаа хөгшрөхийг бодохоор чамд юу хамгийн их баяр төрүүлдэг вэ?",
+      "en": "When you imagine growing old together, what makes you happiest?"
+    },
+    {
+      "id": "q-259",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Хоол хийх тэмцээнд оролцвол юу хийж шүүгчдийг гайхшруулах вэ?",
+      "en": "If you were on a cooking show, what would you make to wow the judges?"
+    },
+    {
+      "id": "q-260",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Би чамайг анх хэзээ үнэхээр ойлгосон гэж мэдэрсэн бэ?",
+      "en": "When did you first feel I really understood you?"
+    },
+    {
+      "id": "q-261",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чиний хамгийн дуртай цэцэг юу вэ?",
+      "en": "What's your favorite flower?"
+    },
+    {
+      "id": "q-262",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Чиний бодлоор сайхан амьдрал гэж юу вэ?",
+      "en": "What does a good life look like to you?"
+    },
+    {
+      "id": "q-263",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Ирэх жил өөртөө илүү их цаг гаргаж юу хийх вэ?",
+      "en": "What would you like to make more time for next year?"
+    },
+    {
+      "id": "q-264",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Чиний өвөрмөц бүжгийн хөдөлгөөн юу вэ?",
+      "en": "What's your signature dance move?"
+    },
+    {
+      "id": "q-265",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Миний аль инээдтэй хувцас чамд одоо ч санагддаг вэ?",
+      "en": "Which funny outfit of mine do you still remember?"
+    },
+    {
+      "id": "q-266",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Уул ус, тал хээр, нуур — аль нь чиний сэтгэлд хамгийн их хүрдэг вэ?",
+      "en": "Which landscape speaks to you most: mountains, water, or open steppe?"
+    },
+    {
+      "id": "q-267",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Нэг өдөр жуулчин шиг Улаанбаатараар аялвал хаашаа очих вэ?",
+      "en": "If we played tourists in Ulaanbaatar for a day, where would we go?"
+    },
+    {
+      "id": "q-268",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Цасан хүн хийвэл түүнд ямар хувцас өмсгөх вэ?",
+      "en": "If we built a snowman, how would we dress it?"
+    },
+    {
+      "id": "q-269",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бидний хамгийн сайхан нар жаргалтыг хаана харсан бэ?",
+      "en": "Where did we watch our most beautiful sunset?"
+    },
+    {
+      "id": "q-270",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Чи өөртөө ямар шинэ зуршил бий болгомоор байна?",
+      "en": "What new habit would you like to build?"
+    },
+    {
+      "id": "q-271",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Хамтдаа даван туулсан зүйлсээс юу нь чамд бидэнд итгэх итгэл өгдөг вэ?",
+      "en": "What have we been through that gives you faith in us?"
+    },
+    {
+      "id": "q-272",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа ямар цуврал кино эхлүүлэх вэ?",
+      "en": "Which series should we start together?"
+    },
+    {
+      "id": "q-273",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа хамгийн их хөгжилдсөн үдэшлэг аль нь байсан бэ?",
+      "en": "Which party did we have the most fun at together?"
+    },
+    {
+      "id": "q-274",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Хоол хийх, аяга таваг угаах хоёрын алинд нь чи илүү дуртай вэ?",
+      "en": "Cooking or washing up — which would you rather do?"
+    },
+    {
+      "id": "q-275",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Ямар амьтны дууг хамгийн сайн дуурайж чаддаг вэ?",
+      "en": "Which animal sound can you imitate best?"
+    },
+    {
+      "id": "q-276",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Бидний харилцааны эхэн үеэс юуг нь хамгийн их санагалздаг вэ?",
+      "en": "What do you miss most about our early days?"
+    },
+    {
+      "id": "q-277",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Санаа зовсон үедээ чи үүнийгээ яаж илэрхийлдэг вэ?",
+      "en": "How do you usually show that you're worried?"
+    },
+    {
+      "id": "q-278",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Бидний харилцааны дараагийн том алхам юу байж болох вэ?",
+      "en": "What could the next big step for us be?"
+    },
+    {
+      "id": "q-279",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Гэрт маань туслах робот байвал түүнийг юу гэж нэрлэх вэ?",
+      "en": "If we had a robot helper at home, what would we name it?"
+    },
+    {
+      "id": "q-280",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Анх надад мессеж бичихдээ хэдэн удаа засаж бичсэн бэ?",
+      "en": "How many times did you rewrite your first message to me?"
+    },
+    {
+      "id": "q-281",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Чамд хамгийн их урам өгдөг үг, ишлэл юу вэ?",
+      "en": "What quote or saying keeps you going?"
+    },
+    {
+      "id": "q-282",
+      "category": "DEEP",
+      "depth": 1,
+      "mn": "Хамгийн сүүлд юуны төлөө надад талархсан бэ?",
+      "en": "What did you last feel thankful to me for?"
+    },
+    {
+      "id": "q-283",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Ирээдүйд бидний Цагаан сар ямар байгаасай?",
+      "en": "How do you picture our Tsagaan Sar in the future?"
+    },
+    {
+      "id": "q-284",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Ямар шинэ бүтээл байгаасай гэж хүсдэг вэ?",
+      "en": "What invention do you wish existed?"
+    },
+    {
+      "id": "q-285",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа зургаа даруулж байхдаа хамгийн их инээлдсэн мөч юу вэ?",
+      "en": "What was the funniest moment while taking photos together?"
+    },
+    {
+      "id": "q-286",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Ямар жижиг зүйлд чи хүүхэд шиг баярладаг вэ?",
+      "en": "What little thing makes you as happy as a child?"
+    },
+    {
+      "id": "q-287",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа анх удаа юу хийж үзмээр байна?",
+      "en": "What's something we've never done that you'd love to try together?"
+    },
+    {
+      "id": "q-288",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Нэг шөнө музейд түгжигдвэл бид юу хийх вэ?",
+      "en": "If we got locked in a museum overnight, what would we do?"
+    },
+    {
+      "id": "q-289",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бидний хамгийн анхны хамтын хоол юу байсан бэ?",
+      "en": "What was the first meal we ever shared?"
+    },
+    {
+      "id": "q-290",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чи өглөөний цайндаа юу идэх дуртай вэ?",
+      "en": "What's your favorite breakfast?"
+    },
+    {
+      "id": "q-291",
+      "category": "DEEP",
+      "depth": 3,
+      "mn": "Ямар үг чамд хамгийн их тайтгарал өгдөг вэ?",
+      "en": "What words comfort you most deeply?"
+    },
+    {
+      "id": "q-292",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Чи ямар шинэ сонирхлоо надтай хуваалцмаар байна?",
+      "en": "What new hobby would you like to share with me?"
+    },
+    {
+      "id": "q-293",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Бидний хамгийн хэцүү өдрүүдийн аль нэгнээс юу сурсан бэ?",
+      "en": "What did you learn from one of our hardest days?"
+    },
+    {
+      "id": "q-294",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Сүүлийн үед чамайг юу хамгийн их баярлуулж байна?",
+      "en": "What's bringing you the most joy lately?"
+    },
+    {
+      "id": "q-295",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Нэг шөнө аль нэг киноны дотор амьдарч болдог бол аль нь вэ?",
+      "en": "If you could spend a night inside any movie, which one?"
+    },
+    {
+      "id": "q-296",
+      "category": "MEMORY",
+      "depth": 3,
+      "mn": "Бид хоёрыг илүү ойртуулсан хамгийн хүнд үе юу байсан гэж боддог вэ?",
+      "en": "Which hard time do you think brought us closer than anything?"
+    },
+    {
+      "id": "q-297",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Сэтгэл чинь тавгүй үед зөвлөгөө, эсвэл зүгээр сонсох — аль нь илүү хэрэгтэй вэ?",
+      "en": "When you're down, what helps more: advice or just being heard?"
+    },
+    {
+      "id": "q-298",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа аль уулын оргилд гарах вэ?",
+      "en": "Which mountain should we hike together?"
+    },
+    {
+      "id": "q-299",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Чиний хамгийн хачин хүсэл юу вэ?",
+      "en": "What's your silliest wish?"
+    },
+    {
+      "id": "q-300",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Хамтдаа анх ямар уламжлал бий болгосон бэ?",
+      "en": "What was the first little tradition we started together?"
+    },
+    {
+      "id": "q-301",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Бага наснаасаа хойш дуртай хэвээр байгаа зүйл чинь юу вэ?",
+      "en": "What's something you've loved since childhood?"
+    },
+    {
+      "id": "q-302",
+      "category": "FUTURE",
+      "depth": 3,
+      "mn": "Олон жилийн дараа бидний түүхийг бусдад яаж ярьцгаамаар байна?",
+      "en": "Years from now, how do you hope we'll tell our story?"
+    },
+    {
+      "id": "q-303",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Цаг нэг минут зогсчихвол юу хийх вэ?",
+      "en": "If time froze for a minute, what would you do?"
+    },
+    {
+      "id": "q-304",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Өөртөө анхаарал тавина гэдгийг чи яаж ойлгодог вэ?",
+      "en": "What does caring for yourself look like to you?"
+    },
+    {
+      "id": "q-305",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Миний хэлсэн хамгийн хөгжилтэй үг юу байсан бэ?",
+      "en": "What's the funniest thing I've ever said?"
+    },
+    {
+      "id": "q-306",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Гэртээ хамгийн их дуртай булан чинь аль нь вэ?",
+      "en": "What's your favorite cozy spot at home?"
+    },
+    {
+      "id": "q-307",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Ирэх долоо хоногт надтай хамт юу хиймээр байна?",
+      "en": "What would you like to do with me this coming week?"
+    },
+    {
+      "id": "q-308",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Бидний ижил хувцас ямар байх вэ?",
+      "en": "What would our matching outfit look like?"
+    },
+    {
+      "id": "q-309",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамгийн хүйтэн өдөр бид хоёр хаана, юу хийж байсан бэ?",
+      "en": "What were we up to on the coldest day we spent together?"
+    },
+    {
+      "id": "q-310",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Чи хэзээ өөртөө хамгийн хатуу ханддаг вэ?",
+      "en": "When are you hardest on yourself?"
+    },
+    {
+      "id": "q-311",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Чамд хамгийн их утга учир өгдөг зүйл юу вэ?",
+      "en": "What gives your life the most meaning?"
+    },
+    {
+      "id": "q-312",
+      "category": "MEMORY",
+      "depth": 3,
+      "mn": "Чамайг хамгийн их өөрчилсөн дурсамж аль нь вэ?",
+      "en": "Which memory has changed you the most?"
+    },
+    {
+      "id": "q-313",
+      "category": "KNOWING",
+      "depth": 3,
+      "mn": "Ховорхон ярьдаг айдас чинь юу вэ?",
+      "en": "What's a fear you rarely talk about?"
+    },
+    {
+      "id": "q-314",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Бид хоёр хамтдаа ямар дурсамж цуглуулмаар байна?",
+      "en": "What kinds of memories do you want us to collect?"
+    },
+    {
+      "id": "q-315",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Хамгийн амттай бууз ямар байх ёстой вэ?",
+      "en": "What makes the perfect buuz?"
+    },
+    {
+      "id": "q-316",
+      "category": "MEMORY",
+      "depth": 3,
+      "mn": "Бага насны өөртөө одоо юу хэлмээр байна?",
+      "en": "What would you tell your younger self now?"
+    },
+    {
+      "id": "q-317",
+      "category": "KNOWING",
+      "depth": 3,
+      "mn": "Чиний тухай миний хараахан мэдэхгүй байгаа зүйл юу вэ?",
+      "en": "What's something about you I don't know yet?"
+    },
+    {
+      "id": "q-318",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа ямар гар урлал хийж үзэх вэ?",
+      "en": "What craft could we try making together?"
+    },
+    {
+      "id": "q-319",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Шинэ од нээвэл түүнийг юу гэж нэрлэх вэ?",
+      "en": "If we discovered a star, what would we name it?"
+    },
+    {
+      "id": "q-320",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Хамгийн их бахархдаг дурсамж чинь юу вэ?",
+      "en": "Which memory makes you proudest?"
+    },
+    {
+      "id": "q-321",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Чиний бодлоор сайн найзын хамгийн чухал чанар юу вэ?",
+      "en": "What makes someone a really good friend, in your view?"
+    },
+    {
+      "id": "q-322",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Аль орны соёлтой ойроос танилцмаар байна?",
+      "en": "Which country's culture would you love to get to know up close?"
+    },
+    {
+      "id": "q-323",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Чи ямар инээдтэй зүйлээс жаахан айдаг вэ?",
+      "en": "What's a silly thing you're a little scared of?"
+    },
+    {
+      "id": "q-324",
+      "category": "DEEP",
+      "depth": 1,
+      "mn": "Яг одоо надад хэлмээр байгаа нэг сайхан үг юу вэ?",
+      "en": "What's one kind thing you'd like to tell me right now?"
+    },
+    {
+      "id": "q-325",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Анх гэрээсээ холдож амьдарсан үе чинь ямар байсан бэ?",
+      "en": "What was it like when you first lived away from home?"
+    },
+    {
+      "id": "q-326",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Ямар дуу сонсохоор чи бүжиглэмээр болдог вэ?",
+      "en": "What song makes you want to dance?"
+    },
+    {
+      "id": "q-327",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа хийх дараагийн жижиг аялал хаашаа байх вэ?",
+      "en": "Where should our next little getaway be?"
+    },
+    {
+      "id": "q-328",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Аль киноны баатрын хувцсаар нэг өдөр гудамжаар алхмаар байна?",
+      "en": "Which movie character's outfit would you wear for a day?"
+    },
+    {
+      "id": "q-329",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хүүхэд байхдаа хамгийн их айдаг байсан зүйл чинь юу вэ?",
+      "en": "What were you scared of as a little kid?"
+    },
+    {
+      "id": "q-330",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чи аль үгийг хамгийн их хэрэглэдэг гэж боддог вэ?",
+      "en": "What word do you think you say the most?"
+    },
+    {
+      "id": "q-331",
+      "category": "DEEP",
+      "depth": 3,
+      "mn": "Хамгийн их ганцаардсан үедээ чамд юу хэрэгтэй байсан бэ?",
+      "en": "When you felt most alone, what did you need?"
+    },
+    {
+      "id": "q-332",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Бага байхдаа өөрийн гараар хийсэн хамгийн сайхан зүйл чинь юу вэ?",
+      "en": "What's the best thing you made with your own hands as a kid?"
+    },
+    {
+      "id": "q-333",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Хамгийн сүүлд хэзээ өөрөөрөө үнэхээр бахархсан бэ?",
+      "en": "When did you last feel truly proud of yourself?"
+    },
+    {
+      "id": "q-334",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Ирэх жилийн энэ үед хамтдаа юугаар бахархмаар байна?",
+      "en": "This time next year, what would you love us to be proud of?"
+    },
+    {
+      "id": "q-335",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Бяцхан байшинд амьдрах бол заавал юу авч орох вэ?",
+      "en": "If we lived in a tiny house, what would we absolutely bring?"
+    },
+    {
+      "id": "q-336",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Найз чинь чамд хамгийн их тусалсан үе хэзээ байсан бэ?",
+      "en": "When did a friend really come through for you?"
+    },
+    {
+      "id": "q-337",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Шинэ зүйл туршихдаа чи зоригтой юу, болгоомжтой юу?",
+      "en": "How do you approach new things — boldly or carefully?"
+    },
+    {
+      "id": "q-338",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хамтдаа ямар амттан хийж сурах вэ?",
+      "en": "What dessert should we learn to bake together?"
+    },
+    {
+      "id": "q-339",
+      "category": "FUN",
+      "depth": 2,
+      "mn": "Бид хоёр нууц хэлтэй байсан бол эхний үг нь юу байх вэ?",
+      "en": "If we had a secret language, what would the first word be?"
+    },
+    {
+      "id": "q-340",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Хамтдаа хамгийн их дуулсан дуу аль нь вэ?",
+      "en": "Which song have we sung together the most?"
+    },
+    {
+      "id": "q-341",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чамд хамгийн их таалагддаг үг юу вэ?",
+      "en": "What's your favorite word?"
+    },
+    {
+      "id": "q-342",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Чи ирээдүйд ямар хүн болохыг хүсч байна?",
+      "en": "Who do you want to become?"
+    },
+    {
+      "id": "q-343",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Бид хоёр ямар тоглоомд хамгийн сайн баг болох вэ?",
+      "en": "Which game would we make the best team at?"
+    },
+    {
+      "id": "q-344",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Бидний хоорондын итгэлийг юу хамгийн их бэхжүүлдэг вэ?",
+      "en": "What builds trust between us the most?"
+    },
+    {
+      "id": "q-345",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Миний төрсөн өдрүүдээс аль нь чамд хамгийн их таалагдсан бэ?",
+      "en": "Which of my birthdays with you was your favorite?"
+    },
+    {
+      "id": "q-346",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Аялахдаа чи юуг заавал авч явдаг вэ?",
+      "en": "What do you always pack when you travel?"
+    },
+    {
+      "id": "q-347",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Нэг өдөр гэрээсээ огт гарахгүй бол яаж өнгөрүүлэх вэ?",
+      "en": "If we stayed home all day, how would we spend it?"
+    },
+    {
+      "id": "q-348",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Зугаа цэнгэлийн паркийн аль тоглоомд хамгийн их дуртай вэ?",
+      "en": "What's your favorite amusement park ride?"
+    },
+    {
+      "id": "q-349",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Аль нэг аяллын үеэр бидэнд тохиолдсон хамгийн инээдтэй явдал юу вэ?",
+      "en": "What's the funniest thing that happened to us on a trip?"
+    },
+    {
+      "id": "q-350",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Чиний бодлоор бид хоёрын хамгийн их ялгаатай тал юу вэ?",
+      "en": "What do you think is the biggest difference between us?"
+    },
+    {
+      "id": "q-351",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Надад бүрэн итгэж болно гэдгээ анх хэзээ мэдэрсэн бэ?",
+      "en": "When did you first feel you could fully trust me?"
+    },
+    {
+      "id": "q-352",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Бид хоёрын аль ижил тал чамд хамгийн их таалагддаг вэ?",
+      "en": "Which way we're alike do you love most?"
+    },
+    {
+      "id": "q-353",
+      "category": "FUTURE",
+      "depth": 3,
+      "mn": "Хамтдаа бүтээмээр байгаа хамгийн том зүйл юу вэ?",
+      "en": "What's the biggest thing you'd love us to build together?"
+    },
+    {
+      "id": "q-354",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Нэг өдөр зөвхөн инээдтэй дүрэмтэй байвал чи ямар дүрэм гаргах вэ?",
+      "en": "If we had a day of silly rules, what rule would you make?"
+    },
+    {
+      "id": "q-355",
+      "category": "DEEP",
+      "depth": 1,
+      "mn": "Өнөөдөр би чамд юугаар тусалж болох вэ?",
+      "en": "How can I make your day a little easier today?"
+    },
+    {
+      "id": "q-356",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Сүүлийн нэг сард бидний хамгийн сайхан мөч юу байсан бэ?",
+      "en": "What was our best moment this past month?"
+    },
+    {
+      "id": "q-357",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чамайг ямар дуу тайвшруулдаг вэ?",
+      "en": "What song calms you down?"
+    },
+    {
+      "id": "q-358",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хөвсгөлийн мөсний баярт очвол юу хиймээр байна?",
+      "en": "If we went to the Khövsgöl Ice Festival, what would you want to do?"
+    },
+    {
+      "id": "q-359",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Чи аль үлгэрийн баатартай хамгийн их төстэй вэ?",
+      "en": "Which fairy-tale character are you most like?"
+    },
+    {
+      "id": "q-360",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Өнгөрсөн долоо хоногт чамайг инээлгэсэн зүйл юу вэ?",
+      "en": "What made you smile this past week?"
+    },
+    {
+      "id": "q-361",
+      "category": "KNOWING",
+      "depth": 3,
+      "mn": "Амьдралд баримталдаг гол зарчим чинь юу вэ?",
+      "en": "What's a principle you try to live by?"
+    },
+    {
+      "id": "q-362",
+      "category": "FUTURE",
+      "depth": 2,
+      "mn": "Ирэх жил хамтдаа юуг илүү олон удаа хийдэг болмоор байна?",
+      "en": "What would you like us to do more often next year?"
+    },
+    {
+      "id": "q-363",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Гэрийн хаалга чинь өөр хотод нээгддэг бол аль хот байгаасай?",
+      "en": "If your front door opened onto another city, which would you want it to be?"
+    },
+    {
+      "id": "q-364",
+      "category": "MEMORY",
+      "depth": 1,
+      "mn": "Энэ жил хамтдаа хийсэн зүйлсээс юу нь хамгийн их таалагдсан бэ?",
+      "en": "What's your favorite thing we've done together this year?"
+    },
+    {
+      "id": "q-365",
+      "category": "KNOWING",
+      "depth": 2,
+      "mn": "Хүмүүсийн ямар зан чамд хамгийн хүндрэлтэй санагддаг вэ?",
+      "en": "What kind of behavior in others do you find hardest to deal with?"
+    },
+    {
+      "id": "q-366",
+      "category": "DEEP",
+      "depth": 2,
+      "mn": "Байгальд байхдаа чи юуг хамгийн гүн мэдэрдэг вэ?",
+      "en": "What do you feel most deeply when you're out in nature?"
+    },
+    {
+      "id": "q-367",
+      "category": "FUTURE",
+      "depth": 1,
+      "mn": "Хоёулаа майханд хонох бол хаана буудаллах вэ?",
+      "en": "If we camped out for a night, where would we pitch the tent?"
+    },
+    {
+      "id": "q-368",
+      "category": "FUN",
+      "depth": 1,
+      "mn": "Хамтдаа хийх хамгийн тэнэг ч хөгжилтэй сорил юу вэ?",
+      "en": "What's the silliest fun challenge we could try together?"
+    },
+    {
+      "id": "q-369",
+      "category": "MEMORY",
+      "depth": 2,
+      "mn": "Хамгийн сүүлд хэзээ надаар бахархсан бэ?",
+      "en": "When did you last feel proud of me?"
+    },
+    {
+      "id": "q-370",
+      "category": "KNOWING",
+      "depth": 1,
+      "mn": "Чиний дуртай кино, үлгэрийн баатар хэн бэ?",
+      "en": "Who's your favorite movie or story character?"
+    }
+  ]
+}

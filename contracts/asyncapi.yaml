@@ -1,0 +1,3067 @@
+asyncapi: 3.0.0
+info:
+  title: Aura Realtime
+  version: 1.0.0
+  description: Aura-гийн бодит цагийн гэрээ (STOMP 1.2 over WebSocket). Сервер үйл явдлыг хэрэглэгч тутмын `/user/queue/events`
+    руу л илгээнэ (DD-AURA-008); хосын хуваалцсан topic байхгүй. Энэ баримтын application нь mobile client. HTTP
+    гэрээ — `contracts/openapi.yaml`.
+defaultContentType: application/json
+servers:
+  dev:
+    host: localhost:8080
+    protocol: ws
+    pathname: /ws
+    description: 'DEV compose; CONNECT header `Authorization: Bearer <access>`'
+    security:
+    - $ref: '#/components/securitySchemes/bearerAuth'
+  prod:
+    host: '{duckdnsHost}'
+    protocol: wss
+    pathname: /ws
+    variables:
+      duckdnsHost:
+        default: aura.duckdns.org
+        description: PAR — эзний DuckDNS хаяг
+    security:
+    - $ref: '#/components/securitySchemes/bearerAuth'
+channels:
+  userEvents:
+    address: /user/queue/events
+    title: Хэрэглэгч тутмын үйл явдал
+    description: Envelope `{id, type, occurredAt, actorId, payload}`. Өөр destination-д SUBSCRIBE → ERROR frame
+      (AC-31).
+    messages:
+      signalReceived:
+        $ref: '#/components/messages/SignalReceived'
+      chatMessageCreated:
+        $ref: '#/components/messages/ChatMessageCreated'
+      chatMessageUpdated:
+        $ref: '#/components/messages/ChatMessageUpdated'
+      chatMessageDeleted:
+        $ref: '#/components/messages/ChatMessageDeleted'
+      chatExpired:
+        $ref: '#/components/messages/ChatExpired'
+      chatReceipt:
+        $ref: '#/components/messages/ChatReceipt'
+      chatTyping:
+        $ref: '#/components/messages/ChatTyping'
+      chatPinned:
+        $ref: '#/components/messages/ChatPinned'
+      chatReaction:
+        $ref: '#/components/messages/ChatReaction'
+      presenceChanged:
+        $ref: '#/components/messages/PresenceChanged'
+      profileUpdated:
+        $ref: '#/components/messages/ProfileUpdated'
+      coupleUpdated:
+        $ref: '#/components/messages/CoupleUpdated'
+      coupleLinked:
+        $ref: '#/components/messages/CoupleLinked'
+      pairingRequested:
+        $ref: '#/components/messages/PairingRequested'
+      pairingCancelled:
+        $ref: '#/components/messages/PairingCancelled'
+      memoryCreated:
+        $ref: '#/components/messages/MemoryCreated'
+      memoryUpdated:
+        $ref: '#/components/messages/MemoryUpdated'
+      memoryDeleted:
+        $ref: '#/components/messages/MemoryDeleted'
+      memoryComment:
+        $ref: '#/components/messages/MemoryComment'
+      memoryReaction:
+        $ref: '#/components/messages/MemoryReaction'
+      planUpdated:
+        $ref: '#/components/messages/PlanUpdated'
+      checklistUpdated:
+        $ref: '#/components/messages/ChecklistUpdated'
+      deckMatched:
+        $ref: '#/components/messages/DeckMatched'
+      listUpdated:
+        $ref: '#/components/messages/ListUpdated'
+      goalUpdated:
+        $ref: '#/components/messages/GoalUpdated'
+      letterDelivered:
+        $ref: '#/components/messages/LetterDelivered'
+      letterRead:
+        $ref: '#/components/messages/LetterRead'
+      capsuleOpened:
+        $ref: '#/components/messages/CapsuleOpened'
+      questionRevealed:
+        $ref: '#/components/messages/QuestionRevealed'
+      checkinShared:
+        $ref: '#/components/messages/CheckinShared'
+      notificationCreated:
+        $ref: '#/components/messages/NotificationCreated'
+      promiseUpdated:
+        $ref: '#/components/messages/PromiseUpdated'
+      quietChanged:
+        $ref: '#/components/messages/QuietChanged'
+      sessionRevoked:
+        $ref: '#/components/messages/SessionRevoked'
+  typing:
+    address: /app/typing
+    messages:
+      typingSignal:
+        $ref: '#/components/messages/TypingSignal'
+  presence:
+    address: /app/presence
+    messages:
+      presencePing:
+        $ref: '#/components/messages/PresencePing'
+  chatDelivered:
+    address: /app/chat.delivered
+    messages:
+      deliveredAck:
+        $ref: '#/components/messages/DeliveredAck'
+operations:
+  receiveUserEvents:
+    action: receive
+    channel:
+      $ref: '#/channels/userEvents'
+    summary: Хамтрагчийн үйлдэл, хүргэлт, мэдэгдлийг хүлээн авах
+    messages:
+    - $ref: '#/channels/userEvents/messages/signalReceived'
+    - $ref: '#/channels/userEvents/messages/chatMessageCreated'
+    - $ref: '#/channels/userEvents/messages/chatMessageUpdated'
+    - $ref: '#/channels/userEvents/messages/chatMessageDeleted'
+    - $ref: '#/channels/userEvents/messages/chatExpired'
+    - $ref: '#/channels/userEvents/messages/chatReceipt'
+    - $ref: '#/channels/userEvents/messages/chatTyping'
+    - $ref: '#/channels/userEvents/messages/chatPinned'
+    - $ref: '#/channels/userEvents/messages/chatReaction'
+    - $ref: '#/channels/userEvents/messages/presenceChanged'
+    - $ref: '#/channels/userEvents/messages/profileUpdated'
+    - $ref: '#/channels/userEvents/messages/coupleUpdated'
+    - $ref: '#/channels/userEvents/messages/coupleLinked'
+    - $ref: '#/channels/userEvents/messages/pairingRequested'
+    - $ref: '#/channels/userEvents/messages/pairingCancelled'
+    - $ref: '#/channels/userEvents/messages/memoryCreated'
+    - $ref: '#/channels/userEvents/messages/memoryUpdated'
+    - $ref: '#/channels/userEvents/messages/memoryDeleted'
+    - $ref: '#/channels/userEvents/messages/memoryComment'
+    - $ref: '#/channels/userEvents/messages/memoryReaction'
+    - $ref: '#/channels/userEvents/messages/planUpdated'
+    - $ref: '#/channels/userEvents/messages/checklistUpdated'
+    - $ref: '#/channels/userEvents/messages/deckMatched'
+    - $ref: '#/channels/userEvents/messages/listUpdated'
+    - $ref: '#/channels/userEvents/messages/goalUpdated'
+    - $ref: '#/channels/userEvents/messages/letterDelivered'
+    - $ref: '#/channels/userEvents/messages/letterRead'
+    - $ref: '#/channels/userEvents/messages/capsuleOpened'
+    - $ref: '#/channels/userEvents/messages/questionRevealed'
+    - $ref: '#/channels/userEvents/messages/checkinShared'
+    - $ref: '#/channels/userEvents/messages/notificationCreated'
+    - $ref: '#/channels/userEvents/messages/promiseUpdated'
+    - $ref: '#/channels/userEvents/messages/quietChanged'
+    - $ref: '#/channels/userEvents/messages/sessionRevoked'
+  sendTyping:
+    action: send
+    channel:
+      $ref: '#/channels/typing'
+    summary: Бичиж байгаа төлөв (typing_visible хоёулаа true үед л дамжина)
+    messages:
+    - $ref: '#/channels/typing/messages/typingSignal'
+  sendPresence:
+    action: send
+    channel:
+      $ref: '#/channels/presence'
+    summary: Апп урд/ард (online_visible хоёулаа true үед л дамжина)
+    messages:
+    - $ref: '#/channels/presence/messages/presencePing'
+  sendChatDelivered:
+    action: send
+    channel:
+      $ref: '#/channels/chatDelivered'
+    summary: Мессеж төхөөрөмжид хүрсэн
+    messages:
+    - $ref: '#/channels/chatDelivered/messages/deliveredAck'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  messages:
+    SignalReceived:
+      name: signal.received
+      title: Зүрх / тэврэлт / «Чамайг бодож байна» ирлээ
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SignalReceivedEvent'
+      x-aura-ac:
+      - AC-17
+      - AC-76
+      - AC-77
+    ChatMessageCreated:
+      name: chat.message.created
+      title: Шинэ мессеж
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChatMessageCreatedEvent'
+      x-aura-ac:
+      - AC-27
+      - AC-28
+    ChatMessageUpdated:
+      name: chat.message.updated
+      title: Мессеж засагдсан
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChatMessageUpdatedEvent'
+      x-aura-ac:
+      - AC-88
+    ChatMessageDeleted:
+      name: chat.message.deleted
+      title: Мессеж устгагдсан
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChatMessageDeletedEvent'
+      x-aura-ac:
+      - AC-176
+      - AC-30
+    ChatExpired:
+      name: chat.expired
+      title: Алга болдог мессежийн хугацаа дууссан
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChatExpiredEvent'
+      x-aura-ac:
+      - AC-92
+    ChatReceipt:
+      name: chat.receipt
+      title: Хүргэгдсэн / уншсан
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChatReceiptEvent'
+      x-aura-ac:
+      - AC-29
+      - AC-176
+    ChatTyping:
+      name: chat.typing
+      title: Хамтрагч бичиж байна
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChatTypingEvent'
+      x-aura-ac:
+      - AC-177
+    ChatPinned:
+      name: chat.pinned
+      title: Pin өөрчлөгдсөн
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChatPinnedEvent'
+      x-aura-ac:
+      - AC-90
+    ChatReaction:
+      name: chat.reaction
+      title: Мессежийн реакц
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChatReactionEvent'
+      x-aura-ac:
+      - AC-88
+    PresenceChanged:
+      name: presence.changed
+      title: Хамтрагчийн онлайн төлөв
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PresenceChangedEvent'
+      x-aura-ac:
+      - AC-70
+    ProfileUpdated:
+      name: profile.updated
+      title: Хамтрагчийн профайл өөрчлөгдсөн
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ProfileUpdatedEvent'
+      x-aura-ac:
+      - AC-62
+    CoupleUpdated:
+      name: couple.updated
+      title: Хосын төлөв (эхэлсэн өдөр, сэдэв, тасалалт)
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/CoupleUpdatedEvent'
+      x-aura-ac:
+      - AC-65
+      - AC-138
+      - AC-185
+    CoupleLinked:
+      name: couple.linked
+      title: Хос холбогдлоо
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/CoupleLinkedEvent'
+      x-aura-ac:
+      - AC-11
+    PairingRequested:
+      name: pairing.requested
+      title: Урилгыг ашиглаж нэгдэх хүсэлт
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PairingRequestedEvent'
+      x-aura-ac:
+      - AC-68
+      - AC-170
+    PairingCancelled:
+      name: pairing.cancelled
+      title: Нэгдэх хүсэлт цуцлагдсан
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PairingCancelledEvent'
+      x-aura-ac:
+      - AC-10
+    MemoryCreated:
+      name: memory.created
+      title: Дурсамж нэмэгдсэн
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/MemoryCreatedEvent'
+      x-aura-ac:
+      - AC-20
+    MemoryUpdated:
+      name: memory.updated
+      title: Дурсамж өөрчлөгдсөн
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/MemoryUpdatedEvent'
+      x-aura-ac:
+      - AC-131
+    MemoryDeleted:
+      name: memory.deleted
+      title: Дурсамж хогийн саванд
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/MemoryDeletedEvent'
+      x-aura-ac:
+      - AC-174
+    MemoryComment:
+      name: memory.comment
+      title: Дурсамжийн сэтгэгдэл
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/MemoryCommentEvent'
+      x-aura-ac:
+      - AC-173
+    MemoryReaction:
+      name: memory.reaction
+      title: Дурсамжийн реакц
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/MemoryReactionEvent'
+      x-aura-ac:
+      - AC-173
+    PlanUpdated:
+      name: plan.updated
+      title: Болзооны төлөв өөрчлөгдсөн
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PlanUpdatedEvent'
+      x-aura-ac:
+      - AC-33
+    ChecklistUpdated:
+      name: checklist.updated
+      title: Бэлтгэлийн checklist
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChecklistUpdatedEvent'
+      x-aura-ac:
+      - AC-96
+    DeckMatched:
+      name: deck.matched
+      title: Нууц санал нэгдэлд тохирол
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DeckMatchedEvent'
+      x-aura-ac:
+      - AC-36
+    ListUpdated:
+      name: list.updated
+      title: Жагсаалтын зүйл
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ListUpdatedEvent'
+      x-aura-ac:
+      - AC-107
+      - AC-109
+    GoalUpdated:
+      name: goal.updated
+      title: Зорилгын явц
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/GoalUpdatedEvent'
+      x-aura-ac:
+      - AC-42
+    LetterDelivered:
+      name: letter.delivered
+      title: Захидал хүргэгдсэн
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/LetterDeliveredEvent'
+      x-aura-ac:
+      - AC-44
+      - AC-182
+    LetterRead:
+      name: letter.read
+      title: Захидлыг уншсан
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/LetterReadEvent'
+      x-aura-ac:
+      - AC-182
+    CapsuleOpened:
+      name: capsule.opened
+      title: Time capsule нээгдсэн
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/CapsuleOpenedEvent'
+      x-aura-ac:
+      - AC-45
+    QuestionRevealed:
+      name: question.revealed
+      title: Хоёулаа хариулсан — хариулт нээгдлээ
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/QuestionRevealedEvent'
+      x-aura-ac:
+      - AC-15
+    CheckinShared:
+      name: checkin.shared
+      title: Хамтрагч check-in хуваалцсан
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/CheckinSharedEvent'
+      x-aura-ac:
+      - AC-115
+    NotificationCreated:
+      name: notification.created
+      title: Апп доторх мэдэгдэл
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/NotificationCreatedEvent'
+      x-aura-ac:
+      - AC-120
+    PromiseUpdated:
+      name: promise.updated
+      title: Амлалтын төлөв
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PromiseUpdatedEvent'
+      x-aura-ac:
+      - AC-93
+    QuietChanged:
+      name: quiet.changed
+      title: Хамтрагчийн «Түр тайван байх» төлөв
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/QuietChangedEvent'
+      x-aura-ac:
+      - AC-123
+    SessionRevoked:
+      name: session.revoked
+      title: Энэ төхөөрөмжийн session хаагдсан
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SessionRevokedEvent'
+      x-aura-ac:
+      - AC-56
+    TypingSignal:
+      name: typing
+      title: Бичиж байна
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/TypingSignal'
+      x-aura-ac:
+      - AC-177
+    PresencePing:
+      name: presence
+      title: Апп урд/ард
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PresencePing'
+      x-aura-ac:
+      - AC-70
+    DeliveredAck:
+      name: chat.delivered
+      title: Мессеж хүргэгдсэн
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DeliveredAck'
+      x-aura-ac:
+      - AC-176
+  schemas:
+    SignalReceivedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: signal.received
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            signalId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+            kind:
+              type: string
+              enum:
+              - HEART
+              - HUG
+              - THINKING
+            text:
+              type:
+              - string
+              - 'null'
+              maxLength: 80
+          required:
+          - signalId
+          - kind
+    ChatMessageCreatedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: chat.message.created
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          $ref: '#/components/schemas/Message'
+    ChatMessageUpdatedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: chat.message.updated
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          $ref: '#/components/schemas/Message'
+    ChatMessageDeletedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: chat.message.deleted
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            messageId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+          required:
+          - messageId
+    ChatExpiredEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: chat.expired
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            messageId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+          required:
+          - messageId
+    ChatReceiptEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: chat.receipt
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            upToMessageId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+            status:
+              type: string
+              enum:
+              - DELIVERED
+              - READ
+            at:
+              type: string
+              format: date-time
+              examples:
+              - '2026-11-07T11:30:00Z'
+          required:
+          - upToMessageId
+          - status
+          - at
+    ChatTypingEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: chat.typing
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            typing:
+              type: boolean
+          required:
+          - typing
+    ChatPinnedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: chat.pinned
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            messageId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+            pinned:
+              type: boolean
+          required:
+          - messageId
+          - pinned
+    ChatReactionEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: chat.reaction
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            messageId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+            reactions:
+              type: array
+              items:
+                $ref: '#/components/schemas/ReactionSummary'
+          required:
+          - messageId
+          - reactions
+    PresenceChangedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: presence.changed
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            online:
+              type: boolean
+            lastActiveAt:
+              type:
+              - string
+              - 'null'
+              format: date-time
+          required:
+          - online
+    ProfileUpdatedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: profile.updated
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          $ref: '#/components/schemas/PersonCard'
+    CoupleUpdatedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: couple.updated
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          $ref: '#/components/schemas/Couple'
+    CoupleLinkedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: couple.linked
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            coupleId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+          required:
+          - coupleId
+    PairingRequestedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: pairing.requested
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          $ref: '#/components/schemas/Pairing'
+    PairingCancelledEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: pairing.cancelled
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            pairingId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+          required:
+          - pairingId
+    MemoryCreatedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: memory.created
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          $ref: '#/components/schemas/MemorySummary'
+    MemoryUpdatedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: memory.updated
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          $ref: '#/components/schemas/MemorySummary'
+    MemoryDeletedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: memory.deleted
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            memoryId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+          required:
+          - memoryId
+    MemoryCommentEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: memory.comment
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            memoryId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+            comment:
+              $ref: '#/components/schemas/Comment'
+            change:
+              type: string
+              enum:
+              - CREATED
+              - UPDATED
+              - DELETED
+          required:
+          - memoryId
+          - change
+    MemoryReactionEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: memory.reaction
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            memoryId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+            reactions:
+              type: array
+              items:
+                $ref: '#/components/schemas/ReactionSummary'
+          required:
+          - memoryId
+          - reactions
+    PlanUpdatedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: plan.updated
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          $ref: '#/components/schemas/DatePlanSummary'
+    ChecklistUpdatedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: checklist.updated
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            planId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+            item:
+              $ref: '#/components/schemas/ChecklistItem'
+            progress:
+              type: object
+              properties:
+                done:
+                  type: integer
+                total:
+                  type: integer
+              required:
+              - done
+              - total
+          required:
+          - planId
+          - item
+          - progress
+    DeckMatchedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: deck.matched
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          $ref: '#/components/schemas/DeckMatch'
+    ListUpdatedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: list.updated
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            listKind:
+              type: string
+              enum:
+              - bucket
+              - todo
+              - shopping
+              - wishlist
+            item:
+              $ref: '#/components/schemas/ListItem'
+            removed:
+              type: boolean
+          required:
+          - listKind
+          - item
+    GoalUpdatedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: goal.updated
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          $ref: '#/components/schemas/Goal'
+    LetterDeliveredEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: letter.delivered
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          $ref: '#/components/schemas/LetterTeaser'
+    LetterReadEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: letter.read
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            letterId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+            readAt:
+              type: string
+              format: date-time
+              examples:
+              - '2026-11-07T11:30:00Z'
+          required:
+          - letterId
+          - readAt
+    CapsuleOpenedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: capsule.opened
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            capsuleId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+          required:
+          - capsuleId
+    QuestionRevealedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: question.revealed
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            coupleDay:
+              type: string
+              format: date
+              examples:
+              - '2026-11-07'
+          required:
+          - coupleDay
+    CheckinSharedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: checkin.shared
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            localDate:
+              type: string
+              format: date
+              examples:
+              - '2026-11-07'
+          required:
+          - localDate
+    NotificationCreatedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: notification.created
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+            type:
+              type: string
+            title:
+              type: string
+            deepLink:
+              type: string
+          required:
+          - id
+          - type
+          - title
+          - deepLink
+    PromiseUpdatedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: promise.updated
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          $ref: '#/components/schemas/SharedPromise'
+    QuietChangedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: quiet.changed
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            userId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+            quietUntil:
+              type:
+              - string
+              - 'null'
+              format: date-time
+          required:
+          - userId
+    SessionRevokedEvent:
+      type: object
+      required:
+      - id
+      - type
+      - occurredAt
+      - payload
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+        type:
+          type: string
+          const: session.revoked
+        occurredAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T11:30:00Z'
+        actorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payload:
+          type: object
+          properties:
+            sessionId:
+              type: string
+              format: uuid
+              examples:
+              - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+          required:
+          - sessionId
+    EventType:
+      type: string
+      enum:
+      - signal.received
+      - chat.message.created
+      - chat.message.updated
+      - chat.message.deleted
+      - chat.expired
+      - chat.receipt
+      - chat.typing
+      - chat.pinned
+      - chat.reaction
+      - presence.changed
+      - profile.updated
+      - couple.updated
+      - couple.linked
+      - pairing.requested
+      - pairing.cancelled
+      - memory.created
+      - memory.updated
+      - memory.deleted
+      - memory.comment
+      - memory.reaction
+      - plan.updated
+      - checklist.updated
+      - deck.matched
+      - list.updated
+      - goal.updated
+      - letter.delivered
+      - letter.read
+      - capsule.opened
+      - question.revealed
+      - checkin.shared
+      - notification.created
+      - promise.updated
+      - quiet.changed
+      - session.revoked
+      description: '`RealtimeEnvelope.type`-ийн бүх утга; mobile `realtime-contract.test.ts` тулгана'
+    TypingSignal:
+      type: object
+      properties:
+        typing:
+          type: boolean
+      required:
+      - typing
+    PresencePing:
+      type: object
+      properties:
+        state:
+          type: string
+          enum:
+          - FOREGROUND
+          - BACKGROUND
+      required:
+      - state
+    DeliveredAck:
+      type: object
+      properties:
+        upToMessageId:
+          type: string
+          format: uuid
+          examples:
+          - 0190f4d2-7c1e-7a3b-9e21-5b8c2d4e6f10
+      required:
+      - upToMessageId
+    Comment:
+      type: object
+      required:
+      - id
+      - memoryId
+      - author
+      - text
+      - createdAt
+      - version
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        memoryId:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        author:
+          $ref: '#/components/schemas/UserRef'
+        text:
+          type: string
+          maxLength: 1000
+        createdAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+        editedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+        version:
+          type: integer
+          format: int64
+          minimum: 0
+    MemorySummary:
+      type: object
+      required:
+      - id
+      - title
+      - occurredOn
+      - visibility
+      - status
+      - author
+      - mediaCount
+      - commentCount
+      - favorite
+      - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-0000-7000-8000-0000000000a1
+        title:
+          type: string
+          maxLength: 120
+        occurredOn:
+          type: string
+          format: date
+          examples:
+          - '2026-10-03'
+        visibility:
+          type: string
+          enum:
+          - SHARED
+          - PRIVATE
+          description: PRIVATE = SOLO space-д үлдсэн (AC-67)
+        status:
+          type: string
+          enum:
+          - UPLOADING
+          - READY
+        cover:
+          $ref: '#/components/schemas/NullableMediaRef'
+        mediaCount:
+          type: integer
+          minimum: 0
+          maximum: 20
+        location:
+          $ref: '#/components/schemas/NullablePlace'
+        author:
+          $ref: '#/components/schemas/UserRef'
+        commentCount:
+          type: integer
+          minimum: 0
+        favorite:
+          type: boolean
+          description: Дуудагчийн дуртай эсэх
+        createdAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+    LetterTeaser:
+      type: object
+      description: Хүргэхээс өмнөх захидал — агуулгагүй (AC-43)
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        deliverAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+        occasionLabel:
+          type:
+          - string
+          - 'null'
+          maxLength: 80
+    SharedPromise:
+      type: object
+      required:
+      - id
+      - text
+      - status
+      - proposer
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        text:
+          type: string
+          maxLength: 140
+        status:
+          type: string
+          enum:
+          - PROPOSED
+          - ACTIVE
+          - DECLINED
+          - ENDED
+        proposer:
+          $ref: '#/components/schemas/UserRef'
+        startsOn:
+          type:
+          - string
+          - 'null'
+          format: date
+          examples:
+          - '2026-11-07'
+        endsOn:
+          type:
+          - string
+          - 'null'
+          format: date
+          examples:
+          - '2026-11-07'
+        myOutcome:
+          type:
+          - boolean
+          - 'null'
+        partnerOutcome:
+          type:
+          - boolean
+          - 'null'
+    ChecklistItem:
+      type: object
+      required:
+      - id
+      - text
+      - position
+      - done
+      - version
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        text:
+          type: string
+          maxLength: 200
+        position:
+          type: integer
+          minimum: 0
+        done:
+          type: boolean
+        doneBy:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        doneAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+        version:
+          type: integer
+          format: int64
+          minimum: 0
+    DatePlanSummary:
+      type: object
+      required:
+      - id
+      - title
+      - startsAt
+      - timezone
+      - status
+      - recurrence
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        title:
+          type: string
+        category:
+          oneOf:
+          - $ref: '#/components/schemas/IdeaCategory'
+          - type: 'null'
+        startsAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-14T11:00:00Z'
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        status:
+          $ref: '#/components/schemas/PlanStatus'
+        place:
+          $ref: '#/components/schemas/NullablePlace'
+        recurrence:
+          $ref: '#/components/schemas/Recurrence'
+        occurrenceOn:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: Давталттай бол тухайн тохиолдлын огноо
+          examples:
+          - '2026-11-07'
+        proposer:
+          $ref: '#/components/schemas/UserRef'
+    Pairing:
+      type: object
+      required:
+      - id
+      - status
+      - inviter
+      - joiner
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        status:
+          type: string
+          enum:
+          - AWAITING_INVITER
+          - LINKED
+          - CANCELLED
+        inviter:
+          $ref: '#/components/schemas/UserRef'
+        joiner:
+          $ref: '#/components/schemas/UserRef'
+    Couple:
+      type: object
+      required:
+      - id
+      - kind
+      - status
+      - timezone
+      - startDateStatus
+      - theme
+      - myView
+      - isLongDistance
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-0000-7000-8000-0000000000c1
+        kind:
+          type: string
+          enum:
+          - SOLO
+          - COUPLE
+        status:
+          $ref: '#/components/schemas/SpaceStatus'
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        startDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          examples:
+          - '2023-02-14'
+        startDateStatus:
+          type: string
+          enum:
+          - CONFIRMED
+          - PENDING
+          - MISMATCH
+        myProposal:
+          type:
+          - string
+          - 'null'
+          format: date
+          examples:
+          - '2026-11-07'
+        partnerProposal:
+          type:
+          - string
+          - 'null'
+          format: date
+          examples:
+          - '2026-11-07'
+        theme:
+          $ref: '#/components/schemas/Theme'
+        pendingThemeProposal:
+          oneOf:
+          - $ref: '#/components/schemas/ThemeProposal'
+          - type: 'null'
+        partner:
+          oneOf:
+          - $ref: '#/components/schemas/PartnerCard'
+          - type: 'null'
+        myView:
+          type: object
+          description: Зөвхөн дуудагчид харагдах хувийн тохиргоо
+          required:
+          - partnerNickname
+          - mascotColor
+          properties:
+            partnerNickname:
+              type:
+              - string
+              - 'null'
+              maxLength: 50
+            partnerAvatar:
+              $ref: '#/components/schemas/NullableMediaRef'
+            mascotColor:
+              $ref: '#/components/schemas/MascotColor'
+        nextMeetupAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+        isLongDistance:
+          type: boolean
+        readOnlyUntil:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+        breakup:
+          oneOf:
+          - $ref: '#/components/schemas/BreakupState'
+          - type: 'null'
+        soloShare:
+          oneOf:
+          - type: object
+            required:
+            - pendingCount
+            properties:
+              pendingCount:
+                type: integer
+                minimum: 0
+          - type: 'null'
+    Goal:
+      type: object
+      required:
+      - id
+      - title
+      - createdBy
+      - steps
+      - stepsDone
+      - contributions
+      - totals
+      - progressPercent
+      - version
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        title:
+          type: string
+        targetDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          examples:
+          - '2026-11-07'
+        targetAmountMnt:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        createdBy:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        completedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/GoalStep'
+        stepsDone:
+          type: integer
+          minimum: 0
+        contributions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contribution'
+        totals:
+          type: array
+          items:
+            type: object
+            required:
+            - userId
+            - amount
+            properties:
+              userId:
+                type: string
+                format: uuid
+                examples:
+                - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+              amount:
+                type: integer
+                format: int64
+                minimum: 0
+        progressPercent:
+          type: number
+          minimum: 0
+          maximum: 100
+        version:
+          type: integer
+          format: int64
+          minimum: 0
+    ReactionSummary:
+      type: object
+      required:
+      - emoji
+      - count
+      - userIds
+      - mine
+      properties:
+        emoji:
+          $ref: '#/components/schemas/ReactionEmoji'
+        count:
+          type: integer
+          minimum: 1
+        userIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+            examples:
+            - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        mine:
+          type: boolean
+    Message:
+      type: object
+      description: Устгагдсан/дууссан мессежийн `text`, `media`, `location` нь null (INV-05).
+      required:
+      - id
+      - clientMessageId
+      - sender
+      - kind
+      - status
+      - deleted
+      - reactions
+      - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-0000-7000-8000-0000000000e1
+        clientMessageId:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        sender:
+          $ref: '#/components/schemas/UserRef'
+        kind:
+          $ref: '#/components/schemas/MessageKind'
+        text:
+          type:
+          - string
+          - 'null'
+          maxLength: 4000
+        media:
+          $ref: '#/components/schemas/NullableMediaRef'
+        location:
+          $ref: '#/components/schemas/NullablePlace'
+        replyTo:
+          oneOf:
+          - $ref: '#/components/schemas/MessageQuote'
+          - type: 'null'
+        status:
+          type: string
+          enum:
+          - SENT
+          - DELIVERED
+          - READ
+        editedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+        deleted:
+          type: boolean
+        disappearSeconds:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 60
+          - 3600
+          - 86400
+          - null
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+        pinnedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+        reactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReactionSummary'
+        createdAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+    ListItem:
+      type: object
+      required:
+      - id
+      - title
+      - position
+      - createdBy
+      - votes
+      - bothWant
+      - version
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        title:
+          type: string
+          maxLength: 120
+        description:
+          type:
+          - string
+          - 'null'
+        category:
+          type:
+          - string
+          - 'null'
+        wishType:
+          oneOf:
+          - $ref: '#/components/schemas/WishType'
+          - type: 'null'
+        position:
+          type: integer
+          minimum: 0
+        createdBy:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        doneBy:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        doneAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+        votes:
+          type: array
+          maxItems: 2
+          items:
+            type: string
+            format: uuid
+            examples:
+            - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        bothWant:
+          type: boolean
+        version:
+          type: integer
+          format: int64
+          minimum: 0
+    DeckMatch:
+      type: object
+      description: Нөгөөгийн сонголт ямар ч талбарт байхгүй (AC-36).
+      required:
+      - ideaRef
+      - idea
+      - matchedAt
+      properties:
+        ideaRef:
+          $ref: '#/components/schemas/IdeaRef'
+        idea:
+          oneOf:
+          - $ref: '#/components/schemas/LibraryIdea'
+          - $ref: '#/components/schemas/DateIdea'
+        matchedAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+    PersonCard:
+      type: object
+      required:
+      - name
+      - localTime
+      - utcOffsetMinutes
+      - offsetFromMeMinutes
+      properties:
+        name:
+          type: string
+        onlineStatus:
+          type: string
+          enum:
+          - ONLINE
+          - OFFLINE
+          description: Аль нэг нь онлайн төлөвөө нуусан бол талбар байхгүй (INV-06)
+        localTime:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T21:30:00+08:00'
+        utcOffsetMinutes:
+          type: integer
+          examples:
+          - 480
+        offsetFromMeMinutes:
+          type: integer
+          examples:
+          - 0
+        weather:
+          oneOf:
+          - $ref: '#/components/schemas/WeatherNow'
+          - type: 'null'
+        quietUntil:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+    UserRef:
+      type: object
+      required:
+      - id
+      - displayName
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-0000-7000-8000-00000000000a
+        displayName:
+          type: string
+          examples:
+          - Бат
+        avatar:
+          $ref: '#/components/schemas/NullableMediaRef'
+    IdeaRef:
+      type: string
+      description: '`library:<libraryId>` эсвэл `idea:<uuid>`'
+      pattern: ^(library:[A-Za-z0-9-]+|idea:[0-9a-f-]{36})$
+      examples:
+      - library:lib-winter-012
+    PlanStatus:
+      type: string
+      enum:
+      - PENDING
+      - COUNTER_PROPOSED
+      - CONFIRMED
+      - DECLINED
+      - CANCELLED
+    MessageQuote:
+      type: object
+      required:
+      - id
+      - senderId
+      - kind
+      - deleted
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        senderId:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        kind:
+          $ref: '#/components/schemas/MessageKind'
+        text:
+          type:
+          - string
+          - 'null'
+          description: Товчилсон
+        deleted:
+          type: boolean
+    ThemeProposal:
+      type: object
+      required:
+      - id
+      - theme
+      - status
+      - proposer
+      - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        theme:
+          $ref: '#/components/schemas/Theme'
+        status:
+          type: string
+          enum:
+          - PENDING
+          - ACCEPTED
+          - DECLINED
+        proposer:
+          $ref: '#/components/schemas/UserRef'
+        createdAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+    MessageKind:
+      type: string
+      enum:
+      - TEXT
+      - IMAGE
+      - VOICE
+      - FILE
+      - LOCATION
+      - HEART
+    NullableMediaRef:
+      oneOf:
+      - $ref: '#/components/schemas/MediaRef'
+      - type: 'null'
+    Contribution:
+      type: object
+      required:
+      - id
+      - userId
+      - amountMnt
+      - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        userId:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        amountMnt:
+          type: integer
+          format: int64
+          exclusiveMinimum: 0
+        createdAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+    NullablePlace:
+      oneOf:
+      - $ref: '#/components/schemas/Place'
+      - type: 'null'
+    ReactionEmoji:
+      type: string
+      enum:
+      - LOVE
+      - ADORE
+      - HEART_EYES
+      - KISS
+      - HUG
+      - SPARKLE
+    IdeaCategory:
+      type: string
+      enum:
+      - FOOD
+      - TRAVEL
+      - HOME
+      - SPORT
+      - CULTURE
+      - OUTDOOR
+      - OTHER
+    DateIdea:
+      type: object
+      required:
+      - id
+      - title
+      - category
+      - author
+      - createdAt
+      - version
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        title:
+          type: string
+          maxLength: 80
+        description:
+          type:
+          - string
+          - 'null'
+        category:
+          $ref: '#/components/schemas/IdeaCategory'
+        budgetMnt:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        place:
+          $ref: '#/components/schemas/NullablePlace'
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          examples:
+          - https://aura.example.mn/
+        setting:
+          oneOf:
+          - $ref: '#/components/schemas/IdeaSetting'
+          - type: 'null'
+        libraryId:
+          type:
+          - string
+          - 'null'
+          description: Сангаас хуулсан бол эх санааны ID
+        author:
+          $ref: '#/components/schemas/UserRef'
+        createdAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+        version:
+          type: integer
+          format: int64
+          minimum: 0
+    PartnerCard:
+      type: object
+      required:
+      - id
+      - displayName
+      - timezone
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        displayName:
+          type: string
+        callName:
+          type:
+          - string
+          - 'null'
+        avatar:
+          $ref: '#/components/schemas/NullableMediaRef'
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        city:
+          oneOf:
+          - $ref: '#/components/schemas/CityRef'
+          - type: 'null'
+        birthDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          examples:
+          - '2026-11-07'
+    LibraryIdea:
+      type: object
+      required:
+      - id
+      - title
+      - description
+      - category
+      - budgetBand
+      - seasons
+      - setting
+      - longDistance
+      - durationMinutes
+      - preparation
+      properties:
+        id:
+          type: string
+          description: Агуулгын сангийн тогтвортой ID
+          examples:
+          - lib-winter-012
+        title:
+          type: string
+          maxLength: 40
+        description:
+          type: string
+        category:
+          $ref: '#/components/schemas/IdeaCategory'
+        budgetBand:
+          $ref: '#/components/schemas/BudgetBand'
+        seasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/Season'
+        setting:
+          $ref: '#/components/schemas/IdeaSetting'
+        longDistance:
+          type: boolean
+        durationMinutes:
+          type: integer
+          minimum: 0
+        preparation:
+          type: string
+    BreakupState:
+      type: object
+      required:
+      - status
+      - restoreDeadline
+      - myRestoreConfirmed
+      - partnerRestoreConfirmed
+      properties:
+        status:
+          $ref: '#/components/schemas/SpaceStatus'
+        restoreDeadline:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Тасалснаас 14 хоног
+          examples:
+          - '2026-11-07T12:00:00Z'
+        myRestoreConfirmed:
+          type: boolean
+        partnerRestoreConfirmed:
+          type: boolean
+    MascotColor:
+      type: string
+      description: Дизайн токены нэр (hex биш).
+      pattern: ^[a-z][a-z0-9-]{1,31}$
+      examples:
+      - coral
+    GoalStep:
+      type: object
+      required:
+      - id
+      - title
+      - position
+      - done
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        title:
+          type: string
+        position:
+          type: integer
+          minimum: 0
+        done:
+          type: boolean
+        doneBy:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        doneAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          examples:
+          - '2026-11-07T12:00:00Z'
+    WishType:
+      type: string
+      enum:
+      - MOVIE
+      - BOOK
+      - PLACE
+      - OTHER
+    Recurrence:
+      type: string
+      enum:
+      - NONE
+      - WEEKLY
+      - MONTHLY
+    WeatherNow:
+      type: object
+      required:
+      - tempC
+      - code
+      - icon
+      - attribution
+      properties:
+        tempC:
+          type: number
+          examples:
+          - -12.5
+        code:
+          type: integer
+          description: WMO цаг агаарын код
+        icon:
+          type: string
+          examples:
+          - snow
+        attribution:
+          type: string
+          examples:
+          - Open-Meteo (CC BY 4.0)
+    Theme:
+      type: string
+      enum:
+      - CORAL
+      - LAVENDER
+      - FOREST
+      - OCEAN
+    SpaceStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - BREAKING
+      - ORPHANED
+      - PURGING
+    Timezone:
+      type: string
+      description: IANA бүс
+      examples:
+      - Asia/Ulaanbaatar
+    BudgetBand:
+      type: string
+      enum:
+      - FREE
+      - UPTO_50K
+      - 50K_150K
+      - OVER_150K
+    Season:
+      type: string
+      enum:
+      - WINTER
+      - SPRING
+      - SUMMER
+      - AUTUMN
+    Place:
+      type: object
+      required:
+      - name
+      - lat
+      - lon
+      properties:
+        name:
+          type: string
+          maxLength: 200
+          examples:
+          - Хустайн нуруу
+        lat:
+          type: number
+          minimum: -90
+          maximum: 90
+          examples:
+          - 47.8
+        lon:
+          type: number
+          minimum: -180
+          maximum: 180
+          examples:
+          - 106.0
+        city:
+          type:
+          - string
+          - 'null'
+        countryCode:
+          type:
+          - string
+          - 'null'
+          pattern: ^[A-Z]{2}$
+          examples:
+          - MN
+    IdeaSetting:
+      type: string
+      enum:
+      - HOME
+      - OUTDOOR
+    MediaRef:
+      type: object
+      description: Медиа. `urls` нь 15 минутын presigned GET; дууссан бол `GET /media/{mediaId}` (DD-AURA-013).
+      required:
+      - id
+      - kind
+      - status
+      - mime
+      - sizeBytes
+      - urls
+      - urlsExpireAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          examples:
+          - 0192f3a4-5b6c-7d8e-9f01-23456789abcd
+        kind:
+          type: string
+          enum:
+          - IMAGE
+          - VIDEO
+          - AUDIO
+          - FILE
+        status:
+          type: string
+          enum:
+          - PENDING
+          - PROCESSING
+          - READY
+          - FAILED
+        mime:
+          type: string
+          examples:
+          - image/jpeg
+        sizeBytes:
+          type: integer
+          format: int64
+          minimum: 0
+        width:
+          type:
+          - integer
+          - 'null'
+          minimum: 1
+        height:
+          type:
+          - integer
+          - 'null'
+          minimum: 1
+        durationMs:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+        blurhash:
+          type:
+          - string
+          - 'null'
+          examples:
+          - LEHV6nWB2yk8pyo0adR*.7kCMdnj
+        waveform:
+          type:
+          - array
+          - 'null'
+          description: 64 цэгийн долгион (0–1)
+          maxItems: 64
+          items:
+            type: number
+            minimum: 0
+            maximum: 1
+        fileName:
+          type:
+          - string
+          - 'null'
+        urls:
+          type: object
+          required:
+          - original
+          properties:
+            original:
+              type: string
+              format: uri
+              examples:
+              - https://s3.aura.example.mn/spaces/x/original?X-Amz-Signature=abc
+            sm:
+              type: string
+              format: uri
+              examples:
+              - https://aura.example.mn/
+            md:
+              type: string
+              format: uri
+              examples:
+              - https://aura.example.mn/
+            lg:
+              type: string
+              format: uri
+              examples:
+              - https://aura.example.mn/
+            poster:
+              type: string
+              format: uri
+              examples:
+              - https://aura.example.mn/
+        urlsExpireAt:
+          type: string
+          format: date-time
+          examples:
+          - '2026-11-07T12:45:00Z'
+    CityRef:
+      type: object
+      required:
+      - name
+      - countryCode
+      - lat
+      - lon
+      - timezone
+      properties:
+        name:
+          type: string
+          examples:
+          - Улаанбаатар
+        countryCode:
+          type: string
+          pattern: ^[A-Z]{2}$
+          examples:
+          - MN
+        lat:
+          type: number
+          minimum: -90
+          maximum: 90
+          examples:
+          - 47.92
+        lon:
+          type: number
+          minimum: -180
+          maximum: 180
+          examples:
+          - 106.92
+        timezone:
+          $ref: '#/components/schemas/Timezone'

@@ -1,11 +1,145 @@
+# Backend тохиргоо (LLD §4.5). Нууц утга энд бичигдэхгүй — орчны хувьсагчаас (INV-10).
 server:
   port: 8080
+  shutdown: graceful
+  error:
+    include-stacktrace: never
+    include-message: never
+
+spring:
+  application:
+    name: aura-backend
+  autoconfigure:
+    # Хэрэглэгчийн нэр/нууц үгийн анхдагч (generated password) хэрэггүй — JWT (T-18)
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/aura}
+    username: ${SPRING_DATASOURCE_USERNAME:aura}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  mail:
+    host: ${SPRING_MAIL_HOST:localhost}
+    port: ${SPRING_MAIL_PORT:1025}
+    username: ${SPRING_MAIL_USERNAME:}
+    password: ${SPRING_MAIL_PASSWORD:}
+  jackson:
+    # Гэрээний required + nullable талбар `null` утгатай ч хариунд байна; required биш талбарыг
+    # ContractJsonInclusion `null` үед хасна (contracts/openapi.yaml, DEV_TEST согог 1)
+    default-property-inclusion: always
+    serialization:
+      write-dates-as-timestamps: false
+  mvc:
+    # Request body/параметрийг логлохгүй (AC-196, DD-AURA-037)
+    log-request-details: false
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
 management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: health,info,prometheus
   endpoint:
     health:
       probes:
         enabled: true
+  health:
+    # SMTP түр унавал контейнер «unhealthy» болохгүй
+    mail:
+      enabled: false
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+logging:
+  level:
+    # Spring MVC-ийн DEBUG нь body-г `toString`-оор бичдэг — хэзээ ч бүү асаа (AC-196)
+    org.springframework.web.servlet.mvc.method.annotation: INFO
+    org.springframework.web.HttpLogging: INFO
+
+aura:
+  jwt:
+    secret: ${AURA_JWT_SECRET:}
+  s3:
+    endpoint: ${AURA_S3_ENDPOINT:http://localhost:8333}
+    public-endpoint: ${AURA_S3_PUBLIC_ENDPOINT:}
+    region: ${AURA_S3_REGION:us-east-1}
+    bucket: ${AURA_S3_BUCKET:aura-media}
+    access-key: ${AURA_S3_ACCESS_KEY:}
+    secret-key: ${AURA_S3_SECRET_KEY:}
+    path-style: ${AURA_S3_PATH_STYLE:true}
+    presign-ttl: ${AURA_S3_PRESIGN_TTL:15m}
+  mail:
+    from: ${AURA_MAIL_FROM:Aura <no-reply@aura.local>}
+  cors:
+    allowed-origins: ${AURA_CORS_ALLOWED_ORIGINS:}
+  cookie:
+    secure: ${AURA_COOKIE_SECURE:true}
+  storage:
+    quota-bytes: ${AURA_STORAGE_QUOTA_BYTES:10737418240}
+    warn-ratio: ${AURA_STORAGE_WARN_RATIO:0.8}
+  sentry:
+    dsn: ${AURA_SENTRY_DSN:}
+    environment: ${AURA_SENTRY_ENVIRONMENT:${spring.profiles.active:default}}
+    release: ${AURA_APP_LATEST_VERSION:}
+  # GAP-16 анхдагч: админы имэйл (таслалаар). Хоосон бол /admin/** хэнд ч 403 ADMIN_ONLY (AC-186, AC-206)
+  admin:
+    emails: ${AURA_ADMIN_EMAILS:}
+  # Апп-ын хувилбар (GET /version, AC-141). Хоосон бол анхдагч (1.0.0, dev, 0000000)
+  app:
+    latest-version: ${AURA_APP_LATEST_VERSION:}
+    min-version: ${AURA_APP_MIN_VERSION:}
+    build: ${AURA_APP_BUILD:}
+    commit-sha: ${AURA_APP_COMMIT_SHA:}
+    download-url: ${AURA_DOWNLOAD_URL:}
+    store-url: ${AURA_APP_STORE_URL:}
+  # Вэбийн passkey (T-85, AC-157). Хоосон бол aura.web.base-url-ээс (RP ID = host, origin = base-url)
+  passkey:
+    rp-id: ${AURA_PASSKEY_RP_ID:}
+    origins: ${AURA_PASSKEY_ORIGINS:}
+  policy:
+    version: ${AURA_POLICY_VERSION:2026-11-07}
+  # Вэб апп-ын гаднах хаяг — имэйлийн холбоос (/verify-email, /reset-password, /not-me) ба OAuth-ийн
+  # вэб буцах хуудас (/oauth-callback). Prod-д Caddy-ийн нийтийн origin.
+  web:
+    base-url: ${AURA_WEB_BASE_URL:http://localhost:8090}
+  # DD-AURA-032. client-id хоосон → 404 PROVIDER_DISABLED (PAR-AURA-005). Callback:
+  # {redirect-base}/api/v1/auth/oauth/{provider}/callback — IdP-д яг ингэж бүртгэнэ.
+  oauth:
+    redirect-base: ${AURA_OAUTH_REDIRECT_BASE:http://localhost:8080}
+    google:
+      client-id: ${AURA_GOOGLE_CLIENT_ID:}
+      client-secret: ${AURA_GOOGLE_CLIENT_SECRET:}
+      issuer: ${AURA_GOOGLE_ISSUER:https://accounts.google.com}
+      id-token-alg: ${AURA_GOOGLE_ID_TOKEN_ALG:RS256}
+    apple:
+      # GAP-02: native iOS build байхгүй — код бэлэн, идэвхгүй
+      enabled: ${AURA_APPLE_ENABLED:false}
+      client-id: ${AURA_APPLE_CLIENT_ID:}
+      client-secret: ${AURA_APPLE_CLIENT_SECRET:}
+  # Push (DD-AURA-022, PAR-AURA-004/006). VAPID хоосон → Web Push алгасна; Expo токен хоосон → алгасна.
+  # Түлхүүрийг deploy үед үүсгэж зөвхөн .env-д (OPS-AURA-003).
+  push:
+    vapid-public-key: ${AURA_VAPID_PUBLIC_KEY:}
+    vapid-private-key: ${AURA_VAPID_PRIVATE_KEY:}
+    vapid-subject: ${AURA_VAPID_SUBJECT:mailto:admin@aura.local}
+    expo-access-token: ${AURA_EXPO_PUSH_ACCESS_TOKEN:}
+  # Цаг агаар ба geocoding — Open-Meteo (§8.4, CC BY 4.0). E2E-д e2e/mocks/openMeteo.ts
+  weather:
+    base-url: ${AURA_WEATHER_BASE_URL:https://api.open-meteo.com}
+    geocoding-base-url: ${AURA_GEOCODING_BASE_URL:https://geocoding-api.open-meteo.com}
+    cache-ttl: 30m

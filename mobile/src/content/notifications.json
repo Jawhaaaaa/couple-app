@@ -1,0 +1,977 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "n-message-new-1",
+      "type": "MESSAGE_NEW",
+      "mn": {
+        "title": "{partner} чамд бичлээ",
+        "body": "Шинэ мессеж хүлээж байна."
+      },
+      "en": {
+        "title": "{partner} wrote to you",
+        "body": "A new message is waiting for you."
+      }
+    },
+    {
+      "id": "n-message-new-2",
+      "type": "MESSAGE_NEW",
+      "mn": {
+        "title": "Шинэ мессеж",
+        "body": "{partner} чамд хэдэн үг илгээлээ."
+      },
+      "en": {
+        "title": "New message",
+        "body": "{partner} sent you a few words."
+      }
+    },
+    {
+      "id": "n-message-new-3",
+      "type": "MESSAGE_NEW",
+      "mn": {
+        "title": "Чатад шинэ зүйл ирлээ",
+        "body": "{partner} юм бичжээ, нэг хараарай."
+      },
+      "en": {
+        "title": "Something new in your chat",
+        "body": "{partner} wrote something — take a peek."
+      }
+    },
+    {
+      "id": "n-memory-created-1",
+      "type": "MEMORY_CREATED",
+      "mn": {
+        "title": "Шинэ дурсамж",
+        "body": "{partner} «{title}» дурсамжийг нэмлээ."
+      },
+      "en": {
+        "title": "New memory",
+        "body": "{partner} added “{title}”."
+      }
+    },
+    {
+      "id": "n-memory-created-2",
+      "type": "MEMORY_CREATED",
+      "mn": {
+        "title": "{partner} нэг мөчийг хадгаллаа",
+        "body": "«{title}» одоо та хоёрын дурсамжид байна."
+      },
+      "en": {
+        "title": "{partner} saved a moment",
+        "body": "“{title}” is now part of your memories."
+      }
+    },
+    {
+      "id": "n-memory-created-3",
+      "type": "MEMORY_CREATED",
+      "mn": {
+        "title": "Дурсамжийн санд шинэ хуудас",
+        "body": "{partner} нэмсэн нь: «{title}»."
+      },
+      "en": {
+        "title": "A new page in your memories",
+        "body": "Just added by {partner}: “{title}”."
+      }
+    },
+    {
+      "id": "n-memory-comment-1",
+      "type": "MEMORY_COMMENT",
+      "mn": {
+        "title": "{partner} сэтгэгдэл үлдээлээ",
+        "body": "«{title}» дурсамж дээр шинэ сэтгэгдэл бий."
+      },
+      "en": {
+        "title": "{partner} left a comment",
+        "body": "There's a new comment on “{title}”."
+      }
+    },
+    {
+      "id": "n-memory-comment-2",
+      "type": "MEMORY_COMMENT",
+      "mn": {
+        "title": "Шинэ сэтгэгдэл",
+        "body": "{partner} «{title}» дурсамжид хэдэн үг бичлээ."
+      },
+      "en": {
+        "title": "New comment",
+        "body": "{partner} wrote a few words on “{title}”."
+      }
+    },
+    {
+      "id": "n-memory-comment-3",
+      "type": "MEMORY_COMMENT",
+      "mn": {
+        "title": "Дурсамж дээр яриа эхэллээ",
+        "body": "{partner} «{title}» дээр бичжээ, хүссэн үедээ хариулаарай."
+      },
+      "en": {
+        "title": "A memory got a reply",
+        "body": "{partner} wrote on “{title}” — reply whenever you like."
+      }
+    },
+    {
+      "id": "n-heart-received-1",
+      "type": "HEART_RECEIVED",
+      "mn": {
+        "title": "{partner} зүрх илгээлээ",
+        "body": "Чамайг бодож байна гэсэн жижиг дохио."
+      },
+      "en": {
+        "title": "{partner} sent you a heart",
+        "body": "A little sign that you're on their mind."
+      }
+    },
+    {
+      "id": "n-heart-received-2",
+      "type": "HEART_RECEIVED",
+      "mn": {
+        "title": "Зүрх ирлээ",
+        "body": "{partner} чамд жаахан хайр илгээв."
+      },
+      "en": {
+        "title": "A heart for you",
+        "body": "{partner} sent a little love your way."
+      }
+    },
+    {
+      "id": "n-heart-received-3",
+      "type": "HEART_RECEIVED",
+      "mn": {
+        "title": "Жаахан дулаан",
+        "body": "{partner} чам руу зүрх шидлээ."
+      },
+      "en": {
+        "title": "A bit of warmth",
+        "body": "{partner} tossed a heart your way."
+      }
+    },
+    {
+      "id": "n-hug-received-1",
+      "type": "HUG_RECEIVED",
+      "mn": {
+        "title": "{partner} чамайг тэвэрлээ",
+        "body": "Хол байсан ч дулаахан тэврэлт хүрч ирлээ."
+      },
+      "en": {
+        "title": "{partner} sent you a hug",
+        "body": "Even from afar, a warm hug just arrived."
+      }
+    },
+    {
+      "id": "n-hug-received-2",
+      "type": "HUG_RECEIVED",
+      "mn": {
+        "title": "Тэврэлт ирлээ",
+        "body": "{partner} чамайг чанга тэврэхийг хүсчээ."
+      },
+      "en": {
+        "title": "A hug for you",
+        "body": "{partner} wishes they could hold you tight."
+      }
+    },
+    {
+      "id": "n-hug-received-3",
+      "type": "HUG_RECEIVED",
+      "mn": {
+        "title": "Дулаахан тэврэлт",
+        "body": "{partner} чамд тэврэлт илгээв. Хариуд нь нэгийг илгээх үү?"
+      },
+      "en": {
+        "title": "A warm hug",
+        "body": "{partner} sent a hug. Send one back?"
+      }
+    },
+    {
+      "id": "n-thinking-of-you-1",
+      "type": "THINKING_OF_YOU",
+      "mn": {
+        "title": "{partner} чамайг бодож байна",
+        "body": "Яг одоо. Зүгээр л үүнийг чамд хэлмээр санагджээ."
+      },
+      "en": {
+        "title": "{partner} is thinking of you",
+        "body": "Right now. They just wanted you to know."
+      }
+    },
+    {
+      "id": "n-thinking-of-you-2",
+      "type": "THINKING_OF_YOU",
+      "mn": {
+        "title": "Чамайг санаж байна",
+        "body": "{partner} чамайг санан бодож суунаа."
+      },
+      "en": {
+        "title": "Missing you",
+        "body": "{partner} has you on their mind."
+      }
+    },
+    {
+      "id": "n-thinking-of-you-3",
+      "type": "THINKING_OF_YOU",
+      "mn": {
+        "title": "Нэг жаахан дохио",
+        "body": "{partner} чамайг бодоод инээмсэглэж байна."
+      },
+      "en": {
+        "title": "A little signal",
+        "body": "{partner} thought of you and smiled."
+      }
+    },
+    {
+      "id": "n-date-proposed-1",
+      "type": "DATE_PROPOSED",
+      "mn": {
+        "title": "{partner} болзоонд урьж байна",
+        "body": "«{title}» — саналыг хараад хариулаарай."
+      },
+      "en": {
+        "title": "{partner} asked you out",
+        "body": "“{title}” — take a look and let them know."
+      }
+    },
+    {
+      "id": "n-date-proposed-2",
+      "type": "DATE_PROPOSED",
+      "mn": {
+        "title": "Шинэ болзооны санал",
+        "body": "{partner} чамтай «{title}» хийхийг хүсч байна."
+      },
+      "en": {
+        "title": "A new date idea",
+        "body": "{partner} would love to do “{title}” with you."
+      }
+    },
+    {
+      "id": "n-date-proposed-3",
+      "type": "DATE_PROPOSED",
+      "mn": {
+        "title": "Болзоо төлөвлөгдөж байна",
+        "body": "{partner} санал болгосон: «{title}». Чи юу гэж бодож байна?"
+      },
+      "en": {
+        "title": "A date is in the works",
+        "body": "{partner} suggested “{title}”. What do you think?"
+      }
+    },
+    {
+      "id": "n-date-responded-1",
+      "type": "DATE_RESPONDED",
+      "mn": {
+        "title": "{partner} хариу өглөө",
+        "body": "«{title}» болзооны талаар хариу ирсэн байна."
+      },
+      "en": {
+        "title": "{partner} replied",
+        "body": "There's an answer about “{title}”."
+      }
+    },
+    {
+      "id": "n-date-responded-2",
+      "type": "DATE_RESPONDED",
+      "mn": {
+        "title": "Болзооны хариу",
+        "body": "{partner} «{title}» саналд чинь хариулжээ."
+      },
+      "en": {
+        "title": "Date reply",
+        "body": "{partner} answered your “{title}” idea."
+      }
+    },
+    {
+      "id": "n-date-responded-3",
+      "type": "DATE_RESPONDED",
+      "mn": {
+        "title": "Төлөвлөгөө шинэчлэгдлээ",
+        "body": "{partner} «{title}» дээр шийдвэрээ хэллээ."
+      },
+      "en": {
+        "title": "Your plan has an update",
+        "body": "{partner} shared their answer on “{title}”."
+      }
+    },
+    {
+      "id": "n-date-reminder-1",
+      "type": "DATE_REMINDER",
+      "mn": {
+        "title": "Удахгүй болзоо",
+        "body": "«{title}» удахгүй эхэлнэ. Бэлдээрэй!"
+      },
+      "en": {
+        "title": "Date coming up",
+        "body": "“{title}” is starting soon. Get ready!"
+      }
+    },
+    {
+      "id": "n-date-reminder-2",
+      "type": "DATE_REMINDER",
+      "mn": {
+        "title": "Өнөөдөр болзоотой",
+        "body": "«{title}» — {partner} хамт байх цагийг тэсэн ядан хүлээж байна."
+      },
+      "en": {
+        "title": "Date day",
+        "body": "“{title}” — {partner} is looking forward to your time together."
+      }
+    },
+    {
+      "id": "n-date-reminder-3",
+      "type": "DATE_REMINDER",
+      "mn": {
+        "title": "Сануулга: «{title}»",
+        "body": "Хоёулаа хамт өнгөрүүлэх цаг ойртлоо."
+      },
+      "en": {
+        "title": "Reminder: “{title}”",
+        "body": "Your time together is almost here."
+      }
+    },
+    {
+      "id": "n-anniversary-reminder-1",
+      "type": "ANNIVERSARY_REMINDER",
+      "mn": {
+        "title": "{days} хоногийн дараа «{title}»",
+        "body": "Хамтдаа хэрхэн тэмдэглэхээ төлөвлөх цаг боллоо."
+      },
+      "en": {
+        "title": "“{title}” in {days} days",
+        "body": "A good time to plan how you'll celebrate together."
+      }
+    },
+    {
+      "id": "n-anniversary-reminder-2",
+      "type": "ANNIVERSARY_REMINDER",
+      "mn": {
+        "title": "Тэмдэглэлт өдөр ойртлоо",
+        "body": "«{title}» хүртэл {days} хоног үлдлээ."
+      },
+      "en": {
+        "title": "A special day is near",
+        "body": "{days} days until “{title}”."
+      }
+    },
+    {
+      "id": "n-anniversary-reminder-3",
+      "type": "ANNIVERSARY_REMINDER",
+      "mn": {
+        "title": "«{title}» удахгүй",
+        "body": "{days} хоног үлдсэн. Жаахан гэнэтийн бэлэг бэлдэх үү?"
+      },
+      "en": {
+        "title": "“{title}” is coming",
+        "body": "{days} days to go. Maybe plan a little surprise?"
+      }
+    },
+    {
+      "id": "n-letter-delivered-1",
+      "type": "LETTER_DELIVERED",
+      "mn": {
+        "title": "{partner} захидал илгээлээ",
+        "body": "Захидал чинь ирлээ. Тайван үедээ нээгээрэй."
+      },
+      "en": {
+        "title": "A letter from {partner}",
+        "body": "Your letter has arrived. Open it when you have a quiet moment."
+      }
+    },
+    {
+      "id": "n-letter-delivered-2",
+      "type": "LETTER_DELIVERED",
+      "mn": {
+        "title": "Шинэ захидал",
+        "body": "{partner} чамд зориулж бичсэн захидал ирлээ."
+      },
+      "en": {
+        "title": "New letter",
+        "body": "A letter {partner} wrote just for you is here."
+      }
+    },
+    {
+      "id": "n-letter-delivered-3",
+      "type": "LETTER_DELIVERED",
+      "mn": {
+        "title": "Захидал хүрч ирлээ",
+        "body": "{partner} бичсэн «{title}» захидал чамайг хүлээж байна."
+      },
+      "en": {
+        "title": "Your letter is here",
+        "body": "“{title}” from {partner} is waiting for you."
+      }
+    },
+    {
+      "id": "n-capsule-opened-1",
+      "type": "CAPSULE_OPENED",
+      "mn": {
+        "title": "Цагийн капсул нээгдлээ",
+        "body": "«{title}» — өнгөрсөн үеийн та хоёр юу хадгалсныг хараарай."
+      },
+      "en": {
+        "title": "Your time capsule is open",
+        "body": "“{title}” — see what your past selves saved."
+      }
+    },
+    {
+      "id": "n-capsule-opened-2",
+      "type": "CAPSULE_OPENED",
+      "mn": {
+        "title": "Нээх цаг боллоо",
+        "body": "«{title}» капсул нээгдэв. Хамтдаа үзээрэй."
+      },
+      "en": {
+        "title": "It's time",
+        "body": "The “{title}” capsule is open. Look through it together."
+      }
+    },
+    {
+      "id": "n-capsule-opened-3",
+      "type": "CAPSULE_OPENED",
+      "mn": {
+        "title": "Өнгөрсөн үеэс ирсэн илгээмж",
+        "body": "Чи {partner} хоёрын хадгалсан «{title}» нээгдлээ."
+      },
+      "en": {
+        "title": "A message from the past",
+        "body": "“{title}”, saved by you and {partner}, is now open."
+      }
+    },
+    {
+      "id": "n-question-partner-answered-1",
+      "type": "QUESTION_PARTNER_ANSWERED",
+      "mn": {
+        "title": "{partner} хариулчихлаа",
+        "body": "Өнөөдрийн асуултад хариулаад түүний хариуг хараарай."
+      },
+      "en": {
+        "title": "{partner} answered",
+        "body": "Answer today's question to see what they said."
+      }
+    },
+    {
+      "id": "n-question-partner-answered-2",
+      "type": "QUESTION_PARTNER_ANSWERED",
+      "mn": {
+        "title": "Өнөөдрийн асуулт",
+        "body": "{partner} аль хэдийн хариулсан. Одоо чиний ээлж."
+      },
+      "en": {
+        "title": "Today's question",
+        "body": "{partner} has already answered. Your turn."
+      }
+    },
+    {
+      "id": "n-question-partner-answered-3",
+      "type": "QUESTION_PARTNER_ANSWERED",
+      "mn": {
+        "title": "Хариу чамайг хүлээж байна",
+        "body": "{partner} өнөөдрийн асуултад хариуллаа. Чи юу гэж хариулах бол?"
+      },
+      "en": {
+        "title": "An answer is waiting",
+        "body": "{partner} answered today's question. What will you say?"
+      }
+    },
+    {
+      "id": "n-invite-used-1",
+      "type": "INVITE_USED",
+      "mn": {
+        "title": "{partner} урилгыг чинь ашиглалаа",
+        "body": "Нэгдэх үү? Батлахад та хоёр холбогдоно."
+      },
+      "en": {
+        "title": "{partner} used your invite",
+        "body": "Shall you two connect? Confirm to link up."
+      }
+    },
+    {
+      "id": "n-invite-used-2",
+      "type": "INVITE_USED",
+      "mn": {
+        "title": "Урилга чинь хүрлээ",
+        "body": "{partner} нэгдэхийг хүсэж байна — батлах уу?"
+      },
+      "en": {
+        "title": "Your invite arrived",
+        "body": "{partner} would like to join you — confirm?"
+      }
+    },
+    {
+      "id": "n-invite-used-3",
+      "type": "INVITE_USED",
+      "mn": {
+        "title": "{partner} хүлээж байна",
+        "body": "Урилгаар чинь орж ирлээ. Нэг товшоод батлаарай."
+      },
+      "en": {
+        "title": "{partner} is waiting",
+        "body": "They came in through your invite. One tap to confirm."
+      }
+    },
+    {
+      "id": "n-pairing-cancelled-1",
+      "type": "PAIRING_CANCELLED",
+      "mn": {
+        "title": "Холболт цуцлагдлаа",
+        "body": "Хосын холболт цуцлагдсан. Шинэ урилгыг хэдийд ч үүсгэж болно."
+      },
+      "en": {
+        "title": "Pairing cancelled",
+        "body": "The pairing was cancelled. You can create a new invite anytime."
+      }
+    },
+    {
+      "id": "n-pairing-cancelled-2",
+      "type": "PAIRING_CANCELLED",
+      "mn": {
+        "title": "Урилга хүчингүй боллоо",
+        "body": "Энэ холболт үргэлжлэхгүй. Бэлэн болсон үедээ дахин эхлээрэй."
+      },
+      "en": {
+        "title": "Invite no longer active",
+        "body": "This pairing won't continue. Start again whenever you're ready."
+      }
+    },
+    {
+      "id": "n-pairing-cancelled-3",
+      "type": "PAIRING_CANCELLED",
+      "mn": {
+        "title": "Холболт дууслаа",
+        "body": "Хосын холболт хаагдлаа. Дэлгэрэнгүйг тохиргооноос хараарай."
+      },
+      "en": {
+        "title": "Pairing ended",
+        "body": "Your pairing has closed. You'll find the details in settings."
+      }
+    },
+    {
+      "id": "n-theme-proposed-1",
+      "type": "THEME_PROPOSED",
+      "mn": {
+        "title": "{partner} шинэ өнгө санал болголоо",
+        "body": "Та хоёрын орон зайн шинэ загварыг хараарай."
+      },
+      "en": {
+        "title": "{partner} suggested a new look",
+        "body": "Take a look at the new theme for your space."
+      }
+    },
+    {
+      "id": "n-theme-proposed-2",
+      "type": "THEME_PROPOSED",
+      "mn": {
+        "title": "Шинэ загварын санал",
+        "body": "{partner} «{title}» загварыг туршиж үзмээр байна."
+      },
+      "en": {
+        "title": "Theme suggestion",
+        "body": "{partner} would like to try the “{title}” theme."
+      }
+    },
+    {
+      "id": "n-theme-proposed-3",
+      "type": "THEME_PROPOSED",
+      "mn": {
+        "title": "Өнгөө солих уу?",
+        "body": "{partner} шинэ загвар санал болгосон. Зөвшөөрөх эсэхээ сонгоорой."
+      },
+      "en": {
+        "title": "Fresh colors?",
+        "body": "{partner} proposed a new theme. Choose whether to accept it."
+      }
+    },
+    {
+      "id": "n-theme-declined-1",
+      "type": "THEME_DECLINED",
+      "mn": {
+        "title": "Одоохондоо хуучин өнгөөрөө",
+        "body": "{partner} одоогийн загвартаа үлдэхийг хүслээ."
+      },
+      "en": {
+        "title": "Keeping the current colors",
+        "body": "{partner} would rather keep the current theme for now."
+      }
+    },
+    {
+      "id": "n-theme-declined-2",
+      "type": "THEME_DECLINED",
+      "mn": {
+        "title": "Загвар хэвээрээ",
+        "body": "{partner} саналыг чинь хүлээж аваагүй ч өөр өнгө санал болгож болно."
+      },
+      "en": {
+        "title": "Theme stays the same",
+        "body": "{partner} passed on this one — you can always suggest another."
+      }
+    },
+    {
+      "id": "n-theme-declined-3",
+      "type": "THEME_DECLINED",
+      "mn": {
+        "title": "{partner} хариуллаа",
+        "body": "Энэ удаа өнгө солигдохгүй. Дараа дахиад хамт сонгоорой."
+      },
+      "en": {
+        "title": "{partner} replied",
+        "body": "The colors stay as they are this time. Pick one together later."
+      }
+    },
+    {
+      "id": "n-promise-proposed-1",
+      "type": "PROMISE_PROPOSED",
+      "mn": {
+        "title": "{partner} амлалт санал болголоо",
+        "body": "«{title}» — хамтдаа хийх эсэхээ шийдээрэй."
+      },
+      "en": {
+        "title": "{partner} proposed a promise",
+        "body": "“{title}” — decide together whether to take it on."
+      }
+    },
+    {
+      "id": "n-promise-proposed-2",
+      "type": "PROMISE_PROPOSED",
+      "mn": {
+        "title": "Шинэ амлалт",
+        "body": "{partner}: «{title}». Чи нэгдэх үү?"
+      },
+      "en": {
+        "title": "A new promise",
+        "body": "{partner}: “{title}”. Will you join in?"
+      }
+    },
+    {
+      "id": "n-promise-proposed-3",
+      "type": "PROMISE_PROPOSED",
+      "mn": {
+        "title": "Хамтын амлалт",
+        "body": "{partner} хоёулаа «{title}» хийцгээе гэж байна."
+      },
+      "en": {
+        "title": "A promise for two",
+        "body": "{partner} suggests you both commit to “{title}”."
+      }
+    },
+    {
+      "id": "n-export-ready-1",
+      "type": "EXPORT_READY",
+      "mn": {
+        "title": "Хуулбар бэлэн боллоо",
+        "body": "Чиний өгөгдлийн хуулбарыг татаж авах боломжтой. Холбоос тодорхой хугацааны дараа хүчингүй болно."
+      },
+      "en": {
+        "title": "Your export is ready",
+        "body": "Your data copy is ready to download. The link expires after a while."
+      }
+    },
+    {
+      "id": "n-export-ready-2",
+      "type": "EXPORT_READY",
+      "mn": {
+        "title": "Дурсамжийн хуулбар бэлэн",
+        "body": "Дурсамжуудын чинь хуулбарыг одоо татаж болно."
+      },
+      "en": {
+        "title": "Memories copy ready",
+        "body": "You can now download a copy of your memories."
+      }
+    },
+    {
+      "id": "n-export-ready-3",
+      "type": "EXPORT_READY",
+      "mn": {
+        "title": "Татаж авах боломжтой",
+        "body": "Хүссэн өгөгдөл чинь бэлтгэгдлээ. Тохиргооноос татаарай."
+      },
+      "en": {
+        "title": "Ready to download",
+        "body": "The data you requested is prepared. Download it from settings."
+      }
+    },
+    {
+      "id": "n-breakup-started-1",
+      "type": "BREAKUP_STARTED",
+      "mn": {
+        "title": "Хосын орон зай хаагдах гэж байна",
+        "body": "{partner} холболтыг дуусгах хүсэлт гаргалаа. {days} хоногийн дотор дурсамжаа хадгалж аваарай."
+      },
+      "en": {
+        "title": "Your shared space is closing",
+        "body": "{partner} has asked to end the pairing. Save your memories within {days} days."
+      }
+    },
+    {
+      "id": "n-breakup-started-2",
+      "type": "BREAKUP_STARTED",
+      "mn": {
+        "title": "Холболт дуусах гэж байна",
+        "body": "Орон зай {days} хоногийн дараа хаагдана. Хүсвэл өгөгдлөө урьдчилан татаж аваарай."
+      },
+      "en": {
+        "title": "Pairing is ending",
+        "body": "Your space will close in {days} days. You can download your data first."
+      }
+    },
+    {
+      "id": "n-breakup-started-3",
+      "type": "BREAKUP_STARTED",
+      "mn": {
+        "title": "Чухал мэдээ",
+        "body": "Хосын холболт дуусгавар болох шатандаа орлоо. Дэлгэрэнгүйг тохиргооноос хараарай."
+      },
+      "en": {
+        "title": "Important update",
+        "body": "Your pairing is in the process of ending. See settings for details."
+      }
+    },
+    {
+      "id": "n-quiet-mode-on-1",
+      "type": "QUIET_MODE_ON",
+      "mn": {
+        "title": "{partner} чимээгүй горим асаалаа",
+        "body": "Одоохондоо амарч байна. Мессеж чинь хүлээгдээд үлдэнэ."
+      },
+      "en": {
+        "title": "{partner} turned on quiet mode",
+        "body": "They're taking a little rest. Your messages will wait for them."
+      }
+    },
+    {
+      "id": "n-quiet-mode-on-2",
+      "type": "QUIET_MODE_ON",
+      "mn": {
+        "title": "Чимээгүй цаг",
+        "body": "{partner} түр завсарлаж байна. Дараа нь бүгдийг харна."
+      },
+      "en": {
+        "title": "Quiet time",
+        "body": "{partner} is taking a short break and will catch up later."
+      }
+    },
+    {
+      "id": "n-quiet-mode-on-3",
+      "type": "QUIET_MODE_ON",
+      "mn": {
+        "title": "Жаахан амралт",
+        "body": "{partner} одоохондоо мэдэгдэл хүлээж авахгүй. Санаа зоволтгүй."
+      },
+      "en": {
+        "title": "A little pause",
+        "body": "{partner} has paused notifications for now. Nothing to worry about."
+      }
+    },
+    {
+      "id": "n-storage-warning-1",
+      "type": "STORAGE_WARNING",
+      "mn": {
+        "title": "Хадгалах зай дүүрэх дөхлөө",
+        "body": "Зай бараг дүүрлээ. Хэрэггүй файлаа цэвэрлэвэл шинэ дурсамж нэмж болно."
+      },
+      "en": {
+        "title": "Storage almost full",
+        "body": "Your space is nearly full. Clear out a few files to keep adding memories."
+      }
+    },
+    {
+      "id": "n-storage-warning-2",
+      "type": "STORAGE_WARNING",
+      "mn": {
+        "title": "Зай багасаж байна",
+        "body": "Хадгалах сангийн ихэнх нь ашиглагдсан. Хогийн савыг хоослоод үзээрэй."
+      },
+      "en": {
+        "title": "Running low on space",
+        "body": "Most of your storage is used. Try emptying the trash."
+      }
+    },
+    {
+      "id": "n-storage-warning-3",
+      "type": "STORAGE_WARNING",
+      "mn": {
+        "title": "Хадгалах зай",
+        "body": "Шинэ зураг, бичлэгт зай бага үлдлээ. Дэлгэрэнгүйг тохиргооноос хараарай."
+      },
+      "en": {
+        "title": "Storage check",
+        "body": "Space for new photos and videos is running low. Check settings for details."
+      }
+    },
+    {
+      "id": "n-inactivity-nudge-1",
+      "type": "INACTIVITY_NUDGE",
+      "mn": {
+        "title": "Сайн уу, удаан уулзсангүй",
+        "body": "Завтай үедээ орж ирээрэй. {partner} чинь нэг мэндчилгээ авбал баярлана."
+      },
+      "en": {
+        "title": "Hi, it's been a little while",
+        "body": "Pop in when you're free. {partner} would love a quick hello."
+      }
+    },
+    {
+      "id": "n-inactivity-nudge-2",
+      "type": "INACTIVITY_NUDGE",
+      "mn": {
+        "title": "Энд бүх зүйл хэвээрээ",
+        "body": "Дурсамжууд чинь чамайг хүлээж байна. Хүссэн үедээ эргэж ирээрэй."
+      },
+      "en": {
+        "title": "Everything's right where you left it",
+        "body": "Your memories are waiting. Come back whenever you like."
+      }
+    },
+    {
+      "id": "n-inactivity-nudge-3",
+      "type": "INACTIVITY_NUDGE",
+      "mn": {
+        "title": "Өнөөдрийн асуулт бэлэн",
+        "body": "Асуулт чамайг хүлээж байна. Хариулахад ердөө нэг минут."
+      },
+      "en": {
+        "title": "Today's question is ready",
+        "body": "A question is waiting for you. It only takes a minute."
+      }
+    },
+    {
+      "id": "n-screenshot-taken-1",
+      "type": "SCREENSHOT_TAKEN",
+      "mn": {
+        "title": "Дэлгэцийн зураг авлаа",
+        "body": "{partner} алга болдог мессежийн дэлгэцийн зургийг авлаа."
+      },
+      "en": {
+        "title": "Screenshot taken",
+        "body": "{partner} took a screenshot of a disappearing message."
+      }
+    },
+    {
+      "id": "n-screenshot-taken-2",
+      "type": "SCREENSHOT_TAKEN",
+      "mn": {
+        "title": "Мессежийг хадгалжээ",
+        "body": "{partner} алга болох мессежийг дэлгэцийн зургаар хадгаллаа."
+      },
+      "en": {
+        "title": "Message saved",
+        "body": "{partner} saved a disappearing message as a screenshot."
+      }
+    },
+    {
+      "id": "n-screenshot-taken-3",
+      "type": "SCREENSHOT_TAKEN",
+      "mn": {
+        "title": "Дэлгэцийн зураг",
+        "body": "{partner} чиний алга болдог мессежийг зураг болгон авлаа — мэдэж байг гэж хэлж байна."
+      },
+      "en": {
+        "title": "Screenshot",
+        "body": "{partner} captured your disappearing message — just letting you know."
+      }
+    },
+    {
+      "id": "n-greeting-morning-1",
+      "type": "GREETING_MORNING",
+      "mn": {
+        "title": "Өглөөний мэнд",
+        "body": "{partner} чамд сайхан өдөр хүсэж байна."
+      },
+      "en": {
+        "title": "Good morning",
+        "body": "{partner} is wishing you a lovely day."
+      }
+    },
+    {
+      "id": "n-greeting-morning-2",
+      "type": "GREETING_MORNING",
+      "mn": {
+        "title": "Шинэ өдөр эхэллээ",
+        "body": "Цайгаа уугаад {partner}-д нэг мэндчилгээ илгээгээрэй."
+      },
+      "en": {
+        "title": "A new day begins",
+        "body": "Grab your tea and send {partner} a quick hello."
+      }
+    },
+    {
+      "id": "n-greeting-morning-3",
+      "type": "GREETING_MORNING",
+      "mn": {
+        "title": "Сайхан амарсан уу?",
+        "body": "Өнөөдөр чи {partner} хоёрт дулаахан өдөр байх болтугай."
+      },
+      "en": {
+        "title": "Did you sleep well?",
+        "body": "May today be a warm one for you and {partner}."
+      }
+    },
+    {
+      "id": "n-greeting-evening-1",
+      "type": "GREETING_EVENING",
+      "mn": {
+        "title": "Сайхан амраарай",
+        "body": "{partner} чамд тайван шөнө хүсэж байна."
+      },
+      "en": {
+        "title": "Sleep well",
+        "body": "{partner} is wishing you a peaceful night."
+      }
+    },
+    {
+      "id": "n-greeting-evening-2",
+      "type": "GREETING_EVENING",
+      "mn": {
+        "title": "Өдөр дуусах дөхлөө",
+        "body": "Унтахын өмнө {partner}-д нэг үг бичээрэй."
+      },
+      "en": {
+        "title": "The day is winding down",
+        "body": "Send {partner} a few words before bed."
+      }
+    },
+    {
+      "id": "n-greeting-evening-3",
+      "type": "GREETING_EVENING",
+      "mn": {
+        "title": "Оройн мэнд",
+        "body": "Өнөөдрийн сайхан мөчөө {partner}-тэй хуваалцаарай."
+      },
+      "en": {
+        "title": "Good evening",
+        "body": "Share today's best moment with {partner}."
+      }
+    },
+    {
+      "id": "n-partner-deleted-1",
+      "type": "PARTNER_DELETED",
+      "mn": {
+        "title": "{partner} акаунтаа устгалаа",
+        "body": "Хамтын дурсамжаа 30 хоногийн дотор хуулбарлан авах боломжтой."
+      },
+      "en": {
+        "title": "{partner} deleted their account",
+        "body": "You can export your shared memories within 30 days."
+      }
+    },
+    {
+      "id": "n-partner-deleted-2",
+      "type": "PARTNER_DELETED",
+      "mn": {
+        "title": "Хамтын орон зай хаагдана",
+        "body": "{partner} Aura-аас гарсан. 30 хоногийн дотор хуулбараа татаж аваарай."
+      },
+      "en": {
+        "title": "Your shared space will close",
+        "body": "{partner} has left Aura. Download your copy within 30 days."
+      }
+    },
+    {
+      "id": "n-partner-deleted-3",
+      "type": "PARTNER_DELETED",
+      "mn": {
+        "title": "Дурсамжаа хадгалаарай",
+        "body": "{partner} акаунтаа устгасан тул хамтын орон зай 30 хоногийн дараа устна."
+      },
+      "en": {
+        "title": "Keep your memories",
+        "body": "{partner} deleted their account, so your shared space will be removed in 30 days."
+      }
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+# PROD (T-90). Caddy-ийн ард HTTPS; cookie заавал secure.
+server:
+  forward-headers-strategy: framework
+aura:
+  cookie:
+    secure: true

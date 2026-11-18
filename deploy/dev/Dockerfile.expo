@@ -1,0 +1,15 @@
+# syntax=docker/dockerfile:1
+# DEV build-ийн контейнер (T-89, LLD §4.5 `expo-dev`): Node 22, JDK 17, Android SDK/NDK.
+# Зөвхөн linux/amd64 (суурь image amd64-тэй; APK нь бүх Android-д ажиллана). Ашиглах — DEPLOYED.md:
+#   docker compose --profile devbuild up -d expo-dev download        # Metro (Expo Go) + S-99
+#   docker compose --profile devbuild run --rm expo-dev apk          # APK build → S-99
+FROM reactnativecommunity/react-native-android:v22.0
+
+ENV EXPO_NO_TELEMETRY=1 \
+    NODE_OPTIONS=--max-old-space-size=4096
+WORKDIR /app/mobile
+COPY expo-dev.sh /usr/local/bin/expo-dev
+RUN chmod +x /usr/local/bin/expo-dev
+EXPOSE 8081
+ENTRYPOINT ["expo-dev"]
+CMD ["metro"]

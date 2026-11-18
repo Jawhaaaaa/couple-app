@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  JSON лог stdout руу (DD-AURA-037, AC-202). Docker `json-file` 30 хоног хадгална (OPS-AURA-006).
+  `traceId` нь MDC-ээс (TraceIdFilter). Нууц нэртэй JSON талбарыг (password, token …) далдална —
+  гол хамгаалалт нь `@Sensitive` + `LogRedaction`; энэ нь давхар хамгаалалт.
+  Хүнд уншигдах мөр хэрэгтэй бол `plain-logs` profile (жишээ `dev,plain-logs`).
+-->
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <springProperty scope="context" name="appName" source="spring.application.name" defaultValue="aura-backend"/>
+
+    <springProfile name="plain-logs">
+        <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="!plain-logs">
+        <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <customFields>{"app":"${appName}"}</customFields>
+                <includeMdcKeyName>traceId</includeMdcKeyName>
+                <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+                    <maxDepthPerThrowable>40</maxDepthPerThrowable>
+                    <rootCauseFirst>true</rootCauseFirst>
+                </throwableConverter>
+                <jsonGeneratorDecorator class="net.logstash.logback.mask.MaskingJsonGeneratorDecorator">
+                    <defaultMask>***</defaultMask>
+                    <path>password</path>
+                    <path>newPassword</path>
+                    <path>currentPassword</path>
+                    <path>token</path>
+                    <path>accessToken</path>
+                    <path>refreshToken</path>
+                    <path>code</path>
+                    <path>secret</path>
+                    <path>authorization</path>
+                </jsonGeneratorDecorator>
+            </encoder>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="JSON"/>
+        </root>
+    </springProfile>
+</configuration>

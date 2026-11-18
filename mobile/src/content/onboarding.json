@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "ob-1",
+      "mn": {
+        "title": "Та хоёрт зориулсан орон зай",
+        "body": "Дурсамж, захидал, төлөвлөгөөгөө нэг дор хадгалаарай."
+      },
+      "en": {
+        "title": "A space just for the two of you",
+        "body": "Keep your memories, letters and plans together in one place."
+      }
+    },
+    {
+      "id": "ob-2",
+      "mn": {
+        "title": "Бусдад харагдахгүй",
+        "body": "Та хоёрын орон зайг өөр хэн ч харахгүй. Өгөгдөл манай серверт хадгалагдах ба хүссэн үедээ хуулбараа татаж авах, бүрмөсөн устгах боломжтой."
+      },
+      "en": {
+        "title": "Private to the two of you",
+        "body": "No one else can see your shared space. Your data is stored on our servers, and you can download a copy or delete it for good anytime."
+      }
+    },
+    {
+      "id": "ob-3",
+      "mn": {
+        "title": "Хоёулаа холбогдоорой",
+        "body": "Урилгын код эсвэл холбоосоо хайртай хүндээ илгээгээд нэг орон зайд нэгдээрэй."
+      },
+      "en": {
+        "title": "Connect with your person",
+        "body": "Send your invite code or link to your loved one and join one shared space."
+      }
+    },
+    {
+      "id": "ob-4",
+      "mn": {
+        "title": "Өдөр бүр жаахан дулаан",
+        "body": "Өдрийн асуулт, зүрх, жижиг мэндчилгээгээр бие биедээ ойр байгаарай."
+      },
+      "en": {
+        "title": "A little warmth every day",
+        "body": "Daily questions, hearts and small hellos keep you close — no pressure."
+      }
+    }
+  ]
+}

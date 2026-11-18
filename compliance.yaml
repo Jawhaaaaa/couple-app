@@ -1,0 +1,17 @@
+# Аюулгүй байдлын шалгалтын чөлөөлөлт.
+# `scripts/audit-gate.mjs` (CI-ийн `dependency audit` job) энэ файлыг уншина.
+#
+# Дүрэм:
+# - Чөлөөлөлт бүр НЭГ advisory-д (GHSA id) хамаарна. Бусад бүх high/critical advisory
+#   `npm audit --audit-level=high`-ийн адил унагасаар байна.
+# - `expires` (UTC, тухайн өдрийг оруулаад) өнгөрмөгц чөлөөлөлт хүчингүй болж audit унана.
+# - Advisory-д засвартай хувилбар (GitHub Advisory API-ийн `first_patched_version`) гармагц
+#   чөлөөлөлт хүчингүй болж audit унана. API-аас хариу авч чадахгүй бол мөн хүчингүй (fail closed).
+# - Шинэ чөлөөлөлтийг зөвхөн эзний шийдвэрээр, шалтгаан, эзэн, хугацаатай нэмнэ.
+waivers:
+  - id: GHSA-fc5q-39xc-vjpf
+    package: picomatch
+    reason: "Засвартай хувилбар алга (<=4.0.7 бүгд эмзэг). Metro/Jest/Expo-ийн гүн dev/build хамаарал. Base commit 355c35c дээр ч унадаг."
+    owner: Jawhaaaaa
+    approved: "2026-11-18 (LAB-2, DEVELOPMENT шатны blocked асуултад эзний шийдвэр (а))"
+    expires: 2026-12-18

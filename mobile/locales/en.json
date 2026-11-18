@@ -1,0 +1,17 @@
+{
+  "ios": {
+    "CFBundleDisplayName": "Aura",
+    "NSCameraUsageDescription": "Aura uses the camera to scan your partner's invite QR code and to take photos and videos for your memories.",
+    "NSPhotoLibraryUsageDescription": "Aura uses your photo library so you can choose a profile photo and add photos and videos to your memories, chat and letters.",
+    "NSPhotoLibraryAddUsageDescription": "Aura saves the photos you choose, such as your year-in-review image, to your photo library.",
+    "NSMicrophoneUsageDescription": "Aura uses the microphone to record voice messages, the voice part of your memories and videos.",
+    "NSLocationWhenInUseUsageDescription": "Aura uses your location only when you choose to share where you are in chat, tag a memory or show your weather. It is stored at city level.",
+    "NSFaceIDUsageDescription": "Aura uses Face ID to lock the app so only you can open your shared space.",
+    "NSCalendarsUsageDescription": "Aura adds the dates you plan together to your phone calendar.",
+    "NSCalendarsFullAccessUsageDescription": "Aura adds the dates you plan together to your phone calendar.",
+    "NSCalendarsWriteOnlyAccessUsageDescription": "Aura adds the dates you plan together to your phone calendar."
+  },
+  "android": {
+    "app_name": "Aura"
+  }
+}

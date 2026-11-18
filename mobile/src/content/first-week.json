@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "fw-1",
+      "day": 1,
+      "mn": {
+        "title": "Эхний зураг",
+        "body": "Хоёулаа хамт байгаа нэг зургаа анхны дурсамж болгон нэмээрэй."
+      },
+      "en": {
+        "title": "First photo",
+        "body": "Add a photo of the two of you as your first memory."
+      }
+    },
+    {
+      "id": "fw-2",
+      "day": 2,
+      "mn": {
+        "title": "Эхний асуулт",
+        "body": "Өнөөдрийн асуултад хоёулаа хариулаад бие биенийхээ хариуг уншаарай."
+      },
+      "en": {
+        "title": "First question",
+        "body": "Both answer today's question, then read each other's replies."
+      }
+    },
+    {
+      "id": "fw-3",
+      "day": 3,
+      "mn": {
+        "title": "Эхний зүрх",
+        "body": "Гэнэтхэн нэг зүрх илгээгээд {partner} чинь хэрхэн баярлахыг хараарай."
+      },
+      "en": {
+        "title": "First heart",
+        "body": "Send a surprise heart and watch {partner} light up."
+      }
+    },
+    {
+      "id": "fw-4",
+      "day": 4,
+      "mn": {
+        "title": "Эхний захидал",
+        "body": "Богинохон ч болтугай, сэтгэлээсээ нэг захидал бичээрэй."
+      },
+      "en": {
+        "title": "First letter",
+        "body": "Write a heartfelt letter — even a short one counts."
+      }
+    },
+    {
+      "id": "fw-5",
+      "day": 5,
+      "mn": {
+        "title": "Эхний болзоо",
+        "body": "Санааны сангаас нэг болзоо сонгоод хамтдаа төлөвлөөрэй."
+      },
+      "en": {
+        "title": "First date plan",
+        "body": "Pick an idea from the library and plan it together."
+      }
+    },
+    {
+      "id": "fw-6",
+      "day": 6,
+      "mn": {
+        "title": "Эхний тэмдэглэлт өдөр",
+        "body": "Танилцсан, эсвэл анх болзсон өдрөө нэмээд ойгоо хэзээ ч бүү мартаарай."
+      },
+      "en": {
+        "title": "First special date",
+        "body": "Add the day you met or first went out, so it's never forgotten."
+      }
+    },
+    {
+      "id": "fw-7",
+      "day": 7,
+      "mn": {
+        "title": "Эхний хамтын жагсаалт",
+        "body": "Хамтдаа хийхийг хүссэн гурван зүйлээ жагсаалтад бичээрэй."
+      },
+      "en": {
+        "title": "First shared list",
+        "body": "Write down three things you'd love to do together."
+      }
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+import { useIsRestoring, useQuery } from '@tanstack/react-query';
+import { useCallback } from 'react';
+
+import { api } from '@/api/client';
+import { isUpdateRequired } from '@/domain/versionCompare';
+import { buildInfo } from '@/platform/buildInfo';
+import { useSessionStore } from '@/stores/sessionStore';
+
+import { fetchMe, type Me, type VersionInfo } from './auth';
+import { versionQueryOptions } from './version';
+
+export type BootStatus = 'pending' | 'ready' | 'unreachable' | 'updateRequired';
+
+/**
+ * `['me']` — нэвтэрсэн үед татна; offline-д persist кэшээс (AC-156). `refetchInterval` —
+ * хос холбогдохыг хүлээж буй дэлгэцүүд (S-08, S-10, S-13) realtime тасарсан үед ч мэдэхэд.
+ */
+export function useMeQuery({ refetchInterval = false }: { refetchInterval?: number | false } = {}) {
+  const accessToken = useSessionStore((s) => s.accessToken);
+  return useQuery({ queryKey: ['me'], queryFn: fetchMe, enabled: !!accessToken, refetchInterval });
+}
+
+export interface Bootstrap {
+  status: BootStatus;
+  /** Сесс хүчинтэй (эсвэл сервер хүрэхгүй ч кэштэй `me` байгаа — offline). */
+  signedIn: boolean;
+  me: Me | undefined;
+  version: VersionInfo | undefined;
+  retry: () => void;
+}
+
+/**
+ * S-01 Splash-ийн ачаалал (LLD §4.3): `['version']` (шинэчлэх шаардлагатай эсэх),
+ * хадгалсан refresh-ээр сесс сэргээх, `['me']`. Persist кэш сэргэж дуустал хүлээнэ.
+ */
+export function useBootstrap(): Bootstrap {
+  const isRestoring = useIsRestoring();
+  const accessToken = useSessionStore((s) => s.accessToken);
+  const version = useQuery({ ...versionQueryOptions, enabled: !isRestoring });
+  const session = useQuery({
+    queryKey: ['session-restore'],
+    queryFn: () => api.restoreSession(),
+    enabled: !isRestoring,
+    retry: 0,
+    staleTime: Infinity,
+  });
+  const me = useMeQuery();
+
+  const { refetch: refetchSession } = session;
+  const { refetch: refetchMe } = me;
+  const { refetch: refetchVersion } = version;
+  const retry = useCallback(() => {
+    void refetchVersion();
+    void refetchSession().then(() => (useSessionStore.getState().accessToken ? refetchMe() : undefined));
+  }, [refetchMe, refetchSession, refetchVersion]);
+
+  const offlineSession = !accessToken && session.data === 'unreachable' && !!me.data;
+  const signedIn = !!accessToken || offlineSession;
+
+  let status: BootStatus;
+  if (isUpdateRequired(version.data, buildInfo().version)) status = 'updateRequired';
+  else if (isRestoring || session.isPending) status = 'pending';
+  else if (!accessToken) status = session.data === 'unreachable' && !me.data ? 'unreachable' : 'ready';
+  else if (me.isPending) status = 'pending';
+  else if (me.isError && !me.data) status = 'unreachable';
+  else status = 'ready';
+
+  return { status, signedIn, me: signedIn ? me.data : undefined, version: version.data, retry };
+}

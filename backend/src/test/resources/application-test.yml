@@ -1,0 +1,50 @@
+# Integration тест (AbstractIntegrationTest). Datasource, S3, SMTP-ийг Testcontainers тавина.
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 4
+      minimum-idle: 1
+aura:
+  # IT бүр (өөр @TestPropertySource-той context) өөрийн MutableClock-той ч нэг DB хуваалцана. Фон
+  # ReminderScheduler нь өөр context-ийн ирээдүйн цагаар бусад тестийн PENDING сануулгыг SENT болгож
+  # байсан (ReminderSchedulerIT-ийн тогтворгүй уналт) — тестэд зөвхөн runOnce()-оор ажиллана.
+  # Цагаас хамаарах бусад ажилд ч ижил: CI-д 2 с тутмын DisappearingMessageJob тестийн тавьсан
+  # цагаар мессежийг runOnce()-оос түрүүлж устгаад DisappearingMessageIT унасан. Эдгээрийн IT бүр
+  # runOnce()-оор өөрөө ажиллуулдаг. JobRunner (aura.jobs.interval) хэвээр — transcode IT фоныг тэсвэрлэнэ.
+  jobs:
+    reminder-interval: PT24H
+    disappearing-interval: PT24H
+    letter-interval: PT24H
+    greeting-interval: PT24H
+    inactivity-interval: PT24H
+    purge-interval: PT24H
+    export-expiry-interval: PT24H
+  # Зөвхөн тестийн утга (≥ 32 байт) — бодит нууц биш
+  jwt:
+    secret: test-only-jwt-secret-0123456789abcdefghijklmnop
+  cors:
+    allowed-origins: http://allowed.example,http://localhost:8090
+  # AdminIT (GAP-16): тогтмол админ имэйл — бусад IT-ийн санамсаргүй имэйлтэй давхцахгүй
+  admin:
+    emails: admin-it@aura.test, Ops-IT@Aura.Test
+  # VersionIT (AC-141)
+  app:
+    latest-version: 1.2.0
+    min-version: 1.1.0
+    build: "142"
+    commit-sha: 830FBFE
+    download-url: http://localhost:8090/download
+    store-url: https://play.google.com/store/apps/details?id=mn.aura.couple
+  sentry:
+    dsn: ""
+    environment: test
+  # Зөвхөн тестийн VAPID түлхүүр (бодит нууц биш); push sink нь localhost дээр http-ээр
+  push:
+    # Дээрх jobs-ийн адил: 30 с тутмын push outbox job өөр context-ийн ирээдүйн цагаар бусад тестийн
+    # «Бүү саад бол»-оор хойшилсон push-ийг эрт илгээж NotificationPreferenceIT.dndInRecipientZone унасан.
+    # Push IT-ууд даруй илгээлт (PushDue) эсвэл /test/jobs/pushOutbox/run (runOnce)-оор ажилладаг.
+    outbox-interval: PT24H
+    vapid-public-key: BPcxbBp3veDT3vGfCAVyjFueUxHcyTU7SLrdNtwqPx_4uYges92uzVAYfRNK7uJDJa8Rs_7I_UIY_8bRGsLShj0
+    vapid-private-key: G2HWTcsIENb1FCQ_rBMi3GKji-JgtSVjM2I2uSvS5gI
+    endpoint-hosts: localhost
+    allow-http-endpoints: true

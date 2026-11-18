@@ -1,11 +1,27 @@
+# CI (T-92, AC-203, AC-195, NFR-18). Энэ бүртгэлийн Actions `startup_failure`-тэй тул pipeline-ийн
+# хаалга нь ЛОКАЛ шалгалт (LLD §4.5-ийн «Шалгах команд»); энэ файл нь ижил командыг GitHub дээр
+# давтахад бэлэн байна. Локалд синтакс: docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint:latest
 name: ci
+
 on:
   push:
+    branches: [main, 'feature/**']
+    tags: ['v*']
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
 
 jobs:
   backend:
+    name: backend — ./mvnw verify
     runs-on: ubuntu-latest
+    timeout-minutes: 40
     defaults:
       run:
         working-directory: backend
@@ -16,10 +32,22 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - run: ./mvnw -B verify
+      # Testcontainers (PostgreSQL, SeaweedFS, Mailpit) — runner-ийн Docker
+      - run: ./mvnw -B -ntp verify
+      - name: Тестийн тайлан
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-surefire
+          path: |
+            backend/target/surefire-reports/
+            backend/target/failsafe-reports/
+          retention-days: 7
 
   mobile:
+    name: mobile — tsc, lint, jest, export
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: mobile
@@ -32,5 +60,191 @@ jobs:
           cache-dependency-path: mobile/package-lock.json
       - run: npm ci
       - run: npx tsc --noEmit
-      - run: npx jest
-      - run: npx expo export --platform web
+      - run: npx expo lint
+      - run: npx jest --ci
+      # E2E-д S-03 «Google-ээр нэвтрэх» товч (AC-06) — backend-ийн тестийн IdP-тэй (GAP-18); нууц биш
+      - run: npx expo export --platform web && node scripts/build-sw.cjs
+        env:
+          EXPO_PUBLIC_OAUTH_GOOGLE: 'true'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web-dist
+          path: mobile/dist/
+          retention-days: 3
+
+  e2e:
+    name: e2e — Playwright (compose, ${{ matrix.browser }})
+    needs: mobile
+    runs-on: ubuntu-latest
+    # Хөтөч бүр тусдаа runner, тусдаа compose стек (тестийн цаг `PUT /test/clock` нийтлэг тул
+    # нэг стек дотор зэрэгцүүлэхгүй) — 3 хөтөч бүгд, бүх тест хэвээр
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium-pixel7, webkit-iphone14, firefox-mobile]
+    timeout-minutes: 60   # нэг хөтөч, нэг worker (playwright.config.ts) — ~100 тест
+    env:
+      SPRING_PROFILES_ACTIVE: dev,e2e
+      # serve-dist.mjs (:8091) ба compose-ийн mobile-web (:8090)
+      AURA_CORS_ALLOWED_ORIGINS: http://localhost:8091,http://localhost:8090
+      AURA_WEB_BASE_URL: http://localhost:8091
+      # AC-211: spec-ийн шалгах арга бүр (UT · IT · E2E) өөрийн тестэд AC ID-аараа байх ёстой — дутуу бол унана
+      AC_COVERAGE_STRICT: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: web-dist
+          path: mobile/dist
+      - name: DEV орчин (compose)
+        run: |
+          cp .env.example .env
+          # Зөвхөн CI-ийн түр DB — нууц биш, runner дуусахад устна
+          sed -i "s|^POSTGRES_PASSWORD=.*|POSTGRES_PASSWORD=ci-$(openssl rand -hex 8)|" .env
+          sed -i "s|^AURA_JWT_SECRET=.*|AURA_JWT_SECRET=$(openssl rand -base64 48 | tr -d '\n')|" .env
+          # E2E-ийн stub-ууд (хост дээр, `host.docker.internal`): Google IdP :8097 (AC-06, GAP-18),
+          # Open-Meteo :8098 (AC-71); Web Push-ийн түр VAPID түлхүүр (AC-154) — ажиллалт бүрд шинэ
+          sed -i '/^AURA_GOOGLE_/d; /^AURA_VAPID_PUBLIC_KEY=/d; /^AURA_VAPID_PRIVATE_KEY=/d' .env
+          node e2e/scripts/vapid-keys.mjs >> .env
+          {
+            echo "AURA_GOOGLE_CLIENT_ID=e2e-google-client"
+            echo "AURA_GOOGLE_CLIENT_SECRET=e2e-google-secret"
+            echo "AURA_GOOGLE_ISSUER=http://host.docker.internal:8097"
+            echo "AURA_GOOGLE_ID_TOKEN_ALG=HS256"
+            echo "AURA_WEATHER_BASE_URL=http://host.docker.internal:8098"
+            echo "AURA_GEOCODING_BASE_URL=http://host.docker.internal:8098"
+          } >> .env
+          docker compose up -d --build --wait --wait-timeout 300 postgres seaweedfs mailpit backend
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: e2e/package-lock.json
+      - name: Playwright
+        working-directory: e2e
+        run: |
+          npm ci
+          # S-99 (download-page.spec.ts) QR-ыг render.mjs-ээр үүсгэнэ — mobile-ийн хамаарлын ижил хувилбар
+          npm i --no-save --no-audit --no-fund qrcode@1.5.4
+          case "${{ matrix.browser }}" in
+            chromium-*) BROWSER=chromium ;;
+            webkit-*) BROWSER=webkit ;;
+            firefox-*) BROWSER=firefox ;;
+          esac
+          npx playwright install --with-deps "$BROWSER"
+          npx playwright test --project=${{ matrix.browser }}
+      - name: AC-209 compose стекийн health (mobile-web-ийг оруулаад)
+        if: matrix.browser == 'chromium-pixel7'
+        run: |
+          docker compose up -d --build --wait --wait-timeout 600 mobile-web
+          bash deploy/tests/compose-health.test.sh
+      - name: Compose лог
+        if: failure()
+        run: docker compose logs --no-color --tail 300 > compose.log; tail -100 compose.log
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: e2e-report-${{ matrix.browser }}
+          path: |
+            e2e/playwright-report/
+            e2e/test-results/
+            compose.log
+          retention-days: 7
+
+  audit:
+    name: dependency audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # `npm audit --audit-level=high`-тэй ижил босго: high/critical бүр унагана.
+      # Зөвхөн compliance.yaml → waivers-д бүртгэлтэй advisory-г дуусах хугацаа хүртэл,
+      # засвартай хувилбар гараагүй үед чөлөөлнө (GHSA-fc5q-39xc-vjpf, 2026-12-18 хүртэл).
+      - name: Audit gate-ийн тест (чөлөөлөлтийн хугацаа, засварын шалгалт)
+        run: node --test scripts/audit-gate.test.mjs
+      - name: npm audit (mobile, high+, compliance.yaml-ийн чөлөөлөлттэй)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/audit-gate.mjs mobile
+      - name: npm audit (e2e, high+, compliance.yaml-ийн чөлөөлөлттэй)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/audit-gate.mjs e2e
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: OWASP dependency-check өгөгдлийн кэш
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository/org/owasp/dependency-check-data
+          key: owasp-nvd-${{ github.run_id }}
+          restore-keys: owasp-nvd-
+      # NVD API түлхүүргүй бол таталт хэдэн цаг үргэлжилж rate limit-д унана — тэр үед алгасна
+      - name: OWASP dependency-check (backend, CVSS ≥ 7 бол унана)
+        if: env.NVD_API_KEY != ''
+        working-directory: backend
+        run: >-
+          ./mvnw -B -ntp org.owasp:dependency-check-maven:13.0.0:check
+          -DfailBuildOnCVSS=7 -DnvdApiKey="$NVD_API_KEY"
+          -Dformats=HTML,JSON -DossindexAnalyzerEnabled=false
+      - name: OWASP dependency-check алгасав
+        if: env.NVD_API_KEY == ''
+        run: echo "::warning::NVD_API_KEY secret байхгүй — backend-ийн OWASP dependency-check алгасагдав (https://nvd.nist.gov/developers/request-an-api-key)"
+      - uses: actions/upload-artifact@v4
+        if: always() && env.NVD_API_KEY != ''
+        with:
+          name: dependency-check-report
+          path: backend/target/dependency-check-report.*
+          retention-days: 14
+
+  infra:
+    name: prod багц — compose, Caddyfile, arm64
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash deploy/tests/prod-config.test.sh
+
+  eas-build:
+    name: EAS build (main, PR, tag)
+    # feature push дээр алгасна (эзний шийдвэр 2026-11-16); main, PR (MR_CREATE) ба хувилбарын tag дээр заавал
+    if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request' || startsWith(github.ref, 'refs/tags/v')
+    needs: [backend, mobile, e2e]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - name: EXPO_TOKEN алга
+        if: env.EXPO_TOKEN == ''
+        working-directory: .
+        run: echo "::notice::EXPO_TOKEN secret байхгүй — EAS build алгасагдав"
+      - uses: actions/checkout@v4
+        if: env.EXPO_TOKEN != ''
+      - uses: actions/setup-node@v4
+        if: env.EXPO_TOKEN != ''
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - uses: expo/expo-github-action@v8
+        if: env.EXPO_TOKEN != ''
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - name: eas build (Android, production)
+        if: env.EXPO_TOKEN != ''
+        run: |
+          npm ci
+          test -f eas.json || { echo "::error::mobile/eas.json алга (T-88)"; exit 1; }
+          eas build --platform android --profile production --non-interactive --no-wait

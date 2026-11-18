@@ -1,0 +1,26 @@
+# Aura PROD cron (ubuntu хэрэглэгч, VM-ийн цаг UTC). Суулгах: crontab /opt/aura/deploy/backup/crontab.example
+# Урьдчилж: sudo mkdir -p /var/log/aura /var/backups/aura /var/lib/aura-alerts && sudo chown ubuntu: тэдгээр
+# Тайлбар: docs/BACKUP.md, docs/OPERATIONS.md §5.
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# DuckDNS IP шинэчлэх (OPS-AURA-002)
+*/5 * * * *  /opt/aura/deploy/duckdns-update.sh >> /var/log/aura/duckdns.log 2>&1
+
+# Шөнийн pg_dump, 30 хоног (OPS-AURA-004, NFR-15) — 19:15 UTC = 03:15 Улаанбаатар (ачаалал бага)
+15 19 * * *   /opt/aura/deploy/backup/backup.sh >> /var/log/aura/backup.log 2>&1
+
+# Медиа sync (SeaweedFS → Oracle Object Storage / хавтас)
+45 19 * * *   /opt/aura/deploy/backup/media-sync.sh >> /var/log/aura/media-sync.log 2>&1
+
+# Долоо хоног бүрийн сэргээх тест — бямба 20:30 UTC = ням 04:30 Улаанбаатар
+30 20 * * 6   /opt/aura/deploy/backup/restore-test.sh >> /var/log/aura/restore-test.log 2>&1
+
+# Сэрэмжлүүлэг (OPS-AURA-005) — 5 мин тутам
+*/5 * * * *  /opt/aura/deploy/monitor/alerts.sh >> /var/log/aura/alerts.log 2>&1
+
+# Логийн архив, 30 хоног (OPS-AURA-006)
+5 0 * * *    /opt/aura/deploy/monitor/log-archive.sh >> /var/log/aura/log-archive.log 2>&1
+
+# Cron-ийн өөрийн лог 1 сараас хэтрэхгүй
+0 1 1 * *    find /var/log/aura -maxdepth 1 -name '*.log' -size +50M -exec truncate -s 0 {} \;

@@ -1,0 +1,129 @@
+{
+  "source": "docs/ASSETS.md",
+  "groups": [
+    {
+      "id": "assets",
+      "items": [
+        {
+          "name": "Animated Noto Emoji",
+          "license": "CC BY 4.0",
+          "holder": "Google",
+          "notice": "Animated Noto Emoji © Google, CC BY 4.0",
+          "url": "https://googlefonts.github.io/noto-emoji-animation/",
+          "files": 16
+        },
+        {
+          "name": "Fluent Emoji 3D",
+          "license": "MIT",
+          "holder": "Microsoft",
+          "notice": "Fluent Emoji 3D © Microsoft, MIT",
+          "url": "https://github.com/microsoft/fluentui-emoji",
+          "files": 13
+        },
+        {
+          "name": "Aura UI sounds",
+          "license": "Өөрийн бүтээсэн (CC0)",
+          "holder": null,
+          "notice": "Aura UI sounds — Өөрийн бүтээсэн (CC0)",
+          "url": null,
+          "files": 4
+        },
+        {
+          "name": "Aura app icon & splash",
+          "license": "Өөрийн бүтээсэн (CC0)",
+          "holder": null,
+          "notice": "Aura app icon & splash — Өөрийн бүтээсэн (CC0)",
+          "url": null,
+          "files": 4
+        }
+      ]
+    },
+    {
+      "id": "libraries",
+      "items": [
+        {
+          "name": "Playfair Display (@expo-google-fonts/playfair-display)",
+          "license": "SIL OFL 1.1",
+          "holder": null,
+          "notice": "Playfair Display (@expo-google-fonts/playfair-display) — SIL OFL 1.1",
+          "url": "https://fonts.google.com/specimen/Playfair+Display"
+        },
+        {
+          "name": "Nunito (@expo-google-fonts/nunito)",
+          "license": "SIL OFL 1.1",
+          "holder": null,
+          "notice": "Nunito (@expo-google-fonts/nunito) — SIL OFL 1.1",
+          "url": "https://fonts.google.com/specimen/Nunito"
+        },
+        {
+          "name": "Nunito 400/700, Playfair Display 400/400 italic TTF (backend/src/main/resources/fonts/, дээрх багцаас хуулсан)",
+          "license": "SIL OFL 1.1",
+          "holder": null,
+          "notice": "Nunito 400/700, Playfair Display 400/400 italic TTF (backend/src/main/resources/fonts/, дээрх багцаас хуулсан) — SIL OFL 1.1",
+          "url": "https://fonts.google.com/specimen/Nunito"
+        },
+        {
+          "name": "Lucide (lucide-react-native)",
+          "license": "ISC",
+          "holder": null,
+          "notice": "Lucide (lucide-react-native) — ISC",
+          "url": "https://lucide.dev"
+        },
+        {
+          "name": "Lottie (lottie-react-native, @lottiefiles/dotlottie-react)",
+          "license": "Apache-2.0 · MIT",
+          "holder": null,
+          "notice": "Lottie (lottie-react-native, @lottiefiles/dotlottie-react) — Apache-2.0 · MIT",
+          "url": "https://github.com/lottie-react-native/lottie-react-native"
+        },
+        {
+          "name": "React Native Reanimated, Gesture Handler, SVG",
+          "license": "MIT",
+          "holder": null,
+          "notice": "React Native Reanimated, Gesture Handler, SVG — MIT",
+          "url": "https://github.com/software-mansion"
+        },
+        {
+          "name": "Expo SDK 58",
+          "license": "MIT",
+          "holder": null,
+          "notice": "Expo SDK 58 — MIT",
+          "url": "https://github.com/expo/expo"
+        },
+        {
+          "name": "TanStack Query, Zustand, i18next",
+          "license": "MIT",
+          "holder": null,
+          "notice": "TanStack Query, Zustand, i18next — MIT",
+          "url": "https://tanstack.com"
+        },
+        {
+          "name": "Leaflet (leaflet)",
+          "license": "BSD-2-Clause",
+          "holder": null,
+          "notice": "Leaflet (leaflet) — BSD-2-Clause",
+          "url": "https://leafletjs.com"
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "items": [
+        {
+          "name": "© OpenStreetMap contributors",
+          "license": "ODbL 1.0",
+          "holder": null,
+          "notice": "© OpenStreetMap contributors — ODbL 1.0",
+          "url": "https://www.openstreetmap.org/copyright"
+        },
+        {
+          "name": "Open-Meteo",
+          "license": "CC BY 4.0",
+          "holder": null,
+          "notice": "Open-Meteo — CC BY 4.0",
+          "url": "https://open-meteo.com"
+        }
+      ]
+    }
+  ]
+}
