@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { FolderPlus, ImagePlus, type LucideIcon, Tag, X } from 'lucide-react-native';
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
@@ -52,6 +52,7 @@ import {
   validateDraft,
 } from '@/memories/editorModel';
 import { suggestFromAssets } from '@/memories/exif';
+import { isLeavingEditor, leaveEditorAfterSave } from '@/memories/leaveEditor';
 import { admitPicks, MEDIA_MAX, type Rejection } from '@/memories/limits';
 import { assetExif, pickMedia, type PickSource, queueAsset, toCandidate } from '@/memories/pickMedia';
 import { outbox } from '@/offline/outboxRuntime';
@@ -102,27 +103,19 @@ export default function MemoryEditorScreen() {
   else body = <ScreenState kind="loading" rows={3} />;
 
   return (
-    <SheetScreen title={title} testID="screen-S-32">
+    <SheetScreen title={title} testID="screen-S-32" onClose={closeUnlessLeaving}>
       {body}
     </SheetScreen>
   );
 }
 
-function toPreview(v: { title: string; occurredOn: string; description?: string | null; location?: { name: string } | null }): VersionPreview {
-  return { title: v.title, occurredOn: v.occurredOn, description: v.description ?? null, placeName: v.location?.name ?? null };
+/** Хадгалсны дараах шилжилтийн үеэр хаах/хаях нь өөр `back()` нэмж S-31-ийг дарахгүй (AC-198). */
+function closeUnlessLeaving() {
+  if (!isLeavingEditor()) closeSheet();
 }
 
-/**
- * Хадгалсны дараа: шинэ дурсамж руу (S-31) эсвэл modal-ыг хааж (засвар, болзооноос) буцна.
- * Навигаци бүр НЭГ үйлдэл (AC-198): `back()` + `push()` дараалан дуудахад вэбэд `back()` нь
- * `history.go(-1)`-ийн асинхрон `popstate`-ээр дуусдаг тул push-ийг дарж (Firefox, 4-өөс 1) S-31-ийн
- * оронд Нүүр рүү буцдаг байсан. `dismissTo` нь modal-ыг хааж S-31-ийг нэг POP_TO-оор нээнэ —
- * түүх дотор байхгүй бол одоогийн дэлгэцийг солино.
- */
-function leaveTo(memoryIdToOpen: string | null) {
-  if (memoryIdToOpen) router.dismissTo(`/memories/${memoryIdToOpen}`);
-  else if (router.canGoBack()) router.back();
-  else router.replace('/memories');
+function toPreview(v: { title: string; occurredOn: string; description?: string | null; location?: { name: string } | null }): VersionPreview {
+  return { title: v.title, occurredOn: v.occurredOn, description: v.description ?? null, placeName: v.location?.name ?? null };
 }
 
 function EditorForm({ draftKey, draft, memoryId }: { draftKey: string; draft: MemoryDraft; memoryId: string | undefined }) {
@@ -230,7 +223,8 @@ function EditorForm({ draftKey, draft, memoryId }: { draftKey: string; draft: Me
     // `back()` нь history-ээр асинхрон тул араас нь `push()` хийвэл уралдаж, S-54 inert үлддэг байв.
     const fromPlan = !!latest().datePlanId;
     clear(draftKey);
-    leaveTo(saved && !memoryId && !fromPlan ? saved.id : null);
+    // AC-198: шилжилтийн дараалал ба вэбийн history-ийн уралдааны тайлбар — `leaveEditorAfterSave`
+    void leaveEditorAfterSave(saved && !memoryId && !fromPlan ? saved.id : null);
   };
 
   const save = async () => {
@@ -559,7 +553,7 @@ function EditorForm({ draftKey, draft, memoryId }: { draftKey: string; draft: Me
           setDiscarding(false);
           dropUploads(latest().media.filter((m) => !m.mediaId));
           clear(draftKey);
-          closeSheet();
+          closeUnlessLeaving();
         }}
         onCancel={() => setDiscarding(false)}
         testID="editor-discard-confirm"

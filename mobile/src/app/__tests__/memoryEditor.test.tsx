@@ -178,8 +178,8 @@ describe('S-32 дурсамж нэмэх', () => {
       }),
     );
     expect(uploadQueue.wait).toHaveBeenCalledWith('local-1');
-    // AC-198: S-31 руу НЭГ навигацийн үйлдлээр — back()+push() хоёр вэбэд history.go(-1)-ийн
-    // асинхрон popstate-тэй уралдаж (Firefox) S-31-ийн оронд Нүүр рүү буцаадаг байсан
+    // AC-198: native-д S-31 руу НЭГ `dismissTo`-оор; вэбийн дараалал (back → бодит popstate → push)
+    // `src/memories/__tests__/leaveEditor.test.ts`-д
     await waitFor(() => expect(router.dismissTo).toHaveBeenCalledWith('/memories/new-1'));
     expect(router.dismissTo).toHaveBeenCalledTimes(1);
     expect(router.back).not.toHaveBeenCalled();
