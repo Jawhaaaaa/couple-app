@@ -162,12 +162,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: npm audit (mobile)
-        working-directory: mobile
-        run: npm audit --audit-level=high
-      - name: npm audit (e2e)
-        working-directory: e2e
-        run: npm audit --audit-level=high
+      # `npm audit --audit-level=high`-тэй ижил босго: high/critical бүр унагана.
+      # Зөвхөн compliance.yaml → waivers-д бүртгэлтэй advisory-г дуусах хугацаа хүртэл,
+      # засвартай хувилбар гараагүй үед чөлөөлнө (GHSA-fc5q-39xc-vjpf, 2026-12-18 хүртэл).
+      - name: Audit gate-ийн тест (чөлөөлөлтийн хугацаа, засварын шалгалт)
+        run: node --test scripts/audit-gate.test.mjs
+      - name: npm audit (mobile, high+, compliance.yaml-ийн чөлөөлөлттэй)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/audit-gate.mjs mobile
+      - name: npm audit (e2e, high+, compliance.yaml-ийн чөлөөлөлттэй)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/audit-gate.mjs e2e
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
