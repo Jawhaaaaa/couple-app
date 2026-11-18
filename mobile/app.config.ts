@@ -120,6 +120,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       ['expo-local-authentication', { faceIDPermission: t.NSFaceIDUsageDescription }],
       ['expo-calendar', { calendarPermission: t.NSCalendarsUsageDescription, writeOnlyCalendarPermission: t.NSCalendarsWriteOnlyAccessUsageDescription }],
       ['expo-notifications', { color: primary }],
+      // OAuth (FR-1.5) — expo-web-browser 58.1-ээс config plugin шаардана
+      'expo-web-browser',
     ],
     extra: {
       ...config.extra,
