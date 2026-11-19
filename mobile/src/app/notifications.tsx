@@ -109,7 +109,7 @@ export default function NotificationsScreen() {
 
   const mutationError = read.error ?? readAll.error;
   return (
-    <TabScreen title={t('common.notifications')} testID="screen-S-24">
+    <TabScreen title={t('common.notifications')} testID="screen-S-24" back>
       {mutationError ? <FormMessage text={errorText(mutationError)} testID="notifications-error" /> : null}
       {/* Зөвшөөрлийн төлөв: push унтраастай бол S-101 руу (FR-13.1) */}
       <View style={styles.notice}>

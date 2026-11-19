@@ -1,4 +1,4 @@
-import { Bell, CircleUser } from 'lucide-react-native';
+import { Bell, ChevronLeft, CircleUser } from 'lucide-react-native';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { useUnreadCount } from '@/api/queries/notifications';
@@ -14,16 +14,23 @@ interface Props {
   unread?: number;
   onBell: () => void;
   onAvatar: () => void;
+  /** Өгвөл гарчгийн өмнө «Буцах» товч (табаас гадуурх S-24, S-80 — доод цэсгүй тул). */
+  onBack?: () => void;
 }
 
 /** Табын толгой: гарчиг, мэдэгдлийн хонх (уншаагүй тоо), аватар → тохиргоо. */
-export function TopBar({ title, unread: unreadProp, onBell, onAvatar }: Props) {
+export function TopBar({ title, unread: unreadProp, onBell, onAvatar, onBack }: Props) {
   const cached = useUnreadCount();
   const unread = unreadProp ?? cached;
   const colors = useColors();
   const t = useT();
   return (
-    <View style={styles.row}>
+    <View style={[styles.row, onBack ? styles.rowWithBack : null]}>
+      {onBack ? (
+        <Pressable onPress={onBack} accessibilityRole="button" accessibilityLabel={t('common.back')} style={styles.icon} testID="topbar-back">
+          <ChevronLeft size={26} color={colors.text} strokeWidth={iconStroke} />
+        </Pressable>
+      ) : null}
       <AppText variant="h1" style={styles.title} accessibilityRole="header">
         {title}
       </AppText>
@@ -58,6 +65,7 @@ export function TopBar({ title, unread: unreadProp, onBell, onAvatar }: Props) {
 
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: spacing.screen, paddingVertical: spacing.xs, gap: spacing.xxs },
+  rowWithBack: { paddingLeft: spacing.xs },
   title: { flex: 1 },
   icon: { width: touchTarget, height: touchTarget, alignItems: 'center', justifyContent: 'center' },
   badge: { position: 'absolute', top: 4, right: 2, minWidth: 18, paddingHorizontal: 4, borderRadius: radius.pill, alignItems: 'center' },
