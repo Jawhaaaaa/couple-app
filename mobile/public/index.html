@@ -47,6 +47,41 @@
         height: 100%;
         flex: 1;
       }
+      /*
+        iOS «Нүүр дэлгэцэнд нэмэх» (standalone + black-translucent): вэб харагдац статус мөрийн доор орж,
+        `height: 100%` нь статус мөрийн өндрөөр богино болдог тул агуулга цаг/цэнэгтэй давхцаж, доод талд
+        хоосон зурвас үлддэг байв. #root-ийг дэлгэцэнд бэхэлж, дээд/хажуугийн safe area-г CSS env()-ээр
+        шууд зайлуулна — env() нь амьдаар шинэчлэгддэг. react-native-safe-area-context нь provider-ийн
+        байрлалаар inset-ээ хасдаг (rect.top) тул давхар зай үүсэхгүй; доод inset-ийг TabBar өөрөө авна.
+        Android/desktop-д env() = 0 тул өөрчлөлтгүй.
+      */
+      @supports (padding-top: env(safe-area-inset-top)) {
+        #root {
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          height: auto;
+          box-sizing: border-box;
+          padding-top: env(safe-area-inset-top);
+          padding-left: env(safe-area-inset-left);
+          padding-right: env(safe-area-inset-right);
+        }
+      }
+      /*
+        Оролтын талбарт хөтчийн өгөгдмөл (iOS Safari-д цэнхэр дөрвөлжин) focus хүрээг хасна — TextField,
+        CodeInput, ChatComposer өөрсдөө focus-ийг хүрээний өнгөөр (primary) харуулдаг.
+      */
+      input:focus,
+      textarea:focus {
+        outline: none;
+      }
+      input,
+      textarea,
+      [role='button'] {
+        -webkit-tap-highlight-color: transparent;
+      }
       /* S-01 static splash: JS ачаалагдаж, React эхний рендэрээ хийтэл (createRoot нь #root-ыг цэвэрлэнэ) */
       #aura-splash {
         flex: 1;
