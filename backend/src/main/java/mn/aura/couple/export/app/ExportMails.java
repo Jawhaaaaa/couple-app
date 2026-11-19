@@ -3,11 +3,11 @@ package mn.aura.couple.export.app;
 import java.util.Map;
 import java.util.UUID;
 import mn.aura.couple.common.config.AuraProperties;
+import mn.aura.couple.common.mail.MailLayout;
 import mn.aura.couple.common.mail.MailMessage;
 import mn.aura.couple.common.mail.MailSender;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.web.util.HtmlUtils;
 
 /**
  * Экспорт бэлэн болсны имэйл (FR-14.5, AC-126). Файлын шууд холбоос биш — апп-ын «Өгөгдөл» хуудас руу (нэвтэрсэн
@@ -38,8 +38,11 @@ public class ExportMails {
                         + "\n\nThe download link expires in 7 days."
                 : "Таны Aura-гийн өгөгдлийн хуулбар бэлэн боллоо. Апп-аас татаж авна уу:\n" + link
                         + "\n\nТатах холбоос 7 хоногийн дараа хүчингүй болно.";
-        String html = "<!doctype html><html><body style=\"font-family:sans-serif\"><p>"
-                + HtmlUtils.htmlEscape(text).replace("\n", "<br>") + "</p></body></html>";
+        String html = MailLayout.render(webBase, en
+                ? new MailLayout.Content("en", "Your export is ready", "Your Aura data export is ready. Open the app to download it.",
+                        null, null, "Open Aura", link, "Or open this link:", "The download link expires in 7 days.")
+                : new MailLayout.Content("mn", "Хуулбар бэлэн боллоо", "Таны Aura-гийн өгөгдлийн хуулбар бэлэн боллоо. Апп-аас татаж авна уу.",
+                        null, null, "Aura нээх", link, "Эсвэл энэ холбоосыг нээнэ үү:", "Татах холбоос 7 хоногийн дараа хүчингүй болно."));
         sender.sendAsync(new MailMessage(to, subject, text, html, null, link));
     }
 }
