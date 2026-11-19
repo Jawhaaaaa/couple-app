@@ -10,13 +10,22 @@ interface Props {
   title: string;
   children: ReactNode;
   testID?: string;
+  /** Табаас гадуурх дэлгэц (S-24, S-80): доод цэс харагдахгүй тул «Буцах» товч (түүхгүй бол Нүүр рүү). */
+  back?: boolean;
 }
 
+const goBack = () => (router.canGoBack() ? router.back() : router.replace('/home'));
+
 /** Табын дэлгэцийн нийтлэг хүрээ: толгой (хонх, аватар) + агуулга. */
-export function TabScreen({ title, children, testID }: Props) {
+export function TabScreen({ title, children, testID, back }: Props) {
   return (
     <View style={styles.root} testID={testID}>
-      <TopBar title={title} onBell={() => router.push('/notifications')} onAvatar={() => router.push('/settings')} />
+      <TopBar
+        title={title}
+        onBell={() => router.push('/notifications')}
+        onAvatar={() => router.push('/settings')}
+        onBack={back ? goBack : undefined}
+      />
       <View style={styles.body}>{children}</View>
     </View>
   );

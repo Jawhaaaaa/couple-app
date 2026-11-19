@@ -94,6 +94,17 @@ describe('S-80 тохиргооны жагсаалт', () => {
       expect(router.push).toHaveBeenLastCalledWith(route);
     }
   });
+
+  it('табаас гадуурх дэлгэц тул «Буцах» товчтой: түүхтэй бол буцна, түүхгүй бол Нүүр рүү', async () => {
+    await renderWithClient(<SettingsScreen />);
+    await fireEvent.press(screen.getByTestId('topbar-back'));
+    expect(router.back).toHaveBeenCalledTimes(1);
+
+    (router.canGoBack as jest.Mock).mockReturnValueOnce(false);
+    await fireEvent.press(screen.getByTestId('topbar-back'));
+    expect(router.replace).toHaveBeenLastCalledWith('/home');
+    expect(router.back).toHaveBeenCalledTimes(1);
+  });
 });
 
 describe('S-88 харагдах байдал', () => {

@@ -19,7 +19,7 @@ export default function SettingsScreen() {
   const paired = couple?.kind === 'COUPLE' && couple.status !== 'ORPHANED';
   const go = (href: Href) => () => router.push(href);
   return (
-    <TabScreen title={t('common.settings')} testID="screen-S-80">
+    <TabScreen title={t('common.settings')} testID="screen-S-80" back>
       <ScrollView contentContainerStyle={styles.list}>
         <SettingsSection title={t('settings.sections.account')}>
           <SettingsRow icon={CircleUser} label={t('settings.profile')} onPress={go('/settings/profile')} testID="settings-profile" />
